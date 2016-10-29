@@ -30,6 +30,7 @@ export class EventComponent {
         this.awesomeEvents = response.data;
         this.socket.syncUpdates('event', this.awesomeEvents);
       });
+    this.$http.get('events/client-token')
   }
 
   addEvent() {
@@ -59,7 +60,6 @@ export class EventComponent {
 
   clientToken() {
     this.$http.get('/client-token', function (req, res) {
-      alert.clientToken();
       gateway.clientToken.generate({}, function (err, response) {
         if (err || !response || !response.clientToken) {
           if (err.name === 'authenticationError') {
