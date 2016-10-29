@@ -47,7 +47,7 @@ function startServer() {
   });
 }
 
-function startBraintree() {
+export function startBraintree() {
   app.post('/api/token', function (request, response) {
     gateway.clientToken.generate({}, function (err, res) {
       if (err) throw err;
@@ -58,6 +58,18 @@ function startBraintree() {
     });
   });
 }
+
+// if using alert or other debugging use the below startBraintree because it will return token as a string to prevent Object object errors.
+
+// export function startBraintree() {
+//   app.post('/api/token', function (request, response) {
+//     gateway.clientToken.generate({}, function (err, res) {
+//       if (err) throw err;
+//       response.json(res.clientToken);
+//       console.log(res.clientToken)
+//     });
+//   });
+// }
 
 sqldb.sequelize.sync()
   .then(startServer)
