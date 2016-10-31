@@ -9,8 +9,8 @@ var gateway = braintree.connect({
 });
 
 gateway.transaction.sale({
-    amount: '666.00',
-    paymentMethodNonce: "nonce-from-the-client",
+    amount: '777.00',
+    paymentMethodNonce: "e4abf0f6-6837-4851-91b9-11312d849c4c",
     options: {
       submitForSettlement: true
     }

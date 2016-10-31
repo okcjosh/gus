@@ -19,6 +19,7 @@ export class BraintreeComponent {
           $scope.$apply(function () {
             $scope.hasCalledBack = 'YEP!';
             alert('Did the scope variable change? Yes!');
+            console.log(obj)
           });
         }
       });
