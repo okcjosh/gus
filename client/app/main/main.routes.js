@@ -8,3 +8,4 @@ export default function routes($stateProvider) {
     template: '<main></main>'
   });
 }
+

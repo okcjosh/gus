@@ -25,6 +25,7 @@ import footer from '../components/footer/footer.component';
 import main from './main/main.component';
 import event from './event/event.component';
 import leo from './leo/leo.component';
+import braintree from './braintree/braintree.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
@@ -32,7 +33,7 @@ import socket from '../components/socket/socket.service';
 import './app.scss';
 
 angular.module('gusApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
-    uiBootstrap, _Auth, account, admin, navbar, footer, main, event, leo, constants, socket, util
+    uiBootstrap, _Auth, account, admin, navbar, footer, main, event, leo, braintree, constants, socket, util
   ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
@@ -51,6 +52,6 @@ angular.module('gusApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io',
 angular.element(document)
   .ready(() => {
     angular.bootstrap(document, ['gusApp'], {
-      strictDi: true
+      strictDi: false
     });
   });
