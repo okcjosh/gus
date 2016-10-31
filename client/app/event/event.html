@@ -39,25 +39,3 @@
     </p>
   </form>
 </div>
-
-
-<form action="/buy" method="post">
-  <h1>Buy some things</h1>
-  <braintree-dropin>Loading payment form...</braintree-dropin>
-
-  <input
-    type="submit"
-    value="Buy for $14"
-  />
-</form>
-
-</div>
-
-<script src="/angular.js"></script>
-<script src="/braintree-angular.js"></script>
-<script>
-  angular.module('example', ['braintree-angular'])
-    .constant('clientTokenPath', '/client-token');
-</script>
-</body>
-</html>
