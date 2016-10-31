@@ -22,6 +22,11 @@ export class MainController {
         this.awesomeThings = response.data;
         this.socket.syncUpdates('thing', this.awesomeThings);
       });
+    // this.$http.post('/api/token')
+    //   .then(response => {
+    //     this.clientToken = response.data;
+    //     console.log(response.data);
+    //   });
   }
 
   addThing() {
