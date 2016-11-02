@@ -14,6 +14,7 @@ var db = {
 };
 
 // Insert models below
+// db.Braintree = db.sequelize.import('../api/braintree/braintree.model');
 db.Leo = db.sequelize.import('../api/leo/leo.model');
 db.Event = db.sequelize.import('../api/event/event.model');
 db.Product = db.sequelize.import('../api/product/product.model');

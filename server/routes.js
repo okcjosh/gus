@@ -9,6 +9,7 @@ import path from 'path';
 
 export default function(app) {
   // Insert routes below
+  app.use('/api/braintrees', require('./api/braintree/index'));
   app.use('/api/leos', require('./api/leo'));
   app.use('/api/events', require('./api/event'));
   app.use('/api/products', require('./api/product'));

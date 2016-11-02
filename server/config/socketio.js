@@ -16,6 +16,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  // require('../api/braintree/braintree.socket').register(socket);
   require('../api/leo/leo.socket').register(socket);
   require('../api/event/event.socket').register(socket);
   require('../api/product/product.socket').register(socket);
