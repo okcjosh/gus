@@ -30,13 +30,15 @@ export default function(sequelize, DataTypes) {
     },
     year_started: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: false,
     },
     lastGig: {
       type: DataTypes.DATE,
       allowNull: true
     }
   }, {
-    tableName: 'leo'
+    tableName: 'leo',
   });
 };
+
+
