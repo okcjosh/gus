@@ -1,6 +1,5 @@
 // 'use strict';
 //
-//
 // export function Transaction(config) {
 //   this.config = config;
 //   this.config.development = config.development || false;

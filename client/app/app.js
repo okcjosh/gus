@@ -24,8 +24,9 @@ import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
 import main from './main/main.component';
 import event from './event/event.component';
+import checkout from './checkout/checkout.component';
 import leo from './leo/leo.component';
-import braintree from './braintree/braintree.component';
+import show from './show/show.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
@@ -33,7 +34,7 @@ import socket from '../components/socket/socket.service';
 import './app.scss';
 
 angular.module('gusApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
-    uiBootstrap, _Auth, account, admin, navbar, footer, main, event, leo, braintree, constants, socket, util
+    uiBootstrap, _Auth, account, admin, navbar, footer, main, show, event, checkout, leo, constants, socket, util
   ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {

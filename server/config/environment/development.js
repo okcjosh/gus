@@ -7,7 +7,7 @@ module.exports = {
 
   // Sequelize connection opions
   sequelize: {
-    uri: 'mysql://es4admin:es4admin@es4.clmk2ccz7ewv.us-west-2.rds.amazonaws.com:3306/es4XXX',
+    uri: 'mysql://es4admin:es4admin@es4.clmk2ccz7ewv.us-west-2.rds.amazonaws.com:3306/es4',
     options: {
       logging: false,
       storage: 'mysql',
@@ -18,7 +18,7 @@ module.exports = {
   },
 
   // Seed database on startup
-  seedDB: true
+  seedDB: false
 
 };
 
