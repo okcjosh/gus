@@ -41,7 +41,7 @@ export default function(app) {
     });
 
 
-  app.post('/api/checkout/new', function (req, res) {
+  app.post('/checkout', function (req, res) {
     var transactionErrors;
     var amount = req.body.amount; // In production you should not take amounts directly from clients
     var nonce = req.body.payment_method_nonce;
