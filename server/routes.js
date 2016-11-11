@@ -10,18 +10,18 @@ import gateway, {formatErrors, createResultObject} from "./gateway";
 
 export default function(app) {
   // Insert routes below
-  app.use('/api/statuses', require('./api/status'));
-  app.use('/api/seniority_classes', require('./api/seniority_class'));
-  app.use('/api/new_appts', require('./api/new_appt'));
-  app.use('/api/leo_schedulings', require('./api/leo_scheduling'));
-  app.use('/api/job_type_preferences', require('./api/job_type_preference'));
-  app.use('/api/job_types', require('./api/job_type'));
-  app.use('/api/job_invitation_statuses', require('./api/job_invitation_status'));
-  app.use('/api/job_invitations', require('./api/job_invitation'));
-  app.use('/api/jobs', require('./api/job'));
-  app.use('/api/dept_preferences', require('./api/dept_preference'));
-  app.use('/api/departments', require('./api/department'));
-  app.use('/api/def_dept_preferences', require('./api/def_dept_preference'));
+  // app.use('/api/statuses', require('./api/status'));
+  // app.use('/api/seniority_classes', require('./api/seniority_class'));
+  // app.use('/api/new_appts', require('./api/new_appt'));
+  // app.use('/api/leo_schedulings', require('./api/leo_scheduling'));
+  // app.use('/api/job_type_preferences', require('./api/job_type_preference'));
+  // app.use('/api/job_types', require('./api/job_type'));
+  // app.use('/api/job_invitation_statuses', require('./api/job_invitation_status'));
+  // app.use('/api/job_invitations', require('./api/job_invitation'));
+  // app.use('/api/jobs', require('./api/job'));
+  // app.use('/api/dept_preferences', require('./api/dept_preference'));
+  // app.use('/api/departments', require('./api/department'));
+  // app.use('/api/def_dept_preferences', require('./api/def_dept_preference'));
   app.use('/api/leos', require('./api/leo'));
   app.use('/api/events', require('./api/event'));
   app.use('/api/things', require('./api/thing'));
@@ -42,9 +42,9 @@ export default function(app) {
 
 
   app.post('/checkout', function (req, res) {
-    var transactionErrors;
-    var amount = req.body.amount; // In production you should not take amounts directly from clients
-    var nonce = req.body.payment_method_nonce;
+    let transactionErrors;
+    let amount = req.body.amount; // In production you should not take amounts directly from clients
+    let nonce = req.body.payment_method_nonce;
 
     gateway.transaction.sale({
       amount: amount,

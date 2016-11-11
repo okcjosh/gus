@@ -1,23 +1,24 @@
+// jscs:disable
 // Generated on 2016-10-26 using generator-angular-fullstack 4.1.0
 'use strict';
 
-import _ from 'lodash';
-import del from 'del';
-import gulp from 'gulp';
-import grunt from 'grunt';
-import path from 'path';
-import through2 from 'through2';
-import gulpLoadPlugins from 'gulp-load-plugins';
-import http from 'http';
-import open from 'open';
-import lazypipe from 'lazypipe';
-import nodemon from 'nodemon';
-import {Server as KarmaServer} from 'karma';
-import runSequence from 'run-sequence';
-import {protractor, webdriver_update} from 'gulp-protractor';
-import {Instrumenter} from 'isparta';
-import webpack from 'webpack-stream';
-import makeWebpackConfig from './webpack.make';
+import _ from "lodash";
+import del from "del";
+import gulp from "gulp";
+import grunt from "grunt";
+import path from "path";
+import through2 from "through2";
+import gulpLoadPlugins from "gulp-load-plugins";
+import http from "http";
+import open from "open";
+import lazypipe from "lazypipe";
+import nodemon from "nodemon";
+import {Server as KarmaServer} from "karma";
+import runSequence from "run-sequence";
+import {protractor, webdriver_update} from "gulp-protractor";
+import {Instrumenter} from "isparta";
+import webpack from "webpack-stream";
+import makeWebpackConfig from "./webpack.make";
 
 var plugins = gulpLoadPlugins();
 var config;
@@ -422,14 +423,14 @@ gulp.task('coverage:pre', () => {
 gulp.task('coverage:unit', () => {
     return gulp.src(paths.server.test.unit)
         .pipe(mocha())
-        .pipe(istanbul())
+      .pipe(istanbul());
         // Creating the reports after tests ran
 });
 
 gulp.task('coverage:integration', () => {
     return gulp.src(paths.server.test.integration)
         .pipe(mocha())
-        .pipe(istanbul())
+      .pipe(istanbul());
         // Creating the reports after tests ran
 });
 
