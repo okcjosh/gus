@@ -54,13 +54,12 @@ export default function(app) {
       }
     }, function (err, result) {
       if (result.success || result.transaction) {
-        res.redirect('/checkout/show/' + result.transaction.id);
-        console.log('FUCK YOU')
+        res.redirect('/' + result.transaction.id);
+
       } else {
         transactionErrors = result.errors.deepErrors();
         req.flash('error', {msg: formatErrors(transactionErrors)});
         res.redirect('/');
-        console.log('BLOW ME')
       }
     });
   });
