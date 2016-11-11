@@ -1,6 +1,6 @@
 'use strict';
 
-import angular from 'angular';
+import angular from "angular";
 
 export function OauthButtonsController($window) {
   'ngInject';
@@ -10,7 +10,7 @@ export function OauthButtonsController($window) {
   };
 }
 
-export default angular.module('gusApp.oauthButtons', [])
+export default angular.module('es4App.oauthButtons', [])
   .directive('oauthButtons', function() {
     return {
       template: require('./oauth-buttons.html'),

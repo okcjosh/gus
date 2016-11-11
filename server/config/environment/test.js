@@ -4,18 +4,14 @@
 // Test specific configuration
 // ===========================
 module.exports = {
-  // MongoDB connection options
-  mongo: {
-    uri: 'mongodb://localhost/gus-test'
-  },
   sequelize: {
-    uri: 'sqlite://',
+    uri: 'mysql://es4admin:es4admin@es4.clmk2ccz7ewv.us-west-2.rds.amazonaws.com:3306/es4xxx',
     options: {
       logging: false,
-      storage: 'test.sqlite',
+      storage: 'mysql',
       define: {
         timestamps: false
       }
     }
-  }
+  },
 };

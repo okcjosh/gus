@@ -1,6 +1,6 @@
 'use strict';
 
-import angular from 'angular';
+import angular from "angular";
 
 export function Modal($rootScope, $uibModal) {
   /**
@@ -73,6 +73,6 @@ export function Modal($rootScope, $uibModal) {
   };
 }
 
-export default angular.module('gusApp.Modal', [])
+export default angular.module('es4App.Modal', [])
   .factory('Modal', Modal)
   .name;

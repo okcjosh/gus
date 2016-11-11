@@ -1,11 +1,11 @@
 'use strict';
 
-import angular from 'angular';
+import angular from "angular";
 
 /**
  * Removes server error when user updates input
  */
-angular.module('gusApp')
+angular.module('es4App')
   .directive('mongooseError', function() {
     return {
       restrict: 'A',

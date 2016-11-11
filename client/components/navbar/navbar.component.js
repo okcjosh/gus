@@ -1,7 +1,7 @@
 'use strict';
 /* eslint no-sync: 0 */
 
-import angular from 'angular';
+import angular from "angular";
 
 export class NavbarComponent {
   menu = [{
@@ -10,6 +10,12 @@ export class NavbarComponent {
   }, {
     title: 'Checkout',
     state: 'checkout'
+  }, {
+    title: 'Event',
+    state: 'event'
+  }, {
+    title: 'Leo',
+    state: 'leo'
   }];
 
   isCollapsed = true;

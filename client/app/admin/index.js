@@ -1,10 +1,10 @@
 'use strict';
 
-import angular from 'angular';
-import routes from './admin.routes';
-import AdminController from './admin.controller';
+import angular from "angular";
+import routes from "./admin.routes";
+import AdminController from "./admin.controller";
 
-export default angular.module('gusApp.admin', ['gusApp.auth', 'ui.router'])
+export default angular.module('es4App.admin', ['es4App.auth', 'ui.router'])
   .config(routes)
   .controller('AdminController', AdminController)
   .name;

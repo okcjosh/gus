@@ -4,17 +4,14 @@
 
 'use strict';
 
-import errors from './components/errors';
-import path from 'path';
-import gateway from './gateway';
-import {formatErrors} from './gateway';
-import {createResultObject} from './gateway';
+import errors from "./components/errors";
+import path from "path";
+import gateway, {formatErrors, createResultObject} from "./gateway";
 
 export default function(app) {
   // Insert routes below
   app.use('/api/statuses', require('./api/status'));
-  app.use('/seniority_classes', require('./api/seniority_class'));
-  app.use('/api/seniority_classs', require('./api/seniority_class'));
+  app.use('/api/seniority_classes', require('./api/seniority_class'));
   app.use('/api/new_appts', require('./api/new_appt'));
   app.use('/api/leo_schedulings', require('./api/leo_scheduling'));
   app.use('/api/job_type_preferences', require('./api/job_type_preference'));
@@ -25,7 +22,6 @@ export default function(app) {
   app.use('/api/dept_preferences', require('./api/dept_preference'));
   app.use('/api/departments', require('./api/department'));
   app.use('/api/def_dept_preferences', require('./api/def_dept_preference'));
-  // app.use('/api/braintrees', require('./api/braintree/index'));
   app.use('/api/leos', require('./api/leo'));
   app.use('/api/events', require('./api/event'));
   app.use('/api/things', require('./api/thing'));
@@ -83,7 +79,7 @@ export default function(app) {
 
     gateway.transaction.find(transactionId, function (err, transaction) {
       result = createResultObject(transaction);
-      res.render('checkout/show/', {transaction: transaction, result: result});
+      res.render('checkout/show/new', {transaction: transaction, result: result});
     });
   });
 }

@@ -1,8 +1,8 @@
 'use strict';
 /*eslint no-process-env:0*/
 
-import path from 'path';
-import _ from 'lodash';
+import path from "path";
+import _ from "lodash";
 
 /*function requiredProcessEnv(name) {
   if(!process.env[name]) {
@@ -33,16 +33,7 @@ var all = {
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
-    session: 'gus-secret'
-  },
-
-  // MongoDB connection options
-  mongo: {
-    options: {
-      db: {
-        safe: true
-      }
-    }
+    session: 'es4-secret'
   },
 
   facebook: {

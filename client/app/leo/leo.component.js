@@ -1,7 +1,7 @@
 'use strict';
 const angular = require('angular');
 const uiRouter = require('angular-ui-router');
-import routing from './leo.routes';
+import routing from "./leo.routes";
 
 export class LeoController {
     awesomeLeos = [];
@@ -54,7 +54,7 @@ export class LeoController {
     }
   }
 
-export default angular.module('gusApp.leo', [uiRouter])
+export default angular.module('es4App.leo', [uiRouter])
   .config(routing)
   .component('leo', {
     template: require('./leo.html'),

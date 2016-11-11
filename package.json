@@ -1,5 +1,5 @@
 {
-  "name": "gus",
+  "name": "es4",
   "version": "0.0.0",
   "main": "server/index.js",
   "dependencies": {

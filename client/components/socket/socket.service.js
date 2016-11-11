@@ -1,8 +1,8 @@
 'use strict';
 
-import * as _ from 'lodash';
-import angular from 'angular';
-import io from 'socket.io-client';
+import * as _ from "lodash";
+import angular from "angular";
+import io from "socket.io-client";
 
 function Socket(socketFactory) {
   'ngInject';
@@ -80,6 +80,6 @@ function Socket(socketFactory) {
   };
 }
 
-export default angular.module('gusApp.socket', [])
+export default angular.module('es4App.socket', [])
   .factory('socket', Socket)
   .name;
