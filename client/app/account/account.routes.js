@@ -4,7 +4,7 @@ export default function routes($stateProvider) {
   'ngInject';
 
   $stateProvider.state('login', {
-    url: '/login',
+    url: '/new',
     template: require('./login/login.html'),
     controller: 'LoginController',
     controllerAs: 'vm'
@@ -22,13 +22,13 @@ export default function routes($stateProvider) {
       }
     })
     .state('signup', {
-      url: '/signup',
+      url: '/checkouts',
       template: require('./signup/signup.html'),
       controller: 'SignupController',
       controllerAs: 'vm'
     })
     .state('settings', {
-      url: '/settings',
+      url: '/show',
       template: require('./settings/settings.html'),
       controller: 'SettingsController',
       controllerAs: 'vm',

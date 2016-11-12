@@ -14,7 +14,7 @@ export function authInterceptor($rootScope, $q, $cookies, $injector, Util) {
       return config;
     },
 
-    // Intercept 401s and redirect you to login
+    // Intercept 401s and redirect you to new
     responseError(response) {
       if(response.status === 401) {
         (state || (state = $injector.get('$state')))

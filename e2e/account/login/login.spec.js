@@ -7,7 +7,7 @@ describe('Login View', function() {
   var page;
 
   var loadPage = function() {
-    let promise = browser.get(config.baseUrl + '/login');
+    let promise = browser.get(config.baseUrl + '/new');
     page = require('./login.po');
     return promise;
   };
@@ -31,7 +31,7 @@ describe('Login View', function() {
     return UserModel.destroy({ where: {} });
   });
 
-  it('should include login form with correct inputs and submit button', function() {
+  it('should include new form with correct inputs and submit button', function () {
     expect(page.form.email.getAttribute('type')).to.eventually.equal('email');
     expect(page.form.email.getAttribute('name')).to.eventually.equal('email');
     expect(page.form.password.getAttribute('type')).to.eventually.equal('password');
@@ -51,7 +51,7 @@ describe('Login View', function() {
 
   describe('with local auth', function() {
 
-    it('should login a user and redirecting to "/"', function() {
+    it('should new a user and redirecting to "/"', function () {
       return page.login(testUser).then(() => {
         var navbar = require('../../components/navbar/navbar.po');
 
@@ -69,15 +69,15 @@ describe('Login View', function() {
     describe('and invalid credentials', function() {
       before(function() {
         return loadPage();
-      })
+      });
 
-      it('should indicate login failures', function() {
+      it('should indicate new failures', function () {
         page.login({
           email: testUser.email,
           password: 'badPassword'
         });
 
-        expect(browser.getCurrentUrl()).to.eventually.equal(config.baseUrl + '/login');
+        expect(browser.getCurrentUrl()).to.eventually.equal(config.baseUrl + '/new');
 
         var helpBlock = page.form.element(by.css('.form-group.has-error .help-block.ng-binding'));
         expect(helpBlock.getText()).to.eventually.equal('This password is not correct.');

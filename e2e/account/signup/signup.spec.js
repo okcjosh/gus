@@ -7,8 +7,8 @@ describe('Signup View', function() {
   var page;
 
   var loadPage = function() {
-    browser.manage().deleteAllCookies()
-    let promise = browser.get(config.baseUrl + '/signup');
+    browser.manage().deleteAllCookies();
+    let promise = browser.get(config.baseUrl + '/checkouts');
     page = require('./signup.po');
     return promise;
   };
@@ -28,7 +28,7 @@ describe('Signup View', function() {
     return UserModel.destroy({ where: {} });
   });
 
-  it('should include signup form with correct inputs and submit button', function() {
+  it('should include checkouts form with correct inputs and submit button', function () {
     expect(page.form.name.getAttribute('type')).to.eventually.equal('text');
     expect(page.form.name.getAttribute('name')).to.eventually.equal('name');
     expect(page.form.email.getAttribute('type')).to.eventually.equal('email');
@@ -54,9 +54,9 @@ describe('Signup View', function() {
 
     before(function() {
       return UserModel.destroy({ where: {} });
-    })
+    });
 
-    it('should signup a new user, log them in, and redirecting to "/"', function() {
+    it('should checkouts a new user, log them in, and redirecting to "/"', function () {
       page.signup(testUser);
 
       var navbar = require('../../components/navbar/navbar.po');
@@ -70,10 +70,10 @@ describe('Signup View', function() {
         return loadPage();
       });
 
-      it('should indicate signup failures', function() {
+      it('should indicate checkouts failures', function () {
         page.signup(testUser);
 
-        expect(browser.getCurrentUrl()).to.eventually.equal(config.baseUrl + '/signup');
+        expect(browser.getCurrentUrl()).to.eventually.equal(config.baseUrl + '/checkouts');
         expect(page.form.email.getAttribute('class')).to.eventually.contain('ng-invalid-mongoose');
 
         var helpBlock = page.form.element(by.css('.form-group.has-error .help-block.ng-binding'));

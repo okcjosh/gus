@@ -5,7 +5,7 @@ var UserModel = require(config.serverConfig.root + '/server/sqldb').User;
 
 describe('Logout View', function() {
   var login = function(user) {
-    let promise = browser.get(config.baseUrl + '/login');
+    let promise = browser.get(config.baseUrl + '/new');
     require('../login/login.po').login(user);
     return promise;
   };
@@ -29,7 +29,7 @@ describe('Logout View', function() {
 
   after(function() {
     return UserModel.destroy({ where: {} });
-  })
+  });
 
   describe('with local auth', function() {
 

@@ -1,14 +1,14 @@
 'use strict';
 
-import express from 'express';
-import passport from 'passport';
-import {setTokenCookie} from '../auth.service';
+import express from "express";
+import passport from "passport";
+import {setTokenCookie} from "../auth.service";
 
 var router = express.Router();
 
 router
   .get('/', passport.authenticate('google', {
-    failureRedirect: '/signup',
+    failureRedirect: '/checkouts',
     scope: [
       'profile',
       'email'
@@ -16,7 +16,7 @@ router
     session: false
   }))
   .get('/callback', passport.authenticate('google', {
-    failureRedirect: '/signup',
+    failureRedirect: '/checkouts',
     session: false
   }), setTokenCookie);
 
