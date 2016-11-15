@@ -16,6 +16,7 @@ export function CheckoutComponent($http) {
     });
 }
 
+
 export default angular.module('gusApp.checkout', [uiRouter])
   .config(routes)
   .component('checkout', {
