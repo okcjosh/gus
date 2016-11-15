@@ -9,11 +9,12 @@
 // Prefer CoreJS over the polyfills above
 import 'core-js/es6';
 import 'core-js/es7/reflect';
+let ENV;
 // require('zone.js/dist/zone');
 
 
 if(!ENV) {
-  var ENV = 'development';
+ ENV = 'development';
 }
 
 if(ENV === 'production') {
@@ -22,7 +23,7 @@ if(ENV === 'production') {
   // Development
 
 
-  Error.stackTraceLimit = Infinity;
+ Error.stackTraceLimit = Infinity;
 
   // require('zone.js/dist/long-stack-trace-zone');
 }

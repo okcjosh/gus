@@ -1,40 +1,40 @@
-<header class="hero-unit" id="banner">
-  <div class="container">
+<header class='hero-unit' id='banner'>
+  <div class='container'>
     <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
+    <p class='lead'>Kick-start your next web app with Angular Fullstack</p>
+    <img src='assets/images/yeoman.png' alt='I'm Yeoman'>
   </div>
 </header>
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="event in $ctrl.awesomeEvents">
-        <li><a href="#" uib-tooltip="{{event}}">{{event.eventTitle}}</a></li>
-        <li><a href="#" uib-tooltip="{{event}}">{{event.date}}</a></li>
-        <li><a href="#" uib-tooltip="{{event}}">{{event.location_desc}}</a></li>
-        <li><a href="#" uib-tooltip="{{event}}">{{event.address}}</a></li>
-        <li><a href="#" uib-tooltip="{{event}}">{{event.department_id}}</a></li>
-        <li><a href="#" uib-tooltip="{{event}}">{{event.status_id}}</a></li>
-        <li><a href="#" uib-tooltip="{{event}}">{{event.leo_id}}<button type="button" class="close" ng-click="$ctrl.deleteEvent(event)">&times;</button></a></li>
+<div class='container'>
+  <div class='row'>
+    <div class='col-lg-12'>
+      <h1 class='page-header'>Features:</h1>
+      <ul class='nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6' ng-repeat='event in $ctrl.awesomeEvents'>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.eventTitle}}</a></li>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.date}}</a></li>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.location_desc}}</a></li>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.address}}</a></li>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.department_id}}</a></li>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.status_id}}</a></li>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.leo_id}}<button type='button' class='close' ng-click='$ctrl.deleteEvent(event)'>&times;</button></a></li>
       </ul>
     </div>
   </div>
 
 
-  <form class="event-form">
+  <form class='event-form'>
     <label>Syncs in realtime across clients</label>
-    <p class="input-group">
-      <input type="text" class="form-control" placeholder="Event Title." ng-model="$ctrl.eventTitle">
-      <input type="text" class="form-control" placeholder="Event Date." ng-model="$ctrl.date">
-      <input type="text" class="form-control" placeholder="Event Location Description." ng-model="$ctrl.location_desc">
-      <input type="text" class="form-control" placeholder="Event Address." ng-model="$ctrl.address">
-      <input type="text" class="form-control" placeholder="Event Department ID." ng-model="$ctrl.department_id">
-      <input type="text" class="form-control" placeholder="Event Status ID." ng-model="$ctrl.status_id">
-      <input type="text" class="form-control" placeholder="Event Leo ID." ng-model="$ctrl.leo_id">
-      <button type="submit" class="btn btn-primary" ng-click="$ctrl.addEvent()">Add New</button>
-      <span class="input-group-btn">
+    <p class='input-group'>
+      <input type='text' class='form-control' placeholder='Event Title.' ng-model='$ctrl.eventTitle'>
+      <input type='text' class='form-control' placeholder='Event Date.' ng-model='$ctrl.date'>
+      <input type='text' class='form-control' placeholder='Event Location Description.' ng-model='$ctrl.location_desc'>
+      <input type='text' class='form-control' placeholder='Event Address.' ng-model='$ctrl.address'>
+      <input type='text' class='form-control' placeholder='Event Department ID.' ng-model='$ctrl.department_id'>
+      <input type='text' class='form-control' placeholder='Event Status ID.' ng-model='$ctrl.status_id'>
+      <input type='text' class='form-control' placeholder='Event Leo ID.' ng-model='$ctrl.leo_id'>
+      <button type='submit' class='btn btn-primary' ng-click='$ctrl.addEvent()'>Add New</button>
+      <span class='input-group-btn'>
       </span>
     </p>
   </form>

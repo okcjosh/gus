@@ -1,10 +1,10 @@
 'use strict';
 
-import express from "express";
-import passport from "passport";
-import {setTokenCookie} from "../auth.service";
+import express from 'express';
+import passport from 'passport';
+import {setTokenCookie} from '../auth.service';
 
-var router = express.Router();
+let router = express.Router();
 
 router
   .get('/', passport.authenticate('twitter', {

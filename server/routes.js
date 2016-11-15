@@ -4,9 +4,9 @@
 
 'use strict';
 
-import errors from "./components/errors";
-import path from "path";
-import gateway, {formatErrors, createResultObject} from "./gateway";
+import errors from './components/errors';
+import path from 'path';
+import gateway, {formatErrors, createResultObject} from './gateway';
 
 export default function(app) {
   // Insert routes below
@@ -53,12 +53,12 @@ export default function(app) {
       }
     }, function (err, result) {
       if (result.success || result.transaction) {
-        res.redirect('/' + result.transaction.id);
+        res.redirect('/checkout/new');
 
       } else {
         transactionErrors = result.errors.deepErrors();
         req.flash('error', {msg: formatErrors(transactionErrors)});
-        res.redirect('/');
+        res.redirect('checkout/new');
       }
     });
   });
@@ -71,13 +71,13 @@ export default function(app) {
     });
   });
 
-  app.get('/checkout/show/:id', function (req, res) {
-    var result;
-    var transactionId = req.params.id;
+   app.get('/checkout/show/:id', function (req, res) {
+     let result;
+     let transactionId = req.params.id;
 
-    gateway.transaction.find(transactionId, function (err, transaction) {
-      result = createResultObject(transaction);
-      res.render('checkout/show/new', {transaction: transaction, result: result});
-    });
-  });
-}
+     gateway.transaction.find(transactionId, function (err, transaction) {
+       result = createResultObject(transaction);
+       res.render('checkout/show/new', {transaction: transaction, result: result});
+     });
+   });
+};

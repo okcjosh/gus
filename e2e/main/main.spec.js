@@ -1,9 +1,9 @@
 'use strict';
 
-var config = browser.params;
+let config = browser.params;
 
 describe('Main View', function() {
-  var page;
+  let page;
 
   beforeEach(function() {
     let promise = browser.get(config.baseUrl + '/');

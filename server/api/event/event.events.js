@@ -5,21 +5,21 @@
 'use strict';
 
 import {EventEmitter} from 'events';
-var Event = require('../../sqldb').Event;
-var EventEvents = new EventEmitter();
+let Event = require('../../sqldb').Event;
+let EventEvents = new EventEmitter();
 
 // Set max event listeners (0 == unlimited)
 EventEvents.setMaxListeners(0);
 
 // Model events
-var events = {
+let events = {
   afterCreate: 'save',
   afterUpdate: 'save',
   afterDestroy: 'remove'
 };
 
 // Register the event emitter to the model events
-for(var e in events) {
+for(let e in events) {
   let event = events[e];
   Event.hook(e, emitEvent(event));
 }

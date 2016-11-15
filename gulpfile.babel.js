@@ -20,8 +20,8 @@ import {Instrumenter} from "isparta";
 import webpack from "webpack-stream";
 import makeWebpackConfig from "./webpack.make";
 
-var plugins = gulpLoadPlugins();
-var config;
+let plugins = gulpLoadPlugins();
+let config;
 
 const clientPath = 'client';
 const serverPath = 'server';
@@ -67,7 +67,7 @@ function onServerLog(log) {
 }
 
 function checkAppReady(cb) {
-    var options = {
+    let options = {
         host: 'localhost',
         port: config.port
     };
@@ -78,8 +78,8 @@ function checkAppReady(cb) {
 
 // Call page until first success
 function whenServerReady(cb) {
-    var serverReady = false;
-    var appReadyInterval = setInterval(() =>
+    let serverReady = false;
+    let appReadyInterval = setInterval(() =>
         checkAppReady((ready) => {
             if (!ready || serverReady) {
                 return;
@@ -171,17 +171,17 @@ gulp.task('env:all', () => {
         localConfig = {};
     }
     plugins.env({
-        vars: localConfig
+        lets: localConfig
     });
 });
 gulp.task('env:test', () => {
     plugins.env({
-        vars: {NODE_ENV: 'test'}
+        lets: {NODE_ENV: 'test'}
     });
 });
 gulp.task('env:prod', () => {
     plugins.env({
-        vars: {NODE_ENV: 'production'}
+        lets: {NODE_ENV: 'production'}
     });
 });
 
@@ -324,7 +324,7 @@ gulp.task('start:server:debug', () => {
 });
 
 gulp.task('watch', () => {
-    var testFiles = _.union(paths.client.test, paths.server.test.unit, paths.server.test.integration);
+    let testFiles = _.union(paths.client.test, paths.server.test.unit, paths.server.test.integration);
 
     plugins.watch(_.union(paths.server.scripts, testFiles))
         .pipe(plugins.plumber())

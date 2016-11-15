@@ -5,7 +5,7 @@ import {
 } from './index';
 
 describe('Controller: OauthButtonsController', function() {
-  var controller, $window;
+  let controller, $window;
 
   beforeEach(() => {
     angular.module('test', [])

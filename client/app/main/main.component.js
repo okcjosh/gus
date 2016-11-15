@@ -1,6 +1,6 @@
-import angular from "angular";
-import uiRouter from "angular-ui-router";
-import routing from "./main.routes";
+import angular from 'angular';
+import uiRouter from 'angular-ui-router';
+import routing from './main.routes';
 
 export class MainController {
   awesomeThings = [];

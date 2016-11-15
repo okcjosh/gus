@@ -1,7 +1,7 @@
 'use strict';
 const angular = require('angular');
 const uiRouter = require('angular-ui-router');
-import routing from "./leo.routes";
+import routing from './leo.routes';
 
 export class LeoController {
     awesomeLeos = [];

@@ -4,10 +4,10 @@
 
 'use strict';
 
-import config from "../config/environment";
-import Sequelize from "sequelize";
+import config from '../config/environment';
+import Sequelize from 'sequelize';
 
-var db = {
+let db = {
   Sequelize,
   sequelize: new Sequelize(config.sequelize.uri, config.sequelize.options)
 };

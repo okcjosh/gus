@@ -1,6 +1,6 @@
 'use strict';
 
-import angular from "angular";
+import angular from 'angular';
 
 export function Modal($rootScope, $uibModal) {
   /**
@@ -10,7 +10,7 @@ export function Modal($rootScope, $uibModal) {
    * @return {Object}            - the instance $uibModal.open() returns
    */
   function openModal(scope = {}, modalClass = 'modal-default') {
-    var modalScope = $rootScope.$new();
+    let modalScope = $rootScope.$new();
 
     angular.extend(modalScope, scope);
 
@@ -39,9 +39,9 @@ export function Modal($rootScope, $uibModal) {
          * @param  {All}           - any additional args are passed straight to del callback
          */
         return function() {
-          var args = Array.prototype.slice.call(arguments);
-          var name = args.shift();
-          var deleteModal;
+          let args = Array.prototype.slice.call(arguments);
+          let name = args.shift();
+          let deleteModal;
 
           deleteModal = openModal({
             modal: {

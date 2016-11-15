@@ -8,7 +8,7 @@ import angular from 'angular';
 export function UtilService($window) {
   'ngInject';
 
-  var Util = {
+  let Util = {
     /**
      * Return a callback or noop function
      *
@@ -26,7 +26,7 @@ export function UtilService($window) {
      * @return {Object}     - the parsed url, anchor element
      */
     urlParse(url) {
-      var a = document.createElement('a');
+      let a = document.createElement('a');
       a.href = url;
 
       // Special treatment for IE, see http://stackoverflow.com/a/13405933 for details

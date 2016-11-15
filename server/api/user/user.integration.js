@@ -5,7 +5,7 @@ import {User} from '../../sqldb';
 import request from 'supertest';
 
 describe('User API:', function() {
-  var user;
+  let user;
 
   // Clear users before testing
   before(function() {
@@ -26,7 +26,7 @@ describe('User API:', function() {
   });
 
   describe('GET /api/users/me', function() {
-    var token;
+    let token;
 
     before(function(done) {
       request(app)

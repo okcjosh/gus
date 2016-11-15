@@ -1,19 +1,19 @@
 'use strict';
 
-var config = browser.params;
-var UserModel = require(config.serverConfig.root + '/server/sqldb').User;
+let config = browser.params;
+let UserModel = require(config.serverConfig.root + '/server/sqldb').User;
 
 describe('Signup View', function() {
-  var page;
+  let page;
 
-  var loadPage = function() {
+  let loadPage = function() {
     browser.manage().deleteAllCookies();
     let promise = browser.get(config.baseUrl + '/checkouts');
     page = require('./signup.po');
     return promise;
   };
 
-  var testUser = {
+  let testUser = {
     name: 'Test',
     email: 'test@example.com',
     password: 'test',
@@ -56,10 +56,10 @@ describe('Signup View', function() {
       return UserModel.destroy({ where: {} });
     });
 
-    it('should checkouts a new user, log them in, and redirecting to "/"', function () {
+    it('should checkouts a new user, log them in, and redirecting to '/'', function () {
       page.signup(testUser);
 
-      var navbar = require('../../components/navbar/navbar.po');
+      let navbar = require('../../components/navbar/navbar.po');
 
       expect(browser.getCurrentUrl()).to.eventually.equal(config.baseUrl + '/');
       expect(navbar.navbarAccountGreeting.getText()).to.eventually.equal('Hello ' + testUser.name);
@@ -76,7 +76,7 @@ describe('Signup View', function() {
         expect(browser.getCurrentUrl()).to.eventually.equal(config.baseUrl + '/checkouts');
         expect(page.form.email.getAttribute('class')).to.eventually.contain('ng-invalid-mongoose');
 
-        var helpBlock = page.form.element(by.css('.form-group.has-error .help-block.ng-binding'));
+        let helpBlock = page.form.element(by.css('.form-group.has-error .help-block.ng-binding'));
         expect(helpBlock.getText()).to.eventually.equal('The specified email address is already in use.');
       });
 

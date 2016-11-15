@@ -1,14 +1,14 @@
 'use strict';
 
 import crypto from 'crypto';
-var authTypes = ['github', 'twitter', 'facebook', 'google'];
+let authTypes = ['github', 'twitter', 'facebook', 'google'];
 
-var validatePresenceOf = function(value) {
+let validatePresenceOf = function(value) {
   return value && value.length;
 };
 
 export default function(sequelize, DataTypes) {
-  var User = sequelize.define('User', {
+  let User = sequelize.define('User', {
 
     _id: {
       type: DataTypes.INTEGER,
@@ -71,7 +71,7 @@ export default function(sequelize, DataTypes) {
      */
     hooks: {
       beforeBulkCreate(users, fields, fn) {
-        var totalUpdated = 0;
+        let totalUpdated = 0;
         users.forEach(user => {
           user.updatePassword(err => {
             if(err) {
@@ -112,7 +112,7 @@ export default function(sequelize, DataTypes) {
           return this.password === this.encryptPassword(password);
         }
 
-        var _this = this;
+        let _this = this;
         this.encryptPassword(password, function(err, pwdGen) {
           if(err) {
             callback(err);
@@ -136,7 +136,7 @@ export default function(sequelize, DataTypes) {
        * @api public
        */
       makeSalt(byteSize, callback) {
-        var defaultByteSize = 16;
+        let defaultByteSize = 16;
 
         if(typeof arguments[0] === 'function') {
           callback = arguments[0];
@@ -172,9 +172,9 @@ export default function(sequelize, DataTypes) {
           return callback ? callback(null) : null;
         }
 
-        var defaultIterations = 10000;
-        var defaultKeyLength = 64;
-        var salt = new Buffer(this.salt, 'base64');
+        let defaultIterations = 10000;
+        let defaultKeyLength = 64;
+        let salt = new Buffer(this.salt, 'base64');
 
         if(!callback) {
           return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength)

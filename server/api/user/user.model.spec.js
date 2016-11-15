@@ -2,8 +2,8 @@
 
 import app from '../..';
 import {User} from '../../sqldb';
-var user;
-var genUser = function() {
+let user;
+let genUser = function() {
   user = User.build({
     provider: 'local',
     name: 'Fake User',
@@ -37,7 +37,7 @@ describe('User Model', function() {
   it('should fail when saving a duplicate user', function() {
     return expect(user.save()
       .then(function() {
-        var userDup = genUser();
+        let userDup = genUser();
         return userDup.save();
       })).to.be.rejected;
   });

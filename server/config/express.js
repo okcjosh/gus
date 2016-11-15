@@ -19,10 +19,10 @@ import passport from 'passport';
 import session from 'express-session';
 import sqldb from '../sqldb';
 import expressSequelizeSession from 'express-sequelize-session';
-var Store = expressSequelizeSession(session.Store);
+let Store = expressSequelizeSession(session.Store);
 
 export default function(app) {
-  var env = app.get('env');
+  let env = app.get('env');
 
   if(env === 'development' || env === 'test') {
     app.use(express.static(path.join(config.root, '.tmp')));

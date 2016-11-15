@@ -1,12 +1,12 @@
 'use strict';
-import sqldb from "../sqldb";
+import sqldb from '../sqldb';
 
 
-var Job = sqldb.Job;
-var JobType = sqldb.JobType;
-var JobInvitationStatus = sqldb.JobInvitationStatus;
-//var JobInvitation = sqldb.JobInvitation;
-//var JobTypePreference = sqldb.JobTypePreference;
+let Job = sqldb.Job;
+let JobType = sqldb.JobType;
+let JobInvitationStatus = sqldb.JobInvitationStatus;
+//let JobInvitation = sqldb.JobInvitation;
+//let JobTypePreference = sqldb.JobTypePreference;
 
 JobType.sync()
   .then(() => JobType.destroy({where: {}}))

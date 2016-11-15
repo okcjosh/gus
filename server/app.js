@@ -4,10 +4,10 @@
 
 'use strict';
 
-import express from "express";
-import sqldb from "./sqldb";
-import config from "./config/environment";
-import http from "http";
+import express from 'express';
+import sqldb from './sqldb';
+import config from './config/environment';
+import http from 'http';
 
 // Populate databases with sample data
 if (config.seedDB) {
@@ -15,9 +15,9 @@ if (config.seedDB) {
 }
 
 // Setup server
-var app = express();
-var server = http.createServer(app);
-var socketio = require('socket.io')(server, {
+let app = express();
+let server = http.createServer(app);
+let socketio = require('socket.io')(server, {
   serveClient: config.env !== 'production',
   path: '/socket.io-client'
 });

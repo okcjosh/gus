@@ -1,6 +1,6 @@
 'use strict';
 /*eslint-env node*/
-var testsContext;
+let testsContext;
 
 require('babel-polyfill');
 require('angular');

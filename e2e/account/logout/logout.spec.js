@@ -1,16 +1,16 @@
 'use strict';
 
-var config = browser.params;
-var UserModel = require(config.serverConfig.root + '/server/sqldb').User;
+let config = browser.params;
+let UserModel = require(config.serverConfig.root + '/server/sqldb').User;
 
 describe('Logout View', function() {
-  var login = function(user) {
+  let login = function(user) {
     let promise = browser.get(config.baseUrl + '/new');
     require('../login/login.po').login(user);
     return promise;
   };
 
-  var testUser = {
+  let testUser = {
     name: 'Test User',
     email: 'test@example.com',
     password: 'test'
@@ -33,8 +33,8 @@ describe('Logout View', function() {
 
   describe('with local auth', function() {
 
-    it('should logout a user and redirecting to "/"', function() {
-      var navbar = require('../../components/navbar/navbar.po');
+    it('should logout a user and redirecting to '/'', function() {
+      let navbar = require('../../components/navbar/navbar.po');
 
       expect(browser.getCurrentUrl()).to.eventually.equal(config.baseUrl + '/');
       expect(navbar.navbarAccountGreeting.getText()).to.eventually.equal('Hello ' + testUser.name);

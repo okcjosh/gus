@@ -66,8 +66,8 @@ export default angular.module('es42App.event', [uiRouter])
 
 
 //
-// var angularStr = fs.readFileSync(path.resolve(__dirname, '../node_modules/angular/angular.js'), 'utf8');
-// var braintreeAngularStr = fs.readFileSync(path.resolve(__dirname, '../braintree-angular.dist.js'), 'utf8');
+// let angularStr = fs.readFileSync(path.resolve(__dirname, '../node_modules/angular/angular.js'), 'utf8');
+// let braintreeAngularStr = fs.readFileSync(path.resolve(__dirname, '../braintree-angular.dist.js'), 'utf8');
 
 // app.use(bodyParser.urlencoded({
 //   extended: true
@@ -85,7 +85,7 @@ export default angular.module('es42App.event', [uiRouter])
 //         res.send(err)
 //       }
 //     } else {
-//       var clientToken = response.clientToken;
+//       let clientToken = response.clientToken;
 //       res.send(clientToken)
 //     }
 //   })
@@ -104,7 +104,7 @@ export default angular.module('es42App.event', [uiRouter])
 //           res.send(err)
 //         }
 //       } else {
-//         var clientToken = response.clientToken;
+//         let clientToken = response.clientToken;
 //         res.send(clientToken)
 //       }
 //     })
@@ -113,7 +113,7 @@ export default angular.module('es42App.event', [uiRouter])
 //
 // paymentNonce() {
 //   this.$http.post('/payment-nonce', function (req, res) {
-//     var nonce = req.body.payment_method_nonce;
+//     let nonce = req.body.payment_method_nonce;
 //     gateway.transaction.sale({
 //       amount: '10.00',
 //       paymentMethodNonce: nonce

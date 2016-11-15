@@ -1,18 +1,18 @@
 'use strict';
 
-var config = browser.params;
-var UserModel = require(config.serverConfig.root + '/server/sqldb').User;
+let config = browser.params;
+let UserModel = require(config.serverConfig.root + '/server/sqldb').User;
 
 describe('Login View', function() {
-  var page;
+  let page;
 
-  var loadPage = function() {
+  let loadPage = function() {
     let promise = browser.get(config.baseUrl + '/new');
     page = require('./login.po');
     return promise;
   };
 
-  var testUser = {
+  let testUser = {
     name: 'Test User',
     email: 'test@example.com',
     password: 'test'
@@ -51,9 +51,9 @@ describe('Login View', function() {
 
   describe('with local auth', function() {
 
-    it('should new a user and redirecting to "/"', function () {
+    it('should new a user and redirecting to '/'', function () {
       return page.login(testUser).then(() => {
-        var navbar = require('../../components/navbar/navbar.po');
+        let navbar = require('../../components/navbar/navbar.po');
 
         return browser.wait(
           () => element(by.css('.hero-unit')),
@@ -79,7 +79,7 @@ describe('Login View', function() {
 
         expect(browser.getCurrentUrl()).to.eventually.equal(config.baseUrl + '/new');
 
-        var helpBlock = page.form.element(by.css('.form-group.has-error .help-block.ng-binding'));
+        let helpBlock = page.form.element(by.css('.form-group.has-error .help-block.ng-binding'));
         expect(helpBlock.getText()).to.eventually.equal('This password is not correct.');
       });
 

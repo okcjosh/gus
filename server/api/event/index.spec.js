@@ -1,8 +1,8 @@
 'use strict';
 
-var proxyquire = require('proxyquire').noPreserveCache();
+let proxyquire = require('proxyquire').noPreserveCache();
 
-var eventCtrlStub = {
+let eventCtrlStub = {
   index: 'eventCtrl.index',
   show: 'eventCtrl.show',
   create: 'eventCtrl.create',
@@ -11,7 +11,7 @@ var eventCtrlStub = {
   destroy: 'eventCtrl.destroy'
 };
 
-var routerStub = {
+let routerStub = {
   get: sinon.spy(),
   put: sinon.spy(),
   patch: sinon.spy(),
@@ -20,7 +20,7 @@ var routerStub = {
 };
 
 // require the index with our stubbed out modules
-var eventIndex = proxyquire('./index.js', {
+let eventIndex = proxyquire('./index.js', {
   express: {
     Router() {
       return routerStub;

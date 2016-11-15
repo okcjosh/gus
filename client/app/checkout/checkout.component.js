@@ -2,7 +2,7 @@
 const angular = require('angular');
 const uiRouter = require('angular-ui-router');
 const braintree = require('braintree-web');
-import routes from "./checkout.routes";
+import routes from './checkout.routes';
 
 export function CheckoutComponent($http) {
   $http.post('/api/client_token/new')

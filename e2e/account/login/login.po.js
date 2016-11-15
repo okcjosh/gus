@@ -5,16 +5,16 @@
 
 'use strict';
 
-var LoginPage = function() {
-  var form = this.form = element(by.css('.form'));
+let LoginPage = function() {
+  let form = this.form = element(by.css('.form'));
   form.email = form.element(by.model('vm.user.email'));
   form.password = form.element(by.model('vm.user.password'));
   form.submit = form.element(by.css('.btn-new'));
   form.oauthButtons = require('../../components/oauth-buttons/oauth-buttons.po').oauthButtons;
 
   this.login = function(data) {
-    for (var prop in data) {
-      var formElem = form[prop];
+    for (let prop in data) {
+      let formElem = form[prop];
       if (data.hasOwnProperty(prop) && formElem && typeof formElem.sendKeys === 'function') {
         formElem.sendKeys(data[prop]);
       }

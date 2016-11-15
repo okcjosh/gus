@@ -1,7 +1,7 @@
 'use strict';
 
-import angular from "angular";
-import LoginController from "./login.controller";
+import angular from 'angular';
+import LoginController from './login.controller';
 
 export default angular.module('es4App.login', [])
   .controller('LoginController', LoginController)

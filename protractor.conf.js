@@ -3,7 +3,7 @@
 
 'use strict';
 
-var config = {
+let config = {
   // The timeout for each script run on the browser. This should be longer
   // than the maximum time your application needs to stabilize between tasks.
   allScriptsTimeout: 110000,
@@ -12,7 +12,7 @@ var config = {
   // with relative paths will be prepended with this.
   baseUrl: 'http://localhost:' + (process.env.PORT || '9000'),
 
-  // Credientials for Saucelabs
+  // Credentials for Saucelabs
   sauceUser: process.env.SAUCE_USERNAME,
 
   sauceKey: process.env.SAUCE_ACCESS_KEY,
@@ -69,7 +69,7 @@ var config = {
       Object.getOwnPropertyDescriptor(Object.prototype, 'should')
     );
 
-    var serverConfig = config.params.serverConfig;
+    let serverConfig = config.params.serverConfig;
   }
 };
 

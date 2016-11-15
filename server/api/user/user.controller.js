@@ -42,12 +42,12 @@ export function index(req, res) {
  * Creates a new user
  */
 export function create(req, res) {
-  var newUser = User.build(req.body);
+  let newUser = User.build(req.body);
   newUser.setDataValue('provider', 'local');
   newUser.setDataValue('role', 'user');
   return newUser.save()
     .then(function(user) {
-      var token = jwt.sign({ _id: user._id }, config.secrets.session, {
+      let token = jwt.sign({ _id: user._id }, config.secrets.session, {
         expiresIn: 60 * 60 * 5
       });
       res.json({ token });
@@ -59,7 +59,7 @@ export function create(req, res) {
  * Get a single user
  */
 export function show(req, res, next) {
-  var userId = req.params.id;
+  let userId = req.params.id;
 
   return User.find({
     where: {
@@ -91,9 +91,9 @@ export function destroy(req, res) {
  * Change a users password
  */
 export function changePassword(req, res) {
-  var userId = req.user._id;
-  var oldPass = String(req.body.oldPassword);
-  var newPass = String(req.body.newPassword);
+  let userId = req.user._id;
+  let oldPass = String(req.body.oldPassword);
+  let newPass = String(req.body.newPassword);
 
   return User.find({
     where: {
@@ -118,7 +118,7 @@ export function changePassword(req, res) {
  * Get my info
  */
 export function me(req, res, next) {
-  var userId = req.user._id;
+  let userId = req.user._id;
 
   return User.find({
     where: {

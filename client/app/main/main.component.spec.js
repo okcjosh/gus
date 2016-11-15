@@ -10,10 +10,10 @@ describe('Component: MainComponent', function() {
   beforeEach(angular.mock.module('stateMock'));
   beforeEach(angular.mock.module('socketMock'));
 
-  var scope;
-  var mainComponent;
-  var state;
-  var $httpBackend;
+  let scope;
+  let mainComponent;
+  let state;
+  let $httpBackend;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function(_$httpBackend_, $http, $componentController, $rootScope, $state,

@@ -1,7 +1,7 @@
 'use strict';
 
-var braintree = require('braintree');
-var environment, gateway;
+let braintree = require('braintree');
+let environment, gateway;
 require('dotenv').load();
 environment = process.env.BT_ENVIRONMENT.charAt(0).toUpperCase() + process.env.BT_ENVIRONMENT.slice(1);
 
@@ -13,7 +13,7 @@ gateway = braintree.connect({
 });
 
 
-export var TRANSACTION_SUCCESS_STATUSES = [
+export let TRANSACTION_SUCCESS_STATUSES = [
   braintree.Transaction.Status.Authorizing,
   braintree.Transaction.Status.Authorized,
   braintree.Transaction.Status.Settled,
@@ -25,9 +25,9 @@ export var TRANSACTION_SUCCESS_STATUSES = [
 
 
 export function formatErrors(errors) {
-  var formattedErrors = '';
+  let formattedErrors = '';
 
-  for (var i in errors) { // eslint-disable-line no-inner-declarations, vars-on-top
+  for (let i in errors) { // eslint-disable-line no-inner-declarations, lets-on-top
     if (errors.hasOwnProperty(i)) {
       formattedErrors += 'Error: ' + errors[i].code + ': ' + errors[i].message + '\n';
     }
@@ -36,8 +36,8 @@ export function formatErrors(errors) {
 }
 
 export function createResultObject(transaction) {
-  var result;
-  var status = transaction.status;
+  let result;
+  let status = transaction.status;
 
   if (TRANSACTION_SUCCESS_STATUSES.indexOf(status) !== -1) {
     result = {

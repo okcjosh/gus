@@ -4,26 +4,26 @@
  */
 
 'use strict';
-import sqldb from "../sqldb";
+import sqldb from '../sqldb';
 
-var Thing = sqldb.Thing;
-var User = sqldb.User;
-var Event = sqldb.Event;
+let Thing = sqldb.Thing;
+let User = sqldb.User;
+let Event = sqldb.Event;
 
-var Leo = sqldb.Leo;
-var DeptPreference = sqldb.DeptPreference;
-var DefDeptPreference = sqldb.DefDeptPreference;
-var Department = sqldb.Department;
+let Leo = sqldb.Leo;
+let DeptPreference = sqldb.DeptPreference;
+let DefDeptPreference = sqldb.DefDeptPreference;
+let Department = sqldb.Department;
 
-var Job = sqldb.Job;
-var JobType = sqldb.JobType;
-var JobInvitationStatus = sqldb.JobInvitationStatus;
-//var JobInvitation = sqldb.JobInvitation;
-var JobTypePreference = sqldb.JobTypePreference;
-var LeoScheduling = sqldb.LeoScheduling;
-var Status = sqldb.Status;
-var SeniorityClass = sqldb.SeniorityClass;
-var NewAppt = sqldb.NewAppt;
+let Job = sqldb.Job;
+let JobType = sqldb.JobType;
+let JobInvitationStatus = sqldb.JobInvitationStatus;
+//let JobInvitation = sqldb.JobInvitation;
+let JobTypePreference = sqldb.JobTypePreference;
+let LeoScheduling = sqldb.LeoScheduling;
+let Status = sqldb.Status;
+let SeniorityClass = sqldb.SeniorityClass;
+let NewAppt = sqldb.NewAppt;
 
 Thing.sync()
   .then(() =>

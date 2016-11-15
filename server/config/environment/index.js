@@ -1,19 +1,19 @@
 'use strict';
 /*eslint no-process-env:0*/
 
-import path from "path";
-import _ from "lodash";
+import path from 'path';
+import _ from 'lodash';
 
 /*function requiredProcessEnv(name) {
   if(!process.env[name]) {
-    throw new Error('You must set the ' + name + ' environment variable');
+    throw new Error('You must set the ' + name + ' environment letiable');
   }
   return process.env[name];
 }*/
 
 // All configurations will extend these options
 // ============================================
-var all = {
+let all = {
   env: process.env.NODE_ENV,
 
   // Root path of server
@@ -31,7 +31,7 @@ var all = {
   // Should we populate the DB with sample data?
   seedDB: false,
 
-  // Secret for session, you will want to change this and make it an environment variable
+  // Secret for session, you will want to change this and make it an environment letiable
   secrets: {
     session: 'es4-secret'
   },

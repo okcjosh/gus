@@ -1,5 +1,5 @@
-'use strict';
-/*eslint no-process-env:0*/
+// 'use strict';
+/* eslint no-process-env:0 */
 
 // Test specific configuration
 // ===========================
@@ -9,9 +9,7 @@ module.exports = {
     options: {
       logging: false,
       storage: 'mysql',
-      define: {
-        timestamps: false
-      }
+      define: {timestamps: false}
     }
-  },
+  }
 };

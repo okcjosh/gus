@@ -4,7 +4,7 @@ describe('Component: LeoComponent', function() {
   // load the controller's module
   beforeEach(module('es4App.leo'));
 
-  var LeoComponent;
+  let LeoComponent;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function($componentController) {

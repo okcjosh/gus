@@ -1,12 +1,12 @@
 'use strict';
 
-import angular from "angular";
-import uiRouter from "angular-ui-router";
-import routing from "./account.routes";
-import login from "./login";
-import settings from "./settings";
-import signup from "./signup";
-import oauthButtons from "../../components/oauth-buttons";
+import angular from 'angular';
+import uiRouter from 'angular-ui-router';
+import routing from './account.routes';
+import login from './login';
+import settings from './settings';
+import signup from './signup';
+import oauthButtons from '../../components/oauth-buttons';
 
 export default angular.module('es4App.account', [uiRouter, login, settings, signup, oauthButtons])
   .config(routing)

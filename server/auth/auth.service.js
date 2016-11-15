@@ -5,7 +5,7 @@ import expressJwt from 'express-jwt';
 import compose from 'composable-middleware';
 import {User} from '../sqldb';
 
-var validateJwt = expressJwt({
+let validateJwt = expressJwt({
   secret: config.secrets.session
 });
 
@@ -80,7 +80,7 @@ export function setTokenCookie(req, res) {
   if(!req.user) {
     return res.status(404).send('It looks like you aren\'t logged in, please try again.');
   }
-  var token = signToken(req.user._id, req.user.role);
+  let token = signToken(req.user._id, req.user.role);
   res.cookie('token', token);
   res.redirect('/');
 }
