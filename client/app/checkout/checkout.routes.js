@@ -9,6 +9,6 @@ export default function ($stateProvider) {
     })
     .state('new', {
       url: '/checkout/new',
-      template: '<new></new>'
+      template: '<show></show>'
     })
 }
