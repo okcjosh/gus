@@ -26,32 +26,3 @@
     </p>
   </form>
 </div>
-
-<!DOCTYPE html>
-<html>
-
-<form>
-  Pick a topic:
-  <input type='radio' ng-model='mylet' value='dogs'>Dogs
-  <input type='radio' ng-model='mylet' value='tuts'>Tutorials
-  <input type='radio' ng-model='mylet' value='cars'>Cars
-</form>
-
-<div ng-switch='mylet'>
-  <div ng-switch-when='dogs'>
-    <h1>Dogs</h1>
-    <p>Welcome to a world of dogs.</p>
-  </div>
-  <div ng-switch-when='tuts'>
-    <h1>Tutorials</h1>
-    <p>Learn from examples.</p>
-  </div>
-  <div ng-switch-when='cars'>
-    <h1>Cars</h1>
-    <p>Read about cars.</p>
-  </div>
-</div>
-
-
-</body>
-</html>

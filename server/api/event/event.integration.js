@@ -1,13 +1,13 @@
 'use strict';
 
-let app = require('../..');
+var app = require('../..');
 import request from 'supertest';
 
-let newEvent;
+var newEvent;
 
 describe('Event API:', function() {
   describe('GET /api/events', function() {
-    let events;
+    var events;
 
     beforeEach(function(done) {
       request(app)
@@ -54,7 +54,7 @@ describe('Event API:', function() {
   });
 
   describe('GET /api/events/:id', function() {
-    let event;
+    var event;
 
     beforeEach(function(done) {
       request(app)
@@ -81,7 +81,7 @@ describe('Event API:', function() {
   });
 
   describe('PUT /api/events/:id', function() {
-    let updatedEvent;
+    var updatedEvent;
 
     beforeEach(function(done) {
       request(app)
@@ -130,7 +130,7 @@ describe('Event API:', function() {
   });
 
   describe('PATCH /api/events/:id', function() {
-    let patchedEvent;
+    var patchedEvent;
 
     beforeEach(function(done) {
       request(app)

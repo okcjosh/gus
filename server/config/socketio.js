@@ -16,6 +16,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  // require('../api/checkout/checkout.socket').register(socket);
   // require('../api/status/status.socket').register(socket);
   // require('../api/seniority_class/seniority_class.socket').register(socket);
   // require('../api/new_appt/new_appt.socket').register(socket);

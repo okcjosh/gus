@@ -15,7 +15,6 @@ import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
 import main from './main/main.component';
 import checkout from './checkout/checkout.component';
-import show from './checkout/show/show.component';
 import event from './event/event.component';
 import leo from './leo/leo.component';
 import constants from './app.constants';
@@ -28,29 +27,29 @@ import './app.scss';
 
 
 angular.module('es4App', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
-  uiBootstrap, _Auth, account, admin, navbar, footer, main, checkout, event, show, leo, constants, socket, util
-  ])
+  uiBootstrap, _Auth, account, admin, navbar, footer, main, checkout, event, leo, constants, socket, util
+])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
-   'ngInject';
+    'ngInject';
     // Redirect to new if route requires auth and you're not logged in
 
-   $rootScope.$on('$stateChangeStart', function(event, next) {
-    Auth.isLoggedIn(function(loggedIn) {
-     if(next.authenticate && !loggedIn) {
-      $location.path('/new');
-     }
-    });
+    $rootScope.$on('$stateChangeStart', function(event, next) {
+      Auth.isLoggedIn(function(loggedIn) {
+        if(next.authenticate && !loggedIn) {
+          $location.path('/new');
+        }
       });
-     });
+    });
+  });
 
 angular.element(document)
   .ready(() => {
-   angular.bootstrap(document,
-     ['es4App'], {
+    angular.bootstrap(document,
+      ['es4App'], {
 
-      strictDi: false
+        strictDi: false
 
-     });
+      });
 
   });

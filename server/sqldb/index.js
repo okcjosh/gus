@@ -13,6 +13,7 @@ let db = {
 };
 
 // Insert models below
+// db.Checkout = db.sequelize.import('../api/checkout/gateway');
 // db.Status = db.sequelize.import('../api/status/status.model');
 // db.SeniorityClass = db.sequelize.import('../api/seniority_class/seniority_class.model');
 // db.NewAppt = db.sequelize.import('../api/new_appt/new_appt.model');

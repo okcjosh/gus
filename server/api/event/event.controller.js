@@ -11,7 +11,6 @@
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-//noinspection JSUnresolvedVariable
 import {Event} from '../../sqldb';
 
 function respondWithResult(res, statusCode) {
@@ -65,12 +64,7 @@ function handleError(res, statusCode) {
 }
 
 // Gets a list of Events
-export function index(parameters) {
-  let req = parameters.req;
-  let res = parameters.res;
-  Event.findAll = function () {
-
-  };
+export function index(req, res) {
   return Event.findAll()
     .then(respondWithResult(res))
     .catch(handleError(res));

@@ -1,3 +1,4 @@
+
 'use strict';
 
 export default function ($stateProvider) {
@@ -7,8 +8,8 @@ export default function ($stateProvider) {
       url: '/checkout',
       template: '<checkout></checkout>'
     })
-    .state('new', {
-      url: '/checkout/new',
+    .state('show', {
+      url: '/checkout/show',
       template: '<show></show>'
     })
 }
