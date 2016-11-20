@@ -70,7 +70,7 @@ export default function(app) {
     });
   });
 
-  app.post('/checkout/:id', function (req, res) {
+  app.get('/checkout/show:id', function (req, res) {
     let result;
     let transactionId = req.params.id;
 
@@ -93,11 +93,11 @@ export default function(app) {
       }
     }, function (err, result) {
       if (result.success || result.transaction) {
-        res.redirect('checkout/show' + result.transaction.id);
+        res.redirect('/show/' + result.transaction.id);
       } else {
         transactionErrors = result.errors.deepErrors();
         req.flash('error', {msg: formatErrors(transactionErrors)});
-        res.redirect('checkout/');
+        res.redirect('/leos');
       }
     });
   });

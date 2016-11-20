@@ -5,7 +5,7 @@ const braintree = require('braintree-web');
 import routes from './checkout.routes';
 
 export function CheckoutComponent($http) {
-  $http.post('/checkout/token')
+  $http.post('checkout/token')
     .then(response => {
       this.clientToken = response.data;
       console.log(this.clientToken);
