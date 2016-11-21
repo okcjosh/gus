@@ -1,11 +1,11 @@
 'use strict';
 const angular = require('angular');
 const uiRouter = require('angular-ui-router');
-const braintree = require('braintree-web');
 import routes from './checkout.routes';
+import braintree from 'braintree-web';
 
 export function CheckoutComponent($http) {
-  $http.post('checkout/token')
+  $http.post('checkout/transaction/token')
     .then(response => {
       this.clientToken = response.data;
       console.log(this.clientToken);
@@ -16,9 +16,7 @@ export function CheckoutComponent($http) {
     });
 }
 
-
 export default angular.module('gusApp.checkout', [uiRouter])
-  .constant('clientTokenPath', '/api/braintree/client_token')
   .config(routes)
   .component('checkout', {
     template: require('./checkout.html'),

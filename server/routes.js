@@ -56,13 +56,13 @@ export default function(app) {
   }
 
 
-  // app.post('/checkout/token', function (req, res) {
+  // app.post('/checkout_/token', function (req, res) {
   //   gateway.clientToken.generate({}, function (err, response) {
-  //     // res.render('client/app/checkout/checkout', {clientToken: response.clientToken, messages: req.flash('error')});
+  //     // res.render('client/app/checkout_/checkout_', {clientToken: response.clientToken, messages: req.flash('error')});
   //   });
   // });
 
-  app.post('/checkout/token', function (request, response) {
+  app.post('/checkout/transaction/token', function (request, response) {
     gateway.clientToken.generate({}, function (err, res) {
       if (err) throw err;
       response.json(res.clientToken);
@@ -70,15 +70,13 @@ export default function(app) {
     });
   });
 
-  app.get('/show/:id', function (req, res) {
+  app.post('/transaction/:id', function (req, res) {
     let result;
-
     let transactionId = req.params.id;
-    console.log('inside of show: ' + transactionId);
+
     gateway.transaction.find(transactionId, function (err, transaction) {
       result = createResultObject(transaction);
-      console.log('fucker: ' + transaction);
-      res.render('', {transaction: transaction, result: result});
+      // res.render('client/app/checkout_/checkout_/show', {transaction: transaction, result: result});
     });
   });
 
@@ -95,8 +93,7 @@ export default function(app) {
       }
     }, function (err, result) {
       if (result.success || result.transaction) {
-        console.log('ima bout to redirect to /show');
-        res.redirect('/show/' + result.transaction.id);
+        res.redirect('/checkout/transaction');
       } else {
         transactionErrors = result.errors.deepErrors();
         req.flash('error', {msg: formatErrors(transactionErrors)});

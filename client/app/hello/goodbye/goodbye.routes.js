@@ -3,8 +3,8 @@
 export default function($stateProvider) {
   'ngInject';
   $stateProvider
-    .state('checkout', {
-      url: '/checkout',
-      template: '<checkout></checkout>'
+    .state('goodbye', {
+      url: '/hello/goodbye',
+      template: '<goodbye></goodbye>'
     });
 }

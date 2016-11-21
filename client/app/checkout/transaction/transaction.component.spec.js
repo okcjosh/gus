@@ -1,14 +1,14 @@
 'use strict';
 
-describe('Component: CheckoutComponent', function() {
+describe('Component: TransactionComponent', function() {
   // load the controller's module
-  beforeEach(module('gusApp.checkout'));
+  beforeEach(module('gusApp.transaction'));
 
-  var CheckoutComponent;
+  var TransactionComponent;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function($componentController) {
-    CheckoutComponent = $componentController('checkout', {});
+    TransactionComponent = $componentController('transaction', {});
   }));
 
   it('should ...', function() {

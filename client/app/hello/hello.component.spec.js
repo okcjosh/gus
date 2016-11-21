@@ -1,14 +1,14 @@
 'use strict';
 
-describe('Component: ShowComponent', function() {
+describe('Component: HelloComponent', function() {
   // load the controller's module
-  beforeEach(module('gusApp.show'));
+  beforeEach(module('gusApp.hello'));
 
-  var ShowComponent;
+  var HelloComponent;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function($componentController) {
-    ShowComponent = $componentController('show', {});
+    HelloComponent = $componentController('hello', {});
   }));
 
   it('should ...', function() {

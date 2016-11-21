@@ -22,13 +22,13 @@ export default function routes($stateProvider) {
       }
     })
     .state('signup', {
-      url: '/checkouts',
+      url: '/signup',
       template: require('./signup/signup.html'),
       controller: 'SignupController',
       controllerAs: 'vm'
     })
     .state('settings', {
-      url: '/show',
+      url: '/settings',
       template: require('./settings/settings.html'),
       controller: 'SettingsController',
       controllerAs: 'vm',
