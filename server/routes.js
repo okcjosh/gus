@@ -70,13 +70,15 @@ export default function(app) {
     });
   });
 
-  app.get('/checkout/show:id', function (req, res) {
+  app.get('/show/:id', function (req, res) {
     let result;
-    let transactionId = req.params.id;
 
+    let transactionId = req.params.id;
+    console.log('inside of show: ' + transactionId);
     gateway.transaction.find(transactionId, function (err, transaction) {
       result = createResultObject(transaction);
-      // res.render('client/app/checkout/checkout/show', {transaction: transaction, result: result});
+      console.log('fucker: ' + transaction);
+      res.render('', {transaction: transaction, result: result});
     });
   });
 
@@ -93,6 +95,7 @@ export default function(app) {
       }
     }, function (err, result) {
       if (result.success || result.transaction) {
+        console.log('ima bout to redirect to /show');
         res.redirect('/show/' + result.transaction.id);
       } else {
         transactionErrors = result.errors.deepErrors();
