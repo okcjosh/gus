@@ -1,7 +1,6 @@
 'use strict';
 const angular = require('angular');
 const uiRouter = require('angular-ui-router');
-import routes from './transaction.routes';
 
 // export class TransactionComponent {
 //   /*@ngInject*/
@@ -82,7 +81,6 @@ export function TransactionComponent() {
 
 
 export default angular.module('gusApp.transaction', [uiRouter])
-  .config(routes)
   .component('transaction', {
     template: require('./transaction.html'),
     controller: TransactionComponent,

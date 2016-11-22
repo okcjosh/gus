@@ -2746,7 +2746,10 @@ aside.drawer {
 // Component styles are injected through gulp
 /* inject:scss */
 @import 'admin/admin';
+@import 'checkout/checkout';
 @import 'event/event';
+@import 'hello/goodbye/goodbye';
+@import 'hello/hello';
 @import 'leo/leo';
 @import 'main/main';
 @import '../components/footer/footer';

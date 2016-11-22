@@ -93,7 +93,7 @@ export default function(app) {
       }
     }, function (err, result) {
       if (result.success || result.transaction) {
-        res.redirect('/checkout/transaction');
+        res.redirect('transaction/' + result.transaction.id);
       } else {
         transactionErrors = result.errors.deepErrors();
         req.flash('error', {msg: formatErrors(transactionErrors)});
