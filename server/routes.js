@@ -76,6 +76,7 @@ export default function(app) {
 
     gateway.transaction.find(transactionId, function (err, transaction) {
       result = createResultObject(transaction);
+      console.log(createResultObject(transaction));
       // res.render('client/app/checkout_/checkout_/show', {transaction: transaction, result: result});
     });
   });
@@ -84,6 +85,7 @@ export default function(app) {
     let transactionErrors;
     let amount = req.body.amount; // In production you should not take amounts directly from clients
     let nonce = req.body.payment_method_nonce;
+    console.log('nonce = ' +  nonce);
 
     gateway.transaction.sale({
       amount: amount,
@@ -94,10 +96,11 @@ export default function(app) {
     }, function (err, result) {
       if (result.success || result.transaction) {
         res.redirect('transaction/' + result.transaction.id);
+        console.log(createResultObject(result + 'result'));
       } else {
         transactionErrors = result.errors.deepErrors();
         req.flash('error', {msg: formatErrors(transactionErrors)});
-        res.redirect('/leos');
+
       }
     });
   });
