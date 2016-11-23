@@ -8,7 +8,15 @@ const uiRouter = require('angular-ui-router');
 //     this.message = 'Hello';
 //   }
 // }
-export function TransactionComponent() {
+export function TransactionComponent($scope, $http, $location) {
+  //alert('tranid: ' + $location.search()['tranid']);
+  var tranid = $location.search()['tranid'];
+  $http.get('/transaction/' + tranid).then(function(response){
+    $scope.transaction = response.data;
+  }, function(err){
+    alert(err);
+  });
+  //alert($scope.transaction);
   function Demo(config) {
     this.config = config;
     this.config.development = config.development || false;
@@ -80,7 +88,7 @@ export function TransactionComponent() {
 }
 
 
-export default angular.module('gusApp.transaction', [uiRouter])
+export default angular.module('es4App.transaction', [uiRouter])
   .component('transaction', {
     template: require('./transaction.html'),
     controller: TransactionComponent,

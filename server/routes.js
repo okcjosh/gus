@@ -70,15 +70,21 @@ export default function(app) {
     });
   });
 
-  app.post('/transaction/:id', function (req, res) {
+  app.get('/transaction/:id', function (req, res) {
     let result;
     let transactionId = req.params.id;
 
     gateway.transaction.find(transactionId, function (err, transaction) {
       result = createResultObject(transaction);
-      console.log(createResultObject(transaction));
+      //console.log(transaction);
+      console.log(result);
       // res.render('client/app/checkout_/checkout_/show', {transaction: transaction, result: result});
+      //res.render('./checkout/transaction/transaction', {transaction:transaction});
+      //res.redirect('/checkout/transaction', );
+      res.json(transaction);
+
     });
+
   });
 
   app.post('/checkout', function (req, res) {
@@ -95,8 +101,11 @@ export default function(app) {
       }
     }, function (err, result) {
       if (result.success || result.transaction) {
-        res.redirect('transaction/' + result.transaction.id);
-        console.log(createResultObject(result + 'result'));
+        var resultOb = createResultObject(result.transaction);
+        console.log('result: ');
+        console.log(resultOb);
+        //res.redirect('transaction/' + result.transaction.id);
+        res.redirect('/checkout/transaction?tranid=' + result.transaction.id);
       } else {
         transactionErrors = result.errors.deepErrors();
         req.flash('error', {msg: formatErrors(transactionErrors)});
