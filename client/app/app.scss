@@ -2237,19 +2237,19 @@ header {
   }
 }
 
-.pseudoshop, .braintree {
+.es4, .braintree {
   display: inline-block;
   text-decoration: none;
   vertical-align: middle;
 }
 
-.pseudoshop, .braintree {
+.es4, .braintree {
   background-color: #fff;
   padding: 3px 8px;
   margin: 0 -8px;
 }
 
-.pseudoshop {
+.es4 {
   -webkit-transition: color 160ms ease;
   -moz-transition: color 160ms ease;
   -ms-transition: color 160ms ease;
@@ -2274,7 +2274,7 @@ header {
 }
 
 @media (min-width: 641px) {
-  .pseudoshop {
+  .es4 {
     -webkit-box-ordinal-group: 1;
     -moz-box-ordinal-group: 1;
     box-ordinal-group: 1;
@@ -2751,7 +2751,9 @@ aside.drawer {
 @import 'hello/goodbye/goodbye';
 @import 'hello/hello';
 @import 'leo/leo';
+@import 'leos/leos';
 @import 'main/main';
+@import 'staff/staff';
 @import '../components/footer/footer';
 @import '../components/modal/modal';
 @import '../components/oauth-buttons/oauth-buttons';

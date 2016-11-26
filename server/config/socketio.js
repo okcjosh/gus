@@ -16,6 +16,8 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/staffing/staffing.socket').register(socket);
+  require('../api/leos/leos.socket').register(socket);
   // require('../api/checkout_OLD/checkout_OLD.socket').register(socket);
   // require('../api/status/status.socket').register(socket);
   // require('../api/seniority_class/seniority_class.socket').register(socket);

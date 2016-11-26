@@ -2,6 +2,24 @@
   <div class="response container">
     <div class="content">
       <section>
+        <img src='assets/images/success.svg'>
+      </section>
+      <script>
+        if (TRANSACTION_SUCCESS_STATUSES.indexOf(status) !== -1) {
+          result = {
+            header: 'Sweet Success!',
+            icon: 'success',
+            message: 'Your test transaction has been successfully processed. See the Braintree API response and try again.'
+          };
+        } else {
+          result = {
+            header: 'Transaction Failed',
+            icon: 'fail',
+            message: 'Your test transaction has a status of ' + status + '. See the Braintree API response and try again.'
+          };
+        }
+      </script>
+      <section>
         <p>Test another transaction or see the Braintree API response.</p>
       </section>
       <section><a href="//checkout" class="button primary back"><span>Test Another Transaction</span></a></section>
@@ -118,6 +136,7 @@
           <td>{{transaction.customer.fax}}</td>
         </tr>
         </tbody>
+        <div class="notice-wrapper"><span class="notice-message">{{msg.msg}}</span></div>
       </table>
     </section>
     <section>
@@ -126,3 +145,4 @@
     <section><a href="https://developers.braintreepayments.com/guides/drop-in" target="_blank" class="button secondary full"> <span>See the Docs</span></a></section>
   </article>
 </aside>
+

@@ -101,7 +101,7 @@ export default function(app) {
       }
     }, function (err, result) {
       if (result.success || result.transaction) {
-        var resultOb = createResultObject(result.transaction);
+        let resultOb = createResultObject(result.transaction);
         console.log('result: ');
         console.log(resultOb);
         //res.redirect('transaction/' + result.transaction.id);

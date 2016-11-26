@@ -87,6 +87,10 @@ export function TransactionComponent($scope, $http, $location) {
   };
 }
 
+// if (messages && messages.length > 0
+//   .show.notice.error.notice-error){
+//   for (message in messages){}}
+
 
 export default angular.module('es4App.transaction', [uiRouter])
   .component('transaction', {

@@ -4,6 +4,7 @@ const uiRouter = require('angular-ui-router');
 import routes from './checkout.routes';
 import braintree from 'braintree-web';
 
+
 export function CheckoutComponent($http) {
   $http.post('checkout/transaction/token')
     .then(response => {
@@ -15,7 +16,6 @@ export function CheckoutComponent($http) {
         })
     });
 }
-
 export default angular.module('gusApp.checkout', [uiRouter])
   .config(routes)
   .component('checkout', {

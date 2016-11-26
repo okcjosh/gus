@@ -9,8 +9,10 @@ export class GoodbyeComponent {
   /*@ngInject*/
   constructor() {
     this.message = 'Hello';
+    this.sentence = 'Hello my name is {{BALLZ}}'
   }
 }
+
 
 export default angular.module('gusApp.goodbye', [uiRouter])
   .config(routes)
@@ -20,3 +22,4 @@ export default angular.module('gusApp.goodbye', [uiRouter])
     controllerAs: 'goodbyeCtrl'
   })
   .name;
+

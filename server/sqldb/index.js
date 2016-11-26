@@ -13,6 +13,8 @@ let db = {
 };
 
 // Insert models below
+db.Staffing = db.sequelize.import('../api/staffing/staffing.model');
+db.Leos = db.sequelize.import('../api/leos/leos.model');
 // db.Checkout = db.sequelize.import('../api/checkout/gateway');
 // db.Status = db.sequelize.import('../api/status/status.model');
 // db.SeniorityClass = db.sequelize.import('../api/seniority_class/seniority_class.model');
