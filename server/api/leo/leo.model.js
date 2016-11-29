@@ -1,12 +1,11 @@
-/* jshint indent: 2 */
+'use strict';
 
 export default function(sequelize, DataTypes) {
   return sequelize.define('leo', {
     leo_id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      primaryKey: true,
-      autoIncrement: false
+      primaryKey: true
     },
     name: {
       type: DataTypes.STRING,
@@ -29,15 +28,19 @@ export default function(sequelize, DataTypes) {
       }
     },
     year_started: {
-      type: DataTypes.DATE,
-      allowNull: false,
+      type: 'YEAR(4)',
+      allowNull: true
     },
     lastGig: {
       type: DataTypes.DATE,
       allowNull: true
+    },
+    phone_verified: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      defaultValue: '0'
     }
   }, {
-    tableName: 'leo',
+    tableName: 'leo'
   });
 };
-

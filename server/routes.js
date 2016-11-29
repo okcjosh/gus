@@ -22,6 +22,22 @@ export default function(app) {
   app.use('/api/events', require('./api/event'));
   app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
+  app.use('/api/cocknballs', require('./api/cocknball'));
+  app.use('/api/def_dept_preferences', require('./api/def_dept_preferences'));
+  app.use('/api/dept_preferences', require('./api/dept_preferences'));
+  app.use('/api/departments', require('./api/department'));
+  app.use('/api/jobs', require('./api/job'));
+  app.use('/api/invitations', require('./api/job_invitation'));
+  app.use('/api/job_invitation_status', require('./api/job_invitation_status'));
+  app.use('/api/job_types', require('./api/job_type'));
+  app.use('/api/job_type_preferences', require('./api/job_type_preference'));
+  app.use('/api/leo_scheduling', require('./api/leo_scheduling'));
+  app.use('/api/new_appts', require('./api/new_appt'));
+  app.use('/api/seniority_class', require('./api/seniority_class'));
+  app.use('/api/status', require('./api/status'));
+
+
+
   app.use('/auth', require('./auth').default);
   function formatErrors(errors) {
     let formattedErrors = '';

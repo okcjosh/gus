@@ -18,20 +18,19 @@ import CheckoutComponent from './checkout/checkout.component';
 import TransactionComponent from './checkout/transaction/transaction.component';
 import event from './event/event.component';
 import leo from './leo/leo.component';
-import HelloComponent from './hello/hello.component';
 import constants from './app.constants';
-import staffing from './staff/staff.component';
-import GoodbyeComponent from './hello/goodbye/goodbye.component';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
 import './app.scss';
-// import ngAnimate from 'angular-animate';
+import ngAnimate from 'angular-animate';
 import ngMessages from 'angular-messages';
+
+
 // import ngValidationMatch from 'angular-validation-match';
 
 
 angular.module('es4App', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
-  uiBootstrap, _Auth, account, admin, ngMessages, navbar, staffing, footer, main, CheckoutComponent, HelloComponent, GoodbyeComponent, TransactionComponent, event, leo, constants, socket, util
+  uiBootstrap, _Auth, ngAnimate, account, admin, ngMessages, navbar, footer, main, CheckoutComponent, TransactionComponent, event, leo, constants, socket, util
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {

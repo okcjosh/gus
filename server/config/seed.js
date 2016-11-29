@@ -12,18 +12,33 @@ let Event = sqldb.Event;
 
 let Leo = sqldb.Leo;
 // let DeptPreference = sqldb.DeptPreference;
-// let DefDeptPreference = sqldb.DefDeptPreference;
+// // let DefDeptPreference = sqldb.DefDeptPreference;
 // let Department = sqldb.Department;
 //
 // let Job = sqldb.Job;
 // let JobType = sqldb.JobType;
 // let JobInvitationStatus = sqldb.JobInvitationStatus;
-//let JobInvitation = sqldb.JobInvitation;
-// let JobTypePreference = sqldb.JobTypePreference;
+// let JobInvitation = sqldb.JobInvitation;
+let JobTypePreference = sqldb.JobTypePreference;
 // let LeoScheduling = sqldb.LeoScheduling;
 // let Status = sqldb.Status;
 // let SeniorityClass = sqldb.SeniorityClass;
 // let NewAppt = sqldb.NewAppt;
+
+JobTypePreference.sync()
+  .then(() => JobTypePreference.destroy({where: {}}))
+  .then(() => {
+    JobTypePreference.bulkCreate([{
+      leo_id: '1',
+      job_type_id: '2',
+    }, {
+      leo_id: '3',
+      job_type_id: '4',
+    }])
+      .then(() => {
+        console.log('finished populating JOB_TYPE_PREFS');
+      });
+  });
 
 Thing.sync()
   .then(() =>
@@ -167,7 +182,7 @@ Leo.sync()
         console.log('finished populating LEOS');
       });
   });
-//
+
 // DefDeptPreference.sync()
 //   .then(() => DefDeptPreference.destroy({where: {}}))
 //   .then(() => {
@@ -188,7 +203,7 @@ Leo.sync()
 //         console.log('finished populating DEF_DEPT_PREFS');
 //       });
 //   });
-//
+
 // JobType.sync()
 //   .then(() => JobType.destroy({where: {}}))
 //   .then(() => {
@@ -203,7 +218,7 @@ Leo.sync()
 //         console.log('finished populating JOB_TYPES');
 //       });
 //   });
-//
+
 // JobInvitationStatus.sync()
 //   .then(() => JobInvitationStatus.destroy({where: {}}))
 //   .then(() => {
@@ -290,19 +305,19 @@ Leo.sync()
 //         console.log('finished populating DEPT_PREFS');
 //       });
 //   });
-// //
-// // // JobInvitation.sync()
-// // //   .then(() => {
-// // //     return DeptPreference.destroy({ where: {} });
-// // //   })
-// // //   .then(() => {
-// // //     JobInvitation.bulkCreate([{
-// // //       job_id: '1',
-// // //       leo_id: '1',
-// // //       expires: '12/12/2017',
-// // //       job_invitation_status_id: '1'
-// // //     }]);
-// // //   });
+//
+// JobInvitation.sync()
+//    .then(() => {
+//      return DeptPreference.destroy({ where: {} });
+//    })
+//    .then(() => {
+//      JobInvitation.bulkCreate([{
+//        job_id: '1',
+//        leo_id: '1',
+//        expires: '12/12/2017',
+//        job_invitation_status_id: '1'
+//      }]);
+//    });
 //
 // SeniorityClass.sync()
 //   .then(() => SeniorityClass.destroy({where: {}}))
@@ -358,17 +373,4 @@ Leo.sync()
 //       });
 //   });
 //
-// JobTypePreference.sync()
-//   .then(() => JobTypePreference.destroy({where: {}}))
-//   .then(() => {
-//     JobTypePreference.bulkCreate([{
-//       leo_id: '1',
-//       job_type_id: '2',
-//     }, {
-//       leo_id: '3',
-//       job_type_id: '4',
-//     }])
-//       .then(() => {
-//         console.log('finished populating JOB_TYPE_PREFS');
-//       });
-//   });
+

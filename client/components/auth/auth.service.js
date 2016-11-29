@@ -31,7 +31,7 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
     /**
      * Authenticate user and save token
      *
-     * @param  {Object}   user     - login info
+     * @param  {Object}   user     - form-profile info
      * @param  {Function} callback - function(error, user)
      * @return {Promise}
      */

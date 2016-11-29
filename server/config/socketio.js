@@ -16,21 +16,20 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
-  require('../api/staffing/staffing.socket').register(socket);
-  require('../api/leos/leos.socket').register(socket);
-  // require('../api/checkout_OLD/checkout_OLD.socket').register(socket);
-  // require('../api/status/status.socket').register(socket);
-  // require('../api/seniority_class/seniority_class.socket').register(socket);
-  // require('../api/new_appt/new_appt.socket').register(socket);
-  // require('../api/leo_scheduling/leo_scheduling.socket').register(socket);
-  // require('../api/job_type_preference/job_type_preference.socket').register(socket);
-  // require('../api/job_type/job_type.socket').register(socket);
-  // require('../api/job_invitation_status/job_invitation_status.socket').register(socket);
-  // require('../api/job_invitation/job_invitation.socket').register(socket);
-  // require('../api/job/job.socket').register(socket);
-  // require('../api/dept_preference/dept_preference.socket').register(socket);
-  // require('../api/department/department.socket').register(socket);
-  // require('../api/def_dept_preference/def_dept_preference.socket').register(socket);
+  require('../api/cocknball/cocknball.socket').register(socket);
+  require('../api/session/session.socket').register(socket);
+  require('../api/dept_preferences/dept_preferences.socket').register(socket);
+  require('../api/def_dept_preferences/def_dept_preferences.socket').register(socket);
+  require('../api/status/status.socket').register(socket);
+  require('../api/seniority_class/seniority_class.socket').register(socket);
+  require('../api/new_appt/new_appt.socket').register(socket);
+  require('../api/leo_scheduling/leo_scheduling.socket').register(socket);
+  require('../api/job_type_preference/job_type_preference.socket').register(socket);
+  require('../api/job_type/job_type.socket').register(socket);
+  require('../api/job_invitation_status/job_invitation_status.socket').register(socket);
+  require('../api/job_invitation/job_invitation.socket').register(socket);
+  require('../api/job/job.socket').register(socket);
+  require('../api/department/department.socket').register(socket);
   require('../api/leo/leo.socket').register(socket);
   require('../api/event/event.socket').register(socket);
   require('../api/thing/thing.socket').register(socket);

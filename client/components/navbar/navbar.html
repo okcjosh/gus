@@ -1,40 +1,29 @@
-<div class='container wide'>
-  <div class="container-slim">
-        <ul class='nav navbar-nav'>
-          <li ng-repeat='item in $ctrl.menu' ui-sref-active='active'>
-            <a ui-sref='{{item.state}}'>{{item.title}}</a>
-          </li>
-          <li ng-show='$ctrl.isAdmin()' ui-sref-active='active'><a ui-sref='admin'>Admin</a></li>
-        </ul>
-
-        <ul class='nav navbar-nav navbar-right'>
-          <li ng-hide='$ctrl.isLoggedIn()' ui-sref-active='active'><a ui-sref='signup'>Sign up</a></li>
-          <li ng-hide='$ctrl.isLoggedIn()' ui-sref-active='active'><a ui-sref='login'>Login</a></li>
-          <li ng-show='$ctrl.isLoggedIn()'><p class='navbar-text'>Hello {{ $ctrl.getCurrentUser().name }}</p> </li>
-          <li ng-show='$ctrl.isLoggedIn()' ui-sref-active='active'><a ui-sref='settings'><span class='glyphicon glyphicon-cog'></span></a></li>
-          <li ng-show='$ctrl.isLoggedIn()'><a ui-sref='logout'>Logout</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-      <button class='navbar-toggle' type='button' ng-click='$ctrl.isCollapsed = !$ctrl.isCollapsed'>
-        <span class='sr-only'>Toggle navigation</span>
-        <span class='icon-bar'></span>
-        <span class='icon-bar'></span>
-        <span class='icon-bar'></span>
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" ng-click="$ctrl.isCollapsed = !$ctrl.isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
       </button>
-      <a href='/' class='navbar-brand'>es4</a>
+      <a href="/" class="navbar-brand">ES4</a>
+    </div>
+    <div uib-collapse="$ctrl.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav">
+        <li ng-repeat="item in $ctrl.menu" ui-sref-active="active">
+          <a ui-sref="{{item.state}}">{{item.title}}</a>
+        </li>
+        <li ng-show="$ctrl.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
+      </ul>
 
-
-<div class="container wide">
-  <div class="content slim">
-    <div class="set">
-      <div class="fill"><a href="/" class="es4">ES<strong>4</strong></a></div>
-      <div class="fill">Event Security, Services, Scheduling & Staffing</div>
-      <div class="fit"><a href="https://developers.braintreepayments.com/guides/drop-in" target="_blank" class="braintree">Braintree</a></div>
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="signup">Sign up</a></li>
+        <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="login">Login</a></li>
+        <li ng-show="$ctrl.isLoggedIn()"><p class="navbar-text">Hello {{ $ctrl.getCurrentUser().name }}</p> </li>
+        <li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+        <li ng-show="$ctrl.isLoggedIn()"><a ui-sref="logout">Logout</a></li>
+      </ul>
     </div>
   </div>
-</div>
-<div class="notice-wrapper">
 </div>
