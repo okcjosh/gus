@@ -40,6 +40,59 @@ let Leo = sqldb.Leo;
 //       });
 //   });
 
+
+Leo.sync()
+  .then(() => Leo.destroy({where: {}}))
+  .then(() => {
+    Leo.bulkCreate([{
+
+      name: 'Joe McJoseph',
+      phone: '+14056844042',
+      email: 'joe@joe.com',
+      department_name: 'DALLASPD',
+      year_started: '2011',
+      lastGig: '01/01/11'
+    }, {
+      name: 'Police Officer',
+      phone: '+14056844042',
+      email: 'test@test.com',
+      department_name: 'DALLASPD',
+      year_started: '2011',
+      lastGig: '02/02/22'
+    }, {
+      name: 'Mr. Rogers',
+      phone: '+14056844042',
+      email: 'test@test.com',
+      department_name: 'DALLASPD',
+      year_started: '2011',
+      lastGig: '03/03/33'
+    }, {
+      name: 'Sargent McGruff',
+      phone: '+14056844042',
+      email: 'test@test.com',
+      department_name: 'DALLASPD',
+      year_started: '2011',
+      lastGig: '04/04/44'
+    }, {
+      name: 'Five Ohh',
+      phone: '+14056844042',
+      email: 'test@test.com',
+      department_name: 'DALLASPD',
+      year_started: '2011',
+      lastGig: '05/05/55'
+    }, {
+      name: 'Lethal Weapon ',
+      phone: '+14056844042',
+      email: 'test@test.com',
+      department_name: 'DALLASPD',
+      year_started: '2011',
+      lastGig: '05/06/66'
+    }])
+      .then(() => {
+        console.log('finished populating LEOS');
+      });
+  });
+
 Thing.sync()
   .then(() =>
     Thing.destroy({where: {}})
@@ -164,57 +217,6 @@ Event.sync()
       });
   });
 
-Leo.sync()
-  .then(() => Leo.destroy({where: {}}))
-  .then(() => {
-    Leo.bulkCreate([{
-
-      name: 'Joe McJoseph',
-      phone: '+14056844042',
-      email: 'joe@joe.com',
-      department_name: 'DALLASPD',
-      year_started: '2011',
-      lastGig: '01/01/11'
-    }, {
-      name: 'Police Officer',
-      phone: '+14056844042',
-      email: 'test@test.com',
-      department_name: 'DALLASPD',
-      year_started: '2011',
-      lastGig: '02/02/22'
-    }, {
-      name: 'Mr. Rogers',
-      phone: '+14056844042',
-      email: 'test@test.com',
-      department_name: 'DALLASPD',
-      year_started: '2011',
-      lastGig: '03/03/33'
-    }, {
-      name: 'Sargent McGruff',
-      phone: '+14056844042',
-      email: 'test@test.com',
-      department_name: 'DALLASPD',
-      year_started: '2011',
-      lastGig: '04/04/44'
-    }, {
-      name: 'Five Ohh',
-      phone: '+14056844042',
-      email: 'test@test.com',
-      department_name: 'DALLASPD',
-      year_started: '2011',
-      lastGig: '05/05/55'
-    }, {
-      name: 'Lethal Weapon ',
-      phone: '+14056844042',
-      email: 'test@test.com',
-      department_name: 'DALLASPD',
-      year_started: '2011',
-      lastGig: '05/06/66'
-    }])
-      .then(() => {
-        console.log('finished populating LEOS');
-      });
-  });
 
 // DefDeptPreference.sync()
 //   .then(() => DefDeptPreference.destroy({where: {}}))

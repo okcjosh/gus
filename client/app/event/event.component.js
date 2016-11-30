@@ -67,9 +67,6 @@ export class EventComponent {
       this.date = '';
       this.location_desc = '';
       this.address = '';
-      this.department_id = '';
-      this.status_id = '';
-      this.leo_id = '';
       this.job_type = '';
       this.one_field = '';
       this.two_field = '';
