@@ -12,8 +12,19 @@ export default function(sequelize, DataTypes) {
     date: DataTypes.DATE,
     location_desc: DataTypes.STRING,
     address: DataTypes.BOOLEAN,
-    department_id: DataTypes.STRING,
-    status_id: DataTypes.STRING,
-    leo_id: DataTypes.INTEGER
+    job_type: DataTypes.STRING,
+    one_field: DataTypes.STRING,
+    two_field: DataTypes.STRING,
+    three_field: DataTypes.STRING,
+    four_field: DataTypes.STRING,
+    five_field: DataTypes.STRING,
+    six_field: DataTypes.STRING,
+    seven_field: DataTypes.STRING,
+    eight_field: DataTypes.STRING,
+    nine_field: DataTypes.STRING,
+    ten_field: DataTypes.STRING,
+    eleven_field: DataTypes.STRING,
+    twelve_field: DataTypes.STRING,
+    ryan_is_a_dick_field: DataTypes.STRING,
   });
 }

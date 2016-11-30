@@ -19,26 +19,26 @@ let Leo = sqldb.Leo;
 // let JobType = sqldb.JobType;
 // let JobInvitationStatus = sqldb.JobInvitationStatus;
 // let JobInvitation = sqldb.JobInvitation;
-let JobTypePreference = sqldb.JobTypePreference;
+// let JobTypePreference = sqldb.JobTypePreference;
 // let LeoScheduling = sqldb.LeoScheduling;
 // let Status = sqldb.Status;
 // let SeniorityClass = sqldb.SeniorityClass;
 // let NewAppt = sqldb.NewAppt;
 
-JobTypePreference.sync()
-  .then(() => JobTypePreference.destroy({where: {}}))
-  .then(() => {
-    JobTypePreference.bulkCreate([{
-      leo_id: '1',
-      job_type_id: '2',
-    }, {
-      leo_id: '3',
-      job_type_id: '4',
-    }])
-      .then(() => {
-        console.log('finished populating JOB_TYPE_PREFS');
-      });
-  });
+// JobTypePreference.sync()
+//   .then(() => JobTypePreference.destroy({where: {}}))
+//   .then(() => {
+//     JobTypePreference.bulkCreate([{
+//       leo_id: '1',
+//       job_type_id: '2',
+//     }, {
+//       leo_id: '3',
+//       job_type_id: '4',
+//     }])
+//       .then(() => {
+//         console.log('finished populating JOB_TYPE_PREFS');
+//       });
+//   });
 
 Thing.sync()
   .then(() =>
@@ -106,25 +106,58 @@ Event.sync()
       date: '10/31/2016',
       location_desc: 'Cowboys Stadium',
       address: '123 Go Fuck Yourself Way',
-      department_id: 'DPD',
-      status_id: 'ABC123',
-      leo_id: 'BALLZ'
+      job_type: 'balls',
+      one_field: 'one',
+      two_field: 'two',
+      three_field: 'three',
+      four_field: 'four',
+      five_field: 'five',
+      six_field: 'six',
+      seven_field: 'seven',
+      eight_field: 'eight',
+      nine_field: 'nine',
+      ten_field: 'ten',
+      eleven_field: 'eleven',
+      twelve_field: 'twelve',
+      ryan_is_a_dick_field: 'dick',
     }, {
       eventTitle: 'After Church Gangbang',
       date: '11/31/2016',
       location_desc: 'First GOP Baptist',
       address: '123 Go Fuck Yourself Way',
-      department_id: 'OKCPD',
-      status_id: 'ABC124',
-      leo_id: 'Deepthroat'
+      job_type: 'balls',
+      one_field: 'one',
+      two_field: 'two',
+      three_field: 'three',
+      four_field: 'four',
+      five_field: 'five',
+      six_field: 'six',
+      seven_field: 'seven',
+      eight_field: 'eight',
+      nine_field: 'nine',
+      ten_field: 'ten',
+      eleven_field: 'eleven',
+      twelve_field: 'twelve',
+      ryan_is_a_dick_field: 'dick',
     }, {
       eventTitle: 'Make America Great Again Rally',
       date: '12/31/2016',
       location_desc: 'Satans House',
       address: '666 LULZ Drive',
-      department_id: 'DPD',
-      status_id: 'ABC125',
-      leo_id: 'Boomer'
+      job_type: 'balls',
+      one_field: 'one',
+      two_field: 'two',
+      three_field: 'three',
+      four_field: 'four',
+      five_field: 'five',
+      six_field: 'six',
+      seven_field: 'seven',
+      eight_field: 'eight',
+      nine_field: 'nine',
+      ten_field: 'ten',
+      eleven_field: 'eleven',
+      twelve_field: 'twelve',
+      ryan_is_a_dick_field: 'dick',
     }])
       .then(() => {
         console.log('finished populating EVENTS');

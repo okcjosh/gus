@@ -5,7 +5,6 @@
     <img src='assets/images/yeoman.png' alt='I'm Yeoman'>
   </div>
 </header>
-
 <div class='container'>
   <div class='row'>
     <div class='col-lg-12'>
@@ -15,14 +14,23 @@
         <li><a href='#' uib-tooltip='{{event}}'>{{event.date}}</a></li>
         <li><a href='#' uib-tooltip='{{event}}'>{{event.location_desc}}</a></li>
         <li><a href='#' uib-tooltip='{{event}}'>{{event.address}}</a></li>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.department_id}}</a></li>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.status_id}}</a></li>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.leo_id}}<button type='button' class='close' ng-click='$ctrl.deleteEvent(event)'>&times;</button></a></li>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.job_type}}</a></li>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.one_field}}</a></li>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.two_field}}</a></li>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.three_field}}</a></li>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.four_field}}</a></li>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.five_field}}</a></li>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.six_field}}</a></li>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.seven_field}}</a></li>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.eight_field}}</a></li>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.nine_field}}</a></li>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.ten_field}}</a></li>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.eleven_field}}</a></li>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.twelve_field}}</a></li>
+        <li><a href='#' uib-tooltip='{{event}}'>{{event.ryan_is_a_dick_field}}<button type='button' class='close' ng-click='$ctrl.deleteEvent(event)'>&times;</button></a></li>
       </ul>
     </div>
   </div>
-
-
   <form class='event-form'>
     <label>Syncs in realtime across clients</label>
     <p class='input-group'>
@@ -30,9 +38,20 @@
       <input type='text' class='form-control' placeholder='Event Date.' ng-model='$ctrl.date'>
       <input type='text' class='form-control' placeholder='Event Location Description.' ng-model='$ctrl.location_desc'>
       <input type='text' class='form-control' placeholder='Event Address.' ng-model='$ctrl.address'>
-      <input type='text' class='form-control' placeholder='Event Department ID.' ng-model='$ctrl.department_id'>
-      <input type='text' class='form-control' placeholder='Event Status ID.' ng-model='$ctrl.status_id'>
-      <input type='text' class='form-control' placeholder='Event Leo ID.' ng-model='$ctrl.leo_id'>
+      <input type='text' class='form-control' placeholder='Event Job Type.' ng-model='$ctrl.job_type'>
+      <input type='text' class='form-control' placeholder='Event One Field.' ng-model='$ctrl.one_field'>
+      <input type='text' class='form-control' placeholder='Event Two Field.' ng-model='$ctrl.two_field'>
+      <input type='text' class='form-control' placeholder='Event Three Field.' ng-model='$ctrl.three_field'>
+      <input type='text' class='form-control' placeholder='Event Four Field.' ng-model='$ctrl.four_field'>
+      <input type='text' class='form-control' placeholder='Event Five Field.' ng-model='$ctrl.five_field'>
+      <input type='text' class='form-control' placeholder='Event Six Field.' ng-model='$ctrl.six_field'>
+      <input type='text' class='form-control' placeholder='Event Seven Field.' ng-model='$ctrl.seven_field'>
+      <input type='text' class='form-control' placeholder='Event Eight Field.' ng-model='$ctrl.eight_field'>
+      <input type='text' class='form-control' placeholder='Event Nine Field.' ng-model='$ctrl.nine_field'>
+      <input type='text' class='form-control' placeholder='Event Ten Field.' ng-model='$ctrl.ten_field'>
+      <input type='text' class='form-control' placeholder='Event Eleven Field.' ng-model='$ctrl.eleven_field'>
+      <input type='text' class='form-control' placeholder='Event Twelve Field.' ng-model='$ctrl.twelve_field'>
+      <input type='text' class='form-control' placeholder='Event Ryan is a Dick Field.' ng-model='$ctrl.ryan_is_a_dick_field'>
       <button type='submit' class='btn btn-primary' ng-click='$ctrl.addEvent()'>Add New</button>
       <span class='input-group-btn'>
       </span>

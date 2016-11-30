@@ -54,7 +54,8 @@
     "socketio-jwt": "^4.2.0",
     "sprint-js": "~0.1.0",
     "sqlite3": "~3.1.1",
-    "twilio": "^2.11.1"
+    "twilio": "^2.11.1",
+    "node-schedule": "latest"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.5",
