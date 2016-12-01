@@ -30,6 +30,10 @@ export class LeoController {
         });
     }
 
+    // inviteLeo() {
+    //   if(tjis)
+    // }
+
     addLeo() {
       if(this.name) {
         this.$http.post('/api/leos', {

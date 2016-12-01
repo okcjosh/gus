@@ -6,38 +6,20 @@
   </div>
 </header>
 
-<div class='container'>
-  <div class='row'>
-    <div class='col-lg-12'>
-      <h1 class='page-header'>Features:</h1>
-      <ul class='nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6' ng-repeat='leo in $ctrl.awesomeLeos'>
-        <li><a href='#' uib-tooltip='{{leo.name}}'>{{leo.name}}</a></li>
-        <li><a href='#' uib-tooltip='{{leo.name}}'>{{leo.phone}}</a></li>
-        <li><a href='#' uib-tooltip='{{leo.name}}'>{{leo.email}}</a></li>
-        <li><a href='#' uib-tooltip='{{leo.name}}'>{{leo.department_id}}</a></li>
-        <li><a href='#' uib-tooltip='{{leo.info}}'>{{leo.year_started}}</a></li>
-        <li><a href='#' uib-tooltip='{{leo.info}}'>{{leo.lastGig}}<button type='button' class='close' ng-click='$ctrl.deleteLeo(leo)'>&times;</button></a></li>
-      </ul>
-    </div>
-  </div>
-
-  <form class='leo-form'>
-    <label>Syncs in realtime across clients</label>
-    <p class='input-group'>
-      <input type='text' class='form-control' placeholder='LEO Name.' ng-model='$ctrl.name'>
-      <input type='text' class='form-control' placeholder='LEO Phone.' ng-model='$ctrl.phone'>
-      <input type='text' class='form-control' placeholder='LEO Email.' ng-model='$ctrl.email'>
-      <input type='text' class='form-control' placeholder='LEO Department ID.' ng-model='$ctrl.department_id'>
-      <input type='text' class='form-control' placeholder='LEO Hire Date.' ng-model='$ctrl.year_started'>
-      <input type='text' class='form-control' placeholder='LEO Last Gig.' ng-model='$ctrl.lastGig'>
-      <button type='submit' class='btn btn-primary' ng-click='$ctrl.addLeo()'>Add New</button>
-      <span class='input-group-btn'>
-      </span>
-    </p>
-  </form>
-</div>
-
-
+<!--<div class='container'>-->
+  <!--<div class='row'>-->
+    <!--<div class='col-lg-12'>-->
+      <!--<ul class='nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6' ng-repeat='leo in $ctrl.awesomeLeos'>-->
+        <!--<li><a href='#' uib-tooltip='{{leo.name}}'>{{leo.name}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{leo.name}}'>{{leo.phone}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{leo.name}}'>{{leo.email}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{leo.name}}'>{{leo.department_id}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{leo.info}}'>{{leo.year_started}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{leo.info}}'>{{leo.lastGig}}<button type='button' class='close' ng-click='$ctrl.deleteLeo(leo)'>&times;</button></a></li>-->
+      <!--</ul>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
 <div class="container" id="tourpackages-carousel" ng-repeat='leo in $ctrl.awesomeLeos' >
   <div class="row">
     <div class="col-lg-12">
@@ -52,16 +34,18 @@
               <h4>{{leo.name}}</h4>
             </div>
             <div class='col-lg-12'>
-              <h6>Last Event Worked</h6>
+              <h5>Last Event Worked</h5>
               <p>{{leo.lastGig}}</p>
-              <h6>Year Hired</h6>
+              <h5>Year Hired</h5>
               <p>{{leo.year_started}}</p>
-              <h6>Contact</h6>
+              <h5>Contact</h5>
               <p>{{leo.phone}}</p>
               <p>{{leo.email}}</p>
-              <h6>Dallas Police Dept</h6>
+              <h3>LEO ID = {{leo.leo_id}}</h3>
+              <p>{{leo.leo_id}}</p>
+              <h5>Dallas Police Dept</h5>
             </div>
-            <button type="button" class="btn btn-primary btn-xs btn-update btn-add-card">INVITE</button>
+            <button type="button" class="btn btn-primary btn-xs btn-update btn-add-card" ng-click='$ctrl.inviteLeo(leo)'>INVITE</button>
           </div>
         </div>
       </div>
