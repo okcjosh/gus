@@ -30,9 +30,14 @@ export class LeoController {
         });
     }
 
-    // inviteLeo() {
-    //   if(tjis)
-    // }
+  inviteLeo(leo) {
+    this.$http.post('/api/invitations', {
+      job_id: '2',
+      leo_id: leo.leo_id,
+      expires: '2016-12-31',
+      job_invitation_status_id: '1'
+    });
+  }
 
     addLeo() {
       if(this.name) {
