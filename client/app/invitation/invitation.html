@@ -1,3 +1,27 @@
-<div>This is the invitation view.</div>
-<h1>AND</h1>
-<h2>some Dragon BALLZ</h2>
+<div class="container">
+  <div class="row">
+    <div class="row">
+      <div class="col-md-6 text-info">
+        Job Date: {{job.date}}
+      </div>
+    </div>
+    <div class="col-md-6 text-info">
+      Job Location: {{job.location}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 text-info">
+      Job Address: {{job.address}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <button class="btn btn-info" type="submit" ng-click="dosomething();">Yes, I accept this assignment</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <button class="btn btn-danger" type="submit" ng-click="dosomething();" >No, I reject this assignment</button>
+    </div>
+  </div>
+</div>

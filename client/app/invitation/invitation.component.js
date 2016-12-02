@@ -7,8 +7,14 @@ import routes from './invitation.routes';
 
 export class InvitationComponent {
   /*@ngInject*/
-  constructor() {
+  constructor($scope, $http) {
     this.message = 'Hello';
+    $http.get('/api/jobs')
+      .then(response => {
+        $scope.job = response.data[0];
+      });
+    //$scope.job = {location: 'American Airlines Center'};
+
   }
 }
 
