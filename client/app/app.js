@@ -17,8 +17,6 @@ import main from './main/main.component';
 import CheckoutComponent from './checkout/checkout.component';
 import TransactionComponent from './checkout/transaction/transaction.component';
 import InvitationComponent from './invitation/invitation.component';
-import RejectComponent from './reject/reject.component';
-import AcceptComponent from './accept/accept.component';
 import event from './event/event.component';
 import leo from './leo/leo.component';
 import constants from './app.constants';
@@ -33,7 +31,7 @@ import ngMessages from 'angular-messages';
 
 
 angular.module('es4App', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
-  uiBootstrap, _Auth, ngAnimate, account, admin, ngMessages, navbar, footer, main, RejectComponent, AcceptComponent, CheckoutComponent, TransactionComponent, InvitationComponent, event, leo, constants, socket, util
+  uiBootstrap, _Auth, ngAnimate, account, admin, ngMessages, navbar, footer, main, CheckoutComponent, TransactionComponent, InvitationComponent, event, leo, constants, socket, util
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
