@@ -65,7 +65,7 @@ function handleError(res, statusCode) {
 
 // Gets a list of Leos
 export function index(req, res) {
-  return Leo.findAll()
+  return Leo.findAll({order: 'lastGig ASC'})
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
