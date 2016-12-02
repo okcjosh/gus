@@ -4,7 +4,7 @@ export default function($stateProvider) {
   'ngInject';
   $stateProvider
     .state('invitation', {
-      url: '/invitation',
+      url: '/invitation/?jobid=jdch45b0',
       template: '<invitation></invitation>'
     });
 }

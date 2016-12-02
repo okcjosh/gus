@@ -31,7 +31,7 @@
       </ul>
     </div>
   </div>
-  <form class='event-form'>
+  <form class='event-form' ng-submit='$ctrl.onFormSubmit()'>
     <label>Syncs in realtime across clients</label>
     <p class='input-group'>
       <input type='text' class='form-control' placeholder='Event Title.' ng-model='$ctrl.eventTitle'>
@@ -52,12 +52,11 @@
       <input type='text' class='form-control' placeholder='Event Eleven Field.' ng-model='$ctrl.eleven_field'>
       <input type='text' class='form-control' placeholder='Event Twelve Field.' ng-model='$ctrl.twelve_field'>
       <input type='text' class='form-control' placeholder='Event Ryan is a Dick Field.' ng-model='$ctrl.ryan_is_a_dick_field'>
-      <button type='submit' class='btn btn-primary' ng-click='$ctrl.addEvent()'>Add New</button>
+      <button type='submit' class='btn btn-primary' ui-sref='checkout' ng-click='$ctrl.addEvent()'>Add New</button>
       <span class='input-group-btn'>
       </span>
     </p>
   </form>
 </div>
-
 
 
