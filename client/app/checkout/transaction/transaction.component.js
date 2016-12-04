@@ -11,9 +11,9 @@ const uiRouter = require('angular-ui-router');
 export function TransactionComponent($scope, $http, $location) {
   //alert('tranid: ' + $location.search()['tranid']);
   var tranid = $location.search()['tranid'];
-  $http.get('/transaction/' + tranid).then(function(response){
+  $http.get('/transaction/' + tranid).then(function(response) {
     $scope.transaction = response.data;
-  }, function(err){
+  }, function(err) {
     alert(err);
   });
   //alert($scope.transaction);

@@ -39,4 +39,4 @@ export default function(sequelize, DataTypes) {
   }, {
     tableName: 'job_invitation'
   });
-};
+}

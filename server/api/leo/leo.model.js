@@ -7,42 +7,42 @@ export default function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-      name: {
+    name: {
       type: DataTypes.STRING,
-        allowNull: false
+      allowNull: false
     },
-      phone: {
+    phone: {
       type: DataTypes.DECIMAL,
-        allowNull: true
+      allowNull: true
     },
-      email: {
+    email: {
       type: DataTypes.STRING,
-        allowNull: true
+      allowNull: true
     },
-      department_id: {
+    department_id: {
       type: DataTypes.INTEGER(11),
-        allowNull: true,
-        references: {
+      allowNull: true,
+      references: {
         model: 'department',
-          key: 'department_id'
+        key: 'department_id'
       }
     },
-      year_started: {
+    year_started: {
       type: 'YEAR(4)',
-        allowNull: true
+      allowNull: true
     },
-      lastGig: {
+    lastGig: {
       type: DataTypes.DATE,
-        allowNull: true
+      allowNull: true
     },
-      phone_verified: {
+    phone_verified: {
       type: DataTypes.INTEGER(11),
-        allowNull: true,
-        defaultValue: '0'
+      allowNull: true,
+      defaultValue: '0'
     }
   },
     {
-      tableName: 'leo'
+     tableName: 'leo'
     });
-};
+}
 

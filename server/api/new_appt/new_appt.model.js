@@ -19,4 +19,4 @@ export default function(sequelize, DataTypes) {
   }, {
     tableName: 'new_appt'
   });
-};
+}

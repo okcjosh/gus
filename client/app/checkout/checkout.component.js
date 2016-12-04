@@ -13,7 +13,7 @@ export function CheckoutComponent($http) {
       braintree.setup(this.clientToken,
         'dropin', {
           container: 'dropin'
-        })
+        });
     });
 }
 export default angular.module('gusApp.checkout', [uiRouter])

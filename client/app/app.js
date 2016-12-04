@@ -17,6 +17,7 @@ import main from './main/main.component';
 import CheckoutComponent from './checkout/checkout.component';
 import TransactionComponent from './checkout/transaction/transaction.component';
 import InvitationComponent from './invitation/invitation.component';
+import DashboardComponent from './dashboard/dashboard.component';
 import event from './event/event.component';
 import leo from './leo/leo.component';
 import constants from './app.constants';
@@ -31,14 +32,14 @@ import ngMessages from 'angular-messages';
 
 
 angular.module('es4App', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
-  uiBootstrap, _Auth, ngAnimate, account, admin, ngMessages, navbar, footer, main, CheckoutComponent, TransactionComponent, InvitationComponent, event, leo, constants, socket, util
+  uiBootstrap, _Auth, ngAnimate, account, admin, ngMessages, navbar, footer, main, CheckoutComponent, DashboardComponent, TransactionComponent, InvitationComponent, event, leo, constants, socket, util
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
     'ngInject';
     // Redirect to new if route requires auth and you're not logged in
 
-    $rootScope.$on('$stateChangeStart', function(event, next) {
+    $rootScope.$on('$stateChangeStart', function(next) {
       Auth.isLoggedIn(function(loggedIn) {
         if(next.authenticate && !loggedIn) {
           $location.path('/new');
@@ -55,5 +56,5 @@ angular.element(document)
         strictDi: false
 
       });
-
   });
+

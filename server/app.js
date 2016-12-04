@@ -10,7 +10,7 @@ import config from './config/environment';
 import http from 'http';
 
 // Populate databases with sample data
-if (config.seedDB) {
+if(config.seedDB) {
   require('./config/seed');
 }
 
@@ -40,6 +40,3 @@ sqldb.sequelize.sync()
   });
 // Expose app
 exports = module.exports = app;
-
-
-

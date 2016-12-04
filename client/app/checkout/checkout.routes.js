@@ -10,5 +10,5 @@ export default function routes($stateProvider) {
     .state('transaction', {
       url: '/checkout/transaction',
       template: '<transaction></transaction>'
-    })
+    });
 }

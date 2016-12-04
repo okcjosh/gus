@@ -23,4 +23,4 @@ export default function(sequelize, DataTypes) {
   }, {
     tableName: 'def_dept_preferences'
   });
-};
+}

@@ -21,4 +21,4 @@ export default function(sequelize, DataTypes) {
   }, {
     tableName: 'job_type_preferences'
   });
-};
+}

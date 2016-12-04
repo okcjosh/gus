@@ -1,7 +1,6 @@
 'use strict';
 import errors from './components/errors';
 import path from 'path';
-let express = require('express');
 let braintree = require('braintree');
 const flash = require('connect-flash');
 let gateway = require('./gateway');
@@ -35,11 +34,8 @@ export default function(app) {
   app.use('/api/new_appts', require('./api/new_appt'));
   app.use('/api/seniority_class', require('./api/seniority_class'));
   app.use('/api/status', require('./api/status'));
-
-
-
   app.use('/auth', require('./auth').default);
-  function formatErrors(errors) {
+  function formatErrors() {
     let formattedErrors = '';
 
     for (let i in errors) { // eslint-disable-line no-inner-declarations, lets-on-top

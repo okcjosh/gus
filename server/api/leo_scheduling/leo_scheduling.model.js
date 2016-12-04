@@ -31,4 +31,4 @@ export default function(sequelize, DataTypes) {
   }, {
     tableName: 'leo_scheduling'
   });
-};
+}

@@ -14,7 +14,6 @@ export class InvitationComponent {
         $scope.job = response.data[0];
       });
     //$scope.job = {location: 'American Airlines Center'};
-
   }
 }
 

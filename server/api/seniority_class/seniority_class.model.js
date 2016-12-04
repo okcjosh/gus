@@ -31,4 +31,4 @@ export default function(sequelize, DataTypes) {
   }, {
     tableName: 'seniority_class'
   });
-};
+}

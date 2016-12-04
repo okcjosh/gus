@@ -14,7 +14,7 @@ let ENV;
 
 
 if(!ENV) {
- ENV = 'development';
+  ENV = 'development';
 }
 
 if(ENV === 'production') {
@@ -23,7 +23,7 @@ if(ENV === 'production') {
   // Development
 
 
- Error.stackTraceLimit = Infinity;
+  Error.stackTraceLimit = Infinity;
 
   // require('zone.js/dist/long-stack-trace-zone');
 }

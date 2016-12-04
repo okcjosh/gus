@@ -55,4 +55,4 @@ export default function(sequelize, DataTypes) {
   }, {
     tableName: 'job'
   });
-};
+}
