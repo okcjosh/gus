@@ -47,6 +47,7 @@
     "datatables.net-responsive-bs": "^2.1.0",
     "datatables.net-scroller": "^1.4.2",
     "datatables.net-scroller-bs": "^1.4.2",
+    "datatables.net-select": "^1.2.0",
     "datejs": "^1.0.0-rc3",
     "devbridge-autocomplete": "^1.2.27",
     "dotenv": "^2.0.0",
@@ -112,7 +113,8 @@
     "switchery": "0.0.2",
     "transitionize": "0.0.3",
     "twilio": "^2.11.1",
-    "validator": "^6.2.0"
+    "validator": "^6.2.0",
+    "dataTables.net-select": "latest"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.5",
