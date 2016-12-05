@@ -34,8 +34,8 @@ export class DashboardComponent {
         this.dataSet = response.data;
         //alert(this.dataSet[0].name);
         $('#example').DataTable( {
-          data: this.dataSet,
           select: true,
+          data: this.dataSet,
           columns: [
             { data: "leo_id", title: "ID"},
             { data: "name", title: "Name" },
