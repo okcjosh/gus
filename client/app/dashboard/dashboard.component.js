@@ -11,6 +11,7 @@ import routes from './dashboard.routes';
 let $ = require( 'jquery' );
 require( 'datatables.net' );
 require( 'datatables.net-buttons');
+//require( 'datatables.net-buttons-bs')(window, $);
 require( 'datatables.net-bs');
 require( 'datatables.net-buttons-bs');
 require( 'datatables.net-fixedheader');
@@ -18,6 +19,7 @@ require( 'datatables.net-fixedheader');
 require( 'datatables.net-keytable');
 require( 'datatables.net-responsive');
 require( 'datatables.net-responsive-bs');
+require( 'dataTables.net-select');
 require( 'datatables.net-scroller');
 // require( 'datatables.net-scroller-bs');
 
@@ -33,20 +35,44 @@ export class DashboardComponent {
       .then(response => {
         this.dataSet = response.data;
         //alert(this.dataSet[0].name);
-        $('#example').DataTable( {
+        var table =  $('#example').DataTable( {
           data: this.dataSet,
-          select: true,
+          //columnDefs: [{ orderable: false, className: 'select-checkbox', targets: 0 }],
+          select: { style: 'multi'},
+          buttons: [
+            {
+              extend:'selected',
+              text: 'Send Invites',
+              action: function ( e, dt, button, config ) {
+                var count = dt.rows( {selected: true }).indexes().length;
+                var idxs = dt.rows({selected:true}).indexes();
+                //alert(count );
+                for(var i = 0; i < count; i++) {
+                  var guy = dt.row(idxs[i]).data();
+                  //alert(guy.name);
+                  this.$http.post('/api/invitations', {
+                    job_id: '2',
+                    leo_id: guy.leo_id,
+                    expires: '2016-12-31',
+                    job_invitation_status_id: '5'
+                  });
+                  //alert('sent to ' + guy.name);
+                }
+              }
+            }
+          ],
           columns: [
-            { data: "leo_id", title: "ID"},
+            //{ data: "leo_id", title: "ID"},
             { data: "name", title: "Name" },
             { data: "phone", title: "Phone" },
             { data: "email", title: "Email" },
-            { data: "department_id", title: "Department"},
+            //{ data: "department_id", title: "Department"},
             { data: "year_started", title: "Start date" },
-            { data: "lastGig", title: "Last Job Worked" },
-            { data: "phone_verified", title: "Phone Verified"}
+            { data: "lastGig", title: "Last Job Worked" }
+           // { data: "phone_verified", title: "Phone Verified"}
           ]
         } );
+        table.buttons().container().appendTo( $('#buttons') );
       });
 
 
