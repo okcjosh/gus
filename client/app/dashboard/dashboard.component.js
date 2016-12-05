@@ -19,7 +19,7 @@ require( 'datatables.net-fixedheader');
 require( 'datatables.net-keytable');
 require( 'datatables.net-responsive');
 require( 'datatables.net-responsive-bs');
-require( 'dataTables.net-select');
+require( 'datatables.net-select');
 require( 'datatables.net-scroller');
 // require( 'datatables.net-scroller-bs');
 
