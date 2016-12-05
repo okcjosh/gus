@@ -1,62 +1,98 @@
-<header class="jumbotron bg-info">
-  <div class="container">
-    <h2>ES4</h2>
-    <p>Event Security Services, Scheduling & Staffing.</p>
-  </div>
-</header>
+<!--<header class="jumbotron bg-info">-->
+  <!--<div class="container">-->
+    <!--<h2>ES4</h2>-->
+    <!--<p>Event Security Services, Scheduling & Staffing.</p>-->
+  <!--</div>-->
+<!--</header>-->
 
-<div class='container'>
-  <div class='row'>
-    <div class='col-lg-12'>
-      <h1 class='page-header'>Features:</h1>
-      <ul class='nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6' ng-repeat='event in $ctrl.awesomeEvents'>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.eventTitle}}</a></li>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.date}}</a></li>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.location_desc}}</a></li>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.address}}</a></li>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.job_type}}</a></li>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.one_field}}</a></li>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.two_field}}</a></li>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.three_field}}</a></li>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.four_field}}</a></li>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.five_field}}</a></li>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.six_field}}</a></li>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.seven_field}}</a></li>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.eight_field}}</a></li>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.nine_field}}</a></li>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.ten_field}}</a></li>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.eleven_field}}</a></li>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.twelve_field}}</a></li>
-        <li><a href='#' uib-tooltip='{{event}}'>{{event.ryan_is_a_dick_field}}<button type='button' class='close' ng-click='$ctrl.deleteEvent(event)'>&times;</button></a></li>
-      </ul>
+<!--<div class='container'>-->
+  <!--<div class='row'>-->
+    <!--<div class='col-lg-12'>-->
+      <!--<h1 class='page-header'>Features:</h1>-->
+      <!--<ul class='nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6' ng-repeat='event in $ctrl.awesomeEvents'>-->
+        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.eventTitle}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.date}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.location_desc}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.address}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.job_type}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.one_field}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.two_field}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.three_field}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.four_field}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.five_field}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.six_field}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.seven_field}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.eight_field}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.nine_field}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.ten_field}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.eleven_field}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.twelve_field}}</a></li>-->
+        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.ryan_is_a_dick_field}}<button type='button' class='close' ng-click='$ctrl.deleteEvent(event)'>&times;</button></a></li>-->
+      <!--</ul>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<form class='event-form' ng-submit='$ctrl.onFormSubmit()'>-->
+    <!--<label>Syncs in realtime across clients</label>-->
+    <!--<p class='input-group'>-->
+      <!--<input type='text' class='form-control' placeholder='Event Title.' ng-model='$ctrl.eventTitle'>-->
+      <!--<input type='text' class='form-control' placeholder='Event Date.' ng-model='$ctrl.date'>-->
+      <!--<input type='text' class='form-control' placeholder='Event Location Description.' ng-model='$ctrl.location_desc'>-->
+      <!--<input type='text' class='form-control' placeholder='Event Address.' ng-model='$ctrl.address'>-->
+      <!--<input type='text' class='form-control' placeholder='Event Job Type.' ng-model='$ctrl.job_type'>-->
+      <!--<input type='text' class='form-control' placeholder='Event One Field.' ng-model='$ctrl.one_field'>-->
+      <!--<input type='text' class='form-control' placeholder='Event Two Field.' ng-model='$ctrl.two_field'>-->
+      <!--<input type='text' class='form-control' placeholder='Event Three Field.' ng-model='$ctrl.three_field'>-->
+      <!--<input type='text' class='form-control' placeholder='Event Four Field.' ng-model='$ctrl.four_field'>-->
+      <!--<input type='text' class='form-control' placeholder='Event Five Field.' ng-model='$ctrl.five_field'>-->
+      <!--<input type='text' class='form-control' placeholder='Event Six Field.' ng-model='$ctrl.six_field'>-->
+      <!--<input type='text' class='form-control' placeholder='Event Seven Field.' ng-model='$ctrl.seven_field'>-->
+      <!--<input type='text' class='form-control' placeholder='Event Eight Field.' ng-model='$ctrl.eight_field'>-->
+      <!--<input type='text' class='form-control' placeholder='Event Nine Field.' ng-model='$ctrl.nine_field'>-->
+      <!--<input type='text' class='form-control' placeholder='Event Ten Field.' ng-model='$ctrl.ten_field'>-->
+      <!--<input type='text' class='form-control' placeholder='Event Eleven Field.' ng-model='$ctrl.eleven_field'>-->
+      <!--<input type='text' class='form-control' placeholder='Event Twelve Field.' ng-model='$ctrl.twelve_field'>-->
+      <!--<input type='text' class='form-control' placeholder='Event Ryan is a Dick Field.' ng-model='$ctrl.ryan_is_a_dick_field'>-->
+      <!--<button type='submit' class='btn btn-primary' ui-sref='checkout' ng-click='$ctrl.addEvent()'>Add New</button>-->
+      <!--<span class='input-group-btn'>-->
+      <!--</span>-->
+    <!--</p>-->
+  <!--</form>-->
+<!--</div>-->
+<form class="form-horizontal">
+  <fieldset>
+
+    <!-- Form Name -->
+    <legend>Form Name</legend>
+
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="Event Type">Event Type</label>
+      <div class="col-md-4">
+        <select id="Event Type" name="Event Type" class="form-control">
+          <option value="Crowd Security/Control">Crowd Security/Control</option>
+          <option value="Private Party">Private Party</option>
+          <option value="Wedding">Wedding</option>
+          <option value="Public Party">Public Party</option>
+          <option value="Festival">Festival</option>
+          <option value="Concert">Concert</option>
+          <option value="Circus">Circus</option>
+          <option value="Carnival">Carnival</option>
+          <option value="Sporting Event">Sporting Event</option>
+          <option value="License premise/Bar club">License premise/Bar or club</option>
+          <option value="Restaurant">Restaurant</option>
+          <option value="Hospital">Hospital</option>
+          <option value="School">School</option>
+        </select>
+      </div>
     </div>
-  </div>
-  <form class='event-form' ng-submit='$ctrl.onFormSubmit()'>
-    <label>Syncs in realtime across clients</label>
-    <p class='input-group'>
-      <input type='text' class='form-control' placeholder='Event Title.' ng-model='$ctrl.eventTitle'>
-      <input type='text' class='form-control' placeholder='Event Date.' ng-model='$ctrl.date'>
-      <input type='text' class='form-control' placeholder='Event Location Description.' ng-model='$ctrl.location_desc'>
-      <input type='text' class='form-control' placeholder='Event Address.' ng-model='$ctrl.address'>
-      <input type='text' class='form-control' placeholder='Event Job Type.' ng-model='$ctrl.job_type'>
-      <input type='text' class='form-control' placeholder='Event One Field.' ng-model='$ctrl.one_field'>
-      <input type='text' class='form-control' placeholder='Event Two Field.' ng-model='$ctrl.two_field'>
-      <input type='text' class='form-control' placeholder='Event Three Field.' ng-model='$ctrl.three_field'>
-      <input type='text' class='form-control' placeholder='Event Four Field.' ng-model='$ctrl.four_field'>
-      <input type='text' class='form-control' placeholder='Event Five Field.' ng-model='$ctrl.five_field'>
-      <input type='text' class='form-control' placeholder='Event Six Field.' ng-model='$ctrl.six_field'>
-      <input type='text' class='form-control' placeholder='Event Seven Field.' ng-model='$ctrl.seven_field'>
-      <input type='text' class='form-control' placeholder='Event Eight Field.' ng-model='$ctrl.eight_field'>
-      <input type='text' class='form-control' placeholder='Event Nine Field.' ng-model='$ctrl.nine_field'>
-      <input type='text' class='form-control' placeholder='Event Ten Field.' ng-model='$ctrl.ten_field'>
-      <input type='text' class='form-control' placeholder='Event Eleven Field.' ng-model='$ctrl.eleven_field'>
-      <input type='text' class='form-control' placeholder='Event Twelve Field.' ng-model='$ctrl.twelve_field'>
-      <input type='text' class='form-control' placeholder='Event Ryan is a Dick Field.' ng-model='$ctrl.ryan_is_a_dick_field'>
-      <button type='submit' class='btn btn-primary' ui-sref='checkout' ng-click='$ctrl.addEvent()'>Add New</button>
-      <span class='input-group-btn'>
-      </span>
-    </p>
-  </form>
-</div>
 
+    <!-- Button -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="singlebutton"></label>
+      <div class="col-md-4">
+        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
 
+  </fieldset>
+</form>
