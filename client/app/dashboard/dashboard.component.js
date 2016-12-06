@@ -74,6 +74,25 @@ export class DashboardComponent {
         } );
         table.buttons().container().appendTo( $('#buttons') );
       });
+    this.$http.get('/api/events')
+      .then(response => {
+        this.events = response.data;
+        //alert(this.dataSet[0].name);
+        var table =  $('#events').DataTable( {
+          data: this.events,
+          //columnDefs: [{ orderable: false, className: 'select-checkbox', targets: 0 }],
+          select: { style: 'multi'},
+         columns: [
+            { data: "eventTitle", title: "Event" },
+            { data: "date", title: "Date"},
+            { data: "location_desc", title: "Location" },
+            { data: "job_type", title: "Event Type" },
+            { data: "one_field", title: "Field 1" },
+            { data: "two_field", title: "Field 2" }
+          ]
+        } );
+        //table.buttons().container().appendTo( $('#buttons') );
+      });
 
 
   }
