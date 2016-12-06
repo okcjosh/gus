@@ -8,9 +8,6 @@ export class NavbarComponent {
     title: 'Home',
     state: 'main'
   }, {
-    title: 'Checkout',
-    state: 'checkout'
-  }, {
     title: 'Event',
     state: 'event'
   }, {
