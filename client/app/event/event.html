@@ -1,75 +1,57 @@
-<!--<header class="jumbotron bg-info">-->
-  <!--<div class="container">-->
-    <!--<h2>ES4</h2>-->
-    <!--<p>Event Security Services, Scheduling & Staffing.</p>-->
-  <!--</div>-->
-<!--</header>-->
-
-<!--<div class='container'>-->
-  <!--<div class='row'>-->
-    <!--<div class='col-lg-12'>-->
-      <!--<h1 class='page-header'>Features:</h1>-->
-      <!--<ul class='nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6' ng-repeat='event in $ctrl.awesomeEvents'>-->
-        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.eventTitle}}</a></li>-->
-        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.date}}</a></li>-->
-        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.location_desc}}</a></li>-->
-        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.address}}</a></li>-->
-        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.job_type}}</a></li>-->
-        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.one_field}}</a></li>-->
-        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.two_field}}</a></li>-->
-        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.three_field}}</a></li>-->
-        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.four_field}}</a></li>-->
-        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.five_field}}</a></li>-->
-        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.six_field}}</a></li>-->
-        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.seven_field}}</a></li>-->
-        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.eight_field}}</a></li>-->
-        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.nine_field}}</a></li>-->
-        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.ten_field}}</a></li>-->
-        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.eleven_field}}</a></li>-->
-        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.twelve_field}}</a></li>-->
-        <!--<li><a href='#' uib-tooltip='{{event}}'>{{event.ryan_is_a_dick_field}}<button type='button' class='close' ng-click='$ctrl.deleteEvent(event)'>&times;</button></a></li>-->
-      <!--</ul>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<form class='event-form' ng-submit='$ctrl.onFormSubmit()'>-->
-    <!--<label>Syncs in realtime across clients</label>-->
-    <!--<p class='input-group'>-->
-      <!--<input type='text' class='form-control' placeholder='Event Title.' ng-model='$ctrl.eventTitle'>-->
-      <!--<input type='text' class='form-control' placeholder='Event Date.' ng-model='$ctrl.date'>-->
-      <!--<input type='text' class='form-control' placeholder='Event Location Description.' ng-model='$ctrl.location_desc'>-->
-      <!--<input type='text' class='form-control' placeholder='Event Address.' ng-model='$ctrl.address'>-->
-      <!--<input type='text' class='form-control' placeholder='Event Job Type.' ng-model='$ctrl.job_type'>-->
-      <!--<input type='text' class='form-control' placeholder='Event One Field.' ng-model='$ctrl.one_field'>-->
-      <!--<input type='text' class='form-control' placeholder='Event Two Field.' ng-model='$ctrl.two_field'>-->
-      <!--<input type='text' class='form-control' placeholder='Event Three Field.' ng-model='$ctrl.three_field'>-->
-      <!--<input type='text' class='form-control' placeholder='Event Four Field.' ng-model='$ctrl.four_field'>-->
-      <!--<input type='text' class='form-control' placeholder='Event Five Field.' ng-model='$ctrl.five_field'>-->
-      <!--<input type='text' class='form-control' placeholder='Event Six Field.' ng-model='$ctrl.six_field'>-->
-      <!--<input type='text' class='form-control' placeholder='Event Seven Field.' ng-model='$ctrl.seven_field'>-->
-      <!--<input type='text' class='form-control' placeholder='Event Eight Field.' ng-model='$ctrl.eight_field'>-->
-      <!--<input type='text' class='form-control' placeholder='Event Nine Field.' ng-model='$ctrl.nine_field'>-->
-      <!--<input type='text' class='form-control' placeholder='Event Ten Field.' ng-model='$ctrl.ten_field'>-->
-      <!--<input type='text' class='form-control' placeholder='Event Eleven Field.' ng-model='$ctrl.eleven_field'>-->
-      <!--<input type='text' class='form-control' placeholder='Event Twelve Field.' ng-model='$ctrl.twelve_field'>-->
-      <!--<input type='text' class='form-control' placeholder='Event Ryan is a Dick Field.' ng-model='$ctrl.ryan_is_a_dick_field'>-->
-      <!--<button type='submit' class='btn btn-primary' ui-sref='checkout' ng-click='$ctrl.addEvent()'>Add New</button>-->
-      <!--<span class='input-group-btn'>-->
-      <!--</span>-->
-    <!--</p>-->
-  <!--</form>-->
-<!--</div>-->
 <form class="form-horizontal">
   <fieldset>
 
     <!-- Form Name -->
     <legend>Form Name</legend>
 
-    <!-- Select Basic -->
+    <!-- Multiple Radios -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="Event Type">Event Type</label>
       <div class="col-md-4">
+        <div class="radio">
+          <label for="Event Type-0">
+            <input type="radio" name="Event Type" id="Event Type-0" value="Crowd Security/Control" checked="checked">
+            Crowd Security/Control
+          </label>
+        </div>
+        <div class="radio">
+          <label for="Event Type-1">
+            <input type="radio" name="Event Type" id="Event Type-1" value="Asset Protection">
+            Asset Protection
+          </label>
+        </div>
+        <div class="radio">
+          <label for="Event Type-2">
+            <input type="radio" name="Event Type" id="Event Type-2" value="Special Patrols">
+            Special Patrols
+          </label>
+        </div>
+        <div class="radio">
+          <label for="Event Type-3">
+            <input type="radio" name="Event Type" id="Event Type-3" value="Traffic Direction">
+            Traffic Direction
+          </label>
+        </div>
+        <div class="radio">
+          <label for="Event Type-4">
+            <input type="radio" name="Event Type" id="Event Type-4" value="Escorts">
+            Escorts
+          </label>
+        </div>
+        <div class="radio">
+          <label for="Event Type-5">
+            <input type="radio" name="Event Type" id="Event Type-5" value="Dignitary/VIP Protection">
+            Dignitary/VIP Protection
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="Event Type">Crowd Security/Control</label>
+      <div class="col-md-4">
         <select id="Event Type" name="Event Type" class="form-control">
-          <option value="Crowd Security/Control">Crowd Security/Control</option>
           <option value="Private Party">Private Party</option>
           <option value="Wedding">Wedding</option>
           <option value="Public Party">Public Party</option>
@@ -86,11 +68,251 @@
       </div>
     </div>
 
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="Special Patrols">Special Patrols</label>
+      <div class="col-md-4">
+        <select id="Special Patrols" name="Special Patrols" class="form-control">
+          <option value="Neighborhood Patrol">Neighborhood Patrol</option>
+          <option value="Apartment Roving Patrol">Apartment Roving Patrol</option>
+          <option value="Special Community Patrols">Special Community Patrols</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="Traffic Direction">Traffic Direction</label>
+      <div class="col-md-4">
+        <select id="Traffic Direction" name="Traffic Direction" class="form-control">
+          <option value="Parking ingress/egress">Parking ingress/egress</option>
+          <option value="Construction Safety/control">Construction Safety/control</option>
+          <option value="Intersection Control">Intersection Control</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="Escorts">Escorts</label>
+      <div class="col-md-4">
+        <select id="Escorts" name="Escorts" class="form-control">
+          <option value="Funeral">Funeral</option>
+          <option value="Over size/load movement">Over size/load movement</option>
+          <option value="Dignitary">Dignitary</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="Asset Protection">Asset Protection</label>
+      <div class="col-md-4">
+        <select id="Asset Protection" name="Asset Protection" class="form-control">
+          <option value="Loss Prevention at Retail">Loss Prevention at Retail</option>
+          <option value="Stores">Stores</option>
+          <option value="Bank Security">Bank Security</option>
+          <option value="Money Drop Security">Money Drop Security</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="officers"># of Officers Needed</label>
+      <div class="col-md-4">
+        <input id="officers" name="officers" type="text" placeholder="1" class="form-control input-md">
+
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="hours"># of Hours Expected</label>
+      <div class="col-md-4">
+        <input id="hours" name="hours" type="text" placeholder="Minimum 2" class="form-control input-md">
+
+      </div>
+    </div>
+
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="crowd">Estimated Size of Crowd</label>
+      <div class="col-md-4">
+        <select id="crowd" name="crowd" class="form-control">
+          <option value="1-50 people = 1 Officer">1-50 people = 1 Officer</option>
+          <option value="51-100 people = 2 Officers">51-100 people = 2 Officers</option>
+          <option value="101-150 People = 3 Officers">101-150 People = 3 Officers</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Multiple Checkboxes -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="Officer Attire">Officer Attire</label>
+      <div class="col-md-4">
+        <div class="checkbox">
+          <label for="Officer Attire-0">
+            <input type="checkbox" name="Officer Attire" id="Officer Attire-0" value="Police Officer Uniform">
+            Police Officer Uniform
+          </label>
+        </div>
+        <div class="checkbox">
+          <label for="Officer Attire-1">
+            <input type="checkbox" name="Officer Attire" id="Officer Attire-1" value="Casual Dress">
+            Casual Dress
+          </label>
+        </div>
+        <div class="checkbox">
+          <label for="Officer Attire-2">
+            <input type="checkbox" name="Officer Attire" id="Officer Attire-2" value="Formal Attire">
+            Formal Attire
+          </label>
+        </div>
+        <div class="checkbox">
+          <label for="Officer Attire-3">
+            <input type="checkbox" name="Officer Attire" id="Officer Attire-3" value="Suit &amp; Tie">
+            Suit &amp; Tie
+          </label>
+        </div>
+        <div class="checkbox">
+          <label for="Officer Attire-4">
+            <input type="checkbox" name="Officer Attire" id="Officer Attire-4" value="Doesn't Matter">
+            Doesn't Matter
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Multiple Checkboxes -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="Officer Skillset">Officer Skillset</label>
+      <div class="col-md-4">
+        <div class="checkbox">
+          <label for="Officer Skillset-0">
+            <input type="checkbox" name="Officer Skillset" id="Officer Skillset-0" value="Bicycle Certified">
+            Bicycle Certified
+          </label>
+        </div>
+        <div class="checkbox">
+          <label for="Officer Skillset-1">
+            <input type="checkbox" name="Officer Skillset" id="Officer Skillset-1" value="Dignitary Protection">
+            Dignitary Protection
+          </label>
+        </div>
+        <div class="checkbox">
+          <label for="Officer Skillset-2">
+            <input type="checkbox" name="Officer Skillset" id="Officer Skillset-2" value="Traffic Direction/Control">
+            Traffic Direction/Control
+          </label>
+        </div>
+        <div class="checkbox">
+          <label for="Officer Skillset-3">
+            <input type="checkbox" name="Officer Skillset" id="Officer Skillset-3" value="Motorcycle Officer">
+            Motorcycle Officer
+          </label>
+        </div>
+        <div class="checkbox">
+          <label for="Officer Skillset-4">
+            <input type="checkbox" name="Officer Skillset" id="Officer Skillset-4" value="Special Weapons">
+            Special Weapons
+          </label>
+        </div>
+        <div class="checkbox">
+          <label for="Officer Skillset-5">
+            <input type="checkbox" name="Officer Skillset" id="Officer Skillset-5" value="Civil Process Service">
+            Civil Process Service
+          </label>
+        </div>
+        <div class="checkbox">
+          <label for="Officer Skillset-6">
+            <input type="checkbox" name="Officer Skillset" id="Officer Skillset-6" value="Crime Scene Investigations">
+            Crime Scene Investigations
+          </label>
+        </div>
+        <div class="checkbox">
+          <label for="Officer Skillset-7">
+            <input type="checkbox" name="Officer Skillset" id="Officer Skillset-7" value="Financial Crimes Certified">
+            Financial Crimes Certified
+          </label>
+        </div>
+        <div class="checkbox">
+          <label for="Officer Skillset-8">
+            <input type="checkbox" name="Officer Skillset" id="Officer Skillset-8" value="Drug Recognition Expert">
+            Drug Recognition Expert
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prepended checkbox -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="prependedcheckbox">Foreign Language Speaker Needed</label>
+      <div class="col-md-4">
+        <div class="input-group">
+      <span class="input-group-addon">
+          <input type="checkbox">
+      </span>
+          <input id="prependedcheckbox" name="prependedcheckbox" class="form-control" type="text" placeholder="i.e. Spanish">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Multiple Checkboxes -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="options">Operational Details</label>
+      <div class="col-md-4">
+        <div class="checkbox">
+          <label for="options-0">
+            <input type="checkbox" name="options" id="options-0" value="Alcohol Served">
+            Alcohol Served
+          </label>
+        </div>
+        <div class="checkbox">
+          <label for="options-1">
+            <input type="checkbox" name="options" id="options-1" value="Traffic Direction">
+            Traffic Direction
+          </label>
+        </div>
+        <div class="checkbox">
+          <label for="options-2">
+            <input type="checkbox" name="options" id="options-2" value="Live Music">
+            Live Music
+          </label>
+        </div>
+        <div class="checkbox">
+          <label for="options-3">
+            <input type="checkbox" name="options" id="options-3" value="Dignitary Protection">
+            Dignitary Protection
+          </label>
+        </div>
+        <div class="checkbox">
+          <label for="options-4">
+            <input type="checkbox" name="options" id="options-4" value="Police Vehicle Needed">
+            Police Vehicle Needed
+          </label>
+        </div>
+        <div class="checkbox">
+          <label for="options-5">
+            <input type="checkbox" name="options" id="options-5" value="">
+            Barricades Requested
+          </label>
+        </div>
+        <div class="checkbox">
+          <label for="options-6">
+            <input type="checkbox" name="options" id="options-6" value="">
+            Music or Amplified Sound
+          </label>
+        </div>
+      </div>
+    </div>
+
     <!-- Button -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="singlebutton"></label>
       <div class="col-md-4">
-        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+        <button id="singlebutton" name="singlebutton" ui-sref="checkout" class="btn btn-primary">Submit</button>
       </div>
     </div>
 
