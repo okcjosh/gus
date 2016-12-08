@@ -66,7 +66,7 @@ export class DashboardComponent {
                       job_id: '2',
                       leo_id: guy.leo_id,
                       expires: '2016-12-31',
-                      job_invitation_status_id: '5'
+                      job_invitation_status_id: '1'
                     }
                   }).then(function (response) {
                     //alert('sent to: ' + guy.name);
