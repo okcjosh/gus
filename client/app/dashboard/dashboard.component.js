@@ -105,8 +105,8 @@ export class DashboardComponent {
             { data: "date", title: "Date"},
             { data: "location_desc", title: "Location" },
             { data: "job_type", title: "Event Type" },
-            { data: "one_field", title: "Field 1" },
-            { data: "two_field", title: "Field 2" }
+            { data: "status", title: "Status" },
+            { data: "event_type", title: "Event Type" }
           ]
         } );
         //table.buttons().container().appendTo( $('#buttons') );
