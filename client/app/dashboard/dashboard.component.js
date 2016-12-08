@@ -46,17 +46,35 @@ export class DashboardComponent {
               action: function ( e, dt, button, config ) {
                 var count = dt.rows( {selected: true }).indexes().length;
                 var idxs = dt.rows({selected:true}).indexes();
+                var $http = angular.injector(["ng"]).get("$http");
                 //alert(count );
                 for(var i = 0; i < count; i++) {
                   var guy = dt.row(idxs[i]).data();
-                  //alert(guy.name);
-                  this.$http.post('/api/invitations', {
-                    job_id: '2',
-                    leo_id: guy.leo_id,
-                    expires: '2016-12-31',
-                    job_invitation_status_id: '5'
+                  //alert(guy.leo_id);
+                  // $http.post('/api/invitations', {
+                  //   job_id: '2',
+                  //   leo_id: guy.leo_id,
+                  //   expires: '2016-12-31',
+                  //   job_invitation_status_id: '5'
+                  // }, function(req, res) {
+                  //   alert(res);
+                  // });
+                  $http({
+                    method: 'POST',
+                    url: '/api/invitations',
+                    data: {
+                      job_id: '2',
+                      leo_id: guy.leo_id,
+                      expires: '2016-12-31',
+                      job_invitation_status_id: '5'
+                    }
+                  }).then(function (response) {
+                    //alert('sent to: ' + guy.name);
+                    // when the response is available
+                  }, function (reason) {
+                    alert(reason.statusText);
+                    // or server returns response with an error status.
                   });
-                  //alert('sent to ' + guy.name);
                 }
               }
             }
