@@ -13,6 +13,9 @@ export class NavbarComponent {
   }, {
     title: 'Leo',
     state: 'leo'
+  }, {
+    title: 'Drag',
+    state: 'drag'
   }];
 
   isCollapsed = false;
