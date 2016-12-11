@@ -5,6 +5,7 @@ import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
 import 'angular-socket-io';
+import 'angular-drag-and-drop-lists';
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
 import {routeConfig} from './app.config';
@@ -19,6 +20,7 @@ import TransactionComponent from './checkout/transaction/transaction.component';
 import InvitationComponent from './invitation/invitation.component';
 import DashboardComponent from './dashboard/dashboard.component';
 import event from './event/event.component';
+import drag from './drag/drag.component';
 import leo from './leo/leo.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
@@ -31,8 +33,8 @@ import ngMessages from 'angular-messages';
 // import ngValidationMatch from 'angular-validation-match';
 
 
-angular.module('es4App', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
-  uiBootstrap, _Auth, ngAnimate, account, admin, ngMessages, navbar, footer, main, CheckoutComponent, DashboardComponent, TransactionComponent, InvitationComponent, event, leo, constants, socket, util
+angular.module('es4App', [ngCookies, ngResource, ngSanitize, 'dndLists', 'btford.socket-io', uiRouter,
+  uiBootstrap, _Auth, ngAnimate, account, admin, ngMessages, navbar, footer, main, CheckoutComponent, DashboardComponent, TransactionComponent, InvitationComponent, event, drag, leo, constants, socket, util
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
