@@ -16,6 +16,12 @@ export class NavbarComponent {
   }, {
     title: 'Drag',
     state: 'drag'
+  }, {
+    title: 'Dashboard',
+    state: 'dashboard'
+  }, {
+    title: 'columnDemo',
+    state: 'columndemo'
   }];
 
   isCollapsed = false;

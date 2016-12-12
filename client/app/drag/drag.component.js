@@ -8,13 +8,24 @@ export class DragComponent {
   /*@ngInject*/
   constructor($http, $scope, socket, $state) {
     this.initializeDragDrop($scope);
+    this.$http = $http;
   }
+
+
+  dragData($scope) {
+    this.$http.get('/api/leos')
+      .then(response => {
+        this.dataSet = response.data;
+        $scope.models = [ data ]
+  })
+}
 
   initializeDragDrop($scope) {
 
     $scope.models = [
       {listName: "A", items: [], dragging: false},
-      {listName: "B", items: [], dragging: false}
+      {listName: "B", items: [], dragging: false},
+      {listName: "C", items: [], dragging: false}
     ];
 
     /**
@@ -36,7 +47,7 @@ export class DragComponent {
     $scope.onDragstart = function(list, event) {
       list.dragging = true;
       if (event.dataTransfer.setDragImage) {
-        var img = new Image();
+        let img = new Image();
         img.src = 'framework/vendor/ic_content_copy_black_24dp_2x.png';
         event.dataTransfer.setDragImage(img, 0, 0);
       }
@@ -53,7 +64,7 @@ export class DragComponent {
         .concat(items)
         .concat(list.items.slice(index));
       return true;
-    }
+    };
 
     /**
      * Last but not least, we have to remove the previously dragged items in the
@@ -65,7 +76,7 @@ export class DragComponent {
 
     // Generate the initial model
     angular.forEach($scope.models, function(list) {
-      for (var i = 1; i <= 4; ++i) {
+      for (let i = 1; i <= 4; ++i) {
         list.items.push({label: "Item " + list.listName + i});
       }
     });

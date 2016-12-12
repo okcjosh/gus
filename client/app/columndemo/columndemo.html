@@ -1,0 +1,41 @@
+<div>This is the columndemo view.</div>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link data-require="bootstrap-css@3.0.2" data-semver="3.0.3" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
+  <script data-require="angular.js@*" data-semver="1.2.5" src="http://code.angularjs.org/1.2.5/angular.js"></script>
+  <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script data-require="bootstrap@*" data-semver="3.0.2" src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  <script src="columndemo.component.js"></script>
+</head>
+
+<body ng-app="app" ng-controller="table_controller">
+<h2>Dynamic table columns with AngularJS!</h2>
+
+<div class="form-group">
+  <div class="col-sm-12">
+    <p>Columns</p>
+    <div ng-repeat="c in all_columns">
+      <label>
+        <input type="checkbox" ng-model="c.checked"> {{ c.title }}
+      </label>
+    </div>
+  </div>
+</div>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th ng-repeat="c in ordered_columns">{{ c.title }}
+    </th>
+  </tr>
+  <tbody>
+  <tr ng-repeat="d in data">
+    <td ng-repeat="c in ordered_columns">{{ d[c.title] }}</td>
+  </tr>
+  </tbody>
+</table>
+</body>
+
+</html>

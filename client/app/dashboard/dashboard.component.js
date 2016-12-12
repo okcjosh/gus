@@ -35,7 +35,7 @@ export class DashboardComponent {
       .then(response => {
         this.dataSet = response.data;
         //alert(this.dataSet[0].name);
-        var table =  $('#example').DataTable( {
+        let table =  $('#example').DataTable( {
           data: this.dataSet,
           //columnDefs: [{ orderable: false, className: 'select-checkbox', targets: 0 }],
           select: { style: 'multi'},
@@ -44,12 +44,12 @@ export class DashboardComponent {
               extend:'selected',
               text: 'Send Invites',
               action: function ( e, dt, button, config ) {
-                var count = dt.rows( {selected: true }).indexes().length;
-                var idxs = dt.rows({selected:true}).indexes();
-                var $http = angular.injector(["ng"]).get("$http");
+                let count = dt.rows( {selected: true }).indexes().length;
+                let idxs = dt.rows({selected:true}).indexes();
+                let $http = angular.injector(["ng"]).get("$http");
                 //alert(count );
-                for(var i = 0; i < count; i++) {
-                  var guy = dt.row(idxs[i]).data();
+                for(let i = 0; i < count; i++) {
+                  let guy = dt.row(idxs[i]).data();
                   //alert(guy.leo_id);
                   // $http.post('/api/invitations', {
                   //   job_id: '2',
@@ -96,7 +96,7 @@ export class DashboardComponent {
       .then(response => {
         this.events = response.data;
         //alert(this.dataSet[0].name);
-        var table =  $('#events').DataTable( {
+        let table =  $('#events').DataTable( {
           data: this.events,
           //columnDefs: [{ orderable: false, className: 'select-checkbox', targets: 0 }],
           select: { style: 'multi'},
