@@ -87,6 +87,7 @@
     "morgan": "~1.7.0",
     "morris.js.so": "^0.5.1",
     "mysql": "^2.11.1",
+    "ng-sortable": "^1.3.7",
     "node-schedule": "latest",
     "normalize.css": "^5.0.0",
     "nprogress": "^0.2.0",

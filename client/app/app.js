@@ -1,6 +1,7 @@
 'use strict';
 
 import angular from 'angular';
+import 'ng-sortable';
 import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
@@ -34,7 +35,7 @@ import ngMessages from 'angular-messages';
 // import ngValidationMatch from 'angular-validation-match';
 
 
-angular.module('es4App', [ngCookies, ngResource, ngSanitize, 'dndLists', 'btford.socket-io', uiRouter,
+angular.module('es4App', [ngCookies, ngResource, ngSanitize,'dndLists', 'btford.socket-io', 'as.sortable', uiRouter,
   uiBootstrap, _Auth, ngAnimate, account, admin, ngMessages, drag, navbar, footer, main, CheckoutComponent, ColumndemoComponent, DashboardComponent, TransactionComponent, InvitationComponent, event, leo, constants, socket, util
 ])
   .config(routeConfig)
