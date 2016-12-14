@@ -9,7 +9,9 @@ export class NewDragComponent {
   /*@ngInject*/
   constructor() {
     this.message = 'Hello';
+
   }
+
 }
 
 export default angular.module('gusApp.newDrag', [uiRouter])

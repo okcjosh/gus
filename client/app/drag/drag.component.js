@@ -90,7 +90,6 @@ export class DragComponent {
 }
 
 
-
 export default angular.module('es42App.drag', [uiRouter])
   .config(routing)
   .component('drag', {
