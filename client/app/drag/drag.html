@@ -59,21 +59,6 @@
   </div>
 </div>
 
-<script type="text/ng-template" id="list2.html">
-  <ul dnd-list dnd-drop="onDrop(list, item, index)">
-    <li ng-repeat="item in list.items"
-        dnd-draggable="getSelectedItemsIncluding(list, item)"
-        dnd-dragstart="onDragstart(list, event)"
-        dnd-moved="onMoved(list)"
-        dnd-dragend="list.dragging = false"
-        dnd-selected="item.selected = !item.selected"
-        ng-class="{'selected': item.selected}"
-        ng-hide="list.dragging && item.selected"
-    >
-      {{item.label}}
-    </li>
-  </ul>
-</script>
 
 <ul data-as-sortable="board.dragControlListeners" data-ng-model="items">
   <li data-ng-repeat="item in items" data-as-sortable-item>
