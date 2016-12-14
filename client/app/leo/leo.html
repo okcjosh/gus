@@ -52,3 +52,8 @@
   </div>
 </div>
 
+<ul data-as-sortable="board.dragControlListeners" data-ng-model="leos">
+  <li data-ng-repeat='leo in $ctrl.awesomeLeos' data-as-sortable-item>
+    <div data-as-sortable-item-handle></div>
+  </li>
+</ul>

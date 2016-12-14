@@ -7,18 +7,19 @@ export class DragComponent {
 
   /*@ngInject*/
   constructor($http, $scope, socket, $state) {
-    this.initializeDragDrop($scope);
     this.$http = $http;
+    this.dragData($scope);
+    //this.initializeDragDrop($scope);
   }
 
 
   dragData($scope) {
     this.$http.get('/api/leos')
       .then(response => {
-        this.dataSet = response.data;
-        $scope.models = [ data ]
-  })
-}
+        $scope.leos = response.data;
+        this.initializeDragDrop($scope);
+      })
+  }
 
   initializeDragDrop($scope) {
 
@@ -77,9 +78,9 @@ export class DragComponent {
     // Generate the initial model
     angular.forEach($scope.models, function(list) {
       for (let i = 1; i <= 4; ++i) {
-        list.items.push({label: "Item " + list.listName + i});
+        list.items.push({label: "Item " + list.listName + i + " " + $scope.leos[i].name});
       }
-    });
+      });
 
     // Model to JSON for demo purpose
     $scope.$watch('models', function(model) {
@@ -87,6 +88,7 @@ export class DragComponent {
     }, true);
   }
 }
+
 
 
 export default angular.module('es42App.drag', [uiRouter])

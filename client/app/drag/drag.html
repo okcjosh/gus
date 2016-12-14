@@ -1,91 +1,79 @@
-<!-- Markup for lists inside the dropzone. It's inside a seperate template
-     because it will be used recursively. The dnd-list directive enables
-     to drop elements into the referenced array. The dnd-draggable directive
-     makes an element draggable and will transfer the object that was
-     assigned to it. If an element was dragged away, you have to remove
-     it from the original list yourself using the dnd-moved attribute -->
-<script type="text/ng-template" id="list.html">
-  <ul dnd-list dnd-drop="onDrop(list, item, index)">
-    <li ng-repeat="item in list.items"
-        dnd-draggable="getSelectedItemsIncluding(list, item)"
-        dnd-dragstart="onDragstart(list, event)"
-        dnd-moved="onMoved(list)"
-        dnd-dragend="list.dragging = false"
-        dnd-selected="item.selected = !item.selected"
-        ng-class="{'selected': item.selected}"
-        ng-hide="list.dragging && item.selected"
-    >
-      {{item.label}}
-    </li>
-  </ul>
-</script>
+<!--&lt;!&ndash; Markup for lists inside the dropzone. It's inside a seperate template-->
+     <!--because it will be used recursively. The dnd-list directive enables-->
+     <!--to drop elements into the referenced array. The dnd-draggable directive-->
+     <!--makes an element draggable and will transfer the object that was-->
+     <!--assigned to it. If an element was dragged away, you have to remove-->
+     <!--it from the original list yourself using the dnd-moved attribute &ndash;&gt;-->
+<!--<script type="text/ng-template" id="list.html">-->
+  <!--<ul dnd-list dnd-drop="onDrop(list, item, index)">-->
+    <!--<li ng-repeat="item in list.items"-->
+        <!--dnd-draggable="getSelectedItemsIncluding(list, item)"-->
+        <!--dnd-dragstart="onDragstart(list, event)"-->
+        <!--dnd-moved="onMoved(list)"-->
+        <!--dnd-dragend="list.dragging = false"-->
+        <!--dnd-selected="item.selected = !item.selected"-->
+        <!--ng-class="{'selected': item.selected}"-->
+        <!--ng-hide="list.dragging && item.selected"-->
+    <!--&gt;-->
+      <!--{{item.label}}-->
+    <!--</li>-->
+  <!--</ul>-->
+<!--</script>-->
 
-<!-- This template is responsible for rendering a container element. It uses
-     the above list template to render each container column -->
-<script type="text/ng-template" id="container.html">
-  <div class="container-element box box-blue">
-    <h3>Container {{item.id}}</h3>
-    <div class="column" ng-repeat="list in item.columns" ng-include="'list.html'"></div>
-    <div class="clearfix"></div>
-  </div>
-</script>
+<!--&lt;!&ndash; This template is responsible for rendering a container element. It uses-->
+     <!--the above list template to render each container column &ndash;&gt;-->
+<!--<script type="text/ng-template" id="container.html">-->
+  <!--<div class="container-element box box-blue">-->
+    <!--<h3>Container {{item.id}}</h3>-->
+    <!--<div class="column" ng-repeat="list in item.columns" ng-include="'list.html'"></div>-->
+    <!--<div class="clearfix"></div>-->
+  <!--</div>-->
+<!--</script>-->
 
-<!-- Template for a normal list item -->
-<script type="text/ng-template" id="item.html">
-  <div class="item">Item {{item.id}}</div>
-</script>
+<!--&lt;!&ndash; Template for a normal list item &ndash;&gt;-->
+<!--<script type="text/ng-template" id="item.html">-->
+  <!--<div class="item">Item {{item.id}}</div>-->
+<!--</script>-->
 
-<!-- Main area with dropzones and source code -->
-<div class="col-md-12 multiDemo">
-  <div class="row">
-    <div ng-repeat="list in models" class="col-md-6">
-      <div class="dropzone box box-yellow">
-        <!-- The dropzone also uses the list template -->
-        <h3>List {{ list.listName }}</h3>
-        <div ng-include="'list.html'"></div>
-      </div>
-    </div>
-  </div>
-</div>
+<!--&lt;!&ndash; Main area with dropzones and source code &ndash;&gt;-->
+<!--<div class="col-md-12 multiDemo">-->
+  <!--<div class="row">-->
+    <!--<div ng-repeat="list in models" class="col-md-6">-->
+      <!--<div class="dropzone box box-yellow">-->
+        <!--&lt;!&ndash; The dropzone also uses the list template &ndash;&gt;-->
+        <!--<h3>List {{ list.listName }}</h3>-->
+        <!--<div ng-include="'list.html'"></div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
 
-<!DOCTYPE html>
-<html>
+<!--<script type="text/ng-template" id="list2.html">-->
+  <!--<ul dnd-list dnd-drop="onDrop(list, item, index)">-->
+    <!--<li ng-repeat="item in list.items"-->
+        <!--dnd-draggable="getSelectedItemsIncluding(list, item)"-->
+        <!--dnd-dragstart="onDragstart(list, event)"-->
+        <!--dnd-moved="onMoved(list)"-->
+        <!--dnd-dragend="list.dragging = false"-->
+        <!--dnd-selected="item.selected = !item.selected"-->
+        <!--ng-class="{'selected': item.selected}"-->
+        <!--ng-hide="list.dragging && item.selected"-->
+    <!--&gt;-->
+      <!--{{item.label}}-->
+    <!--</li>-->
+  <!--</ul>-->
+<!--</script>-->
 
-<head>
-  <link data-require="bootstrap-css@3.0.2" data-semver="3.0.3" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
-  <script data-require="angular.js@*" data-semver="1.2.5" src="http://code.angularjs.org/1.2.5/angular.js"></script>
-  <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-  <script data-require="bootstrap@*" data-semver="3.0.2" src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js"></script>
-</head>
+<!--<ul data-as-sortable="board.dragControlListeners" data-ng-model="items">-->
+  <!--<li data-ng-repeat="item in items" data-as-sortable-item>-->
+    <!--<div data-as-sortable-item-handle></div>-->
+  <!--</li>-->
+<!--</ul>-->
+<!--<!DOCTYPE html>-->
+<!--<html>-->
 
-<body ng-app="app" ng-controller="table_controller">
-<h2>Dynamic table columns with AngularJS!</h2>
-
-<div class="form-group">
-  <div class="col-sm-12">
-    <p>Columns</p>
-    <div ng-repeat="c in all_columns">
-      <label>
-        <input type="checkbox" ng-model="c.checked"> {{ c.title }}
-      </label>
-    </div>
-  </div>
-</div>
-
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th ng-repeat="c in ordered_columns">{{ c.title }}
-    </th>
-  </tr>
-  <tbody>
-  <tr ng-repeat="d in data">
-    <td ng-repeat="c in ordered_columns">{{ d[c.title] }}</td>
-  </tr>
-  </tbody>
-</table>
-</body>
-
-</html>
+<ul data-as-sortable="board.dragControlListeners" data-ng-model="items">
+  <li data-ng-repeat="item in items" data-as-sortable-item>
+    <div data-as-sortable-item-handle></div>
+  </li>
+</ul>
