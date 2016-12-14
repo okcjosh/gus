@@ -52,6 +52,16 @@
   color: #3c763d;
 }
 
+.multiDemo .dropzone {
+  background-color: rgba(0, 0, 0, .2);
+  padding: 5px 10px 5px 10px;
+}
+
+.save-drag-button {
+  // margin-right: 30px;
+  margin-top: 20px;
+}
+
 .as-sortable-dragging{
   border: 1px dotted #000 !important;
 }
@@ -97,4 +107,3 @@
   -ms-user-select: none;
   user-select: none;
 }
-

@@ -8,27 +8,27 @@ export class DragComponent {
   /*@ngInject*/
   constructor($http, $scope, socket, $state) {
     this.$http = $http;
-    this.dragData($scope);
-    //this.initializeDragDrop($scope);
+    this.$scope = $scope;
+    this.init($scope);
+    $scope.saveDrags = this.saveDrags.bind(this, $scope, $http);
   }
 
 
-  dragData($scope) {
+  init($scope) {
     this.$http.get('/api/leos')
       .then(response => {
         $scope.leos = response.data;
-        this.initializeDragDrop($scope);
-      })
+
+        this.$http.get('/api/jobs')
+          .then(res => {
+            $scope.jobs = res.data;
+
+            this.initializeDragDrop($scope);
+          });
+      });
   }
 
   initializeDragDrop($scope) {
-
-    $scope.models = [
-      {listName: "A", items: [], dragging: false},
-      {listName: "B", items: [], dragging: false},
-      {listName: "C", items: [], dragging: false}
-    ];
-
     /**
      * dnd-dragging determines what data gets serialized and send to the receiver
      * of the drop. While we usually just send a single object, we send the array
@@ -76,16 +76,35 @@ export class DragComponent {
     };
 
     // Generate the initial model
-    angular.forEach($scope.models, function(list) {
-      for (let i = 1; i <= 4; ++i) {
-        list.items.push({label: "Item " + list.listName + i + " " + $scope.leos[i].name});
-      }
-      });
+    $scope.leosList = [{ listName: 'Available Leos', items: $scope.leos, dragging: false }];
 
-    // Model to JSON for demo purpose
-    $scope.$watch('models', function(model) {
-      $scope.modelAsJson = angular.toJson(model, true);
-    }, true);
+    $scope.jobsList = $scope.jobs.map(job => {
+      return { job_data: job, listName: job.location, items: [], dragging: false };
+    });
+  }
+
+  saveDrags($scope, $http) {
+    $scope.jobsList.forEach(function(job) {
+
+      var draggedLeos = job.items;
+      draggedLeos.forEach(function(leo) {
+
+        var inviteData = {
+          job_id: job.job_data.job_id,
+        	leo_id: leo.leo_id,
+        	job_invitation_status_id: 1,
+        	expires: 0
+        };
+
+        $http.post('/api/invitations', inviteData)
+          .then(function(res) {
+            if (res.status === 201) {
+              // Invitation successfully created!!!
+              // Decide what you want to do after creating invitation.
+            }
+          });
+      });
+    });
   }
 }
 
