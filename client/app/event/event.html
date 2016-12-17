@@ -5,747 +5,103 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="Shortcut Icon" type="image/ico" href="https://evewebnet.com/ES4_Police/images/favicon.png">
+  <link rel="Shortcut Icon" type="image/ico" href="images/favicon.png">
   <meta name="description" content="">
   <meta name="author" content="">
 
   <title>ES4 &middot; Account Sign In</title>
 
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link href="https://evewebnet.com/ES4_Police/css/font.css" rel="stylesheet" type="text/css">
-  <link href="https://evewebnet.com/ES4_Police/css/custom.css" rel="stylesheet" type="text/css" />
-  <link href="https://evewebnet.com/ES4_Police/css/style.css" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/pdfmake-0.1.18/dt-1.10.12/b-1.2.2/b-colvis-1.2.2/b-html5-1.2.2/b-print-1.2.2/cr-1.3.2/fc-3.2.2/fh-3.1.2/kt-2.1.3/r-2.1.0/rr-1.1.2/sc-1.4.2/se-1.2.0/datatables.min.css"/>
+  <link href="css/font.css'; ?>" rel="stylesheet" type="text/css">
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="https://use.fontawesome.com/d616a5cee4.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/v/bs/pdfmake-0.1.18/dt-1.10.12/b-1.2.2/b-colvis-1.2.2/b-html5-1.2.2/b-print-1.2.2/cr-1.3.2/fc-3.2.2/fh-3.1.2/kt-2.1.3/r-2.1.0/rr-1.1.2/sc-1.4.2/se-1.2.0/datatables.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
-  <link href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
-  <script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
-
-  <script>
-    $(document).ready(function () {
-
-      $("#jobSpecs").find("option").each(function() {
-        $( this ).hide();
-      });
-
-
-      //Initialize tooltips
-      $('.nav-tabs > li a[title]').tooltip();
-
-      //Wizard
-      $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
-
-        let $target = $(e.target);
-
-        if ($target.parent().hasClass('disabled')) {
-          return false;
-        }
-      });
-
-      $(".next-step").click(function (e) {
-
-        let $active = $('.wizard .nav-tabs li.active');
-        $active.next().removeClass('disabled');
-        $active.addClass('disabled');
-        nextTab($active);
-
-      });
-      $(".prev-step").click(function (e) {
-        let $active = $('.wizard .nav-tabs li.active');
-        prevTab($active);
-
-      });
-
-      $('#jobType').change(function () {
-        $('.selectpicker').selectpicker('deselectAll');
-        $("#jobSpecs").find("option").each(function() {	$( this ).hide();});
-        $("#jobType").find("option:selected").each(function () {
-          str = $(this).val();
-        });
-        $("#jobSpecs").find("option[data-job='" + str + "']").each(function() {
-          $( this ).show();
-        });
-        $('.selectpicker').selectpicker('render');
-        $('.selectpicker').selectpicker('refresh');
-
-      });
-
-      $('#creationEventDate').datetimepicker({
-        format: "DD MMMM YYYY"
-      });
-
-    });
-
-    function nextTab(elem) {
-      $(elem).next().find('a[data-toggle="tab"]').click();
-    }
-    function prevTab(elem) {
-      $(elem).prev().find('a[data-toggle="tab"]').click();
-    }
-
-
-    $('.selectpicker').selectpicker({
-      style: 'btn-info',
-      size: 4
-    });
-
-
-  </script>
-  <script src="https://evewebnet.com/ES4_Police/js/custom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+  <script src="js/custom.js"></script>
 </head>
+
 <body class="transparent">
-<nav class="navbar navbar-default" id="topMenu">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-logo" href=""><img alt="ES4" src="images/ps4Logo.png" /></a>
-    </div>
-    <div class="collapse navbar-collapse" id="nav-collapse">
-      <ul class="nav navbar-nav">
-        <li><a href="https://evewebnet.com/ES4_Police/portal.php">Dashboard</a></li><li class="active"><a href="https://evewebnet.com/ES4_Police/portal.php?page=newjob">New Job</a></li></ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li data-toggle="tooltip" data-placement="bottom" title="Sign Out"><a data-toggle="modal" href="#signOut"><i class="fa fa-sign-out"></i></a></li>
-      </ul>
+<div class="container">
+  <div class="row" id="pwd-container">
+    <div class="col-md-4 col-md-offset-4">
+      <section class="login-form">
+        <form method="post" role="login" id="loginForm">
+          <img src="images/ps4Logo.png" class="img-responsive" alt="">
+          <div class="input-group loginFieldElement">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+            <input type="email" name="logEmail" placeholder="Email Address" required class="form-control input-lg">
+          </div>
+
+          <div class="input-group loginFieldElement">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input type="password" name="logPassword" class="form-control input-lg" id="password" placeholder="Password" required >
+          </div>
+
+          <div class="form-group loginBtnElement">
+            <button type="submit" name="go" class="btn btn-lg btn-primary btn-block"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign in</button>
+          </div>
+          <small class="pull-right"><a data-toggle="modal" href="#resetPassword"><i class="fa fa-unlock-alt"></i> Lost Password?</a></small>
+        </form>
+      </section>
     </div>
   </div>
-</nav>
-<div class="modal fade" id="signOut" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
+</div>
+
+<div class="modal fade" id="resetPassword" tabindex="-1" role="dialog" aria-labelledby="resetPassword" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+        <h4 class="modal-title">Reset Password</h4>
+      </div>
       <form action="" method="post">
         <div class="modal-body">
-          <p class="lead">John, are you sure you want to signout of your account?</p>
+          <div class="form-group">
+            <label for="theEmail">Email Address</label>
+            <input type="email" class="form-control" required name="theEmail" id="theEmail" value="" />
+            <span class="help-block">The email address associated with your account.</span>
+          </div>
         </div>
         <div class="modal-footer">
-          <a href="https://evewebnet.com/ES4_Police/logout.php" class="btn btn-success btn-icon-alt">Sign Out  <i class="fa fa-sign-out"></i></a>
-          <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle-o"></i> Cancel</button>
+          <button type="input" name="submit" value="resetPass" class="btn btn-success btn-icon"><i class="fa fa-unlock-alt"></i> Reset Password</button>
+          <button type="button" class="btn btn-default btn-icon" data-dismiss="modal"><i class="fa fa-times-circle-o"></i> Cancel</button>
         </div>
       </form>
     </div>
   </div>
 </div>
-<div class="container main-content mb-20">
-  <h3 class="mb-20">Job Creation &mdash; New Job</h3>
-  <section>
-    <div class="wizard">
-      <div class="wizard-inner">
-        <div class="connecting-line"></div>
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active">
-            <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Venue">
-                            <span class="round-tab">
-                                <i class="glyphicon glyphicon-map-marker"></i>
-                            </span>
-            </a>
-          </li>
-          <li role="presentation" class="disabled">
-            <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Job">
-                            <span class="round-tab">
-                                <i class="glyphicon glyphicon-folder-open"></i>
-                            </span>
-            </a>
-          </li>
-          <li role="presentation" class="disabled">
-            <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Cost">
-                            <span class="round-tab">
-                                <i class="glyphicon glyphicon-shopping-cart"></i>
-                            </span>
-            </a>
-          </li>
+<script>
+  $(document).ready(function () {
+    $.backstretch([
+      "images/us-police2.jpg"
+      , "images/us-police1.jpg"
+      , "images/us-police3.jpg"
+    ], {duration: 5000, fade: 1000});
 
-          <li role="presentation" class="disabled">
-            <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Payment">
-                            <span class="round-tab">
-                                <i class="glyphicon glyphicon-credit-card"></i>
-                            </span>
-            </a>
-          </li>
-        </ul>
-      </div>
-      <form method="post" id="PaymentForm" class="form-horizontal" role="form">
-        <div class="tab-content">
-          <div class="tab-pane active" role="tabpanel" id="step1">
-            <h3 class="margin-bottom-10">Venue</h3>
-            <div class="form-group">
-              <label for="nameOfVenue" id="nameOfVenueLabel" class="control-label col-sm-2">Name</label>
-              <div class="col-sm-10">
-                <input name="nameOfVenue" type="text" id="nameOfVenue" class="form-control" placeholder="Enter the Name of the venue" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="address" id="addressLabel" class="control-label col-sm-2">Address</label>
-              <div class="col-sm-10">
-                <textarea class="form-control" rows="4" name="address" id="address" placeholder="Please enter the full address of the venue"></textarea>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="phoneNumber" id="phoneNumberLabel" class="control-label col-sm-2">Phone Number</label>
-              <div class="col-sm-10">
-                <input name="phoneNumber" type="tel" id="phoneNumber" class="form-control" placeholder="Enter your phone number" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="poContact" id="poContactLabel" class="control-label col-sm-2">Point of Contact</label>
-              <div class="col-sm-10">
-                <input name="poContact" type="text" id="poContact" class="form-control" placeholder="Enter point of Contact" />
-              </div>
-            </div>
-            <ul class="list-inline pull-right margin-top-30">
-              <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
-            </ul>
-          </div>
-          <div class="tab-pane" role="tabpanel" id="step2">
-            <h3 class="margin-bottom-10">Job Details</h3>
-            <div class="form-group">
-              <label for="jobType" id="jobTypeLabel" class="control-label col-sm-2">Job Type</label>
-              <div class="col-sm-10">
-                <select name="jobType" id="jobType" class="form-control">
-                  <option value="">Please select the Job Type</option>
-                  <option value="1">Birthday</option>
-                  <option value="2">Carnival</option>
-                  <option value="3">Circus</option>
-                  <option value="4">Concert</option>
-                  <option value="5">Festival</option>
-                  <option value="6">Hospital</option>
-                  <option value="7">License premise / Bar or Club</option>
-                  <option value="13">Other</option>
-                  <option value="8">Party</option>
-                  <option value="9">Restaurant</option>
-                  <option value="10">School</option>
-                  <option value="11">Sporting Event</option>
-                  <option value="12">Wedding</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="jobSpecs" id="jobSpecsLabel" class="control-label col-sm-2">Job Type Specific Options</label>
-              <div class="col-sm-10">
-                <select class="selectpicker form-control" multiple name="jobSpecs" id="jobSpecs" title="Select a Job Type first">
-                  <option value="39" data-job="8" >Apartment Roving Patrol</option>
-                  <option value="53" data-job="13" >Appartment Roving Patrol</option>
-                  <option value="54" data-job="13" >Bank Security</option>
-                  <option value="55" data-job="13" >Construction Safety / Control</option>
-                  <option value="15" data-job="1" >Intersection Control</option>
-                  <option value="19" data-job="2" >Intersection Control</option>
-                  <option value="23" data-job="3" >Intersection Control</option>
-                  <option value="27" data-job="4" >Intersection Control</option>
-                  <option value="31" data-job="5" >Intersection Control</option>
-                  <option value="43" data-job="10" >Intersection Control</option>
-                  <option value="47" data-job="11" >Intersection Control</option>
-                  <option value="56" data-job="13" >Intersection Control</option>
-                  <option value="16" data-job="1" >Money Drop Security</option>
-                  <option value="20" data-job="2" >Money Drop Security</option>
-                  <option value="24" data-job="3" >Money Drop Security</option>
-                  <option value="32" data-job="5" >Money Drop Security</option>
-                  <option value="36" data-job="7" >Money Drop Security</option>
-                  <option value="40" data-job="8" >Money Drop Security</option>
-                  <option value="42" data-job="9" >Money Drop Security</option>
-                  <option value="57" data-job="13" >Money Drop Security</option>
-                  <option value="17" data-job="1" >Neighborhood Patrol</option>
-                  <option value="21" data-job="2" >Neighborhood Patrol</option>
-                  <option value="25" data-job="3" >Neighborhood Patrol</option>
-                  <option value="28" data-job="4" >Neighborhood Patrol</option>
-                  <option value="33" data-job="5" >Neighborhood Patrol</option>
-                  <option value="37" data-job="7" >Neighborhood Patrol</option>
-                  <option value="41" data-job="8" >Neighborhood Patrol</option>
-                  <option value="44" data-job="10" >Neighborhood Patrol</option>
-                  <option value="48" data-job="11" >Neighborhood Patrol</option>
-                  <option value="58" data-job="13" >Neighborhood Patrol</option>
-                  <option value="30" data-job="4" >Other</option>
-                  <option value="35" data-job="6" >Other</option>
-                  <option value="38" data-job="7" >Other</option>
-                  <option value="46" data-job="10" >Other</option>
-                  <option value="51" data-job="11" >Other</option>
-                  <option value="61" data-job="13" >Other</option>
-                  <option value="18" data-job="1" >Parking ingress / egress</option>
-                  <option value="22" data-job="2" >Parking ingress / egress</option>
-                  <option value="26" data-job="3" >Parking ingress / egress</option>
-                  <option value="29" data-job="4" >Parking ingress / egress</option>
-                  <option value="34" data-job="5" >Parking ingress / egress</option>
-                  <option value="49" data-job="11" >Parking ingress / egress</option>
-                  <option value="52" data-job="12" >Parking ingress / egress</option>
-                  <option value="59" data-job="13" >Parking ingress / egress</option>
-                  <option value="45" data-job="10" >Special Community Patrol</option>
-                  <option value="50" data-job="11" >Special Community Patrol</option>
-                  <option value="60" data-job="13" >Special Community Patrol</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="officerName" id="officerNameLabel" class="control-label col-sm-2">Name(s) of preferred officer(s)</label>
-              <div class="col-sm-10">
-                <select class="selectpicker form-control" multiple name="officerName" title="Please Select">
-                  <option value="6" data-subtext="Dallas">Lance Jones</option>
-                  <option value="2" data-subtext="Edmond">Roger Lockwood</option>
-                  <option value="5" data-subtext="Oklahoma City">Joshua Tree</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-sm-10 col-md-offset-2">
-                <div class="col-sm-3">
-                  <label class="radio-inline">
-                    <input type="radio" name="jobRecuring" id="inlineRadio1" value="no" checked="checked"> One-off Job
-                  </label>
-                </div>
-                <div class="col-sm-3">
-                  <label class="radio-inline">
-                    <input type="radio" name="jobRecuring" id="inlineRadio2" value="yes"> Recuring Job
-                  </label>
-                </div>
-                <div class="col-sm-6">
-                  <label for="officerName" id="officerNameLabel" class="control-label col-sm-2">Every</label>
-                  <div class="col-sm-10">
-                    <label>
-                      <select class="form-control" name="recuringJob">
-                        <option value="">None</option>
-                        <option value="">Day</option>
-                        <option value="">Week</option>
-                        <option value="">Month</option>
-                        <option value="">Year</option>
-                      </select>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="creationEventDate" id="creationEventDateLabel" class="control-label col-sm-2">Event Date</label>
-              <div class="col-sm-10">
-                <div class="input-group date" id="creationEventDate">
-                  <input type="text" value="" name="creationEventDate" class="form-control fieldEve" id="creationEventDate" placeholder="Event Date">
-                  <span class="input-group-addon addonRightEve">
-											<i class="fa fa-calendar" aria-hidden="true"></i>
-										</span>
-                </div>
-              </div>
-            </div>
-            <ul class="list-inline pull-right margin-top-30">
-              <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
-            </ul>
-          </div>
-          <div class="tab-pane" role="tabpanel" id="step3">
-            <h3 class="margin-bottom-10">Cost</h3>
-            <p>This is step 3</p>
-            <ul class="list-inline pull-right margin-top-30">
-              <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
-            </ul>
-          </div>
-          <div class="tab-pane" role="tabpanel" id="complete">
-            <h3 class="margin-bottom-10">Payment</h3>
-            <div class="form-group">
-              <label for="CardHolder" id="CardholderLabel" class="control-label col-sm-3">Card Holder Name</label>
-              <div class="col-sm-9">
-                <input name="CardHolder" type="text" id="CardHolder" class="form-control" placeholder="Enter card holder name" data-cayan="cardholder" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="CardNumber" id="CardLabel" class="control-label col-sm-3">Card Number</label>
-              <div class="col-sm-9">
-                <input name="CardNumber" type="text" id="CardNumber" class="form-control" placeholder="Enter card number" data-cayan="cardnumber" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="ExpirationMonth" id="ExpirationDateLabel" class="control-label col-sm-3">Expiration Date</label>
-              <div class="col-sm-4">
-                <select name="ExpirationMonth" id="ExpirationMonth" data-cayan="expirationmonth" class="form-control">
-                  <option value="01">01 January</option>
-                  <option value="02">02 February</option>
-                  <option value="03">03 March</option>
-                  <option value="04">04 April</option>
-                  <option value="05">05 May</option>
-                  <option value="06">06 June</option>
-                  <option value="07">07 July</option>
-                  <option value="08">08 August</option>
-                  <option value="09">09 September</option>
-                  <option value="10">10 October</option>
-                  <option value="11">11 November</option>
-                  <option selected="selected" value="12">12 December</option>
-                </select>
-              </div>
-              <div class="col-sm-5">
-                <label for="ExpirationYear"></label><select name="ExpirationYear" id="ExpirationYear" data-cayan="expirationyear" class="form-control">
-                  <option value="16">2016</option>
-                  <option selected="selected" value="17">2017</option>
-                  <option value="18">2018</option>
-                  <option value="19">2019</option>
-                  <option value="20">2020</option>
-                  <option value="21">2021</option>
-                  <option value="22">2022</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="CVV" id="CVVLabel" class="control-label col-sm-3">CVV/CVS</label>
-              <div class="col-sm-9">
-                <input name="CVV" type="text" id="CVV" class="form-control" placeholder="Enter the 3 or 4 digit CVV/CVS code" data-cayan="cvv" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="StreetAddress" id="StreetAddressLabel" class="control-label col-sm-3">Street Address</label>
-              <div class="col-sm-9">
-                <input name="StreetAddress" type="text" id="StreetAddress" class="form-control" placeholder="Enter street address" data-cayan="streetaddress" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="ZipCode" id="ZipLabel" class="control-label col-sm-3">Zip code</label>
-              <div class="col-sm-9">
-                <input name="ZipCode" type="text" id="ZipCode" class="form-control" placeholder="Enter 5-digit zip-code" data-cayan="zipcode" />
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-md-9 col-sm-offset-3 shop-cart-final-payment">
-                <hr />
-                <label class="pointer shop-cart-agree pull-left">
-                  <div class="alert alert-danger" id="errorbox_TermsOfService" style="display:none;">
-                    <span id="errormsg_TermsOfService"></span>
-                  </div>
-                  <input type="checkbox" name="agree" id="agreeTAndT_cb" value="1" /> I understand and agree the <a href="https://evewebnet.com/ES4_Police/portal.php?page=termsandconditions" target="_blank">terms and conditions</a>.
-                </label>
-                <span class="fsize20 styleSecondColor pull-right">TOTAL &nbsp; <i class="fa fa-arrow-right"></i> &nbsp; <strong><span class="mainCartTotalAmount">$1000</span></strong></span>
-              </div>
-            </div>
-            <div class="form-actions">
-              <input type="button" name="SubmitButton" value="Place Order" id="SubmitButton" class="btn btn-primary procedCheckout" />
-            </div>
-            <div id="TokenMessageContainer" class="alert" style="display:none;">
-              <span id="tokenMessage" data-cayan="tokenMessage"></span>
-            </div>
-            <label for="TokenHolder"></label><input name="TokenHolder" type="text" id="TokenHolder" style="display:none;" />
-          </div>
-          <div class="clearfix"></div>
-        </div>
-      </form>
-    </div>
-  </section>
-</div>
-<!--<form class="form-horizontal">-->
-  <!--<fieldset>-->
+  });
+</script>
 
-    <!--&lt;!&ndash; Form Name &ndash;&gt;-->
-    <!--<legend>Event Registration</legend>-->
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<script>
+  window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#252e39"
+        },
+        "button": {
+          "background": "#14a7d0"
+        }
+      },
+      "theme": "edgeless"
+    })});
+</script>
 
-    <!--&lt;!&ndash; Multiple Radios &ndash;&gt;-->
-    <!--<div class="form-group">-->
-      <!--<label class="col-md-4 control-label" for="Event Type">Event Type</label>-->
-      <!--<div class="col-md-4">-->
-        <!--<div class="radio">-->
-          <!--<label for="Event Type-0">-->
-            <!--<input type="radio" name="Event Type" id="{{crowd_security}}" value="Crowd Security/Control" checked="checked">-->
-            <!--Crowd Security/Control-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="radio">-->
-          <!--<label for="Event Type-1">-->
-            <!--<input type="radio" name="Event Type" id="XXX" value="Asset Protection">-->
-            <!--Asset Protection-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="radio">-->
-          <!--<label for="Event Type-2">-->
-            <!--<input type="radio" name="Event Type" id="Event Type-2" value="Special Patrols">-->
-            <!--Special Patrols-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="radio">-->
-          <!--<label for="Event Type-3">-->
-            <!--<input type="radio" name="Event Type" id="Event Type-3" value="Traffic Direction">-->
-            <!--Traffic Direction-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="radio">-->
-          <!--<label for="Event Type-4">-->
-            <!--<input type="radio" name="Event Type" id="Event Type-4" value="Escorts">-->
-            <!--Escorts-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="radio">-->
-          <!--<label for="Event Type-5">-->
-            <!--<input type="radio" name="Event Type" id="Event Type-5" value="Dignitary/VIP Protection">-->
-            <!--Dignitary/VIP Protection-->
-          <!--</label>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
 
-    <!--&lt;!&ndash; Select Basic &ndash;&gt;-->
-    <!--<div class="form-group">-->
-      <!--<label class="col-md-4 control-label" for="Event Type">Crowd Security/Control</label>-->
-      <!--<div class="col-md-4">-->
-        <!--<select id="Event Type" name="Event Type" class="form-control">-->
-          <!--<option value="Private Party">Private Party</option>-->
-          <!--<option value="Wedding">Wedding</option>-->
-          <!--<option value="Public Party">Public Party</option>-->
-          <!--<option value="Festival">Festival</option>-->
-          <!--<option value="Concert">Concert</option>-->
-          <!--<option value="Circus">Circus</option>-->
-          <!--<option value="Carnival">Carnival</option>-->
-          <!--<option value="Sporting Event">Sporting Event</option>-->
-          <!--<option value="License premise/Bar club">License premise/Bar or club</option>-->
-          <!--<option value="Restaurant">Restaurant</option>-->
-          <!--<option value="Hospital">Hospital</option>-->
-          <!--<option value="School">School</option>-->
-        <!--</select>-->
-      <!--</div>-->
-    <!--</div>-->
+</body>
+</html>
 
-    <!--&lt;!&ndash; Select Basic &ndash;&gt;-->
-    <!--<div class="form-group">-->
-      <!--<label class="col-md-4 control-label" for="Special Patrols">Special Patrols</label>-->
-      <!--<div class="col-md-4">-->
-        <!--<select id="Special Patrols" name="Special Patrols" class="form-control">-->
-          <!--<option value="Neighborhood Patrol">Neighborhood Patrol</option>-->
-          <!--<option value="Apartment Roving Patrol">Apartment Roving Patrol</option>-->
-          <!--<option value="Special Community Patrols">Special Community Patrols</option>-->
-        <!--</select>-->
-      <!--</div>-->
-    <!--</div>-->
 
-    <!--&lt;!&ndash; Select Basic &ndash;&gt;-->
-    <!--<div class="form-group">-->
-      <!--<label class="col-md-4 control-label" for="Traffic Direction">Traffic Direction</label>-->
-      <!--<div class="col-md-4">-->
-        <!--<select id="Traffic Direction" name="Traffic Direction" class="form-control">-->
-          <!--<option value="Parking ingress/egress">Parking ingress/egress</option>-->
-          <!--<option value="Construction Safety/control">Construction Safety/control</option>-->
-          <!--<option value="Intersection Control">Intersection Control</option>-->
-        <!--</select>-->
-      <!--</div>-->
-    <!--</div>-->
 
-    <!--&lt;!&ndash; Select Basic &ndash;&gt;-->
-    <!--<div class="form-group">-->
-      <!--<label class="col-md-4 control-label" for="Escorts">Escorts</label>-->
-      <!--<div class="col-md-4">-->
-        <!--<select id="Escorts" name="Escorts" class="form-control">-->
-          <!--<option value="Funeral">Funeral</option>-->
-          <!--<option value="Over size/load movement">Over size/load movement</option>-->
-          <!--<option value="Dignitary">Dignitary</option>-->
-        <!--</select>-->
-      <!--</div>-->
-    <!--</div>-->
-
-    <!--&lt;!&ndash; Select Basic &ndash;&gt;-->
-    <!--<div class="form-group">-->
-      <!--<label class="col-md-4 control-label" for="Asset Protection">Asset Protection</label>-->
-      <!--<div class="col-md-4">-->
-        <!--<select id="Asset Protection" name="Asset Protection" class="form-control">-->
-          <!--<option value="Loss Prevention at Retail">Loss Prevention at Retail</option>-->
-          <!--<option value="Stores">Stores</option>-->
-          <!--<option value="Bank Security">Bank Security</option>-->
-          <!--<option value="Money Drop Security">Money Drop Security</option>-->
-        <!--</select>-->
-      <!--</div>-->
-    <!--</div>-->
-
-    <!--&lt;!&ndash; Text input&ndash;&gt;-->
-    <!--<div class="form-group">-->
-      <!--<label class="col-md-4 control-label" for="officers"># of Officers Needed</label>-->
-      <!--<div class="col-md-4">-->
-        <!--<input id="officers" name="officers" type="text" placeholder="1" class="form-control input-md">-->
-
-      <!--</div>-->
-    <!--</div>-->
-
-    <!--&lt;!&ndash; Text input&ndash;&gt;-->
-    <!--<div class="form-group">-->
-      <!--<label class="col-md-4 control-label" for="hours"># of Hours Expected</label>-->
-      <!--<div class="col-md-4">-->
-        <!--<input id="hours" name="hours" type="text" placeholder="Minimum 2" class="form-control input-md">-->
-
-      <!--</div>-->
-    <!--</div>-->
-
-    <!--&lt;!&ndash; Select Basic &ndash;&gt;-->
-    <!--<div class="form-group">-->
-      <!--<label class="col-md-4 control-label" for="crowd">Estimated Size of Crowd</label>-->
-      <!--<div class="col-md-4">-->
-        <!--<select id="crowd" name="crowd" class="form-control">-->
-          <!--<option value="1-50 people = 1 Officer">1-50 people = 1 Officer</option>-->
-          <!--<option value="51-100 people = 2 Officers">51-100 people = 2 Officers</option>-->
-          <!--<option value="101-150 People = 3 Officers">101-150 People = 3 Officers</option>-->
-        <!--</select>-->
-      <!--</div>-->
-    <!--</div>-->
-
-    <!--&lt;!&ndash; Multiple Checkboxes &ndash;&gt;-->
-    <!--<div class="form-group">-->
-      <!--<label class="col-md-4 control-label" for="Officer Attire">Officer Attire</label>-->
-      <!--<div class="col-md-4">-->
-        <!--<div class="checkbox">-->
-          <!--<label for="Officer Attire-0">-->
-            <!--<input type="checkbox" name="Officer Attire" id="Officer Attire-0" value="Police Officer Uniform">-->
-            <!--Police Officer Uniform-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="checkbox">-->
-          <!--<label for="Officer Attire-1">-->
-            <!--<input type="checkbox" name="Officer Attire" id="Officer Attire-1" value="Casual Dress">-->
-            <!--Casual Dress-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="checkbox">-->
-          <!--<label for="Officer Attire-2">-->
-            <!--<input type="checkbox" name="Officer Attire" id="Officer Attire-2" value="Formal Attire">-->
-            <!--Formal Attire-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="checkbox">-->
-          <!--<label for="Officer Attire-3">-->
-            <!--<input type="checkbox" name="Officer Attire" id="Officer Attire-3" value="Suit &amp; Tie">-->
-            <!--Suit &amp; Tie-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="checkbox">-->
-          <!--<label for="Officer Attire-4">-->
-            <!--<input type="checkbox" name="Officer Attire" id="Officer Attire-4" value="Doesn't Matter">-->
-            <!--Doesn't Matter-->
-          <!--</label>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-
-    <!--&lt;!&ndash; Multiple Checkboxes &ndash;&gt;-->
-    <!--<div class="form-group">-->
-      <!--<label class="col-md-4 control-label" for="Officer Skillset">Officer Skillset</label>-->
-      <!--<div class="col-md-4">-->
-        <!--<div class="checkbox">-->
-          <!--<label for="Officer Skillset-0">-->
-            <!--<input type="checkbox" name="Officer Skillset" id="Officer Skillset-0" value="Bicycle Certified">-->
-            <!--Bicycle Certified-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="checkbox">-->
-          <!--<label for="Officer Skillset-1">-->
-            <!--<input type="checkbox" name="Officer Skillset" id="Officer Skillset-1" value="Dignitary Protection">-->
-            <!--Dignitary Protection-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="checkbox">-->
-          <!--<label for="Officer Skillset-2">-->
-            <!--<input type="checkbox" name="Officer Skillset" id="Officer Skillset-2" value="Traffic Direction/Control">-->
-            <!--Traffic Direction/Control-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="checkbox">-->
-          <!--<label for="Officer Skillset-3">-->
-            <!--<input type="checkbox" name="Officer Skillset" id="Officer Skillset-3" value="Motorcycle Officer">-->
-            <!--Motorcycle Officer-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="checkbox">-->
-          <!--<label for="Officer Skillset-4">-->
-            <!--<input type="checkbox" name="Officer Skillset" id="Officer Skillset-4" value="Special Weapons">-->
-            <!--Special Weapons-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="checkbox">-->
-          <!--<label for="Officer Skillset-5">-->
-            <!--<input type="checkbox" name="Officer Skillset" id="Officer Skillset-5" value="Civil Process Service">-->
-            <!--Civil Process Service-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="checkbox">-->
-          <!--<label for="Officer Skillset-6">-->
-            <!--<input type="checkbox" name="Officer Skillset" id="Officer Skillset-6" value="Crime Scene Investigations">-->
-            <!--Crime Scene Investigations-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="checkbox">-->
-          <!--<label for="Officer Skillset-7">-->
-            <!--<input type="checkbox" name="Officer Skillset" id="Officer Skillset-7" value="Financial Crimes Certified">-->
-            <!--Financial Crimes Certified-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="checkbox">-->
-          <!--<label for="Officer Skillset-8">-->
-            <!--<input type="checkbox" name="Officer Skillset" id="Officer Skillset-8" value="Drug Recognition Expert">-->
-            <!--Drug Recognition Expert-->
-          <!--</label>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-
-    <!--&lt;!&ndash; Prepended checkbox &ndash;&gt;-->
-    <!--<div class="form-group">-->
-      <!--<label class="col-md-4 control-label" for="prependedcheckbox">Foreign Language Speaker Needed</label>-->
-      <!--<div class="col-md-4">-->
-        <!--<div class="input-group">-->
-      <!--<span class="input-group-addon">-->
-          <!--<input type="checkbox">-->
-      <!--</span>-->
-          <!--<input id="prependedcheckbox" name="prependedcheckbox" class="form-control" type="text" placeholder="i.e. Spanish">-->
-        <!--</div>-->
-
-      <!--</div>-->
-    <!--</div>-->
-
-    <!--&lt;!&ndash; Multiple Checkboxes &ndash;&gt;-->
-    <!--<div class="form-group">-->
-      <!--<label class="col-md-4 control-label" for="options">Operational Details</label>-->
-      <!--<div class="col-md-4">-->
-        <!--<div class="checkbox">-->
-          <!--<label for="options-0">-->
-            <!--<input type="checkbox" name="options" id="options-0" value="Alcohol Served">-->
-            <!--Alcohol Served-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="checkbox">-->
-          <!--<label for="options-1">-->
-            <!--<input type="checkbox" name="options" id="options-1" value="Traffic Direction">-->
-            <!--Traffic Direction-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="checkbox">-->
-          <!--<label for="options-2">-->
-            <!--<input type="checkbox" name="options" id="options-2" value="Live Music">-->
-            <!--Live Music-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="checkbox">-->
-          <!--<label for="options-3">-->
-            <!--<input type="checkbox" name="options" id="options-3" value="Dignitary Protection">-->
-            <!--Dignitary Protection-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="checkbox">-->
-          <!--<label for="options-4">-->
-            <!--<input type="checkbox" name="options" id="options-4" value="Police Vehicle Needed">-->
-            <!--Police Vehicle Needed-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="checkbox">-->
-          <!--<label for="options-5">-->
-            <!--<input type="checkbox" name="options" id="options-5" value="">-->
-            <!--Barricades Requested-->
-          <!--</label>-->
-        <!--</div>-->
-        <!--<div class="checkbox">-->
-          <!--<label for="options-6">-->
-            <!--<input type="checkbox" name="options" id="options-6" value="">-->
-            <!--Music or Amplified Sound-->
-          <!--</label>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-
-    <!--&lt;!&ndash; Button &ndash;&gt;-->
-    <!--<div class="form-group">-->
-      <!--<label class="col-md-4 control-label" for="singlebutton"></label>-->
-      <!--<div class="col-md-4">-->
-        <!--<button id="singlebutton" name="singlebutton" ui-sref="checkout" class="btn btn-primary">Submit</button>-->
-      <!--</div>-->
-    <!--</div>-->
-
-  <!--</fieldset>-->
-<!--</form>-->

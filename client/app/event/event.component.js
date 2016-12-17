@@ -2,6 +2,8 @@
 const angular = require('angular');
 const uiRouter = require('angular-ui-router');
 import routing from './event.routes';
+const bootstrap = require('bootstrap');
+
 export class EventComponent {
   awesomeEvents = [];
   eventTitle = '';
