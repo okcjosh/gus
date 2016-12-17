@@ -1,7 +1,9 @@
 'use strict';
 const angular = require('angular');
 const $ = require('jquery');
-const jquery = require('jquery');
+//const jquery = $;
+require('bootstrap-select');
+require('@fengyuanchen/datepicker');
 const uiRouter = require('angular-ui-router');
 import routing from './event.routes';
 export class EventComponent {
@@ -31,6 +33,7 @@ export class EventComponent {
     this.$http = $http;
     this.socket = socket;
     this.$state = $state;
+    this.$scope = $scope;
 
     $scope.$on('$destroy',function () {
       socket.unsyncUpdates('event');
@@ -43,80 +46,118 @@ export class EventComponent {
   }
 
   $onInit() {
+    var $scope = this.$scope;
     this.$http.get('/api/events')
       .then(response => {
         this.awesomeEvents = response.data;
         this.socket.syncUpdates('event', this.awesomeEvents);
       });
 
+    this.$scope.progress = 1;
+    this.$scope.nextStep = function() {
+      $scope.progress++;
+    }
 
-    $(document).ready(function () {
-      /** ******************************
-       * Alert Message Boxes
-       ****************************** **/
-      $('.msgClose').click(function (e) {
-        e.preventDefault();
-        $(this).closest('.alertMsg').fadeOut("slow", function () {
-          $(this).addClass('hidden');
-        });
+    this.$scope.format = 'yyyy/MM/dd';
+  this.$scope.date = new Date();
+
+    this.initializeJQueryPlugins();
+
+    // $(document).ready(function () {
+    //   /** ******************************
+    //    * Alert Message Boxes
+    //    ****************************** **/
+    //   $('.msgClose').click(function (e) {
+    //     e.preventDefault();
+    //     $(this).closest('.alertMsg').fadeOut("slow", function () {
+    //       $(this).addClass('hidden');
+    //     });
+    //   });
+    //
+    //   /** ******************************
+    //    * Activate Tool-tips
+    //    ****************************** **/
+    //   // $("[data-toggle='tooltip']").tooltip();
+    //
+    //   /** ******************************
+    //    * Activate Popovers
+    //    ****************************** **/
+    //   // $("[data-toggle='popover']").popover();
+    //
+    //   /** ******************************
+    //    * Form Placeholders
+    //    ****************************** **/
+    //   let placehold = {
+    //     init: function () {
+    //       $('input[type="text"], input[type="email"], input[type="password"], textarea').each(placehold.replace);
+    //     },
+    //     replace: function () {
+    //       let txt = $(this).data('placeholder');
+    //       if (txt) {
+    //         if ($(this).val() == '') {
+    //           $(this).val(txt);
+    //         }
+    //         $(this).focus(function () {
+    //           if ($(this).val() == txt) {
+    //             $(this).val('');
+    //           }
+    //         }).blur(function () {
+    //           if ($(this).val() == '') {
+    //             $(this).val(txt);
+    //           }
+    //         });
+    //       }
+    //     }
+    //   }
+    //   placehold.init();
+    //
+    //   /** ******************************
+    //    * Required Fields
+    //    ****************************** **/
+    //   $("form :input[required='required']").blur(function () {
+    //     if (!$(this).val()) {
+    //       $(this).addClass('hasError');
+    //     } else {
+    //       if ($(this).hasClass('hasError')) {
+    //         $(this).removeClass('hasError');
+    //       }
+    //     }
+    //   });
+    //   $("form :input[required='required']").change(function () {
+    //     if ($(this).hasClass('hasError')) {
+    //       $(this).removeClass('hasError');
+    //     }
+    //   });
+    //
+    // });
+
+  }
+
+  initializeJQueryPlugins() {
+    $('.selectpicker').selectpicker({
+      style: 'btn-default',
+      size: 4
+    });
+
+    $('.bootstrap-select').click(function() {
+      $(this).toggleClass('open');
+    });
+
+    $('#jobType').change(function () {
+      $('.selectpicker').selectpicker('deselectAll');
+      $("#jobSpecs option").each(function() {	$( this ).hide();});
+      $("#jobType option:selected").each(function () {
+        str = $(this).val();
       });
-
-      /** ******************************
-       * Activate Tool-tips
-       ****************************** **/
-      // $("[data-toggle='tooltip']").tooltip();
-
-      /** ******************************
-       * Activate Popovers
-       ****************************** **/
-      // $("[data-toggle='popover']").popover();
-
-      /** ******************************
-       * Form Placeholders
-       ****************************** **/
-      let placehold = {
-        init: function () {
-          $('input[type="text"], input[type="email"], input[type="password"], textarea').each(placehold.replace);
-        },
-        replace: function () {
-          let txt = $(this).data('placeholder');
-          if (txt) {
-            if ($(this).val() == '') {
-              $(this).val(txt);
-            }
-            $(this).focus(function () {
-              if ($(this).val() == txt) {
-                $(this).val('');
-              }
-            }).blur(function () {
-              if ($(this).val() == '') {
-                $(this).val(txt);
-              }
-            });
-          }
-        }
-      }
-      placehold.init();
-
-      /** ******************************
-       * Required Fields
-       ****************************** **/
-      $("form :input[required='required']").blur(function () {
-        if (!$(this).val()) {
-          $(this).addClass('hasError');
-        } else {
-          if ($(this).hasClass('hasError')) {
-            $(this).removeClass('hasError');
-          }
-        }
+      $("#jobSpecs option[data-job='" + str + "']").each(function() {
+        $( this ).show();
       });
-      $("form :input[required='required']").change(function () {
-        if ($(this).hasClass('hasError')) {
-          $(this).removeClass('hasError');
-        }
-      });
+      $('.selectpicker').selectpicker('render');
+      $('.selectpicker').selectpicker('refresh');
 
     });
+
+    $('[data-toggle="datepicker"]').datepicker();
   }
 
   addEvent($state) {
@@ -166,6 +207,7 @@ export class EventComponent {
     }
     // $state.go('checkout');
   }
+
   deleteEvent(event) {
     this.$http.delete(`/api/events/${event._id}`);
   }

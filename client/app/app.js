@@ -7,6 +7,7 @@ import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
 import 'angular-socket-io';
 import 'angular-drag-and-drop-lists';
+import 'angular-bootstrap-datetimepicker';
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
 import {routeConfig} from './app.config';
@@ -34,7 +35,7 @@ import ngMessages from 'angular-messages';
 // import ngValidationMatch from 'angular-validation-match';
 
 
-angular.module('es4App', [ngCookies, ngResource, ngSanitize,'dndLists', 'btford.socket-io', 'as.sortable', uiRouter,
+angular.module('es4App', [ngCookies, ngResource, ngSanitize,'ui.bootstrap.datetimepicker', 'dndLists', 'btford.socket-io', 'as.sortable', uiRouter,
   uiBootstrap, _Auth, ngAnimate, account, admin, ngMessages, drag, navbar, footer, main, CheckoutComponent, DashboardComponent, TransactionComponent, InvitationComponent, event, leo, constants, socket, util
 ])
   .config(routeConfig)

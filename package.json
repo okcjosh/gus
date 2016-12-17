@@ -3,11 +3,13 @@
   "version": "0.0.0",
   "main": "server/index.js",
   "dependencies": {
+    "@fengyuanchen/datepicker": "github:fengyuanchen/datepicker",
     "EVE": "0.0.5",
     "Validator": "^1.0.3",
     "angular": "1.5.9",
     "angular-animate": "~1.5.5",
     "angular-aria": "~1.5.5",
+    "angular-bootstrap-datetimepicker": "^1.1.3",
     "angular-cookies": "~1.5.5",
     "angular-drag-and-drop-lists": "^1.4.0",
     "angular-messages": "^1.5.9",
@@ -55,6 +57,7 @@
     "dropzone": "^4.3.0",
     "echarts": "^3.3.2",
     "ejs": "^2.3.3",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.43",
     "errorhandler": "^1.4.2",
     "eve": "^0.5.0",
     "express": "^4.13.3",
@@ -115,6 +118,7 @@
     "switchery": "0.0.2",
     "transitionize": "0.0.3",
     "twilio": "^2.11.1",
+    "ui-select": "^0.19.6",
     "validator": "^6.2.0"
   },
   "devDependencies": {
