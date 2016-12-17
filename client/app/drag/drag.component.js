@@ -86,10 +86,10 @@ export class DragComponent {
   saveDrags($scope, $http) {
     $scope.jobsList.forEach(function(job) {
 
-      var draggedLeos = job.items;
+      let draggedLeos = job.items;
       draggedLeos.forEach(function(leo) {
 
-        var inviteData = {
+        let inviteData = {
           job_id: job.job_data.job_id,
         	leo_id: leo.leo_id,
         	job_invitation_status_id: 1,
