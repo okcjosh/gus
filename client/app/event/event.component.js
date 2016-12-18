@@ -1,8 +1,5 @@
 'use strict';
 const angular = require('angular');
-//const $ = window.$;
-//const jquery = $;
-//require('bootstrap-select');
 const uiRouter = require('angular-ui-router');
 import routing from './event.routes';
 export class EventComponent {
@@ -46,6 +43,7 @@ export class EventComponent {
 
   $onInit() {
     var $scope = this.$scope;
+    var $state = this.$state;
     this.$http.get('/api/events')
       .then(response => {
         this.awesomeEvents = response.data;
@@ -54,90 +52,30 @@ export class EventComponent {
 
     this.$scope.progress = 1;
     this.$scope.nextStep = function() {
-      $scope.progress++;
+      // Check for validity of filled data
+      if (true) {
+        if ($scope.progress == 3) $state.go('checkout');
+        $scope.progress++;
+      }
     }
     this.$scope.prevStep = function() {
       $scope.progress--;
     }
 
+    this.$scope.submitForm = function(e) {
+      e.preventDefault();
+    }
+
     this.initializeJQueryPlugins();
-
-    // $(document).ready(function () {
-    //   /** ******************************
-    //    * Alert Message Boxes
-    //    ****************************** **/
-    //   $('.msgClose').click(function (e) {
-    //     e.preventDefault();
-    //     $(this).closest('.alertMsg').fadeOut("slow", function () {
-    //       $(this).addClass('hidden');
-    //     });
-    //   });
-    //
-    //   /** ******************************
-    //    * Activate Tool-tips
-    //    ****************************** **/
-    //   // $("[data-toggle='tooltip']").tooltip();
-    //
-    //   /** ******************************
-    //    * Activate Popovers
-    //    ****************************** **/
-    //   // $("[data-toggle='popover']").popover();
-    //
-    //   /** ******************************
-    //    * Form Placeholders
-    //    ****************************** **/
-    //   let placehold = {
-    //     init: function () {
-    //       $('input[type="text"], input[type="email"], input[type="password"], textarea').each(placehold.replace);
-    //     },
-    //     replace: function () {
-    //       let txt = $(this).data('placeholder');
-    //       if (txt) {
-    //         if ($(this).val() == '') {
-    //           $(this).val(txt);
-    //         }
-    //         $(this).focus(function () {
-    //           if ($(this).val() == txt) {
-    //             $(this).val('');
-    //           }
-    //         }).blur(function () {
-    //           if ($(this).val() == '') {
-    //             $(this).val(txt);
-    //           }
-    //         });
-    //       }
-    //     }
-    //   }
-    //   placehold.init();
-    //
-    //   /** ******************************
-    //    * Required Fields
-    //    ****************************** **/
-    //   $("form :input[required='required']").blur(function () {
-    //     if (!$(this).val()) {
-    //       $(this).addClass('hasError');
-    //     } else {
-    //       if ($(this).hasClass('hasError')) {
-    //         $(this).removeClass('hasError');
-    //       }
-    //     }
-    //   });
-    //   $("form :input[required='required']").change(function () {
-    //     if ($(this).hasClass('hasError')) {
-    //       $(this).removeClass('hasError');
-    //     }
-    //   });
-    //
-    // });
-
   }
 
   initializeJQueryPlugins() {
     $('.selectpicker').selectpicker({
       style: 'btn-default',
-      size: 9
+      size: 4
     });
 
+    // To open selectpicker list
     $('.bootstrap-select').click(function() {
       $(this).toggleClass('open');
     });
@@ -158,6 +96,25 @@ export class EventComponent {
 
     $('#creationEventDate').datetimepicker({
       format: "DD MMMM YYYY"
+    });
+
+
+    /** ******************************
+     * Required Fields
+     ****************************** **/
+    $("form :input[required='required']").blur(function () {
+      if (!$(this).val()) {
+        $(this).addClass('hasError');
+      } else {
+        if ($(this).hasClass('hasError')) {
+          $(this).removeClass('hasError');
+        }
+      }
+    });
+    $("form :input[required='required']").change(function () {
+      if ($(this).hasClass('hasError')) {
+        $(this).removeClass('hasError');
+      }
     });
   }
 
