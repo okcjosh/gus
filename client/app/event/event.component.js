@@ -167,8 +167,8 @@ export class EventComponent {
       phone_number: $scope.eventData.phoneNumber,
       point_of_contact: $scope.eventData.point_of_contact,
       job_type: $scope.eventData.jobType,
-      job_specs: $scope.eventData.jobSpecs,
-      officer_name: $scope.eventData.officerName,
+      job_specs: $scope.eventData.jobSpecs.join(' '),
+      officer_name: $scope.eventData.officerName.join(' '),
       is_recuring: Boolean($scope.eventData.isRecuring),
       recuring_interval: $scope.eventData.recuringInterval,
       date: $scope.eventData.creationEventDate
