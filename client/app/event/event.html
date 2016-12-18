@@ -1,59 +1,5 @@
-<script>
-  $(document).ready(function () {
 
-    $("#jobSpecs option").each(function() {
-      $( this ).hide();
-    });
-
-
-    //Initialize tooltips
-    $('.nav-tabs > li a[title]').tooltip();
-
-    //Wizard
-    $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
-
-      var $target = $(e.target);
-
-      if ($target.parent().hasClass('disabled')) {
-        return false;
-      }
-    });
-
-    $(".next-step").click(function (e) {
-
-      var $active = $('.wizard .nav-tabs li.active');
-      $active.next().removeClass('disabled');
-      $active.addClass('disabled');
-      nextTab($active);
-
-    });
-    $(".prev-step").click(function (e) {
-      var $active = $('.wizard .nav-tabs li.active');
-      prevTab($active);
-
-    });
-
-
-
-  });
-
-  function nextTab(elem) {
-    $(elem).next().find('a[data-toggle="tab"]').click();
-  }
-  function prevTab(elem) {
-    $(elem).prev().find('a[data-toggle="tab"]').click();
-  }
-
-
-  // $('.selectpicker').selectpicker({
-  //   style: 'btn-info',
-  //   size: 4
-  // });
-
-
-</script>
-<script src="https://evewebnet.com/ES4_Police/js/custom.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+<!-- <script src="https://evewebnet.com/ES4_Police/js/custom.js"></script> -->
 <div class="container main-content mb-20">
   <h3 class="mb-20">Job Creation &mdash; New Job</h3>
 
@@ -66,7 +12,7 @@
 
           <li role="presentation" ng-class="{active: progress === 1, disabled: progress !== 1}">
             <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Venue">
-                            <span class="round-tab">
+              <span class="round-tab">
                                 <i class="glyphicon glyphicon-map-marker"></i>
                             </span>
             </a>
@@ -74,14 +20,14 @@
 
           <li role="presentation" ng-class="{active: progress === 2, disabled: progress !== 2}">
             <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Job">
-                            <span class="round-tab">
+              <span class="round-tab">
                                 <i class="glyphicon glyphicon-folder-open"></i>
                             </span>
             </a>
           </li>
           <li role="presentation" ng-class="{active: progress === 3, disabled: progress !== 3}">
             <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Cost">
-                            <span class="round-tab">
+              <span class="round-tab">
                                 <i class="glyphicon glyphicon-shopping-cart"></i>
                             </span>
             </a>
@@ -89,7 +35,7 @@
 
           <li role="presentation" ng-class="{active: progress === 4, disabled: progress !== 4}">
             <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Payment">
-                            <span class="round-tab">
+              <span class="round-tab">
                                 <i class="glyphicon glyphicon-credit-card"></i>
                             </span>
             </a>
@@ -130,11 +76,6 @@
               </div>
             </div>
 
-
-
-            <ul class="list-inline pull-right margin-top-30">
-              <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
-            </ul>
           </div>
           <div class="tab-pane" ng-class="{active: progress == 2}" ng-show="progress == 2" role="tabpanel" id="step2">
             <h3 class="margin-bottom-10">Job Details</h3>
@@ -262,29 +203,22 @@
               </div>
             </div>
 
-            <div class="form-group">
-								<label for="creationEventDate" id="creationEventDateLabel" class="control-label col-sm-2">Event Date</label>
-								<div class="col-sm-10">
+            <div class="form-group"> <label for="creationEventDate" id="creationEventDateLabel" class="control-label col-sm-2">Event Date</label>
+              <div class="col-sm-10">
 
-									<div class="input-group date" id="creationEventDate">
-                    <input data-toggle="datepicker">
-<textarea data-toggle="datepicker"></textarea>
-<div data-toggle="datepicker"></div>
-									</div>
-								</div>
-							</div>
-
-
-            <ul class="list-inline pull-right margin-top-30">
-              <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
-            </ul>
+                <div class="input-group date" id="creationEventDate">
+                  <input type="text" value="" name="creationEventDate" class="form-control fieldEve" id="creationEventDate" placeholder="Event Date">
+                  <span class="input-group-addon addonRightEve">
+											<i class="fa fa-calendar" aria-hidden="true"></i>
+										</span>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="tab-pane" ng-class="{active: progress == 3}" ng-show="progress == 3" role="tabpanel" id="step3">
             <h3 class="margin-bottom-10">Cost</h3>
             <p>This is step 3</p>
-            <ul class="list-inline pull-right margin-top-30">
-              <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
-            </ul>
+
           </div>
           <div class="tab-pane" ng-class="{active: progress == 4}" ng-show="progress == 4" role="tabpanel" id="complete">
             <h3 class="margin-bottom-10">Payment</h3>
@@ -357,7 +291,8 @@
                   </div>
                   <input type="checkbox" name="agree" id="agreeTAndT_cb" value="1" /> I understand and agree the <a href="https://evewebnet.com/ES4_Police/portal.php?page=termsandconditions" target="_blank">terms and conditions</a>.
                 </label>
-                <span class="fsize20 styleSecondColor pull-right">TOTAL &nbsp; <i class="fa fa-arrow-right"></i> &nbsp; <strong><span class="mainCartTotalAmount">$1000</span></strong></span>
+                <span class="fsize20 styleSecondColor pull-right">TOTAL &nbsp; <i class="fa fa-arrow-right"></i> &nbsp; <strong><span class="mainCartTotalAmount">$1000</span></strong>
+                </span>
               </div>
             </div>
             <div class="form-actions">
@@ -368,11 +303,14 @@
             </div>
             <input name="TokenHolder" type="text" id="TokenHolder" style="display:none;" />
           </div>
-          <!-- <div class="clearfix"></div> -->
+          <div class="clearfix"></div>
         </div>
       </form>
-      <div>
-        <button type="button" ng-click="nextStep()" class="btn btn-primary btn-info-full next-step pull-right">Save and continue</button>
+      <div class="margin-top-30">
+        <button type="button" ng-hide="progress == 1" ng-click="prevStep()" class="btn btn-primary btn-info-full next-step pull-left">Go back</button>
+
+        <input type="button" ng-if="progress === 4" name="SubmitButton" value="Place Order" id="SubmitButton" class="btn btn-primary procedCheckout pull-right" />
+        <button type="button" ng-hide="progress === 4" ng-click="nextStep()" class="btn btn-primary btn-info-full next-step pull-right">Save and continue</button>
       </div>
     </div>
   </section>

@@ -1,9 +1,8 @@
 'use strict';
 const angular = require('angular');
-const $ = require('jquery');
+//const $ = window.$;
 //const jquery = $;
-require('bootstrap-select');
-require('@fengyuanchen/datepicker');
+//require('bootstrap-select');
 const uiRouter = require('angular-ui-router');
 import routing from './event.routes';
 export class EventComponent {
@@ -57,9 +56,9 @@ export class EventComponent {
     this.$scope.nextStep = function() {
       $scope.progress++;
     }
-
-    this.$scope.format = 'yyyy/MM/dd';
-  this.$scope.date = new Date();
+    this.$scope.prevStep = function() {
+      $scope.progress--;
+    }
 
     this.initializeJQueryPlugins();
 
@@ -136,7 +135,7 @@ export class EventComponent {
   initializeJQueryPlugins() {
     $('.selectpicker').selectpicker({
       style: 'btn-default',
-      size: 4
+      size: 9
     });
 
     $('.bootstrap-select').click(function() {
@@ -157,7 +156,9 @@ export class EventComponent {
 
     });
 
-    $('[data-toggle="datepicker"]').datepicker();
+    $('#creationEventDate').datetimepicker({
+      format: "DD MMMM YYYY"
+    });
   }
 
   addEvent($state) {
