@@ -1,46 +1,5 @@
-<!-- <script src="https://evewebnet.com/ES4_Police/js/custom.js"></script> -->
-<script>
-  /****** GOOGLE address autocomplete *****/
-  var placeSearch, autocomplete;
-  var componentForm = {
-    street_number: 'short_name',
-    route: 'long_name',
-    locality: 'long_name',
-    administrative_area_level_1: 'short_name',
-    country: 'long_name',
-    postal_code: 'short_name'
-  };
-
-  function initAutocomplete() {
-    autocomplete = new google.maps.places.Autocomplete(
-      (document.getElementById('autocomplete')), {
-        types: ['geocode']
-      });
-
-    autocomplete.addListener('place_changed', fillInAddress);
-  }
-
-  function fillInAddress() {}
-
-  function geolocate() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        var geolocation = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        var circle = new google.maps.Circle({
-          center: geolocation,
-          radius: position.coords.accuracy
-        });
-        autocomplete.setBounds(circle.getBounds());
-      });
-    }
-  }
-</script>
 <div class="container main-content mb-20">
   <h3 class="mb-20">Job Creation &mdash; New Job</h3>
-
 
   <section>
     <div class="wizard">
@@ -49,22 +8,23 @@
         <ul class="nav nav-tabs" role="tablist">
 
           <li role="presentation" ng-class="{active: progress === 1, disabled: progress !== 1}">
-            <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" uib-tooltip="Venue">
+            <a aria-controls="step1" role="tab" uib-tooltip="Venue">
               <span class="round-tab">
                                 <i class="glyphicon glyphicon-map-marker"></i>
                             </span>
             </a>
           </li>
 
+          <!-- data-toggle="tab" -->
           <li role="presentation" ng-class="{active: progress === 2, disabled: progress !== 2}">
-            <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" uib-tooltip="Job">
+            <a aria-controls="step2" role="tab" uib-tooltip="Job">
               <span class="round-tab">
                                 <i class="glyphicon glyphicon-folder-open"></i>
                             </span>
             </a>
           </li>
           <li role="presentation" ng-class="{active: progress === 3, disabled: progress !== 3}">
-            <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" uib-tooltip="Cost">
+            <a aria-controls="step3" role="tab" uib-tooltip="Cost">
               <span class="round-tab">
                                 <i class="glyphicon glyphicon-shopping-cart"></i>
                             </span>
@@ -72,7 +32,7 @@
           </li>
 
           <li role="presentation" ng-class="{active: progress === 4, disabled: progress !== 4}">
-            <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" uib-tooltip="Payment">
+            <a aria-controls="complete" role="tab" uib-tooltip="Payment">
               <span class="round-tab">
                                 <i class="glyphicon glyphicon-credit-card"></i>
                             </span>
@@ -81,30 +41,23 @@
         </ul>
       </div>
 
-      <form method="post" id="PaymentForm" ng-submit="submitForm($event)" class="form-horizontal" role="form">
+      <form method="post" name="newEventForm" id="PaymentForm" ng-submit="submitForm($event)" class="form-horizontal" role="form">
         <div class="tab-content">
           <div class="tab-pane" ng-class="{active: progress == 1}" role="tabpanel" id="step1">
             <h3 class="margin-bottom-10">Venue</h3>
 
             <div class="form-group">
-              <label for="nameOfVenue" id="nameOfVenueLabel" class="control-label col-sm-2">Name</label>
+              <label for="nameOfVenue" id="nameOfVenueLabel" class="control-label col-sm-2">Name of Venue</label>
               <div class="col-sm-10">
-                <input name="nameOfVenue" type="text" id="nameOfVenue" class="form-control" placeholder="Enter the Name of the venue" />
+                <input name="nameOfVenue" type="text" ng-model="eventData.nameOfVenue" required id="nameOfVenue" class="form-control" placeholder="Enter the Name of the venue" />
               </div>
             </div>
-
-            <!-- <div class="form-group">
-              <label for="address" id="addressLabel" class="control-label col-sm-2">Address</label>
-              <div class="col-sm-10">
-                <textarea class="form-control" rows="4" name="address" id="address" placeholder="Please enter the full address of the venue"></textarea>
-              </div>
-            </div> -->
 
             <div class="form-group">
               <label for="address" id="addressLabel" class="control-label col-sm-2">Address</label>
               <div class="col-sm-10">
                 <div id="locationField">
-                  <input class="form-control" id="autocomplete" placeholder="Enter your address" name="address" g-places-autocomplete ng-model="googleAutocomplete" type="text"></input>
+                  <input class="form-control" ng-model="eventData.location" required id="autocomplete" placeholder="Enter your address" name="address" g-places-autocomplete type="text"></input>
                 </div>
               </div>
             </div>
@@ -112,14 +65,14 @@
             <div class="form-group">
               <label for="phoneNumber" id="phoneNumberLabel" class="control-label col-sm-2">Phone Number</label>
               <div class="col-sm-10">
-                <input name="phoneNumber" type="tel" id="phoneNumber" class="form-control" placeholder="Enter your phone number" />
+                <input name="phoneNumber" ng-model="eventData.phoneNumber" required type="tel" id="phoneNumber" class="form-control" placeholder="Enter your phone number" />
               </div>
             </div>
 
             <div class="form-group">
               <label for="poContact" id="poContactLabel" class="control-label col-sm-2">Point of Contact</label>
               <div class="col-sm-10">
-                <input name="poContact" type="text" id="poContact" class="form-control" placeholder="Enter point of Contact" />
+                <input name="poContact" ng-model="eventData.poContact" required type="text" id="poContact" class="form-control" placeholder="Enter point of Contact" />
               </div>
             </div>
 
@@ -131,7 +84,7 @@
             <div class="form-group">
               <label for="jobType" id="jobTypeLabel" class="control-label col-sm-2">Job Type</label>
               <div class="col-sm-10">
-                <select name="jobType" id="jobType" class="form-control">
+                <select name="jobType" required ng-model="eventData.jobType" id="jobType" class="form-control">
                   <option value="">Please select the Job Type</option>
                   <option value="1">Birthday</option>
                   <option value="2">Carnival</option>
@@ -153,7 +106,7 @@
             <div class="form-group">
               <label for="jobSpecs" id="jobSpecsLabel" class="control-label col-sm-2">Job Type Specific Options</label>
               <div class="col-sm-10">
-                <select class="selectpicker form-control" multiple name="jobSpecs" id="jobSpecs" title="Select a Job Type first">
+                <select class="selectpicker form-control" ng-model="eventData.jobSpecs" multiple name="jobSpecs" id="jobSpecs" title="Select a Job Type first">
                   <option value="39" data-job="8" >Apartment Roving Patrol</option>
                   <option value="53" data-job="13" >Appartment Roving Patrol</option>
                   <option value="54" data-job="13" >Bank Security</option>
@@ -213,7 +166,7 @@
               <label for="officerName" id="officerNameLabel" class="control-label col-sm-2">Name(s) of preferred officer(s)</label>
               <div class="col-sm-10">
 
-                <select class="selectpicker form-control" multiple name="officerName" title="Please Select">
+                <select class="selectpicker form-control" required ng-model="eventData.officerName" multiple name="officerName" title="Please Select">
                   <option value="6" data-subtext="Dallas">Lance Jones</option>
                   <option value="2" data-subtext="Edmond">Roger Lockwood</option>
                   <option value="5" data-subtext="Oklahoma City">Joshua Tree</option>
@@ -225,12 +178,12 @@
               <div class="col-sm-10 col-md-offset-2">
                 <div class="col-sm-3">
                   <label class="radio-inline">
-                    <input type="radio" name="jobRecuring" id="inlineRadio1" value="no" checked="checked"> One-off Job
+                    <input type="radio" selected name="jobRecuring" ng-model="eventData.isRecuring" id="inlineRadio1" value="no" checked="checked"> One-off Job
                   </label>
                 </div>
                 <div class="col-sm-3">
                   <label class="radio-inline">
-                    <input type="radio" name="jobRecuring" id="inlineRadio2" value="yes"> Recuring Job
+                    <input type="radio" name="jobRecuring" ng-model="eventData.isRecuring" id="inlineRadio2" value="yes"> Recuring Job
                   </label>
                 </div>
                 <div class="col-sm-6">
@@ -238,12 +191,12 @@
                   <label for="officerName" id="officerNameLabel" class="control-label col-sm-2">Every</label>
                   <div class="col-sm-10">
 
-                    <select class="form-control" name="recuringJob">
+                    <select class="form-control" ng-model="eventData.recuringInterval" name="recuringInterval">
                       <option value="">None</option>
-                      <option value="">Day</option>
-                      <option value="">Week</option>
-                      <option value="">Month</option>
-                      <option value="">Year</option>
+                      <option value="1">Day</option>
+                      <option value="2">Week</option>
+                      <option value="3">Month</option>
+                      <option value="4">Year</option>
                     </select>
                   </div>
                 </div>
@@ -254,7 +207,7 @@
               <div class="col-sm-10">
 
                 <div class="input-group date" id="creationEventDate">
-                  <input type="text" value="" name="creationEventDate" class="form-control fieldEve" id="creationEventDate" placeholder="Event Date">
+                  <input type="text" required ng-model="eventData.creationEventDate" name="creationEventDate" class="form-control fieldEve" id="creationEventDateField" placeholder="Event Date">
                   <span class="input-group-addon addonRightEve">
 											<i class="fa fa-calendar" aria-hidden="true"></i>
 										</span>
