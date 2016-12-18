@@ -4,24 +4,24 @@ const uiRouter = require('angular-ui-router');
 import routing from './event.routes';
 export class EventComponent {
   awesomeEvents = [];
-  eventTitle = '';
-  date = '';
-  Location_Desc = '';
-  Address = '';
-  Job_Type = '';
-  event_type = '';
-  crowd_security = '';
-  special_patrols = '';
-  traffic_direction = '';
-  escorts = '';
-  asset_protection = '';
-  officer_needed = '';
-  hours_expected = '';
-  crowd_size = '';
-  officer_attire = '';
-  officer_skillset = '';
-  language = '';
-  operational_details = '';
+  // eventTitle = '';
+  // date = '';
+  // Location_Desc = '';
+  // Address = '';
+  // Job_Type = '';
+  // event_type = '';
+  // crowd_security = '';
+  // special_patrols = '';
+  // traffic_direction = '';
+  // escorts = '';
+  // asset_protection = '';
+  // officer_needed = '';
+  // hours_expected = '';
+  // crowd_size = '';
+  // officer_attire = '';
+  // officer_skillset = '';
+  // language = '';
+  // operational_details = '';
 
 
   /*@ngInject*/
@@ -31,7 +31,7 @@ export class EventComponent {
     this.$state = $state;
     this.$scope = $scope;
 
-    $scope.$on('$destroy',function () {
+    $scope.$on('$destroy', function() {
       socket.unsyncUpdates('event');
     });
     // $scope.$on('FormSubmit', function () {
@@ -41,9 +41,46 @@ export class EventComponent {
     // })
   }
 
+  checkStepValid(step) {
+    var $s = this.$scope;;
+    switch (step) {
+      case 1:
+        if (
+          $s.newEventForm.nameOfVenue.$valid &&
+          $s.newEventForm.address.$valid &&
+          $s.newEventForm.phoneNumber.$valid &&
+          $s.newEventForm.poContact.$valid ) {
+          return true;
+        } else {
+          return false;
+        }
+        break;
+
+      case 2:
+        $s.eventData.creationEventDate = document.getElementById("creationEventDateField").value; // Because the datetimepicker plugin is jquery not angular, so selecting date doesn't set to a model, so we have to get it manually
+        if (
+          $s.newEventForm.jobType.$valid &&
+          $s.newEventForm.jobSpecs.$valid &&
+          $s.newEventForm.officerName.$valid &&
+          $s.newEventForm.jobRecuring.$valid ) {
+          return true;
+        } else {
+          return false;
+        }
+        break;
+
+      case 3:
+        return true; // No fields yet for third step
+        break;
+
+      default:
+    }
+  }
+
   $onInit() {
     var $scope = this.$scope;
     var $state = this.$state;
+    var _self = this;
     this.$http.get('/api/events')
       .then(response => {
         this.awesomeEvents = response.data;
@@ -53,9 +90,15 @@ export class EventComponent {
     this.$scope.progress = 1;
     this.$scope.nextStep = function() {
       // Check for validity of filled data
-      if (true) {
-        if ($scope.progress == 3) $state.go('checkout');
-        $scope.progress++;
+      if (_self.checkStepValid($scope.progress)) {
+        if ($scope.progress == 3) {
+          console.log($scope.eventData);
+          _self.postEvent($state, $scope); // If data was submitted successfully User will be redirected
+        } else {
+          $scope.progress++;
+        }
+      } else {
+        console.log('Not Valid', $scope.newEventForm);
       }
     }
     this.$scope.prevStep = function() {
@@ -66,6 +109,8 @@ export class EventComponent {
       e.preventDefault();
     }
 
+    this.$scope.eventData = {};
+
     this.initializeJQueryPlugins();
   }
 
@@ -75,24 +120,21 @@ export class EventComponent {
       size: 4
     });
 
-    // To open selectpicker list
-    $('.bootstrap-select').click(function() {
-      $(this).toggleClass('open');
-    });
+    var str;
 
-    $('#jobType').change(function () {
-      $('.selectpicker').selectpicker('deselectAll');
-      $("#jobSpecs option").each(function() {	$( this ).hide();});
-      $("#jobType option:selected").each(function () {
-        str = $(this).val();
-      });
-      $("#jobSpecs option[data-job='" + str + "']").each(function() {
-        $( this ).show();
-      });
-      $('.selectpicker').selectpicker('render');
-      $('.selectpicker').selectpicker('refresh');
-
-    });
+    // $('input[name="jobRecuring"]').change(function () {
+    //   //$('.selectpicker').selectpicker('deselectAll');
+    //   $("#jobSpecs option").each(function() {	$( this ).hide();});
+    //   $("#jobType option:selected").each(function () {
+    //     str = $(this).val();
+    //   });
+    //   $("#jobSpecs option[data-job='" + str + "']").each(function() {
+    //     $( this ).show();
+    //   });
+    //   $('.selectpicker').selectpicker('render');
+    //   $('.selectpicker').selectpicker('refresh');
+    //
+    // });
 
     $('#creationEventDate').datetimepicker({
       format: "DD MMMM YYYY"
@@ -102,7 +144,7 @@ export class EventComponent {
     /** ******************************
      * Required Fields
      ****************************** **/
-    $("form :input[required='required']").blur(function () {
+    $("form :input[required='required']").blur(function() {
       if (!$(this).val()) {
         $(this).addClass('hasError');
       } else {
@@ -111,59 +153,35 @@ export class EventComponent {
         }
       }
     });
-    $("form :input[required='required']").change(function () {
+    $("form :input[required='required']").change(function() {
       if ($(this).hasClass('hasError')) {
         $(this).removeClass('hasError');
       }
     });
   }
 
-  addEvent($state) {
-    {
-      if (this.eventTitle) {
-        this.$http.post('/api/events', {
-          eventTitle: this.eventTitle,
-          date: this.Date,
-          location_desc: this.Location_Desc,
-          address: this.Address,
-          job_type: this.Job_Type,
-          event_type: this.event_type,
-          crowd_security: this.crowd_security,
-          special_patrols: this.special_patrols,
-          traffic_direction: this.traffic_direction,
-          escorts: this.escorts,
-          asset_protection: this.asset_protection,
-          officer_needed: this.officer_needed,
-          hours_expected: this.hours_expected,
-          crowd_size: this.crowd_size,
-          officer_attire: this.officer_attire,
-          officer_skillset: this.officer_skillset,
-          language: this.language,
-          operational_details: this.operational_details,
-        });
-
-        this.awesomeEvents = [];
-        this.eventTitle = '';
-        this.date = '';
-        this.Location_Desc = '';
-        this.Address = '';
-        this.Job_Type = '';
-        this.event_type = '';
-        this.crowd_security = '';
-        this.special_patrols = '';
-        this.traffic_direction = '';
-        this.escorts = '';
-        this.asset_protection = '';
-        this.officer_needed = '';
-        this.hours_expected = '';
-        this.crowd_size = '';
-        this.officer_attire = '';
-        this.officer_skillset = '';
-        this.language = '';
-        this.operational_details = '';
-      }
+  postEvent($state, $scope) {
+    var eventPayload = {
+      venue: $scope.eventData.nameOfVenue,
+      location_desc: $scope.eventData.location.formatted_address,
+      phone_number: $scope.eventData.phoneNumber,
+      point_of_contact: $scope.eventData.point_of_contact,
+      job_type: $scope.eventData.jobType,
+      job_specs: $scope.eventData.jobSpecs.join(' '),
+      officer_name: $scope.eventData.officerName.join(' '),
+      is_recuring: Boolean($scope.eventData.isRecuring),
+      recuring_interval: $scope.eventData.recuringInterval,
+      date: $scope.eventData.creationEventDate
     }
-    // $state.go('checkout');
+
+    this.$http.post('/api/events', eventPayload)
+      .then(function(res) {
+        if (res.status === 201) {
+          $state.go('checkout');
+        } else {
+          console.log('Error');
+        }
+      });
   }
 
   deleteEvent(event) {
