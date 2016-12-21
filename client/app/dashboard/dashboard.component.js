@@ -23,8 +23,9 @@ require( 'datatables.net-select');
 export class DashboardComponent {
   /*@ngInject*/
 
-  constructor($http) {
+  constructor($http, $scope) {
     this.$http = $http;
+    this.$scope = $scope;
   }
 
   $onInit() {
@@ -99,21 +100,29 @@ export class DashboardComponent {
           data: this.dataSet,
           //columnDefs: [{ orderable: false, className: 'select-checkbox', targets: 0 }],
          columns: [
+            { data: "_id", title: "ID", visible: false },
             { data: "venue", title: "Venue" },
             { data: "address", title: "Location" },
             { data: "phone_number", title: "Phone Number" },
             { data: "point_of_contact", title: "POC" },
-
+            { data: "job_type", title: "Job Type", visible: false },
+            { data: "job_type_specs", title: "Job Specs", visible: false },
+            { data: "prefered_officer_name", title: "Prefered Officer", visible: false },
+            { data: "is_recuring", title: "Is Recuring", visible: false },
+            { data: "recuring_data", title: "Recuring", visible: false },
+            { data: "date", title: "Date", visible: false },
             // { data: "status", title: "Status" },
             // { data: "event_type", title: "Event Type" }
           ]
         } );
         table.on('select', function (e, dt, type, indexes) {
           if (type === 'row') {
-            let data = table.rows(indexes).data().pluck('id');
-            console.log('XXX');
+            let data = table.rows(indexes).data().pluck('_id');
+            console.log(data);
+            this.$scope.selectedRow.venue = ('your moms house ');
           }
         });
+
         //table.buttons().container().appendTo( $('#buttons') );
       });
    }
