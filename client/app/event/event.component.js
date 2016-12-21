@@ -161,25 +161,28 @@ export class EventComponent {
   }
 
   postEvent($state, $scope) {
+    //alert($scope.eventData.jobSpecs);
     var eventPayload = {
       venue: $scope.eventData.nameOfVenue,
-      location_desc: $scope.eventData.location.formatted_address,
+      address: $scope.eventData.location,
       phone_number: $scope.eventData.phoneNumber,
-      point_of_contact: $scope.eventData.point_of_contact,
+      point_of_contact: $scope.eventData.poContact,
       job_type: $scope.eventData.jobType,
-      job_specs: $scope.eventData.jobSpecs.join(' '),
-      officer_name: $scope.eventData.officerName.join(' '),
-      is_recuring: Boolean($scope.eventData.isRecuring),
-      recuring_interval: $scope.eventData.recuringInterval,
+      job_type_specs: $scope.eventData.jobSpecs[0],
+      prefered_officer_name: $scope.eventData.officerName[0],
+      is_recuring: $scope.eventData.isRecuring,
+      recuring_data: $scope.eventData.recuringInterval,
       date: $scope.eventData.creationEventDate
-    }
+    };
+
+    console.log(eventPayload);
 
     this.$http.post('/api/events', eventPayload)
       .then(function(res) {
         if (res.status === 201) {
           $state.go('checkout');
         } else {
-          console.log('Error');
+          console.log('Error' + res.statusText);
         }
       });
   }

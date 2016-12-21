@@ -154,11 +154,7 @@
                   <option value="45" data-job="10" >Special Community Patrol</option>
                   <option value="50" data-job="11" >Special Community Patrol</option>
                   <option value="60" data-job="13" >Special Community Patrol</option>
-
-
-
                 </select>
-
               </div>
             </div>
 
@@ -178,17 +174,17 @@
               <div class="col-sm-10 col-md-offset-2">
                 <div class="col-sm-3">
                   <label class="radio-inline">
-                    <input type="radio" selected name="jobRecuring" ng-model="eventData.isRecuring" id="inlineRadio1" value="no" checked="checked"> One-off Job
+                    <input type="radio" selected name="jobRecuring" ng-model="eventData.isRecuring" id="inlineRadio1" value="0" checked="checked"> One-off Job
                   </label>
                 </div>
                 <div class="col-sm-3">
                   <label class="radio-inline">
-                    <input type="radio" name="jobRecuring" ng-model="eventData.isRecuring" id="inlineRadio2" value="yes"> Recuring Job
+                    <input type="radio" name="jobRecuring" ng-model="eventData.isRecuring" id="inlineRadio2" value="1"> Recuring Job
                   </label>
                 </div>
                 <div class="col-sm-6">
 
-                  <label for="officerName" id="officerNameLabel" class="control-label col-sm-2">Every</label>
+                  <label class="control-label col-sm-2">Every</label>
                   <div class="col-sm-10">
 
                     <select class="form-control" ng-model="eventData.recuringInterval" name="recuringInterval">
