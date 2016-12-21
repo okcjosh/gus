@@ -110,7 +110,7 @@ export class DashboardComponent {
         } );
         table.on('select', function (e, dt, type, indexes) {
           if (type === 'row') {
-            var data = table.rows(indexes).data().pluck('id');
+            let data = table.rows(indexes).data().pluck('id');
             console.log('XXX');
           }
         });
