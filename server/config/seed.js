@@ -150,72 +150,72 @@ User.sync()
         console.log('finished populating USERS');
       });
   });
-
-Event.sync()
-  .then(() => Event.destroy({where: {}}))
-  .then(() => {
-    Event.bulkCreate([{
-      eventTitle: 'Football A3',
-      date: '10/31/2016',
-      location_desc: 'Cowboys Stadium',
-      address: '123 Go Fuck Yourself Way',
-      job_type: 'balls',
-      event_type: 'one',
-      Two_Field: 'two',
-      Three_Field: 'three',
-      Four_Field: 'four',
-      Five_Field: 'five',
-      Six_Field: 'six',
-      Seven_Field: 'seven',
-      Eight_Field: 'eight',
-      Nine_Field: 'nine',
-      Ten_Field: 'ten',
-      Elevent_Field: 'eleven',
-      Twelve_Field: 'twelve',
-      Ryan_Is_A_Dick_Field: 'dick',
-    }, {
-      eventTitle: 'After Church Gangbang',
-      date: '11/31/2016',
-      location_desc: 'First GOP Baptist',
-      address: '123 Go Fuck Yourself Way',
-      job_type: 'balls',
-      event_type: 'one',
-      Two_Field: 'two',
-      Three_Field: 'three',
-      Four_Field: 'four',
-      Five_Field: 'five',
-      Six_Field: 'six',
-      Seven_Field: 'seven',
-      Eight_Field: 'eight',
-      Nine_Field: 'nine',
-      Ten_Field: 'ten',
-      Elevent_Field: 'eleven',
-      Twelve_Field: 'twelve',
-      Ryan_Is_A_Dick_Field: 'dick',
-    }, {
-      eventTitle: 'Make America Great Again Rally',
-      date: '12/31/2016',
-      location_desc: 'Satans House',
-      address: '666 LULZ Drive',
-      job_type: 'balls',
-      event_type: 'one',
-      Two_Field: 'two',
-      Three_Field: 'three',
-      Four_Field: 'four',
-      Five_Field: 'five',
-      Six_Field: 'six',
-      Seven_Field: 'seven',
-      Eight_Field: 'eight',
-      Nine_Field: 'nine',
-      Ten_Field: 'ten',
-      Elevent_Field: 'eleven',
-      Twelve_Field: 'twelve',
-      Ryan_Is_A_Dick_Field: 'dick',
-    }])
-      .then(() => {
-        console.log('finished populating EVENTS');
-      });
-  });
+//
+// Event.sync()
+//   .then(() => Event.destroy({where: {}}))
+//   .then(() => {
+//     Event.bulkCreate([{
+//       eventTitle: 'Football A3',
+//       date: '10/31/2016',
+//       location_desc: 'Cowboys Stadium',
+//       address: '123 Go Fuck Yourself Way',
+//       job_type: 'balls',
+//       event_type: 'one',
+//       Two_Field: 'two',
+//       Three_Field: 'three',
+//       Four_Field: 'four',
+//       Five_Field: 'five',
+//       Six_Field: 'six',
+//       Seven_Field: 'seven',
+//       Eight_Field: 'eight',
+//       Nine_Field: 'nine',
+//       Ten_Field: 'ten',
+//       Elevent_Field: 'eleven',
+//       Twelve_Field: 'twelve',
+//       Ryan_Is_A_Dick_Field: 'dick',
+//     }, {
+//       eventTitle: 'After Church Gangbang',
+//       date: '11/31/2016',
+//       location_desc: 'First GOP Baptist',
+//       address: '123 Go Fuck Yourself Way',
+//       job_type: 'balls',
+//       event_type: 'one',
+//       Two_Field: 'two',
+//       Three_Field: 'three',
+//       Four_Field: 'four',
+//       Five_Field: 'five',
+//       Six_Field: 'six',
+//       Seven_Field: 'seven',
+//       Eight_Field: 'eight',
+//       Nine_Field: 'nine',
+//       Ten_Field: 'ten',
+//       Elevent_Field: 'eleven',
+//       Twelve_Field: 'twelve',
+//       Ryan_Is_A_Dick_Field: 'dick',
+//     }, {
+//       eventTitle: 'Make America Great Again Rally',
+//       date: '12/31/2016',
+//       location_desc: 'Satans House',
+//       address: '666 LULZ Drive',
+//       job_type: 'balls',
+//       event_type: 'one',
+//       Two_Field: 'two',
+//       Three_Field: 'three',
+//       Four_Field: 'four',
+//       Five_Field: 'five',
+//       Six_Field: 'six',
+//       Seven_Field: 'seven',
+//       Eight_Field: 'eight',
+//       Nine_Field: 'nine',
+//       Ten_Field: 'ten',
+//       Elevent_Field: 'eleven',
+//       Twelve_Field: 'twelve',
+//       Ryan_Is_A_Dick_Field: 'dick',
+//     }])
+//       .then(() => {
+//         console.log('finished populating EVENTS');
+//       });
+//   });
 
 
 // DefDeptPreference.sync()

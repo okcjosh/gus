@@ -3,24 +3,21 @@ const angular = require('angular');
 
 const uiRouter = require('angular-ui-router');
 const jquery = require('jquery');
-const fastclick = require('fastclick');
-const jszip = require('jszip');
-// const pdfmake = require('pdfmake');
 import routes from './dashboard.routes';
 
 let $ = require( 'jquery' );
-require( 'datatables.net' );
-require( 'datatables.net-buttons');
-//require( 'datatables.net-buttons-bs')(window, $);
+// require( 'datatables.net' );
+// require( 'datatables.net-buttons');
+// require( 'datatables.net-buttons-bs')(window, $);
 require( 'datatables.net-bs');
-require( 'datatables.net-buttons-bs');
-require( 'datatables.net-fixedheader');
+// require( 'datatables.net-buttons-bs');
+// require( 'datatables.net-fixedheader');
 // require( 'datatables.net-fixedheader-bs');
-require( 'datatables.net-keytable');
-require( 'datatables.net-responsive');
-require( 'datatables.net-responsive-bs');
-require( 'datatables.net-select');
-require( 'datatables.net-scroller');
+// require( 'datatables.net-keytable');
+// require( 'datatables.net-responsive');
+// require( 'datatables.net-responsive-bs');
+// require( 'datatables.net-select');
+// require( 'datatables.net-scroller');
 // require( 'datatables.net-scroller-bs');
 
 export class DashboardComponent {
@@ -98,14 +95,14 @@ export class DashboardComponent {
         //alert(this.dataSet[0].name);
         let table =  $('#events').DataTable( {
           data: this.dataSet,
-          //columnDefs: [{ orderable: false, className: 'select-checkbox', targets: 0 }],
+          columnDefs: [{ orderable: false, className: 'select-checkbox', targets: 0 }],
           select: { style: 'multi'},
          columns: [
-            { data: "eventTitle", title: "Event" },
-            { data: "date", title: "Date"},
-            { data: "location_desc", title: "Location" },
+            { data: "venue", title: "Venue" },
             { data: "address", title: "Location" },
-            { data: "job_type", title: "Event Type" },
+            { data: "phone_number", title: "Phone Number" },
+            { data: "point_of_contact", title: "POC" },
+
             // { data: "status", title: "Status" },
             // { data: "event_type", title: "Event Type" }
           ]
