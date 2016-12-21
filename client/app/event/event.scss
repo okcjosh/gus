@@ -3,30 +3,30 @@
   font-family: 'Muli';
   font-style: normal;
   font-weight: 300;
-  src: local('Muli Light'), local('Muli-Light'), url("//assets/fonts/muli/Muli-Light.woff") format('woff');
+  src: local('Muli Light');
+  src: local("//assets/fonts/muli/Muli-Light.woff");
 }
 @font-face {
   font-family: 'Muli';
   font-style: normal;
   font-weight: 400;
-  src: local('Muli Regular'), local('Muli-Regular'), url("//assets/fonts/Muli-Regular.woff") format('woff');
+  src: local('Muli Regular');
+  src: local("//assets/fonts/Muli-Regular.woff");
 }
 @font-face {
   font-family: 'Muli';
   font-style: italic;
   font-weight: 300;
-  src: local('Muli Light Italic'), local('Muli-LightItalic'),
-    url("//assets/fonts/muli/Muli-LightItalic.woff") format('woff');
+  src: local('Muli Light Italic');
+  src: local("//assets/fonts/muli/Muli-LightItalic.woff");
 }
 
 @font-face {
   font-family: 'Muli';
   font-style: italic;
   font-weight: 400;
-  src:
-    local('Muli Italic'),
-    local('Muli-Italic'),
-    url("//assets/fonts/muli/Muli-Italic.woff") format('woff');
+  src: local('Muli Italic');
+  src: local("//assets/fonts/muli/Muli-Italic.woff");
 }
 
 * {

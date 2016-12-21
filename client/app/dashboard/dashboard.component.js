@@ -6,19 +6,19 @@ const jquery = require('jquery');
 import routes from './dashboard.routes';
 
 let $ = require( 'jquery' );
-// require( 'datatables.net' );
-// require( 'datatables.net-buttons');
-// require( 'datatables.net-buttons-bs')(window, $);
-require( 'datatables.net-bs');
-// require( 'datatables.net-buttons-bs');
-// require( 'datatables.net-fixedheader');
-// require( 'datatables.net-fixedheader-bs');
-// require( 'datatables.net-keytable');
-// require( 'datatables.net-responsive');
-// require( 'datatables.net-responsive-bs');
-// require( 'datatables.net-select');
-// require( 'datatables.net-scroller');
-// require( 'datatables.net-scroller-bs');
+//require( 'datatables.net' );
+//require( 'datatables.net-buttons');
+//require( 'datatables.net-buttons-bs');
+//require( 'datatables.net-bs');
+//require( 'datatables.net-buttons-bs');
+//require( 'datatables.net-fixedheader');
+//require( 'datatables.net-fixedheader-bs');
+//require( 'datatables.net-keytable');
+//require( 'datatables.net-responsive');
+//require( 'datatables.net-responsive-bs');
+require( 'datatables.net-select');
+//require( 'datatables.net-scroller');
+//require( 'datatables.net-scroller-bs');
 
 export class DashboardComponent {
   /*@ngInject*/
@@ -89,14 +89,15 @@ export class DashboardComponent {
     //     } );
     //     table.buttons().container().appendTo( $('#buttons') );
     //   });
+
     this.$http.get('/api/events')
       .then(response => {
         this.dataSet = response.data;
         //alert(this.dataSet[0].name);
         let table =  $('#events').DataTable( {
+          select: true,
           data: this.dataSet,
-          columnDefs: [{ orderable: false, className: 'select-checkbox', targets: 0 }],
-          select: { style: 'multi'},
+          //columnDefs: [{ orderable: false, className: 'select-checkbox', targets: 0 }],
          columns: [
             { data: "venue", title: "Venue" },
             { data: "address", title: "Location" },
@@ -107,9 +108,15 @@ export class DashboardComponent {
             // { data: "event_type", title: "Event Type" }
           ]
         } );
-        table.buttons().container().appendTo( $('#buttons') );
+        table.on('select', function (e, dt, type, indexes) {
+          if (type === 'row') {
+            var data = table.rows(indexes).data().pluck('id');
+            console.log('XXX');
+          }
+        });
+        //table.buttons().container().appendTo( $('#buttons') );
       });
-  }
+   }
 }
 
 export default angular.module('gusApp.dashboard', [uiRouter])

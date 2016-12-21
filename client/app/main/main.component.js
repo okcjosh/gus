@@ -38,7 +38,14 @@ export class MainController {
     this.$http.delete(`/api/things/${thing._id}`);
   }
 }
-console.log('test');
+console.log('So hey, we brought our drum and this is how we dance');
+console.log('No mistakin, we make our breaks, if you dont like our 808s');
+console.log('Then leave us alone, cause we dont need your policies');
+console.log('We have no apologies for being');
+console.log('Find me where the wild things are');
+
+
+
 export default angular.module('es4App.main', [uiRouter])
   .config(routing)
   .component('main', {
