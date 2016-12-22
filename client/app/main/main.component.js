@@ -38,8 +38,12 @@ export class MainController {
     this.$http.delete(`/api/things/${thing._id}`);
   }
 }
-console.log('So hey, we brought our drum and this is how we dance');
-console.log('No mistakin, we make our breaks, if you dont like our 808s');
+console.log('So hey, HEY!');
+console.log('      we brought our drum');
+console.log('           and this is how we dance');
+console.log('              No mistakin,');
+console.log('                 we make our breaks');
+console.log('                    if you dont like our 808s');
 console.log('Then leave us alone, cause we dont need your policies');
 console.log('We have no apologies for being');
 console.log('Find me where the wild things are');
