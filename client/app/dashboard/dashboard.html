@@ -17,161 +17,17 @@
     <div class="col-md-4">
       <table id="events" class="table table-striped table-bordered" cellspacing="0" width="80%"></table>
       <div class="row">
-        <div class="col-md-6">
-          <a id="modal-118275" href="#modal-container-118275" role="button" class="btn btn-success" data-toggle="modal">APPROVE</a>
-          <div class="modal fade" id="modal-container-118275" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    ×
-                  </button>
-                  <h4 class="modal-title" id="myModalLabel">
-                    Modal title
-                  </h4>
-                </div>
-                <div class="modal-body">
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">
-                    Close
-                  </button>
-                  <button type="button" class="btn btn-primary">
-                    Save changes
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <a id="modal-349281" href="#modal-container-349281" role="button" class="btn btn-danger" data-toggle="modal">REJECT</a>
-          <div class="modal fade" id="modal-container-349281" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    ×
-                  </button>
-                  <h4 class="modal-title" id="myModalLabel">
-                    Modal title
-                  </h4>
-                </div>
-                <div class="modal-body">
-                  ...
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">
-                    Close
-                  </button>
-                  <button type="button" class="btn btn-primary">
-                    Save changes
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
+
       </div>
     </div>
-    <div class="col-md-8">
-      <!--<table class="table table-condensed table-hover table-striped">-->
-        <!--<thead>-->
-        <!--<tr>-->
-          <!--<th>-->
-            <!--#-->
-          <!--</th>-->
-          <!--<th>-->
-            <!--Product-->
-          <!--</th>-->
-          <!--<th>-->
-            <!--Payment Taken-->
-          <!--</th>-->
-          <!--<th>-->
-            <!--Status-->
-          <!--</th>-->
-        <!--</tr>-->
-        <!--</thead>-->
-        <!--<tbody>-->
-        <!--<tr>-->
-          <!--<td>-->
-            <!--1-->
-          <!--</td>-->
-          <!--<td>-->
-            <!--TB - Monthly-->
-          <!--</td>-->
-          <!--<td>-->
-            <!--01/04/2012-->
-          <!--</td>-->
-          <!--<td>-->
-            <!--Default-->
-          <!--</td>-->
-        <!--</tr>-->
-        <!--<tr class="active">-->
-          <!--<td>-->
-            <!--1-->
-          <!--</td>-->
-          <!--<td>-->
-            <!--TB - Monthly-->
-          <!--</td>-->
-          <!--<td>-->
-            <!--01/04/2012-->
-          <!--</td>-->
-          <!--<td>-->
-            <!--Approved-->
-          <!--</td>-->
-        <!--</tr>-->
-        <!--<tr class="success">-->
-          <!--<td>-->
-            <!--2-->
-          <!--</td>-->
-          <!--<td>-->
-            <!--TB - Monthly-->
-          <!--</td>-->
-          <!--<td>-->
-            <!--02/04/2012-->
-          <!--</td>-->
-          <!--<td>-->
-            <!--Declined-->
-          <!--</td>-->
-        <!--</tr>-->
-        <!--<tr class="warning">-->
-          <!--<td>-->
-            <!--3-->
-          <!--</td>-->
-          <!--<td>-->
-            <!--TB - Monthly-->
-          <!--</td>-->
-          <!--<td>-->
-            <!--03/04/2012-->
-          <!--</td>-->
-          <!--<td>-->
-            <!--Pending-->
-          <!--</td>-->
-        <!--</tr>-->
-        <!--<tr class="danger">-->
-          <!--<td>-->
-            <!--4-->
-          <!--</td>-->
-          <!--<td>-->
-            <!--TB - Monthly-->
-          <!--</td>-->
-          <!--<td>-->
-            <!--04/04/2012-->
-          <!--</td>-->
-          <!--<td>-->
-            <!--Call in to confirm-->
-          <!--</td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
-      <!--</table>-->
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">
             Panel title
           </h3>
         </div>
-        <div class="panel-body">  
+        <div class="panel-body">
           <div ng-if="selectedRow">
             Venue: {{ selectedRow.venue}}
             Address: {{selectedRow.address}} <br/>
@@ -182,12 +38,144 @@
             Prefered Officer Name: {{selectedRow.prefered_officer_name}} <br />
             Recuring: {{selectedRow.is_recuring}} <br />
             Recuring Data: {{selectedRow.recuring_data}} <br />
+            <div class="col-md-6">
+              <a id="modal-118275" href="#modal-container-118275" role="button" class="btn btn-success" data-toggle="modal">APPROVE</a>
+              <div class="modal fade" id="modal-container-118275" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                      </button>
+                      <h4 class="modal-title" id="myModalLabel">
+                        Modal title
+                      </h4>
+                    </div>
+                    <div class="modal-body">
+                      <!-- Markup for lists inside the dropzone. It's inside a seperate template
+         because it will be used recursively. The dnd-list directive enables
+         to drop elements into the referenced array. The dnd-draggable directive
+         makes an element draggable and will transfer the object that was
+         assigned to it. If an element was dragged away, you have to remove
+         it from the original list yourself using the dnd-moved attribute -->
+                      <script type="text/ng-template" id="list.html">
+                        <ul dnd-list dnd-drop="onDrop(list, item, index)">
+                          <li ng-repeat="item in list.items"
+                              data-leo-id="{{item.leo_id}}"
+                              dnd-draggable="getSelectedItemsIncluding(list, item)"
+                              dnd-dragstart="onDragstart(list, event)"
+                              dnd-moved="onMoved(list)"
+                              dnd-dragend="list.dragging = false"
+                              dnd-selected="item.selected = !item.selected"
+                              ng-class="{'selected': item.selected}"
+                              ng-hide="list.dragging && item.selected"
+                          >
+                            {{item.name}}
+                          </li>
+                        </ul>
+                      </script>
+
+                      <!-- This template is responsible for rendering a container element. It uses
+                           the above list template to render each container column -->
+                      <script type="text/ng-template" id="container.html">
+                        <div class="container-element box box-blue">
+                          <h3>Container {{item.id}}</h3>
+                          <div class="column" ng-repeat="list in item.columns" ng-include="'list.html'"></div>
+                          <div class="clearfix"></div>
+                        </div>
+                      </script>
+
+                      <!-- Template for a normal list item -->
+                      <script type="text/ng-template" id="item.html">
+                        <div class="item">Item {{item.id}}</div>
+                      </script>
+
+                      <!-- Main area with dropzones and source code -->
+                      <div class="col-md-12 multiDemo">
+                        <div class="row">
+
+                          <div ng-repeat="list in leosList" class="col-md-3" id="leo-list">
+                            <div class="dropzone box box-yellow">
+                              <!-- The dropzone also uses the list template -->
+                              <h5>{{ list.listName }}</h5>
+                              <div ng-include="'list.html'"></div>
+                            </div>
+                          </div>
+
+
+                          <div ng-repeat="list in jobsList" class="col-md-2">
+                            <div class="dropzone box box-yellow">
+                              <!-- The dropzone also uses the list template -->
+                              <h5>{{ list.listName }}</h5>
+                              <div ng-include="'list.html'"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <ul data-as-sortable="board.dragControlListeners" data-ng-model="items">
+                        <li data-ng-repeat="item in items" data-as-sortable-item>
+                          <div data-as-sortable-item-handle></div>
+                        </li>
+                      </ul>
+
+
+
+                      <ul data-as-sortable="board.dragControlListeners" data-ng-model="items">
+                        <li data-ng-repeat="item in items" data-as-sortable-item>
+                          <div data-as-sortable-item-handle></div>
+                        </li>
+                      </ul>
+
+                      <!-- !!!!!! Remove btn-block class from button to make button come back to normal width  -->
+                      <button class="btn btn-primary btn-lg btn-block pull-right save-drag-button" ng-click="saveDrags()">Save </button>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                      </button>
+                      <button type="button" class="btn btn-primary">
+                        Save changes
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <a id="modal-349281" href="#modal-container-349281" role="button" class="btn btn-danger" data-toggle="modal">REJECT</a>
+              <div class="modal fade" id="modal-container-349281" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                      </button>
+                      <h4 class="modal-title" id="myModalLabel">
+                        Modal title
+                      </h4>
+                    </div>
+                    <div class="modal-body">
+                      ...
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                      </button>
+                      <button type="button" class="btn btn-primary">
+                        Save changes
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="panel-footer">
-          Panel footer
         </div>
       </div>
     </div>
   </div>
-</div>
