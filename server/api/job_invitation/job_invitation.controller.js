@@ -66,10 +66,10 @@ function handleError(res, statusCode) {
 // Gets a list of JobInvitations
 export function index(req, res) {
   var jobs;
-  if (req.query.event_id) {
+  if (req.query.party_id) {
     jobs = JobInvitation.findAll({
       where: {
-        event_id: req.query.event_id
+        party_id: req.query.party_id
       }
     });
   } else {

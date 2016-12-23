@@ -99,13 +99,26 @@ export class DashboardComponent {
       dragging: false
     }, {
       round: 3,
-      listName: 'Round 2',
+      listName: 'Round 3',
       items: [],
       dragging: false
     }];
 
-    invitations.forEach(invite => {
-      $scope.invitesList[parseInt(invite.event_id)]
+    let leoAppendedInvites = invitations.map(invite => {
+      var leoIndex = $scope.leosList[0].items.findIndex(leo => {
+        return leo.leo_id == invite.leo_id
+      });
+      if (leoIndex >= 0) {
+        let leo = $scope.leosList[0].items[leoIndex];
+
+        invite.name = leo.name;
+        $scope.leosList[0].items.splice(leoIndex, 1);
+        return invite;
+      }
+    });
+
+    leoAppendedInvites.forEach(invite => {
+      $scope.invitesList[parseInt(invite.pick) - 1]
         .items.push(invite);
     });
 
@@ -123,27 +136,27 @@ export class DashboardComponent {
     var invites = [];
     $scope.invitesList.forEach(function(invite) {
 
-      let draggedLeos = job.items;
+      let draggedLeos = invite.items;
       draggedLeos.forEach(function(leo) {
 
         let inviteData = {
-          event_id: $scope.selectedRow.id,
-          round: invite.round,
+          party_id: $scope.selectedRow.event_id,
+          pick: invite.round,
           leo_id: leo.leo_id,
           expires: 0
         };
 
         invites.push(inviteData);
-
-        // $http.post('/api/invitations', inviteData)
-        //   .then(function(res) {
-        //     if (res.status === 201) {
-        //       // Invitation successfully created!!!
-        //       // Decide what you want to do after creating invitation.
-        //     }
-        //   });
       });
     });
+
+    $http.post('/api/invitations', invites)
+      .then(function(res) {
+        if (res.status === 201) {
+          // Invitation successfully created!!!
+          // Decide what you want to do after creating invitation.
+        }
+      });
   }
 
   $onInit() {
@@ -244,11 +257,10 @@ export class DashboardComponent {
             //  the first item on the next line
             let data = table.rows(indexes).data()[0];
             $scope.selectedRow = data;
-            console.log(data);
 
             $http.get('/api/invitations', {
               params: {
-                event_id: $scope.selectedRow.event_id
+                party_id: $scope.selectedRow.event_id
               }
             })
               .then(res => {

@@ -55,23 +55,18 @@
             <div class="col-md-6" id="approve-modal">
               <a id="modal-118275" href="#modal-container-118275" role="button" class="btn btn-success btn-block" data-toggle="modal">APPROVE</a>
               <div class="modal fade" id="modal-container-118275" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        ×
+                        &times;
                       </button>
                       <h4 class="modal-title" id="myModalLabel">
                         Modal title
                       </h4>
                     </div>
-                    <div class="modal-body">
-                      <!-- Markup for lists inside the dropzone. It's inside a seperate template
-                       because it will be used recursively. The dnd-list directive enables
-                       to drop elements into the referenced array. The dnd-draggable directive
-                       makes an element draggable and will transfer the object that was
-                       assigned to it. If an element was dragged away, you have to remove
-                       it from the original list yourself using the dnd-moved attribute -->
+                    <div class="modal-body" style="overflow: auto;">
+
                       <script type="text/ng-template" id="list.html">
                         <ul dnd-list dnd-drop="onDrop(list, item, index)">
                           <li ng-repeat="item in list.items"
@@ -89,8 +84,6 @@
                         </ul>
                       </script>
 
-                      <!-- This template is responsible for rendering a container element. It uses
-                           the above list template to render each container column -->
                       <script type="text/ng-template" id="container.html">
                         <div class="container-element box box-blue">
                           <h3>Container {{item.id}}</h3>
@@ -116,8 +109,7 @@
                             </div>
                           </div>
 
-
-                          <div ng-repeat="list in invitesList" class="col-md-2">
+                          <div ng-repeat="list in invitesList" class="col-md-3">
                             <div class="dropzone box box-yellow">
                               <!-- The dropzone also uses the list template -->
                               <h5>{{ list.listName }}</h5>
@@ -134,23 +126,18 @@
                         </li>
                       </ul>
 
-
-
                       <ul data-as-sortable="board.dragControlListeners" data-ng-model="items">
                         <li data-ng-repeat="item in items" data-as-sortable-item>
                           <div data-as-sortable-item-handle></div>
                         </li>
                       </ul>
 
-                      <!-- !!!!!! Remove btn-block class from button to make button come back to normal width  -->
-                      <button class="btn btn-primary btn-lg btn-block pull-right save-drag-button" ng-click="saveDrags()">Save </button>
-
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">
                         Close
                       </button>
-                      <button type="button" class="btn btn-primary">
+                      <button type="button" class="btn btn-primary" ng-click="saveDrags()">
                         Save changes
                       </button>
                     </div>
@@ -161,7 +148,7 @@
             <div class="col-md-6" id="reject-modal">
               <a id="modal-349281" href="#modal-container-349281" role="button" class="btn btn-danger btn-block" data-toggle="modal">REJECT</a>
               <div class="modal fade" id="modal-container-349281" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">

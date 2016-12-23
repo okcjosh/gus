@@ -90,7 +90,7 @@ export class EventComponent {
     this.$scope.progress = 1;
     this.$scope.nextStep = function() {
       // Check for validity of filled data
-      if (!_self.checkStepValid($scope.progress)) {
+      if (_self.checkStepValid($scope.progress)) {
         if ($scope.progress == 3) {
           console.log($scope.eventData);
           _self.postEvent($state, $scope); // If data was submitted successfully User will be redirected
