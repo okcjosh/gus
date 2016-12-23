@@ -4,25 +4,6 @@ const uiRouter = require('angular-ui-router');
 import routing from './event-details.routes';
 export class EventDetailsComponent {
   awesomeEvents = [];
-  // eventTitle = '';
-  // date = '';
-  // Location_Desc = '';
-  // Address = '';
-  // Job_Type = '';
-  // event_type = '';
-  // crowd_security = '';
-  // special_patrols = '';
-  // traffic_direction = '';
-  // escorts = '';
-  // asset_protection = '';
-  // officer_needed = '';
-  // hours_expected = '';
-  // crowd_size = '';
-  // officer_attire = '';
-  // officer_skillset = '';
-  // language = '';
-  // operational_details = '';
-
 
   /*@ngInject*/
   constructor($http, $scope, socket, $state) {
@@ -31,170 +12,190 @@ export class EventDetailsComponent {
     this.$state = $state;
     this.$scope = $scope;
 
+    this.init($scope);
+
+    $scope.saveDrags = this.saveDrags.bind(this, $scope, $http);
+
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('event');
     });
-    // $scope.$on('FormSubmit', function () {
-    //   if(event-form.$valid) {
-    //     $state.go('/checkout');
-    //   }
-    // })
   }
 
-  checkStepValid(step) {
-    var $s = this.$scope;;
-    switch (step) {
-      case 1:
-        if (
-          $s.newEventForm.nameOfVenue.$valid &&
-          $s.newEventForm.address.$valid &&
-          $s.newEventForm.phoneNumber.$valid &&
-          $s.newEventForm.poContact.$valid ) {
-          return true;
-        } else {
-          return false;
-        }
-        break;
-
-      case 2:
-        $s.eventData.creationEventDate = document.getElementById("creationEventDateField").value; // Because the datetimepicker plugin is jquery not angular, so selecting date doesn't set to a model, so we have to get it manually
-        if (
-          $s.newEventForm.jobType.$valid &&
-          $s.newEventForm.jobSpecs.$valid &&
-          $s.newEventForm.officerName.$valid &&
-          $s.newEventForm.jobRecuring.$valid ) {
-          return true;
-        } else {
-          return false;
-        }
-        break;
-
-      case 3:
-        return true; // No fields yet for third step
-        break;
-
-      default:
-    }
+  init($scope) {
+    this.$http.get('/api/leos')
+      .then(response => {
+        $scope.leos = response.data;
+      });
   }
 
   $onInit() {
-    var $scope = this.$scope;
-    var $state = this.$state;
-    var _self = this;
-    this.$http.get('/api/events')
-      .then(response => {
-        this.awesomeEvents = response.data;
-        this.socket.syncUpdates('event', this.awesomeEvents);
+    let $scope = this.$scope,
+      event_id = this.$state.params.event_id;
+      
+    this.event_id = event_id;
+
+    this.$http.get('/api/events/' + event_id)
+      .then(function(res) {
+        if (res.status = 200) {
+          $scope.event = res.data;
+        }
       });
 
-    this.$scope.progress = 1;
-    this.$scope.nextStep = function() {
-      // Check for validity of filled data
-      if (_self.checkStepValid($scope.progress)) {
-        if ($scope.progress == 3) {
-          console.log($scope.eventData);
-          _self.postEvent($state, $scope); // If data was submitted successfully User will be redirected
-        } else {
-          $scope.progress++;
+    this.$http.get('/api/users/me')
+      .then(function(res) {
+        if (res.status = 200) {
+          $scope.user = res.data;
+          console.log(res.data)
         }
-      } else {
-        console.log('Not Valid', $scope.newEventForm);
+      });
+
+    this.$http.get('/api/invitations', {
+      params: {
+        party_id: event_id
       }
-    }
-    this.$scope.prevStep = function() {
-      $scope.progress--;
-    }
-
-    this.$scope.submitForm = function(e) {
-      e.preventDefault();
-    }
-
-    this.$scope.eventData = {};
-
-    this.initializeJQueryPlugins();
-  }
-
-  initializeJQueryPlugins() {
-    $('.selectpicker').selectpicker({
-      style: 'btn-default',
-      size: 4
-    });
-
-    var str;
-
-    // $('input[name="jobRecuring"]').change(function () {
-    //   //$('.selectpicker').selectpicker('deselectAll');
-    //   $("#jobSpecs option").each(function() {	$( this ).hide();});
-    //   $("#jobType option:selected").each(function () {
-    //     str = $(this).val();
-    //   });
-    //   $("#jobSpecs option[data-job='" + str + "']").each(function() {
-    //     $( this ).show();
-    //   });
-    //   $('.selectpicker').selectpicker('render');
-    //   $('.selectpicker').selectpicker('refresh');
-    //
-    // });
-
-    $('#creationEventDate').datetimepicker({
-      format: "DD MMMM YYYY"
-    });
-
-
-    /** ******************************
-     * Required Fields
-     ****************************** **/
-    $("form :input[required='required']").blur(function() {
-      if (!$(this).val()) {
-        $(this).addClass('hasError');
-      } else {
-        if ($(this).hasClass('hasError')) {
-          $(this).removeClass('hasError');
-        }
-      }
-    });
-    $("form :input[required='required']").change(function() {
-      if ($(this).hasClass('hasError')) {
-        $(this).removeClass('hasError');
-      }
+    }).then(res => {
+      this.initializeDragDrop($scope, res.data);
     });
   }
 
-  postEvent($state, $scope) {
-    var eventPayload = {
-      venue: $scope.eventData.nameOfVenue,
-      address: $scope.eventData.location.formatted_address,
-      phone_number: $scope.eventData.phoneNumber,
-      point_of_contact: $scope.eventData.poContact,
-      job_type: $scope.eventData.jobType,
-      job_type_specs: $scope.eventData.jobSpecs.join(","),
-      prefered_officer_name: $scope.eventData.officerName.join(","),
-      is_recuring: $scope.eventData.isRecuring,
-      recuring_data: $scope.eventData.recuringInterval,
-      date: $scope.eventData.creationEventDate
+  initializeDragDrop($scope, invitations) {
+    /**
+     * dnd-dragging determines what data gets serialized and send to the receiver
+     * of the drop. While we usually just send a single object, we send the array
+     * of all selected items here.
+     */
+    $scope.getSelectedItemsIncluding = function(list, item) {
+      item.selected = true;
+      return list.items.filter(function(item) { return item.selected; });
     };
 
-    console.log(eventPayload);
+    /**
+     * We set the list into dragging state, meaning the items that are being
+     * dragged are hidden. We also use the HTML5 API directly to set a custom
+     * image, since otherwise only the one item that the user actually dragged
+     * would be shown as drag image.
+     */
+    $scope.onDragstart = function(list, event) {
+      list.dragging = true;
+      if (event.dataTransfer.setDragImage) {
+        let img = new Image();
+        img.src = 'framework/vendor/ic_content_copy_black_24dp_2x.png';
+        event.dataTransfer.setDragImage(img, 0, 0);
+      }
+    };
 
-    this.$http.post('/api/events', eventPayload)
+    /**
+     * In the dnd-drop callback, we now have to handle the data array that we
+     * sent above. We handle the insertion into the list ourselves. By returning
+     * true, the dnd-list directive won't do the insertion itself.
+     */
+    $scope.onDrop = function(list, items, index) {
+      angular.forEach(items, function(item) { item.selected = false; });
+      list.items = list.items.slice(0, index)
+        .concat(items)
+        .concat(list.items.slice(index));
+      return true;
+    };
+
+    /**
+     * Last but not least, we have to remove the previously dragged items in the
+     * dnd-moved callback.
+     */
+    $scope.onMoved = function(list) {
+      list.items = list.items.filter(function(item) { return !item.selected; });
+    };
+
+    // Generate the initial model
+    $scope.leosList = [{
+      listName: 'Available Leos',
+      items: $scope.leos.slice(0),
+      dragging: false
+    }];
+
+    $scope.invitesList = [{
+      round: 1,
+      listName: 'Round 1',
+      items: [],
+      dragging: false
+    }, {
+      round: 2,
+      listName: 'Round 2',
+      items: [],
+      dragging: false
+    }, {
+      round: 3,
+      listName: 'Round 3',
+      items: [],
+      dragging: false
+    }];
+    let leos = $scope.leos.slice(0);
+    let remainingLeos = $scope.leos.slice(0);
+
+    let leoAppendedInvites = invitations.map(invite => {
+      let leoIndex = leos.findIndex(leo => {
+        return leo.leo_id == invite.leo_id
+      });
+      if (leoIndex >= 0) {
+        let leo = leos[leoIndex];
+        invite.name = leo.name;
+        remainingLeos.splice(leoIndex, 1);
+
+        return invite;
+      }
+    });
+
+    $scope.leosList[0].items = remainingLeos;
+
+    leoAppendedInvites.forEach(invite => {
+      $scope.invitesList[parseInt(invite.pick) - 1]
+        .items.push(invite);
+    });
+
+    // $scope.jobsList = invitations.map((invitations, index) => {
+    //   return {
+    //     round: index + 1,
+    //     listName: 'Round ' + index +1,
+    //     items: [],
+    //     dragging: false
+    //   };
+    // });
+  }
+
+  saveDrags($scope, $http) {
+    let invites = [],
+      _self = this;
+
+    $scope.invitesList.forEach(function(invite) {
+
+      let draggedLeos = invite.items;
+      draggedLeos.forEach(function(leo) {
+
+        let inviteData = {
+          party_id: _self.event_id,
+          pick: invite.round,
+          leo_id: leo.leo_id,
+          expires: 0
+        };
+
+        invites.push(inviteData);
+      });
+    });
+
+    $http.post('/api/invitations', invites)
       .then(function(res) {
         if (res.status === 201) {
-          $state.go('checkout');
-        } else {
-          console.log('Error' + res.statusText);
+          // Invitation successfully created!!!
+          // Decide what you want to do after creating invitation.
         }
       });
   }
 
-  deleteEvent(event) {
-    this.$http.delete(`/api/events/${event._id}`);
-  }
 }
 
 
 export default angular.module('es42App.event-details', [uiRouter])
   .config(routing)
-  .component('event-details', {
+  .component('eventDetails', {
     template: require('./event-details.html'),
     controller: EventDetailsComponent,
   })
