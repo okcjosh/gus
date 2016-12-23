@@ -17,13 +17,13 @@ export default function(sequelize, DataTypes) {
     //   }
     // },
 
-    event_id: {
+    party_id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      references: {
-        model: 'event',
-        key: 'event_id'
-      }
+      // references: {
+      //   model: 'event',
+      //   key: 'event_id'
+      // }
     },
     leo_id: {
       type: DataTypes.INTEGER(11),
@@ -38,7 +38,7 @@ export default function(sequelize, DataTypes) {
       allowNull: false
     },
 
-    round: {
+    pick: {
       type: DataTypes.STRING(11),
       allowNull: false,
     },
