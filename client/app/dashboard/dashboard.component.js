@@ -23,9 +23,11 @@ require( 'datatables.net-scroller');
 export class DashboardComponent {
   /*@ngInject*/
 
-  constructor($http, $scope, socket, $state) {
+  constructor($http, $scope, socket, $state, $interpolate) {
     this.$http = $http;
     this.$scope = $scope;
+    this.$scope.$state = $state;
+    this.$interpolate = $interpolate;
     this.init($scope);
     $scope.saveDrags = this.saveDrags.bind(this, $scope, $http);
   }
@@ -235,14 +237,27 @@ export class DashboardComponent {
 
     this.$http.get('/api/events')
       .then(response => {
-        this.dataSet = response.data;
+        this.dataSet = response.data.map(function(event) {
+          let link = `
+            <a
+              href="{{ $state.href('event-details', { event_id: ${event.event_id} }) }}"
+              data-toggle="tooltip"
+              data-placement="right"
+              title=""
+              data-original-title="View Entry">
+                ${event.venue}
+            </a>`;
+          event.venueLink = _self.$interpolate(link)(_self.$scope);
+          return event;
+        });
 
         let table = $('#events').DataTable({
           select: true,
           data: this.dataSet,
           columns: [
             {data: "event_id", title: "ID", visible: false},
-            {data: "venue", title: "Venue"},
+            {data: "venue", title: "Venue Data", visible: false},
+            {data: "venueLink", title: "Venue"},
             {data: "address", title: "Location"},
             {data: "phone_number", title: "Phone Number"},
             {data: "point_of_contact", title: "POC"},
@@ -256,6 +271,7 @@ export class DashboardComponent {
             // { data: "event_type", title: "Event Type" }
           ]
         });
+
 
 
         table.on('select', function (e, dt, type, indexes) {
