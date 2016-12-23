@@ -95,22 +95,25 @@ export function show(req, res) {
 // Creates a new JobInvitation in the DB
 export function create(req, res) {
   var createInvite, event_id;
+
   if (req.body instanceof Array) {
-    createInvite = JobInvitation.bulkCreate(req.body);
-    event_id = req.body.party_id;
-  } else {
-    createInvite = JobInvitation.create(req.body);
+    createInvite = JobInvitation.bulkCreate;
     event_id = req.body[0].party_id;
+  } else {
+    createInvite = JobInvitation.create;
+    event_id = req.body.party_id;
   }
+
   return JobInvitation.destroy({
     where: {
       party_id: event_id
     }
-  }).then(function(int) {
-    return createInvite
+  }).then(function(del) {
+    // After deleting former invitations create fresh ones
+    return createInvite.call(JobInvitation, req.body)
       .then(respondWithResult(res, 201))
       .catch(handleError(res));
-  })
+  });
 }
 
 // Upserts the given JobInvitation in the DB at the specified ID

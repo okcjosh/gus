@@ -85,7 +85,11 @@ export class DashboardComponent {
     };
 
     // Generate the initial model
-    $scope.leosList = [{ listName: 'Available Leos', items: $scope.leos, dragging: false }];
+    $scope.leosList = [{
+      listName: 'Available Leos',
+      items: $scope.leos.slice(0),
+      dragging: false
+    }];
 
     $scope.invitesList = [{
       round: 1,
@@ -103,19 +107,23 @@ export class DashboardComponent {
       items: [],
       dragging: false
     }];
+    let leos = $scope.leos.slice(0);
+    let remainingLeos = $scope.leos.slice(0);
 
     let leoAppendedInvites = invitations.map(invite => {
-      var leoIndex = $scope.leosList[0].items.findIndex(leo => {
+      let leoIndex = leos.findIndex(leo => {
         return leo.leo_id == invite.leo_id
       });
       if (leoIndex >= 0) {
-        let leo = $scope.leosList[0].items[leoIndex];
-
+        let leo = leos[leoIndex];
         invite.name = leo.name;
-        $scope.leosList[0].items.splice(leoIndex, 1);
+        remainingLeos.splice(leoIndex, 1);
+
         return invite;
       }
     });
+
+    $scope.leosList[0].items = remainingLeos;
 
     leoAppendedInvites.forEach(invite => {
       $scope.invitesList[parseInt(invite.pick) - 1]
@@ -262,13 +270,13 @@ export class DashboardComponent {
               params: {
                 party_id: $scope.selectedRow.event_id
               }
-            })
-              .then(res => {
-                _self.initializeDragDrop($scope, res.data);
-              });
+            }).then(res => {
+              _self.initializeDragDrop($scope, res.data);
+            });
+
             if (!$scope.$$phase) {
               // Update the angular $scope so changes are reflected
-              $scope.$apply();
+              $scope.$digest();
             }
           }
         });
