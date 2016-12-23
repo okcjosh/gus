@@ -14,21 +14,26 @@
 <!--</div>-->
 <div class="container-fluid">
   <div class="row">
-    <div class="container main-content">
+    <div class="container main-content" style="width: 98%">
 
       <div class="col-lg-8">
 
-        <div class="row margin-bottom-10">
-          <div class="col-md-12">
-            <h3 class="mb-20">Dashboard — All Jobs</h3>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <b>All Jobs</b>
+          </div>
+          <div class="panel-body">
+            <table id="events" class="table table-striped table-bordered table-responsive"></table>
           </div>
         </div>
-
-        <table id="events" class="table table-striped table-bordered table-responsive"></table>
         <div class="row">
         </div>
       </div>
       <div class="selected-event-details-container col-lg-4">
+        <div ng-hide="selectedRow">
+          <span class="fa fa-ban text-muted" style="font-size: 70px; width: 100%; text-align: center;"></span>
+          <b class="text-muted" style="display: block; width: 100%; text-align: center;"> No Event Selected</b>
+        </div>
         <div class="panel panel-default" ng-if="selectedRow">
           <div class="panel-heading">
             <b>Event Details</b>
