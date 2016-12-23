@@ -118,6 +118,7 @@
     "switchery": "0.0.2",
     "transitionize": "0.0.3",
     "twilio": "^2.11.1",
+    "url-loader": "^0.5.7",
     "validator": "^6.2.0"
   },
   "devDependencies": {

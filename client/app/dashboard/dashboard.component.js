@@ -6,18 +6,18 @@ const jquery = require('jquery');
 import routes from './dashboard.routes';
 
 let $ = require( 'jquery' );
-//require( 'datatables.net' );
-//require( 'datatables.net-buttons');
-//require( 'datatables.net-buttons-bs');
-//require( 'datatables.net-bs');
-//require( 'datatables.net-buttons-bs');
-//require( 'datatables.net-fixedheader');
+require( 'datatables.net' );
+require( 'datatables.net-buttons');
+require( 'datatables.net-buttons-bs');
+require( 'datatables.net-bs');
+require( 'datatables.net-buttons-bs');
+require( 'datatables.net-fixedheader');
 //require( 'datatables.net-fixedheader-bs');
-//require( 'datatables.net-keytable');
-//require( 'datatables.net-responsive');
-//require( 'datatables.net-responsive-bs');
+require( 'datatables.net-keytable');
+require( 'datatables.net-responsive');
+require( 'datatables.net-responsive-bs');
 require( 'datatables.net-select');
-//require( 'datatables.net-scroller');
+require( 'datatables.net-scroller');
 //require( 'datatables.net-scroller-bs');
 
 export class DashboardComponent {
@@ -29,21 +29,15 @@ export class DashboardComponent {
     this.init($scope);
     $scope.saveDrags = this.saveDrags.bind(this, $scope, $http);
   }
+
   init($scope) {
     this.$http.get('/api/leos')
       .then(response => {
         $scope.leos = response.data;
-
-        this.$http.get('/api/jobs')
-          .then(res => {
-            $scope.jobs = res.data;
-
-            this.initializeDragDrop($scope);
-          });
       });
   }
 
-  initializeDragDrop($scope) {
+  initializeDragDrop($scope, invitations) {
     /**
      * dnd-dragging determines what data gets serialized and send to the receiver
      * of the drop. While we usually just send a single object, we send the array
@@ -93,37 +87,69 @@ export class DashboardComponent {
     // Generate the initial model
     $scope.leosList = [{ listName: 'Available Leos', items: $scope.leos, dragging: false }];
 
-    $scope.jobsList = $scope.jobs.map(job => {
-      return { job_data: job, listName: job.location, items: [], dragging: false };
+    $scope.invitesList = [{
+      round: 1,
+      listName: 'Round 1',
+      items: [],
+      dragging: false
+    }, {
+      round: 2,
+      listName: 'Round 2',
+      items: [],
+      dragging: false
+    }, {
+      round: 3,
+      listName: 'Round 2',
+      items: [],
+      dragging: false
+    }];
+
+    invitations.forEach(invite => {
+      $scope.invitesList[parseInt(invite.event_id)]
+        .items.push(invite);
     });
+
+    // $scope.jobsList = invitations.map((invitations, index) => {
+    //   return {
+    //     round: index + 1,
+    //     listName: 'Round ' + index +1,
+    //     items: [],
+    //     dragging: false
+    //   };
+    // });
   }
 
   saveDrags($scope, $http) {
-    $scope.jobsList.forEach(function(job) {
+    var invites = [];
+    $scope.invitesList.forEach(function(invite) {
 
       let draggedLeos = job.items;
       draggedLeos.forEach(function(leo) {
 
         let inviteData = {
-          job_id: job.job_data.job_id,
+          event_id: $scope.selectedRow.id,
+          round: invite.round,
           leo_id: leo.leo_id,
-          job_invitation_status_id: 1,
           expires: 0
         };
 
-        $http.post('/api/invitations', inviteData)
-          .then(function(res) {
-            if (res.status === 201) {
-              // Invitation successfully created!!!
-              // Decide what you want to do after creating invitation.
-            }
-          });
+        invites.push(inviteData);
+
+        // $http.post('/api/invitations', inviteData)
+        //   .then(function(res) {
+        //     if (res.status === 201) {
+        //       // Invitation successfully created!!!
+        //       // Decide what you want to do after creating invitation.
+        //     }
+        //   });
       });
     });
   }
 
   $onInit() {
-    let $scope = this.$scope;
+    let $scope = this.$scope,
+      $http = this.$http,
+      _self = this;
     // this.$http.get('/api/leos')
     //   .then(response => {
     //     this.dataSet = response.data;
@@ -189,13 +215,12 @@ export class DashboardComponent {
     this.$http.get('/api/events')
       .then(response => {
         this.dataSet = response.data;
-        //alert(this.dataSet[0].name);
+
         let table = $('#events').DataTable({
           select: true,
           data: this.dataSet,
-          //columnDefs: [{ orderable: false, className: 'select-checkbox', targets: 0 }],
           columns: [
-            {data: "_id", title: "ID", visible: false},
+            {data: "event_id", title: "ID", visible: false},
             {data: "venue", title: "Venue"},
             {data: "address", title: "Location"},
             {data: "phone_number", title: "Phone Number"},
@@ -219,6 +244,16 @@ export class DashboardComponent {
             //  the first item on the next line
             let data = table.rows(indexes).data()[0];
             $scope.selectedRow = data;
+            console.log(data);
+
+            $http.get('/api/invitations', {
+              params: {
+                event_id: $scope.selectedRow.event_id
+              }
+            })
+              .then(res => {
+                _self.initializeDragDrop($scope, res.data);
+              });
             if (!$scope.$$phase) {
               // Update the angular $scope so changes are reflected
               $scope.$apply();

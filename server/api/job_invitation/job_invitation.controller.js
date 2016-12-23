@@ -65,7 +65,17 @@ function handleError(res, statusCode) {
 
 // Gets a list of JobInvitations
 export function index(req, res) {
-  return JobInvitation.findAll()
+  var jobs;
+  if (req.query.event_id) {
+    jobs = JobInvitation.findAll({
+      where: {
+        event_id: req.query.event_id
+      }
+    });
+  } else {
+    jobs = JobInvitation.findAll();
+  }
+  return jobs
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -84,7 +94,13 @@ export function show(req, res) {
 
 // Creates a new JobInvitation in the DB
 export function create(req, res) {
-  return JobInvitation.create(req.body)
+  var createInvite;
+  if (req.body instanceof Array) {
+    createInvite = JobInvitation.bulkCreate(req.body);
+  } else {
+    createInvite = JobInvitation.create(req.body);
+  }
+  return createInvite
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
