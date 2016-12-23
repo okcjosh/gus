@@ -22,6 +22,7 @@ import TransactionComponent from './checkout/transaction/transaction.component';
 import InvitationComponent from './invitation/invitation.component';
 import DashboardComponent from './dashboard/dashboard.component';
 import event from './event/event.component';
+import eventDetails from './event-details/event-details.component';
 import drag from './drag/drag.component';
 import leo from './leo/leo.component';
 import constants from './app.constants';
@@ -36,7 +37,7 @@ import ngMessages from 'angular-messages';
 
 
 angular.module('es4App', [ngCookies, ngResource, 'ngSanitize', 'dndLists', 'btford.socket-io', 'as.sortable', 'google.places', uiRouter,
-  uiBootstrap, _Auth, ngAnimate, account, admin, ngMessages, drag, navbar, footer, main, CheckoutComponent, DashboardComponent, TransactionComponent, InvitationComponent, event, leo, constants, socket, util
+  uiBootstrap, _Auth, ngAnimate, account, admin, ngMessages, drag, navbar, footer, main, CheckoutComponent, DashboardComponent, TransactionComponent, InvitationComponent, event, eventDetails, leo, constants, socket, util
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {

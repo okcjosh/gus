@@ -1,9 +1,28 @@
 'use strict';
 const angular = require('angular');
 const uiRouter = require('angular-ui-router');
-import routing from './event.routes';
-export class EventComponent {
+import routing from './event-details.routes';
+export class EventDetailsComponent {
   awesomeEvents = [];
+  // eventTitle = '';
+  // date = '';
+  // Location_Desc = '';
+  // Address = '';
+  // Job_Type = '';
+  // event_type = '';
+  // crowd_security = '';
+  // special_patrols = '';
+  // traffic_direction = '';
+  // escorts = '';
+  // asset_protection = '';
+  // officer_needed = '';
+  // hours_expected = '';
+  // crowd_size = '';
+  // officer_attire = '';
+  // officer_skillset = '';
+  // language = '';
+  // operational_details = '';
+
 
   /*@ngInject*/
   constructor($http, $scope, socket, $state) {
@@ -173,10 +192,10 @@ export class EventComponent {
 }
 
 
-export default angular.module('es42App.event', [uiRouter])
+export default angular.module('es42App.event-details', [uiRouter])
   .config(routing)
-  .component('event', {
-    template: require('./event.html'),
-    controller: EventComponent,
+  .component('event-details', {
+    template: require('./event-details.html'),
+    controller: EventDetailsComponent,
   })
   .name;
