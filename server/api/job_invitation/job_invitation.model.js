@@ -8,14 +8,14 @@ export default function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    job_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'job',
-        key: 'job_id'
-      }
-    },
+    // job_id: {
+    //   type: DataTypes.INTEGER(11),
+    //   allowNull: false,
+    //   references: {
+    //     model: 'job',
+    //     key: 'job_id'
+    //   }
+    // },
 
     event_id: {
       type: DataTypes.INTEGER(11),
@@ -43,14 +43,14 @@ export default function(sequelize, DataTypes) {
       allowNull: false,
     },
 
-    job_invitation_status_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'job_invitation_status',
-        key: 'job_invitation_status_id'
-      }
-    }
+    // job_invitation_status_id: {
+    //   type: DataTypes.INTEGER(11),
+    //   allowNull: false,
+    //   references: {
+    //     model: 'job_invitation_status',
+    //     key: 'job_invitation_status_id'
+    //   }
+    // }
   }, {
     tableName: 'job_invitation'
   });
