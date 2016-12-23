@@ -161,15 +161,14 @@ export class EventComponent {
   }
 
   postEvent($state, $scope) {
-    //alert($scope.eventData.jobSpecs);
     var eventPayload = {
       venue: $scope.eventData.nameOfVenue,
-      address: $scope.eventData.location,
+      address: $scope.eventData.location.formatted_address,
       phone_number: $scope.eventData.phoneNumber,
       point_of_contact: $scope.eventData.poContact,
       job_type: $scope.eventData.jobType,
-      job_type_specs: $scope.eventData.jobSpecs[0],
-      prefered_officer_name: $scope.eventData.officerName[0],
+      job_type_specs: $scope.eventData.jobSpecs.join(","),
+      prefered_officer_name: $scope.eventData.officerName.join(","),
       is_recuring: $scope.eventData.isRecuring,
       recuring_data: $scope.eventData.recuringInterval,
       date: $scope.eventData.creationEventDate
