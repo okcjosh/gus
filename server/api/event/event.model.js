@@ -2,7 +2,7 @@
 
 export default function(sequelize, DataTypes) {
   return sequelize.define('Event', {
-    _id: {
+    event_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,

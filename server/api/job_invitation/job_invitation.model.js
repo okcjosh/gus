@@ -16,6 +16,15 @@ export default function(sequelize, DataTypes) {
         key: 'job_id'
       }
     },
+
+    event_id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      references: {
+        model: 'event',
+        key: 'event_id'
+      }
+    },
     leo_id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -28,6 +37,12 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: false
     },
+
+    round: {
+      type: DataTypes.STRING(11),
+      allowNull: false,
+    },
+
     job_invitation_status_id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,

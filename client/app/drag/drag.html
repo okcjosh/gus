@@ -31,6 +31,14 @@
   </div>
 </script>
 
+<script type="text/ng-template" id="container.html">
+  <div class="container-element box box-blue">
+    <h3>Container {{item.id}}</h3>
+    <div class="column" ng-repeat="list in item.columns" ng-include="'list.html'"></div>
+    <div class="clearfix"></div>
+  </div>
+</script>
+
 <!-- Template for a normal list item -->
 <script type="text/ng-template" id="item.html">
   <div class="item">Item {{item.id}}</div>

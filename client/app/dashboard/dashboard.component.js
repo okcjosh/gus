@@ -189,42 +189,42 @@ export class DashboardComponent {
     this.$http.get('/api/events')
       .then(response => {
         this.dataSet = response.data;
-          //alert(this.dataSet[0].name);
-          let table = $('#events').DataTable({
-            select: true,
-            data: this.dataSet,
-            //columnDefs: [{ orderable: false, className: 'select-checkbox', targets: 0 }],
-            columns: [
-              {data: "_id", title: "ID", visible: false},
-              {data: "venue", title: "Venue"},
-              {data: "address", title: "Location"},
-              {data: "phone_number", title: "Phone Number"},
-              {data: "point_of_contact", title: "POC"},
-              {data: "job_type", title: "Job Type", visible: false},
-              {data: "job_type_specs", title: "Job Specs", visible: false},
-              {data: "prefered_officer_name", title: "Prefered Officer", visible: false},
-              {data: "is_recuring", title: "Is Recuring", visible: false},
-              {data: "recuring_data", title: "Recuring", visible: false},
-              {data: "date", title: "Date", visible: false},
-              // { data: "status", title: "Status" },
-              // { data: "event_type", title: "Event Type" }
-            ]
-          });
+        //alert(this.dataSet[0].name);
+        let table = $('#events').DataTable({
+          select: true,
+          data: this.dataSet,
+          //columnDefs: [{ orderable: false, className: 'select-checkbox', targets: 0 }],
+          columns: [
+            {data: "_id", title: "ID", visible: false},
+            {data: "venue", title: "Venue"},
+            {data: "address", title: "Location"},
+            {data: "phone_number", title: "Phone Number"},
+            {data: "point_of_contact", title: "POC"},
+            {data: "job_type", title: "Job Type", visible: false},
+            {data: "job_type_specs", title: "Job Specs", visible: false},
+            {data: "prefered_officer_name", title: "Prefered Officer", visible: false},
+            {data: "is_recuring", title: "Is Recuring", visible: false},
+            {data: "recuring_data", title: "Recuring", visible: false},
+            {data: "date", title: "Date", visible: false},
+            // { data: "status", title: "Status" },
+            // { data: "event_type", title: "Event Type" }
+          ]
+        });
 
 
-          table.on('select', function (e, dt, type, indexes) {
-            if (type === 'row') {
-              // table.rows(indexes).data() ==> This returns an array of selected rows
-              //  because you can select multiple items at the same time, so I just get
-              //  the first item on the next line
-              let data = table.rows(indexes).data()[0];
-              $scope.selectedRow = data;
-              if (!$scope.$$phase) {
-                // Update the angular $scope so changes are reflected
-                $scope.$apply();
-              }
+        table.on('select', function (e, dt, type, indexes) {
+          if (type === 'row') {
+            // table.rows(indexes).data() ==> This returns an array of selected rows
+            //  because you can select multiple items at the same time, so I just get
+            //  the first item on the next line
+            let data = table.rows(indexes).data()[0];
+            $scope.selectedRow = data;
+            if (!$scope.$$phase) {
+              // Update the angular $scope so changes are reflected
+              $scope.$apply();
             }
-          });
+          }
+        });
 
         // table.on('select', function (e, dt, type, indexes) {
         //   if (type === 'row') {
@@ -232,9 +232,9 @@ export class DashboardComponent {
         //     console.log(data);
         //   }
         // });
-          //table.buttons().container().appendTo( $('#buttons') );
-        });
-    }
+        //table.buttons().container().appendTo( $('#buttons') );
+      });
+  }
 }
 
 export default angular.module('gusApp.dashboard', [uiRouter])
