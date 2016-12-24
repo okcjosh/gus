@@ -74,7 +74,7 @@ export function index(req, res) {
 export function show(req, res) {
   return Event.find({
     where: {
-      _id: req.params.id
+      event_id: req.params.id
     }
   })
     .then(handleEntityNotFound(res))
