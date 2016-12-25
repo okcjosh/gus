@@ -4,10 +4,7 @@ export default function routes($stateProvider) {
   'ngInject';
   $stateProvider
     .state('checkout', {
-      url: '/checkout',
-      params: {
-        event_id: null
-      },
+      url: '/checkout?event_id',
       template: '<checkout></checkout>'
     })
     .state('transaction', {

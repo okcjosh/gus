@@ -17,6 +17,11 @@ export function TransactionComponent($scope, $http, $location, $state) {
   }, function(err) {
     alert(err);
   });
+
+  $http.get('/api/events/2')
+    .then(res => {
+      $scope.event = res.data;
+    });
   //alert($scope.transaction);
   // function Demo(config) {
   //   this.config = config;
