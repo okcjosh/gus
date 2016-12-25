@@ -9,7 +9,7 @@ export function CheckoutComponent($http) {
   $http.post('checkout/transaction/token')
     .then(response => {
       this.clientToken = response.data;
-      console.log(this.clientToken);
+      // console.log(this.clientToken);
       braintree.setup(this.clientToken,
         'dropin', {
           container: 'dropin'

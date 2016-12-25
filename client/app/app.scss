@@ -18,15 +18,16 @@ $fa-font-path: '/assets/fonts/font-awesome/';
   padding: 0.2em 0;
 }
 
-@import 'custom';
+@import '../../node_modules/animate.css/animate.min.css';
 
 
 // Component styles are injected through gulp
 
 /* inject:scss */
+@import 'aCustom';
 @import 'admin/admin';
 @import 'checkout/checkout';
-@import 'custom';
+@import 'checkout/transaction/transaction';
 @import 'dashboard/dashboard';
 @import 'drag/drag';
 @import 'event-details/event-details';
@@ -34,6 +35,7 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 @import 'invitation/invitation';
 @import 'leo/leo';
 @import 'main/main';
+@import 'style';
 @import '../components/footer/footer';
 @import '../components/modal/modal';
 @import '../components/oauth-buttons/oauth-buttons';

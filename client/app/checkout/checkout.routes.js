@@ -8,7 +8,7 @@ export default function routes($stateProvider) {
       template: '<checkout></checkout>'
     })
     .state('transaction', {
-      url: '/checkout/transaction',
+      url: '/checkout/transaction?tranid',
       template: '<transaction></transaction>'
     });
 }

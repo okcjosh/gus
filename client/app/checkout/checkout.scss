@@ -2,6 +2,10 @@
   margin: 20px 0;
 }
 
+.wrapper.container {
+  margin-top: 2rem;
+}
+
 #banner {
   border-bottom: none;
   margin-top: -20px;
@@ -24,4 +28,8 @@
 
 .navbar-text {
   margin-left: 15px;
+}
+
+.center-block {
+  float: none;
 }

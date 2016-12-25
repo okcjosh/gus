@@ -1,0 +1,25 @@
+html {
+  position: relative;
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 80px;
+  padding-bottom: 20px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 80px;
+  overflow: hidden;
+}
+
+.btn-icon span {
+  margin: 0px 5px 0px 5px;
+}
