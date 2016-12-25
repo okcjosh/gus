@@ -11,3 +11,8 @@ npm-debug.log
 coverage
 .DS_Store
 server/.DS_Store
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
