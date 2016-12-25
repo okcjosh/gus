@@ -5,6 +5,9 @@ export default function routes($stateProvider) {
   $stateProvider
     .state('checkout', {
       url: '/checkout',
+      params: {
+        event_id: null
+      },
       template: '<checkout></checkout>'
     })
     .state('transaction', {

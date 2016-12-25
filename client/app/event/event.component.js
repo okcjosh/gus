@@ -23,7 +23,7 @@ export class EventComponent {
   }
 
   checkStepValid(step) {
-    var $s = this.$scope;;
+    var $s = this.$scope;
     switch (step) {
       case 1:
         if (
@@ -159,8 +159,9 @@ export class EventComponent {
 
     this.$http.post('/api/events', eventPayload)
       .then(function(res) {
+        console.log(res.data)
         if (res.status === 201) {
-          $state.go('checkout');
+          $state.go('checkout', { event_id: res.data.event_id });
         } else {
           console.log('Error' + res.statusText);
         }

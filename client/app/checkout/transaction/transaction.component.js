@@ -87,7 +87,7 @@ export function TransactionComponent($scope, $http, $location, $state) {
   //   }, 10);
   // };
   //
-  
+
 }
 
 // if (messages && messages.length > 0
@@ -99,6 +99,6 @@ export default angular.module('es4App.transaction', [uiRouter])
   .component('transaction', {
     template: require('./transaction.html'),
     controller: TransactionComponent,
-    controllerAs: 'transactionCtrl'
+    controllerAs: 'TransactionCtrl'
   })
   .name;

@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
 
-    <div class="wrapper col-lg-8 text-center animated fadeInRight">
+    <div class="wrapper col-lg-8 hidden-print text-center animated fadeInRight">
       <div class="response bt-response col-lg-6 center-block">
         <div class="content">
           <section>
@@ -10,14 +10,14 @@
           <section>
             <p class="pay-success-message">Payment for your event was successful, you can print the receipt for your event here</p>
           </section>
-          <section><a href="//checkout" class="btn btn-success btn-icon btn-lg"> <span class="fa fa-print"></span> Print Receipt </a></section>
+          <section><a href="javascript:window.print()" class="btn btn-success btn-icon btn-lg"> <span class="fa fa-print"></span> Print Receipt </a></section>
         </div>
       </div>
     </div>
     <aside class="drawer dark col-lg-4">
       <header>
         <div class="content text-center">
-          <h3>ES4 Receipt</h3>
+          <h3> <img src="assets/images/ps4Logo.png" class="visible-print receipt-logo"> ES4 Receipt</h3>
         </div>
       </header>
       <article class="content compact">
@@ -42,12 +42,8 @@
                 <td>{{transaction.status}}</td>
               </tr>
               <tr>
-                <th>createdAt</th>
+                <th>Date</th>
                 <td>{{transaction.createdAt}}</td>
-              </tr>
-              <tr>
-                <th>updatedAt</th>
-                <td>{{transaction.updatedAt}}</td>
               </tr>
             </tbody>
           </table>
@@ -74,7 +70,7 @@
               </tr>
               <tr>
                 <th>Expiration Date</th>
-                <td>{{transaction.creditCard.expirationMonth}}/{{transaction.creditCard.expirationYear}}</td>
+                <td>{{transaction.creditCard.expirationMonth + '/' + transaction.creditCard.expirationYear}}</td>
               </tr>
               <tr>
                 <th>Cardholder Name</th>
@@ -126,12 +122,6 @@
             </tbody>
             <div class="notice-wrapper"><span class="notice-message">{{msg.msg}}</span></div>
           </table>
-        </section>
-        <section>
-          <p class="center small">Integrate with the Braintree SDK for a secure and seamless checkout</p>
-        </section>
-        <section>
-          <a href="https://developers.braintreepayments.com/guides/drop-in" target="_blank" class="button secondary full"> <span>See the Docs</span></a>
         </section>
       </article>
     </aside>

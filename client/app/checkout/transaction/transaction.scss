@@ -40,3 +40,20 @@ aside.drawer {
   -moz-animation: slideInRighht 700ms 1 normal cubic-bezier(0.645, 0.045, 0.355, 1) both 1200ms;
   animation: slideInRight 700ms 1 normal cubic-bezier(0.645, 0.045, 0.355, 1) both 1200ms;
 }
+
+
+@media print {
+  body {
+    margin: 0px;
+    min-height: none;
+  }
+
+  aside.drawer {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  aside .receipt-logo {
+    display: inline-block !important;
+  }
+}
