@@ -5,7 +5,19 @@ import routes from './checkout.routes';
 import braintree from 'braintree-web';
 
 
-export function CheckoutComponent($http) {
+export function CheckoutComponent($scope, $http, $state) {
+  let event_id = $state.params.event_id;
+
+  if (! event_id) {
+    $state.go('event');
+    return ;
+  }
+
+  $http.get('api/events/' + event_id)
+    .then(res => {
+      $scope.event = res.data;
+    });
+
   $http.post('checkout/transaction/token')
     .then(response => {
       this.clientToken = response.data;

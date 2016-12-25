@@ -11,12 +11,14 @@ export class NavbarComponent {
 
   isCollapsed = false;
 
-  constructor(Auth) {
+  constructor(Auth, $scope) {
     'ngInject';
 
     this.isLoggedIn = Auth.isLoggedInSync;
     this.isAdmin = Auth.isAdminSync;
     this.getCurrentUser = Auth.getCurrentUserSync;
+
+    $scope.isCollapsed = true;
   }
 
 }

@@ -101,7 +101,7 @@ export default function(app) {
 
   app.post('/checkout', function (req, res) {
     let transactionErrors;
-    let amount = req.body.amount; // In production you should not take amounts directly from clients
+    let amount = req.body.amount; // In production you should not take amounts directly from clients, I second this
     let nonce = req.body.payment_method_nonce;
     console.log('nonce = ' +  nonce);
 
@@ -121,7 +121,7 @@ export default function(app) {
       } else {
         transactionErrors = result.errors.deepErrors();
         req.flash('error', {msg: formatErrors(transactionErrors)});
-
+        res.status(400).send({msg: 'Error processing payment'});
       }
     });
   });
@@ -136,5 +136,3 @@ export default function(app) {
       res.sendFile(path.resolve(`${app.get('appPath')}/index.html`));
     });
 }
-
-

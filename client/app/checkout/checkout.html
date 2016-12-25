@@ -13,11 +13,17 @@
       </header>
       <div class="panel panel-default">
         <div class="panel-body">
+          <h3 ng-show="event.venue">
+            Payment for event at {{ event.venue }}
+          </h3>
+          <br />
           <form id='payment-form' action='/checkout' method='post'>
             <section>
               <div class='bt-drop-in-wrapper'>
                 <div id='dropin'></div>
               </div>
+
+              <input type="hidden" name="event_id" ng-model="event.event_id">
 
               <div class="form-group">
                 <label for='amount'>Amount</label>
