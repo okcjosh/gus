@@ -30,20 +30,23 @@
 
           <p class='help-block'>{{ vm.errors.login }}</p>
         </div>
-
         <div>
-          <button class='btn btn-inverse btn-lg btn-login' type='submit'>
+          <button class='btn btn-rounded btn-primary btn-lg' type='submit'>
             Login
           </button>
-          <a class='btn btn-default btn-lg btn-register' ui-sref='signup'>
+          <button class='btn btn-rounded btn-info btn-lg' ui-sref='signup'>
             Register
-          </a>
+          </button>
         </div>
 
         <hr/>
+        <div class="well well-sm accInfo mb-20">
+          <h5 class="mt-5 mb-10">Your Account Entries are secure.</h5>
+          <small>We store all Account Entry information you save in our database in an encrypted format. We do not sell or make your information available to any one for any reason.</small>
+        </div>
         <div class='row'>
           <div class='col-sm-4 col-md-3'>
-            <oauth-buttons classes='btn-block'></oauth-buttons>
+            <oauth-buttons classes='btn-block btn-rounded'></oauth-buttons>
           </div>
         </div>
       </form>
@@ -51,3 +54,4 @@
   </div>
   <hr>
 </div>
+
