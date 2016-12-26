@@ -31,7 +31,9 @@ export class EventDetailsComponent {
   $onInit() {
     let $scope = this.$scope,
       event_id = this.$state.params.event_id;
-      
+
+    $scope.leoSort = 'lastGig';
+
     this.event_id = event_id;
 
     this.$http.get('/api/events/' + event_id)
