@@ -1,7 +1,7 @@
 'use strict';
 
 export default function(sequelize, DataTypes) {
-  return sequelize.define('Event', {
+  var Event = sequelize.define('Event', {
     event_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -18,9 +18,16 @@ export default function(sequelize, DataTypes) {
     is_recuring: DataTypes.BOOLEAN,
     recuring_data: DataTypes.STRING,
     date: DataTypes.DATE,
+    status_id: DataTypes.INTEGER(11)
     // address: DataTypes.STRING,
     // job_type: DataTypes.STRING,
-    // status: DataTypes.STRING,
+    // status_id: {
+    //   type: DataTypes.INTEGER(11),
+    //   references: {
+    //     model: "status",
+    //     key: "status_id"
+    //   }
+    // }
     // event_type: DataTypes.STRING,
     // crowd_security: DataTypes.STRING,
     // special_patrols: DataTypes.STRING,
@@ -35,4 +42,6 @@ export default function(sequelize, DataTypes) {
     // language: DataTypes.STRING,
     // operational_details: DataTypes.STRING
   });
+  //Event.hasOne(status, {foreignKey: "status_id"});
+  return Event;
 }
