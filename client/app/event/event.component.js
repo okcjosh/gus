@@ -23,6 +23,7 @@ export class EventComponent {
   }
 
   checkStepValid(step) {
+    return true;
     var $s = this.$scope;
     switch (step) {
       case 1:
@@ -90,7 +91,9 @@ export class EventComponent {
       e.preventDefault();
     }
 
-    this.$scope.eventData = {};
+    this.$scope.eventData = {
+      creationEventDate: moment().add(7, 'days').format('DD MMMM YYYY hh:mm')
+    };
 
     this.initializeJQueryPlugins();
   }
@@ -118,8 +121,34 @@ export class EventComponent {
     // });
 
     $('#creationEventDate').datetimepicker({
-      format: "DD MMMM YYYY"
-    });
+			format: "DD MMMM YYYY hh:mm",
+			minDate: moment().add(7, 'days')
+		});
+
+		$('#creationEventDateGroup').datetimepicker({
+			format: "DD MMMM YYYY hh:mm",
+			minDate: moment().add(7, 'days')
+		});
+
+		$('#creationEventTime').datetimepicker({
+			format: "LT"
+		});
+
+		$('#creationEventTimeGroup').datetimepicker({
+			format: "LT"
+		});
+
+    $(' [name="jobRecuring"]').change(function(){
+			//$("#recuringJobSelect").prop('selectedIndex',0);
+			var rVal = $(this).val();
+			if(rVal == '1') {
+				$("#recuringJobSelect").prop('disabled', false);
+				$('#recurrentJob').modal('show');
+			} else {
+				$("#recuringJobSelect").prop('disabled', 'disabled');
+				$('#recurrentJob').modal('hide');
+			}
+		});
 
 
     /** ******************************

@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="container main-content" style="width: 98%">
+      <h2 class="text-center" style="margin-bottom: 30px;">Set Price ranges for event</h2>
+
+      <table class="table table-striped table-hover table-bordered table-responsive">
+        <thead>
+          <th>Job Type</th>
+          <th>Price</th>
+          <th>other factors...</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="job in jobTypes">
+            <th>{{job.name}}</th>
+            <td>
+              <div class="form-group">
+                <label for="" class="sr-only"> Base price: </label>
+                <div class="input-group">
+                  <div class="input-group-addon">$</div>
+                  <input class="form-control" ng-model="job.price" type="number">
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="input-group">
+                <input class="form-control" type="number" placeholder="other factors">
+                <div class="input-group-addon">/ hour</div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button class="btn btn-primary pull-right" ng-click="saveRates()">Save</button>
+
+    </div>
+
+  </div>
+</div>

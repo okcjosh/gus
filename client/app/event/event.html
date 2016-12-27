@@ -47,6 +47,13 @@
             <h3 class="margin-bottom-10">Venue</h3>
 
             <div class="form-group">
+              <label for="title" id="titleLabel" class="control-label col-sm-2">Title</label>
+              <div class="col-sm-10">
+                <input name="title" type="text" ng-model="eventData.title" required id="title" class="form-control" placeholder="e.g. Mary and Michael's Wedding" />
+              </div>
+            </div>
+
+            <div class="form-group">
               <label for="nameOfVenue" id="nameOfVenueLabel" class="control-label col-sm-2">Name of Venue</label>
               <div class="col-sm-10">
                 <input name="nameOfVenue" type="text" ng-model="eventData.nameOfVenue" required id="nameOfVenue" class="form-control" placeholder="Enter the Name of the venue" />
@@ -63,6 +70,15 @@
             </div>
 
             <div class="form-group">
+              <label for="description" id="descriptionLabel" class="control-label col-sm-2">Event Description</label>
+              <div class="col-sm-10">
+                <div id="descriptionField">
+                  <textarea class="form-control" ng-model="eventData.description" placeholder="Add a description for your event" name="description"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
               <label for="phoneNumber" id="phoneNumberLabel" class="control-label col-sm-2">Phone Number</label>
               <div class="col-sm-10">
                 <input name="phoneNumber" ng-model="eventData.phoneNumber" required type="tel" id="phoneNumber" class="form-control" placeholder="Enter your phone number" />
@@ -73,6 +89,13 @@
               <label for="poContact" id="poContactLabel" class="control-label col-sm-2">Point of Contact</label>
               <div class="col-sm-10">
                 <input name="poContact" ng-model="eventData.poContact" required type="text" id="poContact" class="form-control" placeholder="Enter point of Contact" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email" id="emailLabel" class="control-label col-sm-2">Email</label>
+              <div class="col-sm-10">
+                <input name="email" ng-model="eventData.email" required type="email" id="email" class="form-control" placeholder="Coordinator email address" />
               </div>
             </div>
 
@@ -202,14 +225,48 @@
             <div class="form-group"> <label for="creationEventDate" id="creationEventDateLabel" class="control-label col-sm-2">Event Date</label>
               <div class="col-sm-10">
 
-                <div class="input-group date" id="creationEventDate">
-                  <input type="text" required ng-model="eventData.creationEventDate" name="creationEventDate" class="form-control fieldEve" id="creationEventDateField" placeholder="Event Date">
+                <div class="input-group date" id="creationEventDateGroup">
+                  <input type="text" required ng-model="eventData.creationEventDate" name="creationEventDate" class="form-control fieldEve" id="creationEventDate" placeholder="Event Date">
                   <span class="input-group-addon addonRightEve">
 											<i class="fa fa-calendar" aria-hidden="true"></i>
 										</span>
                 </div>
+                <span id="helpBlock" class="help-block"><span class="text-danger"><i class="fa fa-info-circle" aria-hidden="true"></i> A minimum of 7 days is required between the start of the event and the registration.</span></span>
               </div>
             </div>
+
+            <div class="form-group">
+								<label for="ExpirationMonth" id="ExpirationDateLabel" class="control-label col-sm-2">Officer(s) to arrive at </label>
+								<div class="col-sm-4">
+									<select name="ExpirationMonth" id="ExpirationMonth" data-cayan="expirationmonth" class="form-control">
+										<option value="01">01 January</option>
+										<option value="02">02 February</option>
+										<option value="03">03 March</option>
+										<option value="04">04 April</option>
+										<option value="05">05 May</option>
+										<option value="06">06 June</option>
+										<option value="07">07 July</option>
+										<option value="08">08 August</option>
+										<option value="09">09 September</option>
+										<option value="10">10 October</option>
+										<option value="11">11 November</option>
+										<option selected="selected" value="12">12 December</option>
+									</select>
+								</div>
+								<label for="ExpirationMonth" id="ExpirationDateLabel" class="control-label col-sm-2">Expiration Date</label>
+								<div class="col-sm-4">
+									<select name="ExpirationYear" id="ExpirationYear" data-cayan="expirationyear" class="form-control">
+										<option value="16">2016</option>
+										<option selected="selected" value="17">2017</option>
+										<option value="18">2018</option>
+										<option value="19">2019</option>
+										<option value="20">2020</option>
+										<option value="21">2021</option>
+										<option value="22">2022</option>
+									</select>
+								</div>
+							</div>
+
           </div>
           <div class="tab-pane" ng-class="{active: progress == 3}" role="tabpanel" id="step3">
             <h3 class="margin-bottom-10">Cost</h3>
@@ -228,5 +285,152 @@
     </div>
 
   </section>
-</div>
 
+  <div class="modal fade" id="recurrentJob" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div>
+
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#daily" aria-controls="daily" role="tab" data-toggle="tab">Daily</a></li>
+            <li role="presentation"><a href="#weekly" aria-controls="weekly" role="tab" data-toggle="tab">Weekly</a></li>
+            <li role="presentation"><a href="#monthly" aria-controls="monthly" role="tab" data-toggle="tab">Monthly</a></li>
+            <li role="presentation"><a href="#yearly" aria-controls="yearly" role="tab" data-toggle="tab">Yearly</a></li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content" style="padding:30px 15px 10px 15px;">
+            <div role="tabpanel" class="tab-pane active" id="daily">
+              <form class="form-horizontal">
+                <fieldset>
+                  <div class="form-group">
+                    <div class="col-md-6">
+                      <div class="row radio">
+                        <label for="radios-0">
+                        <div class="col-md-3">
+                          <input type="radio" name="radios" id="radios-0" value="1" checked="checked"> Every
+                        </div>
+                        <div class="col-md-5">
+                          <input type="number" name="dailyNumber" style="width:50px;" min="0" max="365">
+                        </div> day(s)
+                      </label>
+                      </div>
+                      <div class="radio">
+                        <label for="radios-1">
+                        <input type="radio" name="radios" id="radios-1" value="2">
+                        Every Week Day
+                      </label>
+                      </div>
+                      <div class="radio">
+                        <label for="radios-1">
+                        <input type="radio" name="radios" id="radios-1" value="3">
+                        Every Week End Day
+                      </label>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="weekly">
+              <form class="form-horizontal">
+                <fieldset>
+                  <div class="form-group">
+                    <label for="weeklyNumber" class="col-sm-2 control-label">Every</label>
+                    <div class="col-md-4">
+                      <div class="input-group">
+
+                        <input type="number" name="weeklyNumber" id="weeklyNumber" class="form-control" min="0" max="52" placeholder="1">
+                        <span class="input-group-addon">week(s) on</span>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <label class="checkbox-inline" for="checkboxes-1">
+                      <input type="checkbox" name="checkboxes" id="checkboxes-1" value="1">
+                      Mon
+                    </label>
+                      <label class="checkbox-inline" for="checkboxes-2">
+                      <input type="checkbox" name="checkboxes" id="checkboxes-2" value="2">
+                      Tue
+                    </label>
+                      <label class="checkbox-inline" for="checkboxes-3">
+                      <input type="checkbox" name="checkboxes" id="checkboxes-3" value="3">
+                      Wed
+                    </label>
+                      <label class="checkbox-inline" for="checkboxes-4">
+                      <input type="checkbox" name="checkboxes" id="checkboxes-4" value="4">
+                      Thu
+                    </label>
+                      <label class="checkbox-inline" for="checkboxes-5">
+                      <input type="checkbox" name="checkboxes" id="checkboxes-5" value="5">
+                      Fri
+                    </label>
+                      <label class="checkbox-inline" for="checkboxes-6">
+                      <input type="checkbox" name="checkboxes" id="checkboxes-6" value="6">
+                      Sat
+                    </label>
+                      <label class="checkbox-inline" for="checkboxes-7">
+                      <input type="checkbox" name="checkboxes" id="checkboxes-7" value="7">
+                      Sun
+                    </label>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+
+
+
+
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="monthly">
+              <p>Curabitur ut libero et urna sagittis mollis sit amet pulvinar diam. Maecenas ut finibus eros. Pellentesque urna ex, tincidunt non ex vitae, vestibulum pulvinar tellus. Nam sapien purus, porttitor eu commodo facilisis, dictum eget metus. Sed luctus,
+                magna et dignissim finibus, ex ante tristique turpis, vitae congue mauris eros a leo. Aliquam ut accumsan eros. Nulla facilisi. Donec id facilisis elit. In at vulputate justo. Ut imperdiet justo vel vehicula aliquet. Aliquam condimentum ultricies
+                diam at facilisis. Sed sed imperdiet ante. Fusce non ullamcorper elit. Ut sollicitudin nisl dignissim orci mollis volutpat. Sed in massa odio. Donec interdum orci consequat, tincidunt diam et, maximus nulla.</p>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="yearly">
+              <p>Cras eget molestie enim. Cras elit leo, semper et arcu vitae, volutpat commodo nunc. Fusce imperdiet eget lectus eu ultrices. Integer commodo, est ut tempor scelerisque, nulla leo mollis ante, sit amet condimentum ipsum sem nec lectus. Suspendisse
+                iaculis enim id pulvinar euismod. Donec ornare pellentesque eleifend. Curabitur mollis ultricies faucibus. Aliquam sed ex lacus. Aliquam lacus erat, aliquam eget suscipit at, rutrum vel nulla. Pellentesque tempus dolor purus, a finibus lacus
+                tincidunt id. Donec et erat dolor. Curabitur turpis sem, gravida non posuere ac, luctus sed lacus. Sed ornare pretium dolor at mollis. In venenatis luctus ultricies. Nam a diam vel turpis hendrerit imperdiet at at elit. Interdum et malesuada
+                fames ac ante ipsum primis in faucibus. Integer varius tortor vel ipsum dignissim, viverra posuere dolor vehicula. Curabitur in pretium ligula. Integer ac turpis efficitur, malesuada massa vitae, aliquam dui. Proin hendrerit libero eget risus
+                egestas, vel rhoncus orci sollicitudin. Curabitur tempus quis purus ac lacinia. Nulla molestie libero fringilla, feugiat dolor sit amet, sodales orci. Donec gravida feugiat magna, molestie cursus dui porttitor sit amet. Ut quis diam turpis.</p>
+            </div>
+          </div>
+          <hr class="clearfix" style="margin:0 15px;">
+          <div id="reccurenceDate" style="padding:10px 15px 40px 15px;">
+
+            <div class="row">
+              <div class="col-md-6">
+                <label for="createdBetweenStart">Dates</label>
+                <div class="input-group date" id="creationdateafter">
+                  <input type="text" value="" name="creationdateafter" class="form-control fieldEve" id="createdBetweenStart" placeholder="Starting On">
+                  <span class="input-group-addon addonRightEve">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                </span>
+                </div>
+              </div>
+              <!-- /.col-md-6 -->
+              <div class="col-md-6">
+                <label for="createdBetweenEnd">&nbsp;</label>
+                <div class="input-group date" id="creationdatebefore">
+                  <input type="text" value="" name="creationdatebefore" class="form-control fieldEve" id="createdBetweenEnd" placeholder="Ending On">
+                  <span class="input-group-addon addonRightEve">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                </span>
+                </div>
+              </div>
+              <!-- /.col-md-6 -->
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
