@@ -12,6 +12,7 @@
 
 import jsonpatch from 'fast-json-patch';
 import {Leo} from '../../sqldb';
+import {Department} from '../../sqldb';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -59,13 +60,14 @@ function handleEntityNotFound(res) {
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
+    console.log(err);
     res.status(statusCode).send(err);
   };
 }
 
 // Gets a list of Leos
 export function index(req, res) {
-  return Leo.findAll({order: 'lastGig ASC'})
+  return Leo.findAll({order: 'lastGig ASC', include: [Department]})
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
