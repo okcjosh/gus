@@ -38,11 +38,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     status_id: {
       type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'status',
-        key: 'status_id'
-      }
+      allowNull: false
     },
     leo_id: {
       type: DataTypes.INTEGER(11),
