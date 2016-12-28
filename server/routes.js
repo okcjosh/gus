@@ -32,6 +32,7 @@ export default function(app) {
   app.use('/api/job_type_preferences', require('./api/job_type_preference'));
   app.use('/api/leo_scheduling', require('./api/leo_scheduling'));
   app.use('/api/new_appts', require('./api/new_appt'));
+  app.use('/api/notifications', require('./api/notification'));
   app.use('/api/seniority_class', require('./api/seniority_class'));
   app.use('/api/status', require('./api/status'));
   app.use('/auth', require('./auth').default);
