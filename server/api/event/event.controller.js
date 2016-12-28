@@ -12,6 +12,7 @@
 
 import jsonpatch from 'fast-json-patch';
 import {Event} from '../../sqldb';
+import {Status} from '../../sqldb';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -59,22 +60,42 @@ function handleEntityNotFound(res) {
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
+    console.log(statusCode);
+    console.log(err);
     res.status(statusCode).send(err);
   };
 }
 
 // Gets a list of Events
 export function index(req, res) {
-  return Event.findAll()
+  return Event.findAll({include: [Status]})
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
+
+// include: [{
+//   model: status,
+//   through: {
+//     attributes: ['name']
+//   }
+// }]
 
 // Gets a single Event from the DB
 export function show(req, res) {
   return Event.find({
     where: {
       event_id: req.params.id
+    }
+  })
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+export function showByStatus(req, res) {
+  return Event.find({
+    where: {
+      status_id: req.params.status_id
     }
   })
     .then(handleEntityNotFound(res))

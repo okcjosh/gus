@@ -28,8 +28,11 @@ db.JobInvitation = db.sequelize.import('../api/job_invitation/job_invitation.mod
 db.Job = db.sequelize.import('../api/job/job.model');
 db.Department = db.sequelize.import('../api/department/department.model');
 db.Leo = db.sequelize.import('../api/leo/leo.model');
+db.Leo.belongsTo(db.Department, {foreignKey: 'department_id'});
 db.Event = db.sequelize.import('../api/event/event.model');
+db.Event.belongsTo(db.Status, {foreignKey: 'status_id'});
+//db.Status.belongsToMany(db.Event, {through: 'eventStatus', foreignKey: "status_id", otherKey: "status_id"});
 db.Thing = db.sequelize.import('../api/thing/thing.model');
 db.User = db.sequelize.import('../api/user/user.model');
-
+db.sequelize.sync();
 module.exports = db;
