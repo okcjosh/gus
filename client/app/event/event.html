@@ -194,78 +194,132 @@
             </div>
 
             <div class="form-group">
-              <div class="col-sm-10 col-md-offset-2">
-                <div class="col-sm-3">
-                  <label class="radio-inline">
-                    <input type="radio" selected name="jobRecuring" ng-model="eventData.isRecuring" id="inlineRadio1" value="0" checked="checked"> One-off Job
+              <div class="col-md-9 col-md-offset-3">
+                <div class="row">
+                  <div class="col-md-3">
+                    <label class="radio-inline">
+                    <input type="radio" name="jobRecuring" id="inlineRadio1" value="0" class="recuringJob" checked="checked"> One-off Job
                   </label>
-                </div>
-                <div class="col-sm-3">
-                  <label class="radio-inline">
-                    <input type="radio" name="jobRecuring" ng-model="eventData.isRecuring" id="inlineRadio2" value="1"> Recuring Job
+                  </div>
+                  <div class="col-md-3">
+                    <label class="radio-inline">
+                    <input type="radio" name="jobRecuring" id="inlineRadio2" value="1" class="recuringJob"> Recuring Job
                   </label>
-                </div>
-                <div class="col-sm-6">
-
-                  <label class="control-label col-sm-2">Every</label>
-                  <div class="col-sm-10">
-
-                    <select class="form-control" ng-model="eventData.recuringInterval" name="recuringInterval">
-                      <option value="">None</option>
-                      <option value="1">Day</option>
-                      <option value="2">Week</option>
-                      <option value="3">Month</option>
-                      <option value="4">Year</option>
-                    </select>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="form-group"> <label for="creationEventDate" id="creationEventDateLabel" class="control-label col-sm-2">Event Date</label>
-              <div class="col-sm-10">
-
+            <div class="form-group">
+              <label for="creationEventDate" id="creationEventDateLabel" class="control-label col-md-3">Event Date &amp; Time</label>
+              <div class="col-md-4">
                 <div class="input-group date" id="creationEventDateGroup">
-                  <input type="text" required ng-model="eventData.creationEventDate" name="creationEventDate" class="form-control fieldEve" id="creationEventDate" placeholder="Event Date">
+                  <input type="text" value="" name="creationEventDate" class="form-control" id="creationEventDate" placeholder="Event Date" aria-describedby="helpBlock">
                   <span class="input-group-addon addonRightEve">
-											<i class="fa fa-calendar" aria-hidden="true"></i>
-										</span>
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                  </span>
+
                 </div>
                 <span id="helpBlock" class="help-block"><span class="text-danger"><i class="fa fa-info-circle" aria-hidden="true"></i> A minimum of 7 days is required between the start of the event and the registration.</span></span>
+              </div>
+
+              <label for="attendeesNum" id="attendeesNumLabel" class="control-label col-md-3">Number of Attendees Expected</label>
+              <div class="col-md-2">
+                <input type="number" value="" name="attendeesNum" class="form-control" id="attendeesNum" placeholder="0">
+              </div>
+
+
+            </div>
+
+            <div class="form-group">
+              <label for="OfficerArriveTime" id="OfficerArriveTimeLabel" class="control-label col-md-3">Officer(s) to arrive at</label>
+              <div class="col-md-4">
+                <div class="input-group date" id="OfficerArriveTimeGroup">
+                  <input type="time" value="" name="OfficerArriveTime" class="form-control" id="OfficerArriveTime" placeholder="Time">
+                  <span class="input-group-addon addonRightEve">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                  </span>
+
+                </div>
+              </div>
+              <label for="OfficerStayHours" id="OfficerStayHoursLabel" class="control-label col-md-3">Number of hours requested</label>
+              <div class="col-md-2">
+                <input type="number" value="" min="0" name="OfficerStayHours" class="form-control" id="OfficerStayHours" placeholder="1">
               </div>
             </div>
 
             <div class="form-group">
-								<label for="ExpirationMonth" id="ExpirationDateLabel" class="control-label col-sm-2">Officer(s) to arrive at </label>
-								<div class="col-sm-4">
-									<select name="ExpirationMonth" id="ExpirationMonth" data-cayan="expirationmonth" class="form-control">
-										<option value="01">01 January</option>
-										<option value="02">02 February</option>
-										<option value="03">03 March</option>
-										<option value="04">04 April</option>
-										<option value="05">05 May</option>
-										<option value="06">06 June</option>
-										<option value="07">07 July</option>
-										<option value="08">08 August</option>
-										<option value="09">09 September</option>
-										<option value="10">10 October</option>
-										<option value="11">11 November</option>
-										<option selected="selected" value="12">12 December</option>
-									</select>
-								</div>
-								<label for="ExpirationMonth" id="ExpirationDateLabel" class="control-label col-sm-2">Expiration Date</label>
-								<div class="col-sm-4">
-									<select name="ExpirationYear" id="ExpirationYear" data-cayan="expirationyear" class="form-control">
-										<option value="16">2016</option>
-										<option selected="selected" value="17">2017</option>
-										<option value="18">2018</option>
-										<option value="19">2019</option>
-										<option value="20">2020</option>
-										<option value="21">2021</option>
-										<option value="22">2022</option>
-									</select>
-								</div>
-							</div>
+              <label for="officerUniform" id="officerUniformLabel" class="control-label col-md-3">Uniform of Officer(s)</label>
+              <div class="col-md-9">
+                <select name="officerUniform" id="officerUniform" class="form-control">
+                <option value="">Please select</option>
+                <optgroup label="Plain Clothes">
+                  <option value="2">formal</option>
+                  <option value="2">informal</option>
+                  <option value="2">other</option>
+                <optgroup label="Uniform">
+                  <option value="1">Police</option>
+                  <option value="1">To be supplied by venue</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="alcoholServed" id="alcoholServedLabel" class="control-label col-md-3">Will alcohol be served? <span class="text-danger"><i class="fa fa-asterisk red" aria-hidden="true"></i></span></label>
+              <div class="col-md-3">
+                <label class="radio-inline">
+                  <input type="radio" name="alcoholServed" id="alcoholServed1" value="yes"> yes
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="alcoholServed" id="alcoholServed2" value="no" checked="checked"> no
+                </label>
+
+              </div>
+              <label for="policeVehicule" id="policeVehiculeLabel" class="control-label col-md-3">Police vehicule required? <span class="text-danger"><i class="fa fa-asterisk red" aria-hidden="true"></i></span></label>
+              <div class="col-md-3">
+                <label class="radio-inline">
+                  <input type="radio" name="policeVehicule" id="policeVehicule1" value="yes"> yes
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="policeVehicule" id="policeVehicule2" value="no" checked="checked"> no
+                </label>
+
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="barricadeRequested" id="barricadeRequestedLabel" class="control-label col-md-3">Barricades requested? <span class="text-danger"><i class="fa fa-asterisk red" aria-hidden="true"></i></span></label>
+              <div class="col-md-3">
+                <label class="radio-inline">
+                  <input type="radio" name="barricadeRequested" id="barricadeRequested1" value="yes"> yes
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="barricadeRequested" id="barricadeRequested2" value="no" checked="checked"> no
+                </label>
+
+              </div>
+              <label for="amplifiedSound" id="amplifiedSound" class="control-label col-md-3">Music or other amplified sound/explosions?</label>
+              <div class="col-md-3">
+                <label class="radio-inline">
+                  <input type="radio" name="amplifiedSound" id="amplifiedSound1" value="yes"> yes
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="amplifiedSound" id="amplifiedSound2" value="no" checked="checked"> no
+                </label>
+
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="additionalExpect" id="additionalExpectLabel" class="control-label col-md-3">Additional Expectations of officer(s)</label>
+              <div class="col-md-9">
+                <select class="selectpicker form-control" multiple name="additionalExpect" id="additionalExpect" title="Please select">
+                  <option value="1">Activity Sheets</option>
+                  <option value="2">Specialised Skills/Training</option>
+                  <option value="3">W2 Forms with client</option>
+                </select>
+              </div>
+            </div>
 
           </div>
           <div class="tab-pane" ng-class="{active: progress == 3}" role="tabpanel" id="step3">
@@ -285,152 +339,268 @@
     </div>
 
   </section>
+</div>
 
-  <div class="modal fade" id="recurrentJob" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-md">
-      <div class="modal-content">
-        <div>
+<div class="modal fade" id="recurrentJob" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div>
 
-          <!-- Nav tabs -->
-          <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#daily" aria-controls="daily" role="tab" data-toggle="tab">Daily</a></li>
-            <li role="presentation"><a href="#weekly" aria-controls="weekly" role="tab" data-toggle="tab">Weekly</a></li>
-            <li role="presentation"><a href="#monthly" aria-controls="monthly" role="tab" data-toggle="tab">Monthly</a></li>
-            <li role="presentation"><a href="#yearly" aria-controls="yearly" role="tab" data-toggle="tab">Yearly</a></li>
-          </ul>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#daily" aria-controls="daily" role="tab" data-toggle="tab">Daily</a></li>
+          <li role="presentation"><a href="#weekly" aria-controls="weekly" role="tab" data-toggle="tab">Weekly</a></li>
+          <li role="presentation"><a href="#monthly" aria-controls="monthly" role="tab" data-toggle="tab">Monthly</a></li>
+          <li role="presentation"><a href="#yearly" aria-controls="yearly" role="tab" data-toggle="tab">Yearly</a></li>
+        </ul>
 
-          <!-- Tab panes -->
-          <div class="tab-content" style="padding:30px 15px 10px 15px;">
-            <div role="tabpanel" class="tab-pane active" id="daily">
-              <form class="form-horizontal">
-                <fieldset>
-                  <div class="form-group">
-                    <div class="col-md-6">
-                      <div class="row radio">
-                        <label for="radios-0">
-                        <div class="col-md-3">
-                          <input type="radio" name="radios" id="radios-0" value="1" checked="checked"> Every
-                        </div>
-                        <div class="col-md-5">
-                          <input type="number" name="dailyNumber" style="width:50px;" min="0" max="365">
-                        </div> day(s)
-                      </label>
-                      </div>
-                      <div class="radio">
-                        <label for="radios-1">
-                        <input type="radio" name="radios" id="radios-1" value="2">
-                        Every Week Day
-                      </label>
-                      </div>
-                      <div class="radio">
-                        <label for="radios-1">
-                        <input type="radio" name="radios" id="radios-1" value="3">
-                        Every Week End Day
-                      </label>
-                      </div>
+        <!-- Tab panes -->
+        <div class="tab-content" style="padding:30px 15px 10px 15px;">
+          <div role="tabpanel" class="tab-pane active" id="daily">
+            <form class="form-horizontal">
+              <fieldset>
+
+                <div class="form-group">
+                  <label for="monthlyNumber" class="col-md-1 control-label">
+                  <input type="radio" name="dailyRadioValue" id="radios-1" value="1">
+                </label>
+                  <div class="col-md-5">
+                    <div class="input-group">
+                      <span class="input-group-addon">Every</span>
+                      <input type="number" name="dailyNumber" id="dailyNumber" class="form-control" min="0" max="31" placeholder="1">
+                      <span class="input-group-addon">day(s)</span>
                     </div>
                   </div>
-                </fieldset>
-              </form>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="weekly">
-              <form class="form-horizontal">
-                <fieldset>
-                  <div class="form-group">
-                    <label for="weeklyNumber" class="col-sm-2 control-label">Every</label>
-                    <div class="col-md-4">
-                      <div class="input-group">
+                </div>
 
-                        <input type="number" name="weeklyNumber" id="weeklyNumber" class="form-control" min="0" max="52" placeholder="1">
-                        <span class="input-group-addon">week(s) on</span>
-                      </div>
-
-                    </div>
+                <div class="form-group">
+                  <label for="monthlyNumber" class="col-md-1 control-label">
+                  <input type="radio" name="dailyRadioValue" id="radios-2" value="2">
+                </label>
+                  <div class="col-md-5">
+                    <input type="text" value="Every Week Day" name="everyWeekDay" id="everyWeekDay" class="form-control" readonly="readonly">
                   </div>
-                  <div class="form-group">
-                    <div class="col-md-12">
-                      <label class="checkbox-inline" for="checkboxes-1">
-                      <input type="checkbox" name="checkboxes" id="checkboxes-1" value="1">
-                      Mon
-                    </label>
-                      <label class="checkbox-inline" for="checkboxes-2">
-                      <input type="checkbox" name="checkboxes" id="checkboxes-2" value="2">
-                      Tue
-                    </label>
-                      <label class="checkbox-inline" for="checkboxes-3">
-                      <input type="checkbox" name="checkboxes" id="checkboxes-3" value="3">
-                      Wed
-                    </label>
-                      <label class="checkbox-inline" for="checkboxes-4">
-                      <input type="checkbox" name="checkboxes" id="checkboxes-4" value="4">
-                      Thu
-                    </label>
-                      <label class="checkbox-inline" for="checkboxes-5">
-                      <input type="checkbox" name="checkboxes" id="checkboxes-5" value="5">
-                      Fri
-                    </label>
-                      <label class="checkbox-inline" for="checkboxes-6">
-                      <input type="checkbox" name="checkboxes" id="checkboxes-6" value="6">
-                      Sat
-                    </label>
-                      <label class="checkbox-inline" for="checkboxes-7">
-                      <input type="checkbox" name="checkboxes" id="checkboxes-7" value="7">
-                      Sun
-                    </label>
-                    </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="monthlyNumber" class="col-md-1 control-label">
+                  <input type="radio" name="dailyRadioValue" id="radios-3" value="3">
+                </label>
+                  <div class="col-md-5">
+                    <input type="text" value="Every Week End Day" name="everyWeekDay" id="everyWeekDay" class="form-control" readonly="readonly">
                   </div>
-                </fieldset>
-              </form>
-
-
-
-
-
-            </div>
-            <div role="tabpanel" class="tab-pane" id="monthly">
-              <p>Curabitur ut libero et urna sagittis mollis sit amet pulvinar diam. Maecenas ut finibus eros. Pellentesque urna ex, tincidunt non ex vitae, vestibulum pulvinar tellus. Nam sapien purus, porttitor eu commodo facilisis, dictum eget metus. Sed luctus,
-                magna et dignissim finibus, ex ante tristique turpis, vitae congue mauris eros a leo. Aliquam ut accumsan eros. Nulla facilisi. Donec id facilisis elit. In at vulputate justo. Ut imperdiet justo vel vehicula aliquet. Aliquam condimentum ultricies
-                diam at facilisis. Sed sed imperdiet ante. Fusce non ullamcorper elit. Ut sollicitudin nisl dignissim orci mollis volutpat. Sed in massa odio. Donec interdum orci consequat, tincidunt diam et, maximus nulla.</p>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="yearly">
-              <p>Cras eget molestie enim. Cras elit leo, semper et arcu vitae, volutpat commodo nunc. Fusce imperdiet eget lectus eu ultrices. Integer commodo, est ut tempor scelerisque, nulla leo mollis ante, sit amet condimentum ipsum sem nec lectus. Suspendisse
-                iaculis enim id pulvinar euismod. Donec ornare pellentesque eleifend. Curabitur mollis ultricies faucibus. Aliquam sed ex lacus. Aliquam lacus erat, aliquam eget suscipit at, rutrum vel nulla. Pellentesque tempus dolor purus, a finibus lacus
-                tincidunt id. Donec et erat dolor. Curabitur turpis sem, gravida non posuere ac, luctus sed lacus. Sed ornare pretium dolor at mollis. In venenatis luctus ultricies. Nam a diam vel turpis hendrerit imperdiet at at elit. Interdum et malesuada
-                fames ac ante ipsum primis in faucibus. Integer varius tortor vel ipsum dignissim, viverra posuere dolor vehicula. Curabitur in pretium ligula. Integer ac turpis efficitur, malesuada massa vitae, aliquam dui. Proin hendrerit libero eget risus
-                egestas, vel rhoncus orci sollicitudin. Curabitur tempus quis purus ac lacinia. Nulla molestie libero fringilla, feugiat dolor sit amet, sodales orci. Donec gravida feugiat magna, molestie cursus dui porttitor sit amet. Ut quis diam turpis.</p>
-            </div>
+                </div>
+              </fieldset>
+            </form>
           </div>
-          <hr class="clearfix" style="margin:0 15px;">
-          <div id="reccurenceDate" style="padding:10px 15px 40px 15px;">
+          <div role="tabpanel" class="tab-pane" id="weekly">
+            <form class="form-horizontal">
+              <fieldset>
+                <div class="form-group">
+                  <div class="col-md-6">
+                    <div class="input-group">
+                      <span class="input-group-addon">Every</span>
+                      <input type="number" name="weeklyNumber" id="weeklyNumber" class="form-control" min="0" max="52" placeholder="1">
+                      <span class="input-group-addon">week(s) on</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <label class="checkbox-inline" for="checkboxes-1">
+                    <input type="checkbox" name="checkboxes" id="checkboxes-1" value="1">
+                    Mon
+                  </label>
+                    <label class="checkbox-inline" for="checkboxes-2">
+                    <input type="checkbox" name="checkboxes" id="checkboxes-2" value="2">
+                    Tue
+                  </label>
+                    <label class="checkbox-inline" for="checkboxes-3">
+                    <input type="checkbox" name="checkboxes" id="checkboxes-3" value="3">
+                    Wed
+                  </label>
+                    <label class="checkbox-inline" for="checkboxes-4">
+                    <input type="checkbox" name="checkboxes" id="checkboxes-4" value="4">
+                    Thu
+                  </label>
+                    <label class="checkbox-inline" for="checkboxes-5">
+                    <input type="checkbox" name="checkboxes" id="checkboxes-5" value="5">
+                    Fri
+                  </label>
+                    <label class="checkbox-inline" for="checkboxes-6">
+                    <input type="checkbox" name="checkboxes" id="checkboxes-6" value="6">
+                    Sat
+                  </label>
+                    <label class="checkbox-inline" for="checkboxes-7">
+                    <input type="checkbox" name="checkboxes" id="checkboxes-7" value="7">
+                    Sun
+                  </label>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="monthly">
+            <form class="form-horizontal">
+              <fieldset>
+                <div class="form-group">
+                  <label for="monthlyNumber" class="col-md-1 control-label">
+                  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                </label>
+                  <div class="col-md-6">
+                    <div class="input-group">
+                      <span class="input-group-addon">Day</span>
+                      <input type="number" name="monthlyNumber" id="monthlyNumber" class="form-control" min="0" max="31" placeholder="1">
+                      <span class="input-group-addon">of every month</span>
+                    </div>
+                  </div>
+                </div>
 
-            <div class="row">
-              <div class="col-md-6">
-                <label for="createdBetweenStart">Dates</label>
-                <div class="input-group date" id="creationdateafter">
-                  <input type="text" value="" name="creationdateafter" class="form-control fieldEve" id="createdBetweenStart" placeholder="Starting On">
-                  <span class="input-group-addon addonRightEve">
-                <i class="fa fa-calendar" aria-hidden="true"></i>
-                </span>
+                <div class="form-group">
+                  <label class="col-md-1 control-label" for="selectbasic"><input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"></label>
+                  <div class="col-md-1 padding-top-08"> The </div>
+                  <div class="col-md-3">
+                    <select id="" name="" class="form-control">
+                    <option value="1">First</option>
+                    <option value="2">Second</option>
+                    <option value="3">Third</option>
+                    <option value="4">Fourth</option>
+                  </select>
+                  </div>
+                  <div class="col-md-3">
+                    <select id="" name="" class="form-control">
+                    <option value="1">Monday</option>
+                    <option value="2">Tuesday</option>
+                    <option value="3">Wednesday</option>
+                    <option value="4">Thursday</option>
+                    <option value="5">Friday</option>
+                    <option value="6">Saturday</option>
+                    <option value="7">Sunday</option>
+                  </select>
+                  </div>
+                  <div class="col-md-3 padding-top-08"> of every month</div>
                 </div>
-              </div>
-              <!-- /.col-md-6 -->
-              <div class="col-md-6">
-                <label for="createdBetweenEnd">&nbsp;</label>
-                <div class="input-group date" id="creationdatebefore">
-                  <input type="text" value="" name="creationdatebefore" class="form-control fieldEve" id="createdBetweenEnd" placeholder="Ending On">
-                  <span class="input-group-addon addonRightEve">
-                <i class="fa fa-calendar" aria-hidden="true"></i>
-                </span>
+
+
+
+
+
+
+              </fieldset>
+            </form>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="yearly">
+            <form class="form-horizontal">
+              <fieldset>
+                <div class="form-group">
+                  <label for="monthlyNumber" class="col-md-1 control-label">
+                  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                </label>
+                  <div class="col-md-1 padding-top-08"> Every </div>
+                  <div class="col-md-3">
+                    <select id="" name="" class="form-control">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">Novembre</option>
+                    <option value="12">December</option>
+                  </select>
+                  </div>
+                  <div class="col-md-2">
+                    <input type="number" name="monthlyNumber" id="monthlyNumber" class="form-control" min="0" max="31" placeholder="1">
+                  </div>
                 </div>
+
+                <div class="form-group">
+                  <label for="monthlyNumber" class="col-md-1 control-label">
+                  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                </label>
+                  <div class="col-md-1 padding-top-08">The</div>
+                  <div class="col-md-3">
+                    <select id="" name="" class="form-control">
+                    <option value="1">First</option>
+                    <option value="2">Second</option>
+                    <option value="3">Third</option>
+                    <option value="4">Fourth</option>
+                  </select>
+                  </div>
+                  <div class="col-md-3">
+                    <select id="" name="" class="form-control">
+                    <option value="1">Monday</option>
+                    <option value="2">Tuesday</option>
+                    <option value="3">Wednesday</option>
+                    <option value="4">Thursday</option>
+                    <option value="5">Friday</option>
+                    <option value="6">Saturday</option>
+                    <option value="7">Sunday</option>
+                  </select>
+                  </div>
+                  <div class="col-md-1 padding-top-08">of</div>
+                  <div class="col-md-3">
+                    <select id="" name="" class="form-control">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">Novembre</option>
+                    <option value="12">December</option>
+                  </select>
+                  </div>
+                </div>
+
+              </fieldset>
+            </form>
+          </div>
+        </div>
+        <hr class="clearfix" style="margin:0 15px;">
+        <div id="reccurenceDate" style="padding:10px 15px 40px 15px;">
+
+          <div class="row">
+            <div class="col-md-6">
+              <label for="createdBetweenStart">Dates</label>
+              <div class="input-group date" id="creationdateafter">
+                <input type="text" value="" name="creationdateafter" class="form-control" id="createdBetweenStart" placeholder="Starting On">
+                <span class="input-group-addon addonRightEve">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              </span>
               </div>
-              <!-- /.col-md-6 -->
             </div>
-
+            <!-- /.col-md-6 -->
+            <div class="col-md-6">
+              <label for="createdBetweenEnd">&nbsp;</label>
+              <div class="input-group date" id="creationdatebefore">
+                <input type="text" value="" name="creationdatebefore" class="form-control" id="createdBetweenEnd" placeholder="Ending On">
+                <span class="input-group-addon addonRightEve">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              </span>
+              </div>
+            </div>
+            <!-- /.col-md-6 -->
           </div>
 
         </div>
-      </div>
-    </div>
-  </div>
 
+      </div>
+
+      <div class="modal-footer">
+        <a href="" class="btn btn-success btn-icon-alt"><i class="fa fa-check"></i> Save</a>
+        <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle-o"></i> Cancel</button>
+      </div>
+
+    </div>
+
+  </div>
 </div>

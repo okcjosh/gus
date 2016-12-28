@@ -12,14 +12,11 @@ export class EventComponent {
     this.$state = $state;
     this.$scope = $scope;
 
+    $scope.loadRecuringModal = this.loadRecuringModal;//.bind(null, $scope);
+
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('event');
     });
-    // $scope.$on('FormSubmit', function () {
-    //   if(event-form.$valid) {
-    //     $state.go('/checkout');
-    //   }
-    // })
   }
 
   checkStepValid(step) {
@@ -195,6 +192,10 @@ export class EventComponent {
           console.log('Error' + res.statusText);
         }
       });
+  }
+
+  loadRecuringModal() {
+    console.log(this.$scope);
   }
 
   deleteEvent(event) {
