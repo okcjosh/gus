@@ -2,13 +2,45 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Events', {
-    _id: {
+    event_id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    eventTitle: {
+    venue: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    address: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    phone_number: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    point_of_contact: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    job_type: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    job_type_specs: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    prefered_officer_name: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    is_recuring: {
+      type: DataTypes.INTEGER(1),
+      allowNull: true
+    },
+    recuring_data: {
       type: DataTypes.STRING,
       allowNull: true
     },
@@ -16,25 +48,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true
     },
-    location_desc: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    address: {
-      type: DataTypes.INTEGER(1),
-      allowNull: true
-    },
-    department_id: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
     status_id: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    leo_id: {
       type: DataTypes.INTEGER(11),
-      allowNull: true
+      allowNull: false,
+      defaultValue: '1'
     }
   }, {
     tableName: 'Events'

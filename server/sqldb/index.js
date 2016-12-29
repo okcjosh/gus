@@ -13,6 +13,7 @@ let db = {
 };
 
 // Insert models below
+db.Notification = db.sequelize.import('../api/notification/notification.model');
 db.Cocknball = db.sequelize.import('../api/cocknball/cocknball.model');
 db.Session = db.sequelize.import('../api/session/session.model');
 db.DeptPreferences = db.sequelize.import('../api/dept_preferences/dept_preferences.model');
