@@ -26,7 +26,7 @@
       <ul class="list-group pw-lists">
         <h5 class="mb-20">Coordinator</h5>
         <li class="list-group-item">
-          <strong>Coordinator</strong>: {{ event.coordinator }} </li>
+          <strong>Coordinator</strong>: {{ event.point_of_contact }} </li>
         <li class="list-group-item">
           <strong>Phone Number</strong>: {{ event.phone_number }} </li>
         <li class="list-group-item">
@@ -44,12 +44,12 @@
 
         <div class="form-group">
           <label for="entryTitle">Job Title</label>
-          <input type="text" class="form-control" name="entryTitle" required="required" ng-model="event.venue" />
+          <input type="text" class="form-control" readonly name="entryTitle" required="required" ng-model="event.venue" />
         </div>
 
         <div class="form-group">
           <label for="entryDesc">Description</label>
-          <textarea class="form-control" name="entryDesc" required="required" rows="4" ng-model="event.description"></textarea>
+          <textarea class="form-control" readonly name="entryDesc" required="required" rows="4" ng-model="event.description"></textarea>
         </div>
 
 
