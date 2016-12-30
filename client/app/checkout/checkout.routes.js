@@ -5,10 +5,12 @@ export default function routes($stateProvider) {
   $stateProvider
     .state('checkout', {
       url: '/checkout?event_id',
-      template: '<checkout></checkout>'
+      template: '<checkout></checkout>',
+      authenticate: true
     })
     .state('transaction', {
       url: '/checkout/transaction?tranid',
-      template: '<transaction></transaction>'
+      template: '<transaction></transaction>',
+      authenticate: true
     });
 }

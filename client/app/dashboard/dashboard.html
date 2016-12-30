@@ -160,13 +160,48 @@
                       </h4>
                     </div>
                     <div class="modal-body">
-                      ...
+                      <form class="form-horizontal">
+                        <fieldset>
+
+                          <!-- Form Name -->
+                          <legend>Form Name</legend>
+
+                          <!-- Multiple Checkboxes -->
+                          <div class="form-group">
+                            <label class="col-md-4 control-label" for="checkboxes">Notify Client of Rejection</label>
+                            <div class="col-md-4">
+                              <div class="checkbox">
+                                <label for="checkboxes-0">
+                                  <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
+                                  SMS Text
+                                </label>
+                              </div>
+                              <div class="checkbox">
+                                <label for="checkboxes-1">
+                                  <input type="checkbox" name="checkboxes" id="checkboxes-1" value="2">
+                                  Email
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Textarea -->
+                          <div class="form-group">
+                            <label class="col-md-4 control-label" for="textarea">Rejection Feedback</label>
+                            <div class="col-md-4">
+                              <textarea class="form-control" id="textarea" name="textarea">Your event registration has been rejected</textarea>
+                            </div>
+                          </div>
+
+                        </fieldset>
+                      </form>
+
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">
                         Close
                       </button>
-                      <button type="button" class="btn btn-primary">
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">
                         Save changes
                       </button>
                     </div>
