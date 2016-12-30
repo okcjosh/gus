@@ -5,7 +5,8 @@ export default function(sequelize, DataTypes) {
     leo_id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     name: {
       type: DataTypes.STRING,

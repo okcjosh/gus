@@ -5,6 +5,7 @@ export default function($stateProvider) {
   $stateProvider
     .state('drag', {
       url: '/drag',
-      template: '<drag></drag>'
+      template: '<drag></drag>',
+      authenticate: true
     });
 }
