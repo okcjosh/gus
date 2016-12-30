@@ -6,6 +6,6 @@ export default function routes($stateProvider) {
     .state('leo', {
       url: '/leo',
       template: '<leo></leo>',
-      authenticate: true
+      authenticate: 'admin'
     });
 }

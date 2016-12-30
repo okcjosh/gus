@@ -6,6 +6,6 @@ export default function($stateProvider) {
     .state('dashboard', {
       url: '/dashboard',
       template: '<dashboard></dashboard>',
-      authenticate: true
+      authenticate: 'admin'
     });
 }
