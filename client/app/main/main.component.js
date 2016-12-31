@@ -18,7 +18,6 @@ require( 'datatables.net-scroller');
 //require( 'datatables.net-scroller-bs');
 
 export class MainController {
-
   /*@ngInject*/
   constructor($http, $scope, socket, $state, $interpolate, Auth) {
     this.$http = $http;

@@ -204,7 +204,8 @@
     "validator": "^6.2.0",
     "webpack": "^1.12.14",
     "webpack-dev-middleware": "^1.5.1",
-    "webpack-stream": "^3.2.0"
+    "webpack-stream": "^3.2.0",
+    "nyan": "latest"
   },
   "engines": {
     "node": "^6.2.2",
