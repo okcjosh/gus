@@ -1,30 +1,85 @@
 <div class="container-fluid">
   <div class="row">
     <div class="container main-content" style="width: 98%">
-      <h2 class="text-center" style="margin-bottom: 30px;">Set Price ranges for event</h2>
+      <h2 class="text-center margin-bottom-20">Set Price ranges for event</h2>
+
+      <div class="well well-sm accInfo container margin-bottom-10">
+        <h5 class="" style="margin-bottom: 10px;">Set General Costs for Job Types</h5>
+        <div class="form-group col-xs-6">
+          <label for="">Alchohol Cost</label>
+          <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <input class="form-control" ng-model="all.alchohol" type="number">
+          </div>
+        </div>
+
+        <div class="form-group col-xs-6">
+          <label for="">Police Vehicle Cost</label>
+          <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <input class="form-control" ng-model="all.police_vehicle" type="number">
+          </div>
+        </div>
+        <div class="form-group col-xs-6">
+          <label for="">Barricade Cost</label>
+          <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <input class="form-control" ng-model="all.barricade" type="number">
+          </div>
+        </div>
+        <div class="form-group col-xs-6">
+          <label for="">Amplified Sound Cost</label>
+          <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <input class="form-control" ng-model="all.amplified_sound" type="number">
+          </div>
+        </div>
+
+        <div class="col-xs-12">
+          <button class="btn btn-primary pull-right" ng-click="saveGenerals()">Save General Costs</button>
+        </div>
+      </div>
+
 
       <table class="table table-striped table-hover table-bordered table-responsive">
         <thead>
           <th>Job Type</th>
-          <th>Price</th>
-          <th>Other factors...</th>
+          <th>Base Cost</th>
+          <th>Crowd Rate</th>
+          <th>Officer Rate</th>
+          <th>Hour Rate per Officer</th>
         </thead>
         <tbody>
           <tr ng-repeat="job in jobTypes">
             <th>{{job.name}}</th>
             <td>
               <div class="form-group">
-                <label for="" class="sr-only"> Base price: </label>
+                <label for="" class="sr-only"> Base cost: </label>
                 <div class="input-group">
                   <div class="input-group-addon">$</div>
-                  <input class="form-control" ng-model="job.price" type="number">
+                  <input class="form-control" ng-model="job.base_price" type="number">
                 </div>
               </div>
             </td>
             <td>
               <div class="input-group">
-                <input class="form-control" type="number" placeholder="other factors">
-                <div class="input-group-addon">/ hour</div>
+                <div class="input-group-addon">$</div>
+                <input class="form-control" ng-model="job.crowd_rate" type="number" placeholder="Charge per 10 guests">
+                <div class="input-group-addon">/ 10 guests</div>
+              </div>
+            </td>
+            <td>
+              <div class="input-group">
+                <div class="input-group-addon">$</div>
+                <input class="form-control" ng-model="job.officer_rate" type="number" placeholder="Charge per officer">
+                <div class="input-group-addon">/ officer</div>
+              </div>
+            </td>
+            <td>
+              <div class="input-group">
+                <div class="input-group-addon">$</div>
+                <input class="form-control" ng-model="job.hour_rate" type="number" placeholder="Charge per hour per officer">
+                <div class="input-group-addon">/ hour per officer</div>
               </div>
             </td>
           </tr>

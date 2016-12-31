@@ -74,7 +74,7 @@ export function index(req, res) {
 export function show(req, res) {
   return JobType.find({
     where: {
-      _id: req.params.id
+      job_type_id: req.params.id
     }
   })
     .then(handleEntityNotFound(res))
@@ -90,14 +90,32 @@ export function create(req, res) {
 }
 
 // Upserts the given JobType in the DB at the specified ID
-export function upsert(req, res) {
-  if(req.body._id) {
-    delete req.body._id;
-  }
-
-  return JobType.upsert(req.body, {
+export function update(req, res) {
+  
+  return JobType.update(req.body, {
     where: {
-      _id: req.params.id
+      job_type_id: req.params.id
+    }
+  })
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+// Updates all rows in the table to have the general costs
+export function setGeneralCosts(req, res) {
+
+  let cost = {
+    alchohol: req.body.alchohol,
+    police_vehicle: req.body.police_vehicle,
+    barricade: req.body.barricade,
+    amplified_sound: req.body.amplified_sound
+  };
+
+  return JobType.update(cost, {
+    where: {
+      job_type_id: {
+        $gt: 0
+      }
     }
   })
     .then(respondWithResult(res))
@@ -106,12 +124,12 @@ export function upsert(req, res) {
 
 // Updates an existing JobType in the DB
 export function patch(req, res) {
-  if(req.body._id) {
-    delete req.body._id;
+  if(req.body.job_type_id) {
+    delete req.body.job_type_id;
   }
   return JobType.find({
     where: {
-      _id: req.params.id
+      job_type_id: req.params.id
     }
   })
     .then(handleEntityNotFound(res))
@@ -124,7 +142,7 @@ export function patch(req, res) {
 export function destroy(req, res) {
   return JobType.find({
     where: {
-      _id: req.params.id
+      job_type_id: req.params.id
     }
   })
     .then(handleEntityNotFound(res))
