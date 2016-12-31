@@ -31,20 +31,20 @@ export class RatesComponent {
   }
 
   init($scope) {
-    // This will be replaced with http get for all jobtypes
-    let j = [];
-    for (let i = 1; i < 10; i++) {
-      j.push({
-        job_type_id: i,
-        name: 'A name ' + Math.random(),
-        description: 'A description',
-        price: 1000
+    this.$http.get('/api/job_types')
+      .then(function(res) {
+        $scope.jobTypes = res.data;
+        let first = res.data[0];
+        $scope.all = {
+          alchohol: first.alchohol,
+          police_vehicle: first.police_vehicle,
+          barricade: first.barricade,
+          amplified_sound: first.amplified_sound
+        }
       });
-    }
-    $scope.jobTypes = j;
-    // END: Replacement.. Generated dummy data
 
-    $scope.saveRates = this.saveRates.bind(null, $scope);
+    $scope.saveRates = this.saveRates.bind(this, $scope);
+    $scope.saveGenerals = this.saveGenerals.bind(this, $scope);
   }
 
   $onInit() {
@@ -52,10 +52,22 @@ export class RatesComponent {
   }
 
   saveRates($scope) {
-    console.log($scope.jobTypes);
-    console.log('There will be a post request here!')
+    $scope.jobTypes.forEach((jobType) => {
+      console.log(jobType);
+      this.$http.put('/api/job_types/' + jobType.job_type_id, jobType)
+        .then(function(res) {
+          //console.log(res);
+        });
+    });
   }
 
+  saveGenerals($scope) {
+    console.log($scope.all)
+    this.$http.put('/api/job_types/general_costs', $scope.all)
+      .then(function(res) {
+
+      });
+  }
 }
 
 export default angular.module('gusApp.rates', [uiRouter])

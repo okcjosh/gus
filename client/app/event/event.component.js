@@ -20,7 +20,7 @@ export class EventComponent {
   }
 
   checkStepValid(step) {
-    // /return true;
+    // return true;
     var $s = this.$scope;
     switch (step) {
       case 1:
@@ -111,7 +111,8 @@ export class EventComponent {
       creationEventDate: moment().add(7, 'days').format('DD MMMM YYYY hh:mm'),
       is_recuring: "0",
       hours_expected: 0,
-      crowd_size: 0
+      crowd_size: 0,
+      operational_details: []
     };
 
     this.$scope.jobTypes = [

@@ -10,12 +10,21 @@ export default function(sequelize, DataTypes) {
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false,
+      unique: true
     },
     description: {
       type: DataTypes.STRING,
       allowNull: true
-    }
+    },
+    base_price: DataTypes.INTEGER(11),
+    officer_rate: DataTypes.INTEGER(11),
+    crowd_rate: DataTypes.INTEGER(11),
+    hour_rate: DataTypes.INTEGER(11),
+    alchohol: DataTypes.INTEGER(11),
+    police_vehicle: DataTypes.INTEGER(11),
+    barricade: DataTypes.INTEGER(11),
+    amplified_sound: DataTypes.INTEGER(11)
   }, {
     tableName: 'job_type'
   });
