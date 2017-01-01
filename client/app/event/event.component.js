@@ -6,11 +6,12 @@ export class EventComponent {
   awesomeEvents = [];
 
   /*@ngInject*/
-  constructor($http, $scope, socket, $state) {
+  constructor($http, $scope, socket, $state, $q) {
     this.$http = $http;
     this.socket = socket;
     this.$state = $state;
     this.$scope = $scope;
+    this.$q = $q;
 
     $scope.loadRecuringModal = this.loadRecuringModal;//.bind(null, $scope);
 
@@ -74,6 +75,7 @@ export class EventComponent {
     var $scope = this.$scope;
     var $state = this.$state;
     var _self = this;
+
     this.$http.get('/api/events')
       .then(response => {
         this.awesomeEvents = response.data;
@@ -84,9 +86,25 @@ export class EventComponent {
     this.$scope.nextStep = function() {
       // Check for validity of filled data
       if (_self.checkStepValid($scope.progress)) {
-        if ($scope.progress == 3) {
+        if ($scope.progress == 2) {
+          _self.postEvent($scope)
+            .then(function(event) {
+              // Store created event on scope
+              $scope.event = event;
+              // Get cost of created event
+              _self.$http.get('/api/events/' + event._id + '/cost')
+                .then(function(res) {
+                  $scope.eventCost = res.data;
+                  $scope.progress++;
+                  console.log(res.data);
+                });
+
+            });
+        } else if ($scope.progress == 3) {
+          $state.go('checkout', { event_id: $scope.event._id });
+
           console.log($scope.eventData);
-          _self.postEvent($state, $scope); // If data was submitted successfully User will be redirected
+          // _self.postEvent($scope); // If data was submitted successfully User will be redirected
         } else {
           $scope.progress++;
         }
@@ -115,21 +133,10 @@ export class EventComponent {
       operational_details: []
     };
 
-    this.$scope.jobTypes = [
-      { value: 1, job: 'Birthday' },
-      { value: 2, job: 'Carnival' },
-      { value: 3, job: 'Circus' },
-      { value: 4, job: 'Concert' },
-      { value: 5, job: 'Festival' },
-      { value: 6, job: 'Hospital' },
-      { value: 7, job: 'License premise / Bar or Club' },
-      { value: 8, job: 'Party' },
-      { value: 9, job: 'Restaurant' },
-      { value: 10, job:  'School' },
-      { value: 11, job:  'Sporting Event' },
-      { value: 12, job:  'Wedding' },
-      { value: 13, job:  'Other' }
-    ];
+    this.$http.get('/api/job_types')
+      .then(function(res) {
+        _self.$scope.jobTypes = res.data;
+      });
 
     this.$scope.jobTypeSpecs = [
       { value: '39', data_job: '8', type_spec: 'Apartment Roving Patrol' },
@@ -330,7 +337,7 @@ export class EventComponent {
 
   }
 
-  postEvent($state, $scope) {
+  postEvent($scope) {
     var eventPayload = {
       title: $scope.eventData.title,
       venue: $scope.eventData.nameOfVenue,
@@ -338,7 +345,7 @@ export class EventComponent {
       phone_number: $scope.eventData.phoneNumber,
       point_of_contact: $scope.eventData.poContact,
       email: $scope.eventData.email,
-      job_type: $scope.eventData.jobType,
+      jobTypeId: $scope.eventData.jobType,
       job_type_specs: $scope.eventData.jobSpecs.join(","),
       prefered_officer_name: $scope.eventData.officerName.join(","),
       is_recuring: $scope.eventData.is_recuring,
@@ -362,15 +369,21 @@ export class EventComponent {
 
     console.log(eventPayload);
 
+    let d = this.$q.defer();
+
     this.$http.post('/api/events', eventPayload)
       .then(function(res) {
         console.log(res.data)
         if (res.status === 201) {
-          $state.go('checkout', { event_id: res.data.event_id });
+          d.resolve(res.data);
+          //$state.go('checkout', { event_id: res.data._id });
         } else {
+          d.reject(res);
           console.log('Error' + res.statusText);
         }
       });
+
+    return d.promise;
   }
 
   loadRecuringModal() {

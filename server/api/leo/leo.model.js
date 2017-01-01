@@ -2,7 +2,7 @@
 
 export default function(sequelize, DataTypes) {
   return sequelize.define('leo', {
-    leo_id: {
+    _id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
@@ -20,14 +20,14 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     },
-    department_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      references: {
-        model: 'department',
-        key: 'department_id'
-      }
-    },
+    // department_id: {
+    //   type: DataTypes.INTEGER(11),
+    //   allowNull: true,
+    //   references: {
+    //     model: 'department',
+    //     key: '_id'
+    //   }
+    // },
     year_started: {
       type: 'YEAR(4)',
       allowNull: true
@@ -46,4 +46,3 @@ export default function(sequelize, DataTypes) {
      tableName: 'leo'
     });
 }
-

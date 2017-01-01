@@ -2,7 +2,7 @@
 
 export default function(sequelize, DataTypes) {
   return sequelize.define('seniority_class', {
-    seniority_class_id: {
+    _id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,

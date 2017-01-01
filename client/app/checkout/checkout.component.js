@@ -7,6 +7,7 @@ import braintree from 'braintree-web';
 
 export function CheckoutComponent($scope, $http, $state) {
   let event_id = $state.params.event_id;
+  $scope.event_id = event_id;
 
   if (! event_id) {
     $state.go('event');
@@ -17,6 +18,11 @@ export function CheckoutComponent($scope, $http, $state) {
     .then(res => {
       $scope.event = res.data;
     });
+
+    $http.get('api/events/' + event_id + '/cost')
+      .then(res => {
+        $scope.cost = res.data;
+      });
 
   $http.post('checkout/transaction/token')
     .then(response => {

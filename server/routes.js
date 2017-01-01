@@ -1,5 +1,7 @@
 'use strict';
 import errors from './components/errors';
+import { CostCalculator } from './api/event/event.controller';
+import { JobType, Event, User, Transaction } from './sqldb';
 import path from 'path';
 let braintree = require('braintree');
 const flash = require('connect-flash');
@@ -87,17 +89,26 @@ export default function(app) {
     let result;
     let transactionId = req.params.id;
 
-    gateway.transaction.find(transactionId, function (err, transaction) {
-      result = createResultObject(transaction);
-      //console.log(transaction);
-      console.log(result);
-      // res.render('client/app/checkout_/checkout_/show', {transaction: transaction, result: result});
-      //res.render('./checkout/transaction/transaction', {transaction:transaction});
-      //res.redirect('/checkout/transaction', );
-      res.json(transaction);
+    Transaction.find({
+      where: {
+        transaction_id: transactionId
+      },
+      include: [{
+        model: Event,
+        include: [User, JobType]
+      }]
+    }).then(function(tran) {
 
+      gateway.transaction.find(transactionId, function (err, BTtransaction) {
+        result = createResultObject(BTtransaction);
+
+        res.json({
+          BTtransaction: BTtransaction,
+          result: result,
+          transaction: tran
+        });
+      });
     });
-
   });
 
   app.post('/checkout', function (req, res) {
@@ -105,26 +116,44 @@ export default function(app) {
     let amount = req.body.amount; // In production you should not take amounts directly from clients, I second this
     let nonce = req.body.payment_method_nonce;
     console.log('nonce = ' +  nonce);
+    //let amount = req.body.event_id; //////////////********
 
-    gateway.transaction.sale({
-      amount: amount,
-      paymentMethodNonce: nonce,
-      options: {
-        submitForSettlement: true
-      }
-    }, function (err, result) {
-      if (result.success || result.transaction) {
-        let resultOb = createResultObject(result.transaction);
-        console.log('result: ');
-        console.log(resultOb);
-        //res.redirect('transaction/' + result.transaction.id);
-        res.redirect('/checkout/transaction?tranid=' + result.transaction.id);
-      } else {
-        transactionErrors = result.errors.deepErrors();
-        req.flash('error', {msg: formatErrors(transactionErrors)});
-        res.status(400).send({msg: 'Error processing payment'});
-      }
+    Event.find({
+      where: {
+        _id: req.body.event_id
+      },
+      include: [JobType]
+    }).then(function(event) {
+
+      gateway.transaction.sale({
+        amount: CostCalculator(event).grand_total,
+        paymentMethodNonce: nonce,
+        options: {
+          submitForSettlement: true
+        }
+      }, function (err, result) {
+        if (result.success || result.transaction) {
+          let resultOb = createResultObject(result.transaction);
+          console.log('result: ');
+          console.log(resultOb);
+          //res.redirect('transaction/' + result.transaction.id); clear this former route
+
+          // Store transaction result to event
+          event.createTransaction({
+            transaction_id: result.transaction.id,
+            transaction_status: result.transaction.status
+          });
+
+          res.redirect('/checkout/transaction?tranid=' + result.transaction.id);
+        } else {
+          transactionErrors = result.errors.deepErrors();
+          req.flash('error', {msg: formatErrors(transactionErrors)});
+          res.status(400).send({msg: 'Error processing payment'});
+        }
+      });
+
     });
+
   });
 
   // All undefined asset or api routes should return a 404

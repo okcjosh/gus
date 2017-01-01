@@ -1,17 +1,17 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/job_types              ->  index
- * POST    /api/job_types              ->  create
- * GET     /api/job_types/:id          ->  show
- * PUT     /api/job_types/:id          ->  upsert
- * PATCH   /api/job_types/:id          ->  patch
- * DELETE  /api/job_types/:id          ->  destroy
+ * GET     /api/transactions              ->  index
+ * POST    /api/transactions              ->  create
+ * GET     /api/transactions/:id          ->  show
+ * PUT     /api/transactions/:id          ->  upsert
+ * PATCH   /api/transactions/:id          ->  patch
+ * DELETE  /api/transactions/:id          ->  destroy
  */
 
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import {JobType} from '../../sqldb';
+import {Transaction} from '../../sqldb';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -63,16 +63,16 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of JobTypes
+// Gets a list of Transactions
 export function index(req, res) {
-  return JobType.findAll()
+  return Transaction.findAll()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Gets a single JobType from the DB
+// Gets a single Transaction from the DB
 export function show(req, res) {
-  return JobType.find({
+  return Transaction.find({
     where: {
       _id: req.params.id
     }
@@ -82,17 +82,20 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
-// Creates a new JobType in the DB
+// Creates a new Transaction in the DB
 export function create(req, res) {
-  return JobType.create(req.body)
+  return Transaction.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
 
-// Upserts the given JobType in the DB at the specified ID
-export function update(req, res) {
+// Upserts the given Transaction in the DB at the specified ID
+export function upsert(req, res) {
+  if(req.body._id) {
+    delete req.body._id;
+  }
 
-  return JobType.update(req.body, {
+  return Transaction.upsert(req.body, {
     where: {
       _id: req.params.id
     }
@@ -101,33 +104,12 @@ export function update(req, res) {
     .catch(handleError(res));
 }
 
-// Updates all rows in the table to have the general costs
-export function setGeneralCosts(req, res) {
-
-  let cost = {
-    alchohol: req.body.alchohol,
-    police_vehicle: req.body.police_vehicle,
-    barricade: req.body.barricade,
-    amplified_sound: req.body.amplified_sound
-  };
-
-  return JobType.update(cost, {
-    where: {
-      _id: {
-        $gt: 0
-      }
-    }
-  })
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-}
-
-// Updates an existing JobType in the DB
+// Updates an existing Transaction in the DB
 export function patch(req, res) {
   if(req.body._id) {
     delete req.body._id;
   }
-  return JobType.find({
+  return Transaction.find({
     where: {
       _id: req.params.id
     }
@@ -138,9 +120,9 @@ export function patch(req, res) {
     .catch(handleError(res));
 }
 
-// Deletes a JobType from the DB
+// Deletes a Transaction from the DB
 export function destroy(req, res) {
-  return JobType.find({
+  return Transaction.find({
     where: {
       _id: req.params.id
     }

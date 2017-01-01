@@ -2,20 +2,20 @@
 
 export default function(sequelize, DataTypes) {
   return sequelize.define('leo_scheduling', {
-    leo_scheduling_id: {
+    _id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    leo_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'leo',
-        key: 'leo_id'
-      }
-    },
+    // leo_id: {
+    //   type: DataTypes.INTEGER(11),
+    //   allowNull: false,
+    //   references: {
+    //     model: 'leo',
+    //     key: '_id'
+    //   }
+    // },
     start_date: {
       type: DataTypes.DATE,
       allowNull: false

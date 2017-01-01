@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('notification', {
-    notification_id: {
+    _id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,

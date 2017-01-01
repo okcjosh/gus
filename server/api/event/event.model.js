@@ -2,12 +2,14 @@
 
 export default function(sequelize, DataTypes) {
   var Event = sequelize.define('Event', {
-    event_id: {
+    _id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
+    job_type_specs: DataTypes.STRING,
+
     status_id: DataTypes.INTEGER(11),
 
     title: DataTypes.STRING,
@@ -16,16 +18,14 @@ export default function(sequelize, DataTypes) {
     phone_number: DataTypes.STRING,
     point_of_contact: DataTypes.STRING,
     email: DataTypes.STRING,
-    job_type: DataTypes.STRING,
-    job_type_specs: DataTypes.STRING,
     description: DataTypes.STRING,
     prefered_officer_name: DataTypes.STRING,
     is_recuring: DataTypes.BOOLEAN,
     recuring_data: DataTypes.STRING,
     date: DataTypes.DATE,
-    crowd_size: DataTypes.STRING,
+    crowd_size: DataTypes.INTEGER(11),
     officer_arrival_time: DataTypes.STRING,
-    hours_expected: DataTypes.STRING,
+    hours_expected: DataTypes.INTEGER(11),
     officer_attire: DataTypes.STRING,
 
     alchohol: DataTypes.STRING,
@@ -59,6 +59,5 @@ export default function(sequelize, DataTypes) {
     // language: DataTypes.STRING,
     // operational_details: DataTypes.STRING
   });
-  //Event.hasOne(status, {foreignKey: "status_id"});
   return Event;
 }

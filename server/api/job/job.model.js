@@ -8,14 +8,14 @@ export default function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    job_type_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'job_type',
-        key: 'job_type_id'
-      }
-    },
+    // job_type_id: {
+    //   type: DataTypes.INTEGER(11),
+    //   allowNull: false,
+    //   references: {
+    //     model: 'job_type',
+    //     key: '_id'
+    //   }
+    // },
     date: {
       type: DataTypes.DATE,
       allowNull: false
@@ -28,30 +28,30 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    department_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'department',
-        key: 'department_id'
-      }
-    },
-    status_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'status',
-        key: 'status_id'
-      }
-    },
-    leo_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      references: {
-        model: 'leo',
-        key: 'leo_id'
-      }
-    }
+    // department_id: {
+    //   type: DataTypes.INTEGER(11),
+    //   allowNull: false,
+    //   references: {
+    //     model: 'department',
+    //     key: '_id'
+    //   }
+    // },
+    // status_id: {
+    //   type: DataTypes.INTEGER(11),
+    //   allowNull: false,
+    //   references: {
+    //     model: 'status',
+    //     key: '_id'
+    //   }
+    // },
+    // leo_id: {
+    //   type: DataTypes.INTEGER(11),
+    //   allowNull: true,
+    //   references: {
+    //     model: 'leo',
+    //     key: '_id'
+    //   }
+    // }
   }, {
     tableName: 'job'
   });

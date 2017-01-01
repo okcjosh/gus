@@ -54,7 +54,7 @@ export class RatesComponent {
   saveRates($scope) {
     $scope.jobTypes.forEach((jobType) => {
       console.log(jobType);
-      this.$http.put('/api/job_types/' + jobType.job_type_id, jobType)
+      this.$http.put('/api/job_types/' + jobType._id, jobType)
         .then(function(res) {
           //console.log(res);
         });
@@ -62,7 +62,6 @@ export class RatesComponent {
   }
 
   saveGenerals($scope) {
-    console.log($scope.all)
     this.$http.put('/api/job_types/general_costs', $scope.all)
       .then(function(res) {
 
