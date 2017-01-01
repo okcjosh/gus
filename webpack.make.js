@@ -41,6 +41,7 @@ module.exports = function makeWebpackConfig(options) {
             app: './client/app/app.js',
             polyfills: './client/polyfills.js',
             vendors: [
+                'flickity',
                 'jquery',
                 'angular',
                 'angular-animate',

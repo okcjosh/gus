@@ -261,7 +261,7 @@ export class DashboardComponent {
             {data: "address", title: "Location"},
             {data: "phone_number", title: "Phone Number"},
             {data: "point_of_contact", title: "POC"},
-            {data: "status.name", title: "Status"},
+            {data: "status_id", title: "Status"},
             {data: "job_type", title: "Job Type", visible: false},
             {data: "job_type_specs", title: "Job Specs", visible: false},
             {data: "prefered_officer_name", title: "Prefered Officer", visible: false},

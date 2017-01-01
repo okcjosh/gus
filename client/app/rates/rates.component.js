@@ -6,19 +6,17 @@ const jquery = require('jquery');
 import routes from './rates.routes';
 
 let $ = require('jquery');
-// require( 'datatables.net' );
-// require( 'datatables.net-buttons');
-// require( 'datatables.net-buttons-bs');
-// require( 'datatables.net-bs');
-// require( 'datatables.net-buttons-bs');
-// require( 'datatables.net-fixedheader');
-// require( 'datatables.net-fixedheader-bs');
-// require( 'datatables.net-keytable');
-// require( 'datatables.net-responsive');
-// require( 'datatables.net-responsive-bs');
-// require( 'datatables.net-select');
-// require( 'datatables.net-scroller');
-// require( 'datatables.net-scroller-bs');
+require( 'datatables.net' );
+require( 'datatables.net-buttons');
+require( 'datatables.net-buttons-bs');
+require( 'datatables.net-bs');
+require( 'datatables.net-buttons-bs');
+require( 'datatables.net-fixedheader');
+require( 'datatables.net-keytable');
+require( 'datatables.net-responsive');
+require( 'datatables.net-responsive-bs');
+require( 'datatables.net-select');
+require( 'datatables.net-scroller');
 
 export class RatesComponent {
   /*@ngInject*/
