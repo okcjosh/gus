@@ -1,6 +1,7 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import routing from './main.routes';
+const flickity = require('flickity');
 const jquery = require('jquery');
 let $ = require( 'jquery' );
 require( 'datatables.net' );
@@ -27,7 +28,7 @@ export class MainController {
     this.$scope.$state = $state;
     this.$interpolate = $interpolate;
 
-    $scope.$on('$destroy', function() {
+    $scope.$on('$destroy', function () {
       socket.unsyncUpdates('thing');
     });
   }
@@ -37,7 +38,7 @@ export class MainController {
       .then(response => {
         this.dataSet = response.data;
         // alert(this.dataSet[0].name);
-        let table =  $('#example').DataTable( {
+        let table = $('#example').DataTable({
           data: this.dataSet,
           columns: [
             {data: "event_id", title: "ID", visible: false},
@@ -54,13 +55,13 @@ export class MainController {
             {data: "date", title: "Date", visible: false},
             // { data: "status", title: "Status" },
             // { data: "event_type", title: "Event Type" }
-            ]
-          });
-        })
-      }
+          ]
+        });
+      })
+  }
 
   addThing() {
-    if(this.newThing) {
+    if (this.newThing) {
       this.$http.post('/api/things', {
         name: this.newThing
       });
@@ -72,6 +73,9 @@ export class MainController {
     this.$http.delete(`/api/things/${thing._id}`);
   }
 }
+
+
+
 console.log('So hey, HEY!');
 console.log('      we brought our drum');
 console.log('           and this is how we dance');

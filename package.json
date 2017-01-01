@@ -88,6 +88,7 @@
     "fast-json-patch": "^1.0.0",
     "fastclick": "^1.0.6",
     "file-loader": "^0.9.0",
+    "flickity": "^2.0.5",
     "flot": "^0.8.0-alpha",
     "font-awesome": ">=4.1.0",
     "fontawesome": "^4.7.0",
@@ -163,6 +164,7 @@
     "normalize.css": "^5.0.0",
     "nprogress": "^0.2.0",
     "null-loader": "^0.1.1",
+    "nyan": "latest",
     "open": "~0.0.4",
     "parsleyjs": "^2.6.0",
     "passport": "~0.3.0",
@@ -204,8 +206,7 @@
     "validator": "^6.2.0",
     "webpack": "^1.12.14",
     "webpack-dev-middleware": "^1.5.1",
-    "webpack-stream": "^3.2.0",
-    "nyan": "latest"
+    "webpack-stream": "^3.2.0"
   },
   "engines": {
     "node": "^6.2.2",
