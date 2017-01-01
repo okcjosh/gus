@@ -2,7 +2,7 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import routing from './main.routes';
 const flickity = require('flickity');
-const jquery = require('jquery');
+// const jquery = require('jquery');
 let $ = require( 'jquery' );
 require( 'datatables.net' );
 require( 'datatables.net-buttons');
