@@ -9,9 +9,6 @@ export default function(sequelize, DataTypes) {
       autoIncrement: true
     },
     job_type_specs: DataTypes.STRING,
-
-    status_id: DataTypes.INTEGER(11),
-
     title: DataTypes.STRING,
     venue: DataTypes.STRING,
     address: DataTypes.STRING,

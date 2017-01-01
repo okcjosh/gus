@@ -128,7 +128,7 @@ export function CostCalculator(event) {
 // Gets a list of Events
 export function index(req, res) {
   return Event.findAll({
-    include: [JobType]
+    include: [JobType, Status]
   })
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -140,7 +140,7 @@ export function show(req, res) {
     where: {
       _id: req.params.id
     },
-    include: [JobType, User]
+    include: [JobType, User, Status]
   })
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))

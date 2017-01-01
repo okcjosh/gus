@@ -38,14 +38,18 @@ db.Transaction = db.sequelize.import('../api/transaction/transaction.model');
 
 db.Leo.belongsTo(db.Department);
 db.Department.hasMany(db.Leo);
-// //db.Status.belongsToMany(db.Event, {through: 'eventStatus', foreignKey: "status_id", otherKey: "status_id"});
-// db.Event.belongsTo(db.Status);
 
 db.Event.belongsTo(db.JobType);
 db.JobType.hasMany(db.Event);
 
 db.Event.belongsTo(db.User);
 db.User.hasMany(db.Event);
+
+db.Event.belongsTo(db.Status);
+db.Status.hasMany(db.Event);
+
+db.JobInvitation.belongsTo(db.JobInvitationStatus);
+db.JobInvitationStatus.hasMany(db.JobInvitation);
 
 // Braintree relation to event
 db.Transaction.belongsTo(db.Event);
