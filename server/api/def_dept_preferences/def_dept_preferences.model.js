@@ -1,8 +1,8 @@
 'use strict';
 
 export default function(sequelize, DataTypes) {
-  return sequelize.define('def_dept_preferences', {
-    preference_id: {
+  return sequelize.define('DefDeptPreferences', {
+    _id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
@@ -20,7 +20,5 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(10),
       allowNull: false
     }
-  }, {
-    tableName: 'def_dept_preferences'
   });
 }

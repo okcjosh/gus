@@ -1,8 +1,8 @@
 'use strict';
 
 export default function(sequelize, DataTypes) {
-  return sequelize.define('seniority_class', {
-    seniority_class_id: {
+  return sequelize.define('SeniorityClass', {
+    _id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
@@ -28,7 +28,5 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: false
     }
-  }, {
-    tableName: 'seniority_class'
   });
 }

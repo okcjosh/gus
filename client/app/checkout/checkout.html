@@ -23,18 +23,18 @@
                 <div id='dropin'></div>
               </div>
 
-              <input type="hidden" name="event_id" ng-model="event.event_id">
+              <input type="hidden" name="event_id" value="{{ event_id }}">
 
               <div class="form-group">
                 <label for='amount'>Amount</label>
                 <div class='input-group'>
                   <div class="input-group-addon">$</div>
-                  <input class="form-control" id='amount' name='amount' type='number' min='1' placeholder='Amount' value='10' />
+                  <input class="form-control" id='amount' name='amount' placeholder='Amount' value='{{cost.grand_total}}' readonly/>
                 </div>
               </div>
 
             </section>
-            <button type='submit' class='btn btn-success btn-icon btn-lg'><span class="fa fa-check-circle"></span>Pay</button>
+            <button type='submit' ng-disabled="!cost.grand_total" class='btn btn-success btn-icon btn-lg'><span class="fa fa-check-circle"></span>Pay</button>
           </form>
 
         </div>

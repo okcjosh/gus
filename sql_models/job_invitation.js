@@ -8,13 +8,9 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    job_id: {
+    party_id: {
       type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'job',
-        key: 'job_id'
-      }
+      allowNull: false
     },
     leo_id: {
       type: DataTypes.INTEGER(11),
@@ -28,13 +24,14 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: false
     },
+    pick: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     job_invitation_status_id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      references: {
-        model: 'job_invitation_status',
-        key: 'job_invitation_status_id'
-      }
+      defaultValue: '1'
     }
   }, {
     tableName: 'job_invitation'

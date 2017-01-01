@@ -1,8 +1,8 @@
 'use strict';
 
 export default function(sequelize, DataTypes) {
-  return sequelize.define('job_invitation', {
-    job_invitation_id: {
+  return sequelize.define('JobInvitation', {
+    _id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
@@ -25,14 +25,14 @@ export default function(sequelize, DataTypes) {
       //   key: 'event_id'
       // }
     },
-    leo_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'leo',
-        key: 'leo_id'
-      }
-    },
+    // leo_id: {
+    //   type: DataTypes.INTEGER(11),
+    //   allowNull: false,
+    //   references: {
+    //     model: 'leo',
+    //     key: '_id'
+    //   }
+    // },
     expires: {
       type: DataTypes.DATE,
       allowNull: false
@@ -51,7 +51,5 @@ export default function(sequelize, DataTypes) {
     //     key: 'job_invitation_status_id'
     //   }
     // }
-  }, {
-    tableName: 'job_invitation'
   });
 }

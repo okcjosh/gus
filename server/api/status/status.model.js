@@ -1,8 +1,8 @@
 'use strict';
 
 export default function(sequelize, DataTypes) {
-  return sequelize.define('status', {
-    status_id: {
+  return sequelize.define('Status', {
+    _id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
@@ -16,7 +16,5 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     }
-  }, {
-    tableName: 'status'
   });
 }

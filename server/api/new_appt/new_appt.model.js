@@ -1,7 +1,7 @@
 'use strict';
 
 export default function(sequelize, DataTypes) {
-  return sequelize.define('new_appt', {
+  return sequelize.define('NewAppt', {
     idnew_appt: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -16,7 +16,5 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     }
-  }, {
-    tableName: 'new_appt'
   });
 }

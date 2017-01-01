@@ -21,4 +21,3 @@ module.exports = {
   seedDB: true
 
 };
-

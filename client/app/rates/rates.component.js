@@ -6,19 +6,17 @@ const jquery = require('jquery');
 import routes from './rates.routes';
 
 let $ = require('jquery');
-// require( 'datatables.net' );
-// require( 'datatables.net-buttons');
-// require( 'datatables.net-buttons-bs');
-// require( 'datatables.net-bs');
-// require( 'datatables.net-buttons-bs');
-// require( 'datatables.net-fixedheader');
-// require( 'datatables.net-fixedheader-bs');
-// require( 'datatables.net-keytable');
-// require( 'datatables.net-responsive');
-// require( 'datatables.net-responsive-bs');
-// require( 'datatables.net-select');
-// require( 'datatables.net-scroller');
-// require( 'datatables.net-scroller-bs');
+require( 'datatables.net' );
+require( 'datatables.net-buttons');
+require( 'datatables.net-buttons-bs');
+require( 'datatables.net-bs');
+require( 'datatables.net-buttons-bs');
+require( 'datatables.net-fixedheader');
+require( 'datatables.net-keytable');
+require( 'datatables.net-responsive');
+require( 'datatables.net-responsive-bs');
+require( 'datatables.net-select');
+require( 'datatables.net-scroller');
 
 export class RatesComponent {
   /*@ngInject*/
@@ -31,20 +29,20 @@ export class RatesComponent {
   }
 
   init($scope) {
-    // This will be replaced with http get for all jobtypes
-    let j = [];
-    for (let i = 1; i < 10; i++) {
-      j.push({
-        job_type_id: i,
-        name: 'A name ' + Math.random(),
-        description: 'A description',
-        price: 1000
+    this.$http.get('/api/job_types')
+      .then(function(res) {
+        $scope.jobTypes = res.data;
+        let first = res.data[0];
+        $scope.all = {
+          alchohol: first.alchohol,
+          police_vehicle: first.police_vehicle,
+          barricade: first.barricade,
+          amplified_sound: first.amplified_sound
+        }
       });
-    }
-    $scope.jobTypes = j;
-    // END: Replacement.. Generated dummy data
 
-    $scope.saveRates = this.saveRates.bind(null, $scope);
+    $scope.saveRates = this.saveRates.bind(this, $scope);
+    $scope.saveGenerals = this.saveGenerals.bind(this, $scope);
   }
 
   $onInit() {
@@ -52,10 +50,26 @@ export class RatesComponent {
   }
 
   saveRates($scope) {
-    console.log($scope.jobTypes);
-    console.log('There will be a post request here!')
+    $scope.jobTypes.forEach((jobType) => {
+      let j = {
+        base_price: jobType.base_price,
+        crowd_rate: jobType.crowd_rate,
+        hour_rate: jobType.hour_rate,
+        officer_rate: jobType.officer_rate
+      };
+      this.$http.put('/api/job_types/' + jobType._id, j)
+        .then(function(res) {
+          //console.log(res);
+        });
+    });
   }
 
+  saveGenerals($scope) {
+    this.$http.put('/api/job_types/general_costs', $scope.all)
+      .then(function(res) {
+
+      });
+  }
 }
 
 export default angular.module('gusApp.rates', [uiRouter])

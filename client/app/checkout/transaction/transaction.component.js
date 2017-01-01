@@ -13,15 +13,15 @@ export function TransactionComponent($scope, $http, $location, $state) {
   //var tranid = $location.search()['tranid'];
   let tranid = $state.params.tranid;
   $http.get('/transaction/' + tranid).then(function(response) {
-    $scope.transaction = response.data;
+    $scope.transaction = response.data.BTtransaction;
+    $scope.event = response.data.transaction.Event;
+    $scope.result = response.data.result;
   }, function(err) {
-    alert(err);
+    console.log(err)
+    //alert(err);
   });
 
-  $http.get('/api/events/2')
-    .then(res => {
-      $scope.event = res.data;
-    });
+
   //alert($scope.transaction);
   // function Demo(config) {
   //   this.config = config;

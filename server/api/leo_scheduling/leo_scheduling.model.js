@@ -1,21 +1,21 @@
 'use strict';
 
 export default function(sequelize, DataTypes) {
-  return sequelize.define('leo_scheduling', {
-    leo_scheduling_id: {
+  return sequelize.define('LeoScheduling', {
+    _id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    leo_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'leo',
-        key: 'leo_id'
-      }
-    },
+    // leo_id: {
+    //   type: DataTypes.INTEGER(11),
+    //   allowNull: false,
+    //   references: {
+    //     model: 'leo',
+    //     key: '_id'
+    //   }
+    // },
     start_date: {
       type: DataTypes.DATE,
       allowNull: false
@@ -28,7 +28,5 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(10),
       allowNull: false
     }
-  }, {
-    tableName: 'leo_scheduling'
   });
 }

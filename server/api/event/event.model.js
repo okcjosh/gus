@@ -2,23 +2,40 @@
 
 export default function(sequelize, DataTypes) {
   var Event = sequelize.define('Event', {
-    event_id: {
+    _id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
+    job_type_specs: DataTypes.STRING,
+
+    status_id: DataTypes.INTEGER(11),
+
+    title: DataTypes.STRING,
     venue: DataTypes.STRING,
     address: DataTypes.STRING,
     phone_number: DataTypes.STRING,
     point_of_contact: DataTypes.STRING,
-    job_type: DataTypes.STRING,
-    job_type_specs: DataTypes.STRING,
+    email: DataTypes.STRING,
+    description: DataTypes.STRING,
     prefered_officer_name: DataTypes.STRING,
     is_recuring: DataTypes.BOOLEAN,
     recuring_data: DataTypes.STRING,
     date: DataTypes.DATE,
-    status_id: DataTypes.INTEGER(11)
+    crowd_size: DataTypes.INTEGER(11),
+    officer_arrival_time: DataTypes.STRING,
+    hours_expected: DataTypes.INTEGER(11),
+    officer_attire: DataTypes.STRING,
+
+    alchohol: DataTypes.STRING,
+    barricades: DataTypes.STRING,
+    police_vehicle: DataTypes.STRING,
+    amplified_sound: DataTypes.STRING,
+
+    operational_details: DataTypes.STRING
+
+
     // address: DataTypes.STRING,
     // job_type: DataTypes.STRING,
     // status_id: {
@@ -41,7 +58,24 @@ export default function(sequelize, DataTypes) {
     // officer_skillset: DataTypes.STRING,
     // language: DataTypes.STRING,
     // operational_details: DataTypes.STRING
+  }, {
+    instanceMethods: {
+      // Hide password from JSON of user
+      toJSON: function () {
+        var e = Object.assign({}, this.get());
+        if (e.User) {
+          delete e.User.password;
+          delete e.User.provider;
+          delete e.User.salt;
+          delete e.User.facebook;
+          delete e.User.twitter;
+          delete e.User.google;
+          delete e.User.github;
+        }
+
+        return e;
+      },
+    }
   });
-  //Event.hasOne(status, {foreignKey: "status_id"});
   return Event;
 }

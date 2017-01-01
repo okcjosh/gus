@@ -1,8 +1,8 @@
 'use strict';
 
 export default function(sequelize, DataTypes) {
-  return sequelize.define('department', {
-    department_id: {
+  return sequelize.define('Department', {
+    _id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
@@ -16,7 +16,5 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     }
-  }, {
-    tableName: 'department'
   });
 }

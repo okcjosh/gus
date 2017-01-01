@@ -5,6 +5,7 @@ export default function routes($stateProvider) {
   $stateProvider
     .state('leo', {
       url: '/leo',
-      template: '<leo></leo>'
+      template: '<leo></leo>',
+      authenticate: 'admin'
     });
 }

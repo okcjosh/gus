@@ -150,7 +150,7 @@ export class DashboardComponent {
       draggedLeos.forEach(function(leo) {
 
         let inviteData = {
-          party_id: $scope.selectedRow.event_id,
+          party_id: $scope.selectedRow._id,
           pick: invite.round,
           leo_id: leo.leo_id,
           expires: 0
@@ -240,7 +240,7 @@ export class DashboardComponent {
         this.dataSet = response.data.map(function(event) {
           let link = `
             <a
-              href="{{ $state.href('event-details', { event_id: ${event.event_id} }) }}"
+              href="{{ $state.href('event-details', { event_id: ${event._id} }) }}"
               data-toggle="tooltip"
               data-placement="right"
               title=""
@@ -255,14 +255,14 @@ export class DashboardComponent {
           select: true,
           data: this.dataSet,
           columns: [
-            {data: "event_id", title: "ID", visible: false},
+            {data: "_id", title: "ID", visible: false},
             {data: "venue", title: "Venue Data", visible: false},
             {data: "venueLink", title: "Venue"},
             {data: "address", title: "Location"},
             {data: "phone_number", title: "Phone Number"},
             {data: "point_of_contact", title: "POC"},
-            {data: "status.name", title: "Status"},
-            {data: "job_type", title: "Job Type", visible: false},
+            {data: "status_id", title: "Status"},
+            {data: "JobType", title: "Job Type", visible: false},
             {data: "job_type_specs", title: "Job Specs", visible: false},
             {data: "prefered_officer_name", title: "Prefered Officer", visible: false},
             {data: "is_recuring", title: "Is Recuring", visible: false},
@@ -285,7 +285,7 @@ export class DashboardComponent {
 
             $http.get('/api/invitations', {
               params: {
-                party_id: $scope.selectedRow.event_id
+                party_id: $scope.selectedRow._id
               }
             }).then(res => {
               _self.initializeDragDrop($scope, res.data);

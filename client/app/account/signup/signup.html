@@ -8,14 +8,40 @@
 
         <div class='form-group' ng-class='{ 'has-success': form.name.$valid && vm.submitted,
                                             'has-error': form.name.$invalid && vm.submitted }'>
-          <label>Name</label>
+          <label>First Name</label>
 
           <input type='text' name='name' class='form-control' ng-model='vm.user.name'
                  required/>
           <p class='help-block' ng-show='form.name.$error.required && vm.submitted'>
             A name is required
           </p>
+        <div class='form-group' ng-class='{ 'has-success': form.name.$valid && vm.submitted,
+        'has-error': form.name.$invalid && vm.submitted }'>
+        <label>Last Name</label>
+
+        <input type='text' name='lastname' class='form-control' ng-model='vm.user.lastname'
+               required/>
+        <p class='help-block' ng-show='form.lastname.$error.required && vm.submitted'>
+          A last name is required
+        </p>
+    </div>
         </div>
+
+
+    <div class='form-group' ng-class='{ 'has-success': form.cell.$valid && vm.submitted,
+    'has-error': form.cell.$invalid && vm.submitted }'>
+    <label>Cell</label>
+    <input type='text' name='name' class='form-control' ng-model='vm.user.cell'
+           required/>
+    <p class='help-block' ng-show='form.cell.$error.required && vm.submitted'>
+      A cell number is required
+    </p>
+  <label for="checkboxes-0">
+    <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
+    ES4 Requires permission to send SMS text messages to your cell phone. Please acknowledge by clicking the checkbox
+  </label>
+  </div>
+
 
         <div class='form-group' ng-class='{ 'has-success': form.email.$valid && vm.submitted,
                                             'has-error': form.email.$invalid && vm.submitted }'>

@@ -47,22 +47,22 @@
             <h3 class="margin-bottom-10">Venue</h3>
 
             <div class="form-group">
-              <label for="title" id="titleLabel" class="control-label col-sm-2">Title</label>
-              <div class="col-sm-10">
+              <label for="title" id="titleLabel" class="control-label col-md-3">Title</label>
+              <div class="col-md-9">
                 <input name="title" type="text" ng-model="eventData.title" required id="title" class="form-control" placeholder="e.g. Mary and Michael's Wedding" />
               </div>
             </div>
 
             <div class="form-group">
-              <label for="nameOfVenue" id="nameOfVenueLabel" class="control-label col-sm-2">Name of Venue</label>
-              <div class="col-sm-10">
+              <label for="nameOfVenue" id="nameOfVenueLabel" class="control-label col-md-3">Venue Name</label>
+              <div class="col-md-9">
                 <input name="nameOfVenue" type="text" ng-model="eventData.nameOfVenue" required id="nameOfVenue" class="form-control" placeholder="Enter the Name of the venue" />
               </div>
             </div>
 
             <div class="form-group">
-              <label for="address" id="addressLabel" class="control-label col-sm-2">Address</label>
-              <div class="col-sm-10">
+              <label for="address" id="addressLabel" class="control-label col-md-3">Venue Address</label>
+              <div class="col-md-9">
                 <div id="locationField">
                   <input class="form-control" ng-model="eventData.location" required id="autocomplete" placeholder="Enter your address" name="address" g-places-autocomplete autocomplete="off" type="text"></input>
                 </div>
@@ -70,31 +70,22 @@
             </div>
 
             <div class="form-group">
-              <label for="description" id="descriptionLabel" class="control-label col-sm-2">Event Description</label>
-              <div class="col-sm-10">
-                <div id="descriptionField">
-                  <textarea class="form-control" ng-model="eventData.description" placeholder="Add a description for your event" name="description"></textarea>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="phoneNumber" id="phoneNumberLabel" class="control-label col-sm-2">Phone Number</label>
-              <div class="col-sm-10">
-                <input name="phoneNumber" ng-model="eventData.phoneNumber" required type="tel" id="phoneNumber" class="form-control" placeholder="Enter your phone number" />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="poContact" id="poContactLabel" class="control-label col-sm-2">Point of Contact</label>
-              <div class="col-sm-10">
+              <label for="poContact" id="poContactLabel" class="control-label col-md-3">Venue Manager / Point of Contact</label>
+              <div class="col-md-9">
                 <input name="poContact" ng-model="eventData.poContact" required type="text" id="poContact" class="form-control" placeholder="Enter point of Contact" />
               </div>
             </div>
 
             <div class="form-group">
-              <label for="email" id="emailLabel" class="control-label col-sm-2">Email</label>
-              <div class="col-sm-10">
+              <label for="phoneNumber" id="phoneNumberLabel" class="control-label col-md-3">Venue Phone Number</label>
+              <div class="col-md-9">
+                <input name="phoneNumber" ng-model="eventData.phoneNumber" required type="tel" id="phoneNumber" class="form-control" placeholder="Enter your phone number" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email" id="emailLabel" class="control-label col-md-3">Venue Email</label>
+              <div class="col-md-9">
                 <input name="email" ng-model="eventData.email" required type="email" id="email" class="form-control" placeholder="Coordinator email address" />
               </div>
             </div>
@@ -105,85 +96,30 @@
 
 
             <div class="form-group">
-              <label for="jobType" id="jobTypeLabel" class="control-label col-sm-2">Job Type</label>
-              <div class="col-sm-10">
+              <label for="jobType" id="jobTypeLabel" class="control-label col-md-3">Job Type</label>
+              <div class="col-md-9">
                 <select name="jobType" required ng-model="eventData.jobType" id="jobType" class="form-control">
+
                   <option value="">Please select the Job Type</option>
-                  <option value="1">Birthday</option>
-                  <option value="2">Carnival</option>
-                  <option value="3">Circus</option>
-                  <option value="4">Concert</option>
-                  <option value="5">Festival</option>
-                  <option value="6">Hospital</option>
-                  <option value="7">License premise / Bar or Club</option>
-                  <option value="13">Other</option>
-                  <option value="8">Party</option>
-                  <option value="9">Restaurant</option>
-                  <option value="10">School</option>
-                  <option value="11">Sporting Event</option>
-                  <option value="12">Wedding</option>
+                  <option ng-repeat="j in jobTypes" value="{{j._id}}">{{j.name}}</option>
+
                 </select>
               </div>
             </div>
 
             <div class="form-group">
-              <label for="jobSpecs" id="jobSpecsLabel" class="control-label col-sm-2">Job Type Specific Options</label>
-              <div class="col-sm-10">
+              <label for="jobSpecs" id="jobSpecsLabel" class="control-label col-md-3">Job Type Specific Options</label>
+              <div class="col-md-9">
                 <select class="selectpicker form-control" ng-model="eventData.jobSpecs" multiple name="jobSpecs" id="jobSpecs" title="Select a Job Type first">
-                  <option value="39" data-job="8" >Apartment Roving Patrol</option>
-                  <option value="53" data-job="13" >Appartment Roving Patrol</option>
-                  <option value="54" data-job="13" >Bank Security</option>
-                  <option value="55" data-job="13" >Construction Safety / Control</option>
-                  <option value="15" data-job="1" >Intersection Control</option>
-                  <option value="19" data-job="2" >Intersection Control</option>
-                  <option value="23" data-job="3" >Intersection Control</option>
-                  <option value="27" data-job="4" >Intersection Control</option>
-                  <option value="31" data-job="5" >Intersection Control</option>
-                  <option value="43" data-job="10" >Intersection Control</option>
-                  <option value="47" data-job="11" >Intersection Control</option>
-                  <option value="56" data-job="13" >Intersection Control</option>
-                  <option value="16" data-job="1" >Money Drop Security</option>
-                  <option value="20" data-job="2" >Money Drop Security</option>
-                  <option value="24" data-job="3" >Money Drop Security</option>
-                  <option value="32" data-job="5" >Money Drop Security</option>
-                  <option value="36" data-job="7" >Money Drop Security</option>
-                  <option value="40" data-job="8" >Money Drop Security</option>
-                  <option value="42" data-job="9" >Money Drop Security</option>
-                  <option value="57" data-job="13" >Money Drop Security</option>
-                  <option value="17" data-job="1" >Neighborhood Patrol</option>
-                  <option value="21" data-job="2" >Neighborhood Patrol</option>
-                  <option value="25" data-job="3" >Neighborhood Patrol</option>
-                  <option value="28" data-job="4" >Neighborhood Patrol</option>
-                  <option value="33" data-job="5" >Neighborhood Patrol</option>
-                  <option value="37" data-job="7" >Neighborhood Patrol</option>
-                  <option value="41" data-job="8" >Neighborhood Patrol</option>
-                  <option value="44" data-job="10" >Neighborhood Patrol</option>
-                  <option value="48" data-job="11" >Neighborhood Patrol</option>
-                  <option value="58" data-job="13" >Neighborhood Patrol</option>
-                  <option value="30" data-job="4" >Other</option>
-                  <option value="35" data-job="6" >Other</option>
-                  <option value="38" data-job="7" >Other</option>
-                  <option value="46" data-job="10" >Other</option>
-                  <option value="51" data-job="11" >Other</option>
-                  <option value="61" data-job="13" >Other</option>
-                  <option value="18" data-job="1" >Parking ingress / egress</option>
-                  <option value="22" data-job="2" >Parking ingress / egress</option>
-                  <option value="26" data-job="3" >Parking ingress / egress</option>
-                  <option value="29" data-job="4" >Parking ingress / egress</option>
-                  <option value="34" data-job="5" >Parking ingress / egress</option>
-                  <option value="49" data-job="11" >Parking ingress / egress</option>
-                  <option value="52" data-job="12" >Parking ingress / egress</option>
-                  <option value="59" data-job="13" >Parking ingress / egress</option>
-                  <option value="45" data-job="10" >Special Community Patrol</option>
-                  <option value="50" data-job="11" >Special Community Patrol</option>
-                  <option value="60" data-job="13" >Special Community Patrol</option>
+                  <option ng-repeat="spec in jobTypeSpecs" value="{{spec.value}}" data-job="{{spec.data_job}}">{{spec.type_spec}}</option>
+
                 </select>
               </div>
             </div>
 
             <div class="form-group">
-              <label for="officerName" id="officerNameLabel" class="control-label col-sm-2">Name(s) of preferred officer(s)</label>
-              <div class="col-sm-10">
+              <label for="officerName" id="officerNameLabel" class="control-label col-md-3">Name(s) of preferred officer(s)</label>
+              <div class="col-md-9">
 
                 <select class="selectpicker form-control" required ng-model="eventData.officerName" multiple name="officerName" title="Please Select">
                   <option value="6" data-subtext="Dallas">Lance Jones</option>
@@ -194,16 +130,26 @@
             </div>
 
             <div class="form-group">
+              <label for="description" id="descriptionLabel" class="control-label col-md-3">Event Description</label>
+              <div class="col-md-9">
+                <div id="descriptionField">
+                  <textarea class="form-control" ng-model="eventData.description" placeholder="Add a description for your event" name="description"></textarea>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="form-group">
               <div class="col-md-9 col-md-offset-3">
                 <div class="row">
                   <div class="col-md-3">
                     <label class="radio-inline">
-                    <input type="radio" name="jobRecuring" id="inlineRadio1" value="0" class="recuringJob" checked="checked"> One-off Job
+                    <input type="radio" name="jobRecuring" id="inlineRadio1" ng-model="eventData.is_recuring" value="0" class="recuringJob" checked> One-off Job
                   </label>
                   </div>
                   <div class="col-md-3">
                     <label class="radio-inline">
-                    <input type="radio" name="jobRecuring" id="inlineRadio2" value="1" class="recuringJob"> Recuring Job
+                    <input type="radio" name="jobRecuring" ng-click="showRecurringModal()" id="inlineRadio2" ng-model="eventData.is_recuring" value="1" class="recuringJob"> Recuring Job
                   </label>
                   </div>
                 </div>
@@ -214,7 +160,7 @@
               <label for="creationEventDate" id="creationEventDateLabel" class="control-label col-md-3">Event Date &amp; Time</label>
               <div class="col-md-4">
                 <div class="input-group date" id="creationEventDateGroup">
-                  <input type="text" value="" name="creationEventDate" class="form-control" id="creationEventDate" placeholder="Event Date" aria-describedby="helpBlock">
+                  <input type="text" ng-model="eventData.date" name="creationEventDate" class="form-control" id="creationEventDate" placeholder="Event Date" aria-describedby="helpBlock">
                   <span class="input-group-addon addonRightEve">
                     <i class="fa fa-calendar" aria-hidden="true"></i>
                   </span>
@@ -225,7 +171,7 @@
 
               <label for="attendeesNum" id="attendeesNumLabel" class="control-label col-md-3">Number of Attendees Expected</label>
               <div class="col-md-2">
-                <input type="number" value="" name="attendeesNum" class="form-control" id="attendeesNum" placeholder="0">
+                <input type="number" value="" min="0" ng-model="eventData.crowd_size" name="attendeesNum" class="form-control" id="attendeesNum" placeholder="0">
               </div>
 
 
@@ -235,7 +181,7 @@
               <label for="OfficerArriveTime" id="OfficerArriveTimeLabel" class="control-label col-md-3">Officer(s) to arrive at</label>
               <div class="col-md-4">
                 <div class="input-group date" id="OfficerArriveTimeGroup">
-                  <input type="time" value="" name="OfficerArriveTime" class="form-control" id="OfficerArriveTime" placeholder="Time">
+                  <input value="" ng-model="eventData.officer_arrival_time" name="officer_arrival_time" class="form-control" id="OfficerArriveTime" placeholder="Time">
                   <span class="input-group-addon addonRightEve">
                     <i class="fa fa-clock-o" aria-hidden="true"></i>
                   </span>
@@ -244,22 +190,22 @@
               </div>
               <label for="OfficerStayHours" id="OfficerStayHoursLabel" class="control-label col-md-3">Number of hours requested</label>
               <div class="col-md-2">
-                <input type="number" value="" min="0" name="OfficerStayHours" class="form-control" id="OfficerStayHours" placeholder="1">
+                <input type="number" value="" ng-model="eventData.hours_expected" min="0" name="officer_stay_hours" class="form-control" id="OfficerStayHours" placeholder="1">
               </div>
             </div>
 
             <div class="form-group">
-              <label for="officerUniform" id="officerUniformLabel" class="control-label col-md-3">Uniform of Officer(s)</label>
+              <label for="officerUniform" required id="officerUniformLabel" class="control-label col-md-3">Uniform of Officer(s)</label>
               <div class="col-md-9">
-                <select name="officerUniform" id="officerUniform" class="form-control">
-                <option value="">Please select</option>
-                <optgroup label="Plain Clothes">
-                  <option value="2">formal</option>
-                  <option value="2">informal</option>
-                  <option value="2">other</option>
-                <optgroup label="Uniform">
-                  <option value="1">Police</option>
-                  <option value="1">To be supplied by venue</option>
+                <select name="officerUniform" id="officerUniform" ng-model="eventData.officer_attire" class="form-control">
+                  <option value="">Please select</option>
+                  <optgroup label="Plain Clothes">
+                    <option value="2Formal">Formal</option>
+                    <option value="2Informal">Informal</option>
+                    <option value="2Other">Other</option>
+                  <optgroup label="Uniform">
+                    <option value="1Police">Police</option>
+                    <option value="1ToBeSupplied">To be supplied by venue</option>
                 </select>
               </div>
             </div>
@@ -268,20 +214,20 @@
               <label for="alcoholServed" id="alcoholServedLabel" class="control-label col-md-3">Will alcohol be served? <span class="text-danger"><i class="fa fa-asterisk red" aria-hidden="true"></i></span></label>
               <div class="col-md-3">
                 <label class="radio-inline">
-                  <input type="radio" name="alcoholServed" id="alcoholServed1" value="yes"> yes
+                  <input type="radio" name="alchoholServed" ng-model="eventData.alchohol" id="alcoholServed1" value="yes"> yes
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="alcoholServed" id="alcoholServed2" value="no" checked="checked"> no
+                  <input type="radio" name="alchoholServed" ng-model="eventData.alchohol" id="alcoholServed2" value="no" checked="checked"> no
                 </label>
 
               </div>
-              <label for="policeVehicule" id="policeVehiculeLabel" class="control-label col-md-3">Police vehicule required? <span class="text-danger"><i class="fa fa-asterisk red" aria-hidden="true"></i></span></label>
+              <label for="policeVehicle" id="policeVehicleLabel" class="control-label col-md-3">Police vehicle required? <span class="text-danger"><i class="fa fa-asterisk red" aria-hidden="true"></i></span></label>
               <div class="col-md-3">
                 <label class="radio-inline">
-                  <input type="radio" name="policeVehicule" id="policeVehicule1" value="yes"> yes
+                  <input type="radio" name="policeVehicle" ng-model="eventData.police_vehicle" id="policeVehicle1" value="yes"> yes
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="policeVehicule" id="policeVehicule2" value="no" checked="checked"> no
+                  <input type="radio" name="policeVehicle" ng-model="eventData.police_vehicle" id="policeVehicle2" value="no" checked="checked"> no
                 </label>
 
               </div>
@@ -291,29 +237,31 @@
               <label for="barricadeRequested" id="barricadeRequestedLabel" class="control-label col-md-3">Barricades requested? <span class="text-danger"><i class="fa fa-asterisk red" aria-hidden="true"></i></span></label>
               <div class="col-md-3">
                 <label class="radio-inline">
-                  <input type="radio" name="barricadeRequested" id="barricadeRequested1" value="yes"> yes
+                  <input type="radio" name="barricadeRequested" ng-model="eventData.barricades" id="barricadeRequested1" value="yes"> yes
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="barricadeRequested" id="barricadeRequested2" value="no" checked="checked"> no
+                  <input type="radio" name="barricadeRequested" ng-model="eventData.barricades" id="barricadeRequested2" value="no" checked="checked"> no
                 </label>
 
               </div>
               <label for="amplifiedSound" id="amplifiedSound" class="control-label col-md-3">Music or other amplified sound/explosions?</label>
               <div class="col-md-3">
                 <label class="radio-inline">
-                  <input type="radio" name="amplifiedSound" id="amplifiedSound1" value="yes"> yes
+                  <input type="radio" name="amplifiedSound" ng-model="eventData.amplified_sound" id="amplifiedSound1" value="yes"> yes
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="amplifiedSound" id="amplifiedSound2" value="no" checked="checked"> no
+                  <input type="radio" name="amplifiedSound" ng-model="eventData.amplified_sound" id="amplifiedSound2" value="no" checked="checked"> no
                 </label>
 
               </div>
             </div>
 
+            <div class="well well-sm accInfo col-md-offset-3"><small><span class="text-danger"><i class="fa fa-asterisk" aria-hidden="true"></i></span> Additional fee may be charged.</small></div>
+
             <div class="form-group">
               <label for="additionalExpect" id="additionalExpectLabel" class="control-label col-md-3">Additional Expectations of officer(s)</label>
               <div class="col-md-9">
-                <select class="selectpicker form-control" multiple name="additionalExpect" id="additionalExpect" title="Please select">
+                <select class="selectpicker form-control" ng-model="eventData.operational_details" multiple name="additionalExpect" id="additionalExpect" title="Please select">
                   <option value="1">Activity Sheets</option>
                   <option value="2">Specialised Skills/Training</option>
                   <option value="3">W2 Forms with client</option>
@@ -324,14 +272,69 @@
           </div>
           <div class="tab-pane" ng-class="{active: progress == 3}" role="tabpanel" id="step3">
             <h3 class="margin-bottom-10">Cost</h3>
-            <p>This is step 3</p>
-
+            <table class="table table-bordered table-responsive table-hover">
+              <thead>
+                <th>Element</th>
+                <th>Rate</th>
+                <th>Needed</th>
+                <th>Cost</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Cost for {{event.JobType.name}}</th>
+                  <td colspan="2">${{eventCost.base.cost}}</td>
+                  <td>${{eventCost.base.total}}</td>
+                </tr>
+                <tr>
+                  <th>Cost for Officers</th>
+                  <td>${{eventCost.officers.cost}} per officer</td>
+                  <td>{{eventCost.officers.count}} officer(s)</td>
+                  <td>${{eventCost.officers.total}}</td>
+                </tr>
+                <tr>
+                  <th>Cost for duration of Job</th>
+                  <td>${{eventCost.time.cost}} per hour</td>
+                  <td>{{eventCost.time.count}} hour(s)</td>
+                  <td>${{eventCost.time.total}}</td>
+                </tr>
+                <tr>
+                  <th>Cost for Crowd</th>
+                  <td>${{eventCost.crowd.cost}} / 10 people</td>
+                  <td>{{eventCost.crowd.count}} hour(s)</td>
+                  <td>${{eventCost.crowd.total}}</td>
+                </tr>
+                <tr>
+                  <th>Cost for Alchohol</th>
+                  <td colspan="2">${{eventCost.alchohol.cost}}</td>
+                  <td>${{eventCost.alchohol.total}}</td>
+                </tr>
+                <tr>
+                  <th>Cost for Police Vehicle</th>
+                  <td colspan="2">${{eventCost.police_vehicle.cost}}</td>
+                  <td>${{eventCost.police_vehicle.total}}</td>
+                </tr>
+                <tr>
+                  <th>Cost for Barricade</th>
+                  <td colspan="2">${{eventCost.barricade.cost}}</td>
+                  <td>${{eventCost.barricade.total}}</td>
+                </tr>
+                <tr>
+                  <th>Cost for Amplified Sound</th>
+                  <td colspan="2">${{eventCost.amplified_sound.cost}}</td>
+                  <td>${{eventCost.amplified_sound.total}}</td>
+                </tr>
+                <tr>
+                  <th colspan="3">Grand Total ==></th>
+                  <td>${{eventCost.grand_total}}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="clearfix"></div>
         </div>
       </form>
       <div class="margin-top-30">
-        <button type="button" ng-hide="progress == 1" ng-click="prevStep()" class="btn btn-primary btn-info-full btn-rounded next-step pull-left">Go back</button>
+        <button type="button" ng-hide="progress > 2 || progress == 1" ng-click="prevStep()" class="btn btn-primary btn-info-full btn-rounded next-step pull-left">Go back</button>
 
         <input type="button" ng-if="progress === 4" name="SubmitButton" value="Place Order" id="SubmitButton" class="btn btn-primary  btn-rounded procedCheckout pull-right" />
         <button type="button" ng-hide="progress === 4" ng-click="nextStep()" class="btn btn-primary btn-info-full next-step pull-right btn-rounded">Save and continue</button>

@@ -1,8 +1,8 @@
 'use strict';
 
 export default function(sequelize, DataTypes) {
-  return sequelize.define('job_type', {
-    job_type_id: {
+  return sequelize.define('JobType', {
+    _id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
@@ -10,13 +10,20 @@ export default function(sequelize, DataTypes) {
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false,
+      unique: true
     },
     description: {
       type: DataTypes.STRING,
       allowNull: true
-    }
-  }, {
-    tableName: 'job_type'
+    },
+    base_price: DataTypes.INTEGER(11),
+    officer_rate: DataTypes.INTEGER(11),
+    crowd_rate: DataTypes.INTEGER(11),
+    hour_rate: DataTypes.INTEGER(11),
+    alchohol: DataTypes.INTEGER(11),
+    police_vehicle: DataTypes.INTEGER(11),
+    barricade: DataTypes.INTEGER(11),
+    amplified_sound: DataTypes.INTEGER(11)
   });
 }

@@ -90,14 +90,32 @@ export function create(req, res) {
 }
 
 // Upserts the given JobType in the DB at the specified ID
-export function upsert(req, res) {
-  if(req.body._id) {
-    delete req.body._id;
-  }
+export function update(req, res) {
 
-  return JobType.upsert(req.body, {
+  return JobType.update(req.body, {
     where: {
       _id: req.params.id
+    }
+  })
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+// Updates all rows in the table to have the general costs
+export function setGeneralCosts(req, res) {
+
+  let cost = {
+    alchohol: req.body.alchohol,
+    police_vehicle: req.body.police_vehicle,
+    barricade: req.body.barricade,
+    amplified_sound: req.body.amplified_sound
+  };
+
+  return JobType.update(cost, {
+    where: {
+      _id: {
+        $gt: 0
+      }
     }
   })
     .then(respondWithResult(res))
