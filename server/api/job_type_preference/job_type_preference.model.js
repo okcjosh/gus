@@ -1,7 +1,7 @@
 'use strict';
 
 export default function(sequelize, DataTypes) {
-  return sequelize.define('job_type_preferences', {
+  return sequelize.define('JobTypePreferences', {
     // leo_id: {
     //   type: DataTypes.INTEGER(11),
     //   allowNull: false,
@@ -18,7 +18,5 @@ export default function(sequelize, DataTypes) {
     //     key: '_id'
     //   }
     // }
-  }, {
-    tableName: 'job_type_preferences'
   });
 }

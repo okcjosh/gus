@@ -11,7 +11,7 @@
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import {Event, Status, JobType} from '../../sqldb';
+import {Event, Status, JobType, User} from '../../sqldb';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -73,43 +73,43 @@ export function CostCalculator(event) {
 
   var c = {
     base: {
-      cost: event.job_type.base_price,
-      total: event.job_type.base_price || 0
+      cost: event.JobType.base_price,
+      total: event.JobType.base_price || 0
     },
     officers: {
-      cost: event.job_type.officer_rate,
+      cost: event.JobType.officer_rate,
       count: event.prefered_officer_name.split(',').length,
-      total: (event.job_type.officer_rate * (event.prefered_officer_name.split(',').length)) || 0
+      total: (event.JobType.officer_rate * (event.prefered_officer_name.split(',').length)) || 0
     },
     time: {
-      cost: event.job_type.hour_rate,
+      cost: event.JobType.hour_rate,
       count: event.hours_expected,
-      total: (event.job_type.hour_rate * event.hours_expected) || 0
+      total: (event.JobType.hour_rate * event.hours_expected) || 0
     },
     crowd: {
-      cost: event.job_type.crowd_rate,
+      cost: event.JobType.crowd_rate,
       count: event.crowd_size,
-      total: (event.job_type.crowd_rate * event.crowd_size) || 0
+      total: (event.JobType.crowd_rate * (event.crowd_size / 10)) || 0
     },
     alchohol: {
-      cost: event.job_type.alchohol,
+      cost: event.JobType.alchohol,
       count: event.alchohol,
-      total: (event.job_type.alchohol * yesNo(event.alchohol)) || 0
+      total: (event.JobType.alchohol * yesNo(event.alchohol)) || 0
     },
     police_vehicle: {
-      cost: event.job_type.police_vehicle,
+      cost: event.JobType.police_vehicle,
       count: event.police_vehicle,
-      total: (event.job_type.police_vehicle * yesNo(event.police_vehicle)) || 0
+      total: (event.JobType.police_vehicle * yesNo(event.police_vehicle)) || 0
     },
     barricade: {
-      cost: event.job_type.barricade,
+      cost: event.JobType.barricade,
       count: event.barricade,
-      total: (event.job_type.barricade * yesNo(event.barricade)) || 0
+      total: (event.JobType.barricade * yesNo(event.barricade)) || 0
     },
     amplified_sound: {
-      cost: event.job_type.amplified_sound,
+      cost: event.JobType.amplified_sound,
       count: event.amplified_sound,
-      total: (event.job_type.amplified_sound * yesNo(event.amplified_sound)) || 0
+      total: (event.JobType.amplified_sound * yesNo(event.amplified_sound)) || 0
     }
   };
 
@@ -140,7 +140,7 @@ export function show(req, res) {
     where: {
       _id: req.params.id
     },
-    include: [JobType]
+    include: [JobType, User]
   })
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
@@ -159,7 +159,7 @@ export function showByStatus(req, res) {
 }
 
 export function getEventCost(req, res) {
-  Event.find({
+  return Event.find({
     where: {
       _id: req.params.id
     },
@@ -172,9 +172,21 @@ export function getEventCost(req, res) {
 
 // Creates a new Event in the DB
 export function create(req, res) {
-  // need the current user id
   return Event.create(req.body)
-    .then(respondWithResult(res, 201))
+    .then(function(event) {
+      event.setUser(req.user._id)
+        .then(function(user) {
+          event.reload({
+            include: [User, JobType]
+          }).then(function() {
+            res.status(201).json({
+              event: event,
+              cost: CostCalculator(event)
+            });
+          });
+        });
+    })
+    //.then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
 

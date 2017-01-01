@@ -58,6 +58,24 @@ export default function(sequelize, DataTypes) {
     // officer_skillset: DataTypes.STRING,
     // language: DataTypes.STRING,
     // operational_details: DataTypes.STRING
+  }, {
+    instanceMethods: {
+      // Hide password from JSON of user
+      toJSON: function () {
+        var e = Object.assign({}, this.get());
+        if (e.User) {
+          delete e.User.password;
+          delete e.User.provider;
+          delete e.User.salt;
+          delete e.User.facebook;
+          delete e.User.twitter;
+          delete e.User.google;
+          delete e.User.github;
+        }
+
+        return e;
+      },
+    }
   });
   return Event;
 }

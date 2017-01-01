@@ -1,7 +1,7 @@
 'use strict';
 
 export default function(sequelize, DataTypes) {
-  return sequelize.define('leo_scheduling', {
+  return sequelize.define('LeoScheduling', {
     _id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -28,7 +28,5 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(10),
       allowNull: false
     }
-  }, {
-    tableName: 'leo_scheduling'
   });
 }

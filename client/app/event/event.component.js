@@ -21,7 +21,7 @@ export class EventComponent {
   }
 
   checkStepValid(step) {
-    // return true;
+    // return true; // uncomment for testing event form to move without validation
     var $s = this.$scope;
     switch (step) {
       case 1:
@@ -88,17 +88,11 @@ export class EventComponent {
       if (_self.checkStepValid($scope.progress)) {
         if ($scope.progress == 2) {
           _self.postEvent($scope)
-            .then(function(event) {
+            .then(function(data) {
               // Store created event on scope
-              $scope.event = event;
-              // Get cost of created event
-              _self.$http.get('/api/events/' + event._id + '/cost')
-                .then(function(res) {
-                  $scope.eventCost = res.data;
-                  $scope.progress++;
-                  console.log(res.data);
-                });
-
+              $scope.event = data.event;
+              $scope.eventCost = data.cost;
+              $scope.progress++;
             });
         } else if ($scope.progress == 3) {
           $state.go('checkout', { event_id: $scope.event._id });
@@ -130,7 +124,9 @@ export class EventComponent {
       is_recuring: "0",
       hours_expected: 0,
       crowd_size: 0,
-      operational_details: []
+      operational_details: [],
+      jobSpecs: [],
+      officerName: []
     };
 
     this.$http.get('/api/job_types')
@@ -341,11 +337,11 @@ export class EventComponent {
     var eventPayload = {
       title: $scope.eventData.title,
       venue: $scope.eventData.nameOfVenue,
-      address: $scope.eventData.location.formatted_address,
+      address: $scope.eventData.location ? $scope.eventData.location.formatted_address : $scope.eventData.location,
       phone_number: $scope.eventData.phoneNumber,
       point_of_contact: $scope.eventData.poContact,
       email: $scope.eventData.email,
-      jobTypeId: $scope.eventData.jobType,
+      JobTypeId: $scope.eventData.jobType,
       job_type_specs: $scope.eventData.jobSpecs.join(","),
       prefered_officer_name: $scope.eventData.officerName.join(","),
       is_recuring: $scope.eventData.is_recuring,

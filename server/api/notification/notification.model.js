@@ -1,7 +1,7 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('notification', {
+  return sequelize.define('Notification', {
     _id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -32,7 +32,5 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     }
-  }, {
-    tableName: 'notification'
   });
 };

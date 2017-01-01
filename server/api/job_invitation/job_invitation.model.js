@@ -1,7 +1,7 @@
 'use strict';
 
 export default function(sequelize, DataTypes) {
-  return sequelize.define('job_invitation', {
+  return sequelize.define('JobInvitation', {
     _id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -51,7 +51,5 @@ export default function(sequelize, DataTypes) {
     //     key: 'job_invitation_status_id'
     //   }
     // }
-  }, {
-    tableName: 'job_invitation'
   });
 }

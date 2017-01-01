@@ -1,7 +1,7 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import routing from './main.routes';
-const flickity = require('flickity');
+const Flickity = require('flickity');
 // const jquery = require('jquery');
 let $ = require( 'jquery' );
 require( 'datatables.net' );
@@ -58,6 +58,12 @@ export class MainController {
           ]
         });
       })
+
+      var flkty = new Flickity( '.carousel', {
+        // options
+        autoPlay: true,
+        wrapAround: true
+      });
   }
 
   addThing() {
@@ -96,13 +102,3 @@ export default angular.module('es4App.main', [uiRouter])
     controller: MainController
   })
   .name;
-
-
-
-
-
-
-
-
-
-

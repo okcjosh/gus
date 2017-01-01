@@ -272,8 +272,63 @@
           </div>
           <div class="tab-pane" ng-class="{active: progress == 3}" role="tabpanel" id="step3">
             <h3 class="margin-bottom-10">Cost</h3>
-            <p>This is step 3</p>
-
+            <table class="table table-bordered table-responsive table-hover">
+              <thead>
+                <th>Element</th>
+                <th>Rate</th>
+                <th>Needed</th>
+                <th>Cost</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Cost for {{event.JobType.name}}</th>
+                  <td colspan="2">${{eventCost.base.cost}}</td>
+                  <td>${{eventCost.base.total}}</td>
+                </tr>
+                <tr>
+                  <th>Cost for Officers</th>
+                  <td>${{eventCost.officers.cost}} per officer</td>
+                  <td>{{eventCost.officers.count}} officer(s)</td>
+                  <td>${{eventCost.officers.total}}</td>
+                </tr>
+                <tr>
+                  <th>Cost for duration of Job</th>
+                  <td>${{eventCost.time.cost}} per hour</td>
+                  <td>{{eventCost.time.count}} hour(s)</td>
+                  <td>${{eventCost.time.total}}</td>
+                </tr>
+                <tr>
+                  <th>Cost for Crowd</th>
+                  <td>${{eventCost.crowd.cost}} / 10 people</td>
+                  <td>{{eventCost.crowd.count}} hour(s)</td>
+                  <td>${{eventCost.crowd.total}}</td>
+                </tr>
+                <tr>
+                  <th>Cost for Alchohol</th>
+                  <td colspan="2">${{eventCost.alchohol.cost}}</td>
+                  <td>${{eventCost.alchohol.total}}</td>
+                </tr>
+                <tr>
+                  <th>Cost for Police Vehicle</th>
+                  <td colspan="2">${{eventCost.police_vehicle.cost}}</td>
+                  <td>${{eventCost.police_vehicle.total}}</td>
+                </tr>
+                <tr>
+                  <th>Cost for Barricade</th>
+                  <td colspan="2">${{eventCost.barricade.cost}}</td>
+                  <td>${{eventCost.barricade.total}}</td>
+                </tr>
+                <tr>
+                  <th>Cost for Amplified Sound</th>
+                  <td colspan="2">${{eventCost.amplified_sound.cost}}</td>
+                  <td>${{eventCost.amplified_sound.total}}</td>
+                </tr>
+                <tr>
+                  <th colspan="3">Grand Total ==></th>
+                  <td>${{eventCost.grand_total}}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="clearfix"></div>
         </div>

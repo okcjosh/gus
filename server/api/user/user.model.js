@@ -99,6 +99,19 @@ export default function(sequelize, DataTypes) {
      * Instance Methods
      */
     instanceMethods: {
+      // Hide password from JSON of user
+      toJSON: function () {
+        var values = Object.assign({}, this.get());
+
+        delete values.password;
+        delete values.provider;
+        delete values.salt;
+        delete values.facebook;
+        delete values.twitter;
+        delete values.google;
+        delete values.github;
+        return values;
+      },
       /**
        * Authenticate - check if the passwords are the same
        *
