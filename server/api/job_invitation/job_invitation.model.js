@@ -25,14 +25,14 @@ export default function(sequelize, DataTypes) {
       //   key: 'event_id'
       // }
     },
-    // leo_id: {
-    //   type: DataTypes.INTEGER(11),
-    //   allowNull: false,
-    //   references: {
-    //     model: 'leo',
-    //     key: '_id'
-    //   }
-    // },
+    leo_id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      // references: {
+      //   model: 'Leo',
+      //   key: '_id'
+      // }
+    },
     expires: {
       type: DataTypes.DATE,
       allowNull: false
@@ -43,13 +43,12 @@ export default function(sequelize, DataTypes) {
       allowNull: false,
     },
 
-    // job_invitation_status_id: {
-    //   type: DataTypes.INTEGER(11),
-    //   allowNull: false,
-    //   references: {
-    //     model: 'job_invitation_status',
-    //     key: 'job_invitation_status_id'
-    //   }
-    // }
+    job_invitation_status_id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      default: 1
+    }
+  }, {
+    tableName: 'JobInvitation'
   });
 }
