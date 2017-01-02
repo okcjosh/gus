@@ -38,17 +38,22 @@ export class EventDetailsComponent {
 
     this.$http.get('/api/events/' + event_id)
       .then(function(res) {
-        if (res.status = 200) {
+        if (res.status === 200) {
           $scope.event = res.data;
         }
       });
 
     this.$http.get('/api/users/me')
       .then(function(res) {
-        if (res.status = 200) {
+        if (res.status === 200) {
           $scope.user = res.data;
-          console.log(res.data)
+          console.log(res.data);
         }
+      });
+
+    this.$http.get('/api/job_types')
+      .then(function(res) {
+        $scope.jobTypes = res.data;
       });
 
     this.$http.get('/api/invitations', {

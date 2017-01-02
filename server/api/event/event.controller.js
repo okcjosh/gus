@@ -78,8 +78,8 @@ export function CostCalculator(event) {
     },
     officers: {
       cost: event.JobType.officer_rate,
-      count: event.prefered_officer_name.split(',').length,
-      total: (event.JobType.officer_rate * (event.prefered_officer_name.split(',').length)) || 0
+      count: Math.ceil(event.crowd_size / 50),//event.prefered_officer_name.split(',').length,
+      total: (event.JobType.officer_rate * Math.ceil(event.crowd_size / 50)) || 0//(event.prefered_officer_name.split(',').length)) || 0
     },
     time: {
       cost: event.JobType.hour_rate,
