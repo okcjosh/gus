@@ -48,8 +48,8 @@ db.User.hasMany(db.Event);
 db.Event.belongsTo(db.Status);
 db.Status.hasMany(db.Event);
 
-db.JobInvitation.belongsTo(db.JobInvitationStatus);
-db.JobInvitationStatus.hasMany(db.JobInvitation);
+//db.JobInvitation.belongsTo(db.JobInvitationStatus);
+//db.JobInvitationStatus.hasMany(db.JobInvitation);
 
 // Braintree relation to event
 db.Transaction.belongsTo(db.Event);
