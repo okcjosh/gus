@@ -27,7 +27,6 @@ export class EventComponent {
       case 1:
         this.jQueryShowErrorStep('#step1');
         if (
-          $s.newEventForm.title.$valid &&
           $s.newEventForm.nameOfVenue.$valid &&
           $s.newEventForm.address.$valid &&
           $s.newEventForm.phoneNumber.$valid &&

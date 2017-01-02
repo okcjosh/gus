@@ -237,6 +237,14 @@ export class DashboardComponent {
 
     this.$http.get('/api/events')
       .then(response => {
+        let statusLabels = {
+          'Created': 'warning',
+          'Accepted': 'info',
+          'Scheduled': 'success',
+          'Rejected': 'danger',
+          'Completed': 'primary'
+        };
+
         this.dataSet = response.data.map(function(event) {
           let link = `
             <a
@@ -248,6 +256,8 @@ export class DashboardComponent {
                 ${event.venue}
             </a>`;
           event.venueLink = _self.$interpolate(link)(_self.$scope);
+          let colorClass = 'label label-' + statusLabels[event.Status.name];
+          event.statusLabel = `<span class="${colorClass}">${event.Status.name}</span>`;
           return event;
         });
 
@@ -261,7 +271,7 @@ export class DashboardComponent {
             {data: "address", title: "Location"},
             {data: "phone_number", title: "Phone Number"},
             {data: "point_of_contact", title: "POC"},
-            {data: "status_id", title: "Status"},
+            {data: "statusLabel", title: "Status", className: 'text-center'},
             {data: "JobType", title: "Job Type", visible: false},
             {data: "job_type_specs", title: "Job Specs", visible: false},
             {data: "prefered_officer_name", title: "Prefered Officer", visible: false},
@@ -298,13 +308,6 @@ export class DashboardComponent {
           }
         });
 
-        // table.on('select', function (e, dt, type, indexes) {
-        //   if (type === 'row') {
-        //     let data = table.rows(indexes).data().pluck('_id');
-        //     console.log(data);
-        //   }
-        // });
-        //table.buttons().container().appendTo( $('#buttons') );
       });
   }
 }

@@ -80,7 +80,7 @@
                     &times;
                   </button>
                   <h4 class="modal-title" id="myModalLabel">
-                    Modal title
+                    Assign Officers
                   </h4>
                 </div>
                 <div class="modal-body" style="overflow: auto;">
@@ -177,14 +177,28 @@
                         <option value="year_started">By Year started</option>
                       </select>
                     </div>
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <div class="form-group">
+                      <label>Filter by: </label>
+                      <select class="form-control" ng-model="leoFilter">
+                        <option value="">---- Officers preffered Job Types ----</option>
+                        <option ng-repeat="type in jobTypes" value="{{::type.name}}">{{::type.name}}</option>
+                      </select>
+                    </div>
 
+                    <!-- CHECKBOXES for filter is too messy -->
                     <!-- <div class="form-group">
                       <label>Filter by: </label>
-                      <select class="form-control" ng-model="leoSort">
-                        <option value="name">By Name</option>
-                        <option value="lastGig">By Last Gig</option>
-                        <option value="year_started">By Year started</option>
-                      </select>
+
+                      <div ng-repeat="type in jobTypes" class="checkbox">
+                        <label>
+                          <input type="checkbox" value="">
+                          {{type.name}}
+                        </label>
+                      </div>
+
                     </div> -->
 
                   </div>
