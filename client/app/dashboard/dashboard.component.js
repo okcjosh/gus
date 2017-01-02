@@ -239,7 +239,10 @@ export class DashboardComponent {
       .then(response => {
         let statusLabels = {
           'Created': 'warning',
-          'Invitations Sent': 'info'
+          'Accepted': 'info',
+          'Scheduled': 'success',
+          'Rejected': 'danger',
+          'Completed': 'primary'
         };
 
         this.dataSet = response.data.map(function(event) {
@@ -305,13 +308,6 @@ export class DashboardComponent {
           }
         });
 
-        // table.on('select', function (e, dt, type, indexes) {
-        //   if (type === 'row') {
-        //     let data = table.rows(indexes).data().pluck('_id');
-        //     console.log(data);
-        //   }
-        // });
-        //table.buttons().container().appendTo( $('#buttons') );
       });
   }
 }
