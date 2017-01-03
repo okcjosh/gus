@@ -1,56 +1,73 @@
 
+<div class='container'>
+  <div class=''>
+    <!-- <div class='container' style="margin-bottom: 30px;">
+      <h1>Login</h1>
+      <p>Accounts are reset on server restart from <code>server/config/seed.js</code>. Default account is <code>test@example.com</code> / <code>test</code></p>
+      <p>Admin account is <code>admin@example.com</code> / <code>admin</code></p>
+    </div> -->
 
-<div class='container' style="width:350px">
-  <div class='row'>
-    <!--<div class='col-sm-12'>-->
-      <!--<h1>Login</h1>-->
-      <!--<p>Accounts are reset on server restart from <code>server/config/seed.js</code>. Default account is <code>test@example.com</code> / <code>test</code></p>-->
-      <!--<p>Admin account is <code>admin@example.com</code> / <code>admin</code></p>-->
-    <!--</div>-->
-    <div class='col-sm-12'>
-      <form class='form' name='form' ng-submit='vm.login(form)' novalidate>
 
-        <div class='form-group'>
-          <label>Email</label>
+    <div class='col-xs-8 col-md-6 center-block margin-top-30'>
 
-          <input placeholder="Email" type='email' name='email' class='form-control' ng-model='vm.user.email' required>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Login
+        </div>
+        <div class="panel-body">
+          <form class='form' name='form' ng-submit='vm.login(form)' novalidate>
+
+            <div class='form-group'>
+              <label>Email</label>
+
+              <input placeholder="Email" type='email' name='email' class='form-control' ng-model='vm.user.email' required>
+            </div>
+
+            <div class='form-group'>
+              <label>Password</label>
+
+              <input placeholder="Password" type='password' name='password' class='form-control' ng-model='vm.user.password' required>
+            </div>
+
+            <div class='form-group has-error'>
+              <p class='help-block' ng-show='form.email.$error.required && form.password.$error.required && vm.submitted'>
+                Please enter your email and password.
+              </p>
+              <p class='help-block' ng-show='form.email.$error.email && vm.submitted'>
+                Please enter a valid email.
+              </p>
+
+              <p class='help-block'>{{ vm.errors.login }}</p>
+            </div>
+
+            <div class="col-xs-12 " style="margin-bottom: 20px; padding: 0px;">
+              <button class='btn btn-primary btn-lg btn-login btn-block' type='submit'>
+                Login
+              </button>
+              <button class='btn btn-rounded btn-info btn-lg btn-block' ui-sref='signup'>
+                Register
+              </button>
+            </div>
+
+            <div class='col-xs-12' style="padding: 0px;">
+              <oauth-buttons classes='btn-block btn-rounded'></oauth-buttons>
+            </div>
+          </form>
+
         </div>
 
-        <div class='form-group'>
-          <label>Password</label>
+      </div>
 
-          <input placeholder="Password" type='password' name='password' class='form-control' ng-model='vm.user.password' required>
-        </div>
 
-        <div class='form-group has-error'>
-          <p class='help-block' ng-show='form.email.$error.required && form.password.$error.required && vm.submitted'>
-            Please enter your email and password.
-          </p>
-          <p class='help-block' ng-show='form.email.$error.email && vm.submitted'>
-            Please enter a valid email.
-          </p>
+      <hr/>
 
-          <p class='help-block'>{{ vm.errors.login }}</p>
-        </div>
-        <div>
-          <button class='btn btn-primary btn-group-sm' type='submit'>
-            Login
-          </button>
-          <button class='btn btn-rounded btn-info btn-group-sm' ui-sref='signup'>
-            Register
-          </button>
-          <button class='btn btn-rounded btn-info btn-group-sm' ui-sref='main'>
-            Forgot Password
-          </button>
-        </div>
 
-        <hr/>
-        <div class="well well-sm accInfo mb-20">
-          <h5 class="mt-5 mb-10">Your Account Entries are secure.</h5>
-          <small>We store all Account Entry information you save in our database in an encrypted format. We do not sell or make your information available to any one for any reason.</small>
-        </div>
-      </form>
     </div>
+
+  </div>
+  <div class="well well-sm accInfo mb-20">
+    <h5 class="mt-5 mb-10">Your Account Entries are secure.</h5>
+    <small>We store all Account Entry information you save in our database in an encrypted format. We do not sell or make your information available to any one for any reason.</small>
   </div>
   <hr>
 </div>

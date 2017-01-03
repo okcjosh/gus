@@ -5,6 +5,7 @@ class _User {
   name = '';
   email = '';
   role = '';
+  phone = '';
   $promise = undefined;
 }
 
