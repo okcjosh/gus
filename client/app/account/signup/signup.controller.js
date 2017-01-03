@@ -25,7 +25,7 @@ export default class SignupController {
         name: this.user.name,
         email: this.user.email,
         password: this.user.password,
-        cell: this.user.cell
+        phone: this.user.cell
       })
         .then(() => {
           // Account created, redirect to home
