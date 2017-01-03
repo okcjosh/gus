@@ -1,32 +1,120 @@
-<div class="container">
+<!--<div class="container">-->
+  <!--<div class="row">-->
+    <!--<div class="row">-->
+      <!--<div class="col-md-6 text-info">-->
+        <!--Job Date: {{job.date}}-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+      <!--<div class="col-md-6 text-info">-->
+        <!--Job Location: {{job.venue}}-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+      <!--<div class="col-md-6 text-info">-->
+        <!--Job Address: {{job.address}}-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+      <!--<div class="col-md-6">-->
+        <!--<button type="button" class="btn btn-success btn-block btn-rounded" ui-sref='main' type="submit" ng-click="dosomething();">Yes, I accept this assignment</button>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<span>-->
+      <!--<div class=""> </div>-->
+    <!--</span>-->
+    <!--<div class="row">-->
+      <!--<div class="col-md-6">-->
+        <!--<button type="button" class="btn btn-danger btn-block btn-rounded" ui-sref='main' type="submit" ng-click="dosomething();">No, I reject this assignment </button>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+<div class="container main-content mb-20">
+  <h3 class="mb-20">View Job &mdash; <small> {{event.title}} </small></h3>
+
   <div class="row">
-    <div class="row">
-      <div class="col-md-6 text-info">
-        Job Date: {{job.date}}
-      </div>
+    <div class="col-md-4">
+      <ul class="list-group pw-lists">
+        <h5 class="mb-20">Client</h5>
+        <li class="list-group-item">
+          <strong>Name</strong>: {{ user.name }} </li>
+        <li class="list-group-item">
+          <strong>Email</strong>: {{ user.email }} </li>
+
+      </ul>
+      <ul class="list-group pw-lists">
+        <h5 class="mb-20">Job Summary</h5>
+        <li class="list-group-item">
+          <strong>Venue</strong>: {{ event.venue }} </li>
+        <li class="list-group-item">
+          <strong>Address</strong> {{ event.address }} </li>
+        <li class="list-group-item">
+          <strong>Job Type</strong>: {{ event.JobType.name}} </li>
+        <li class="list-group-item"><strong>Job Options</strong>: {{ event.job_type_specs }}</li>
+        <li class="list-group-item">
+          <strong>Start Date</strong>: {{ event.date }} </li>
+      </ul>
+      <ul class="list-group pw-lists">
+        <h5 class="mb-20">Coordinator</h5>
+        <li class="list-group-item">
+          <strong>Coordinator</strong>: {{ event.point_of_contact }} </li>
+        <li class="list-group-item">
+          <strong>Phone Number</strong>: {{ event.phone_number }} </li>
+        <li class="list-group-item">
+          <strong>Email</strong>: {{ event.email }} </li>
+
+
+      </ul>
+      <!--a data-toggle="modal" href="#chngPass" class="btn btn-success btn-xs btn-icon mb-20"><i class="fa fa-lock"></i> Change Password</a>
+  <a data-toggle="modal" href="#delEntry" class="btn btn-danger btn-xs btn-icon mb-20"><i class="fa fa-trash"></i> Delete Entry</a-->
+
     </div>
-    <div class="row">
-      <div class="col-md-6 text-info">
-        Job Location: {{job.venue}}
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 text-info">
-        Job Address: {{job.address}}
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <button type="button" class="btn btn-success btn-block btn-rounded" ui-sref='main' type="submit" ng-click="dosomething();">Yes, I accept this assignment</button>
-      </div>
-    </div>
-    <span>
-      <div class=""> </div>
-    </span>
-    <div class="row">
-      <div class="col-md-6">
-        <button type="button" class="btn btn-danger btn-block btn-rounded" ui-sref='main' type="submit" ng-click="dosomething();">No, I reject this assignment </button>
-      </div>
-    </div>
+    <div class="col-md-8">
+      <h5 class="mb-20">Job Details</h5>
+      <form action="" method="post">
+
+        <div class="form-group">
+          <label for="entryTitle">Job Title</label>
+          <input type="text" class="form-control" readonly name="entryTitle" required="required" ng-model="event.venue" />
+        </div>
+
+        <div class="form-group">
+          <label for="entryDesc">Description</label>
+          <textarea class="form-control" readonly name="entryDesc" required="required" rows="4" ng-model="event.description"></textarea>
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="entryUsername">Client</label>
+              <input type="text" class="form-control" name="entryUsername" value="" />
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <label for="entryEmail">Email</label>
+              <input type="text" class="form-control" name="entryEmail" value="myContact@okcnm.org" />
+            </div>
+          </div>
+        </div>
+        <input name="catIdOld" type="hidden" value="11" />
+        <input name="entryTitleOld" type="hidden" value="+nA0ZaI7TxeLO3MbHsiRJ/RXhJpb6xnjCcUQzOipr/Q=" />
+        <div class="row">
+          <div class="col-md-6">
+            <button type="button" class="btn btn-success btn-block btn-rounded" ui-sref='main' type="submit" ng-click="dosomething();">Yes, I accept this assignment</button>
+          </div>
+        </div>
+        <span>
+          <div class=""> </div>
+        </span>
+        <div class="row">
+          <div class="col-md-6">
+            <button type="button" class="btn btn-danger btn-block btn-rounded" ui-sref='main' type="submit" ng-click="dosomething();">No, I reject this assignment </button>
+          </div>
+        </div>
+      </form>
   </div>
+</div>
 </div>

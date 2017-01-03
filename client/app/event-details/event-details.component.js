@@ -180,7 +180,7 @@ export class EventDetailsComponent {
         let inviteData = {
           party_id: _self.event_id,
           pick: invite.round,
-          leo_id: leo.leo_id,
+          leo_id: leo._id,
           expires: 0
         };
 

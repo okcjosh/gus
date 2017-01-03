@@ -148,11 +148,11 @@ export class DashboardComponent {
 
       let draggedLeos = invite.items;
       draggedLeos.forEach(function(leo) {
-
+        //alert('leo: ' + leo._id);
         let inviteData = {
           party_id: $scope.selectedRow._id,
           pick: invite.round,
-          leo_id: leo.leo_id,
+          leo_id: leo._id,
           expires: 0
         };
 
@@ -283,7 +283,6 @@ export class DashboardComponent {
             // { data: "event_type", title: "Event Type" }
           ]
         });
-
 
 
         table.on('select', function (e, dt, type, indexes) {

@@ -1,4 +1,6 @@
-<div class='container'>
+
+
+<div class='container' style="width:350px">
   <div class='row'>
     <!--<div class='col-sm-12'>-->
       <!--<h1>Login</h1>-->
@@ -31,13 +33,13 @@
           <p class='help-block'>{{ vm.errors.login }}</p>
         </div>
         <div>
-          <button class='btn btn-primary btn-lg btn-login' type='submit'>
+          <button class='btn btn-primary btn-group-sm' type='submit'>
             Login
           </button>
-          <button class='btn btn-rounded btn-info btn-lg' ui-sref='signup'>
+          <button class='btn btn-rounded btn-info btn-group-sm' ui-sref='signup'>
             Register
           </button>
-          <button class='btn btn-rounded btn-info btn-lg' ui-sref='main'>
+          <button class='btn btn-rounded btn-info btn-group-sm' ui-sref='main'>
             Forgot Password
           </button>
         </div>
@@ -46,11 +48,6 @@
         <div class="well well-sm accInfo mb-20">
           <h5 class="mt-5 mb-10">Your Account Entries are secure.</h5>
           <small>We store all Account Entry information you save in our database in an encrypted format. We do not sell or make your information available to any one for any reason.</small>
-        </div>
-        <div class='row'>
-          <div class='col-sm-4 col-md-3'>
-            <oauth-buttons classes='btn-block btn-rounded'></oauth-buttons>
-          </div>
         </div>
       </form>
     </div>

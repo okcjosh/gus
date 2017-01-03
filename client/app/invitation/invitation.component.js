@@ -18,9 +18,13 @@ export class InvitationComponent {
     var event = this.$state.params.event_id;
     this.$http.get('/api/events/' + event)
       .then(response => {
-        this.$scope.job = response.data;
+        this.$scope.event = response.data;
       }, err => {
         alert('error: ' + err);
+      });
+    this.$http.get('/api/users/me')
+      .then( response => {
+        this.$scope.user = response.data;
       });
   }
 
