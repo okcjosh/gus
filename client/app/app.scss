@@ -23,6 +23,7 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 
 /* inject:scss */
 @import 'account/login/login';
+@import 'accounts/accounts';
 @import 'aCustom';
 @import 'admin/admin';
 @import 'checkout/checkout';

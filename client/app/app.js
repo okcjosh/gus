@@ -7,6 +7,7 @@ import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
 import 'angular-socket-io';
 import 'angular-drag-and-drop-lists';
+import AccountsComponent from './accounts/accounts.component';
 import 'angular-google-places-autocomplete';
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
@@ -38,7 +39,7 @@ import ngMessages from 'angular-messages';
 
 
 angular.module('es4App', [ngCookies, ngResource, 'ngSanitize', 'dndLists', 'btford.socket-io', 'as.sortable', 'google.places', uiRouter,
-  uiBootstrap, _Auth, ngAnimate, account, admin, ngMessages, drag, navbar, footer, main, CheckoutComponent, DashboardComponent, RatesComponent, TransactionComponent, InvitationComponent, event, eventDetails, leo, constants, socket, util
+  uiBootstrap, _Auth, ngAnimate, account, admin, ngMessages, AccountsComponent, drag, navbar, footer, main, CheckoutComponent, DashboardComponent, RatesComponent, TransactionComponent, InvitationComponent, event, eventDetails, leo, constants, socket, util
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
