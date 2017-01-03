@@ -70,19 +70,7 @@ export class LeoController {
           let leos = response.data;
 
           let table = $('#leoTable').DataTable({
-            select: true,
-            data: leos,
-            columns: [
-              {data: "_id", title: "ID", visible: false},
-              {data: "name", title: "Name"},
-              {data: "phone", title: "Phone"},
-              {data: "email", title: "Email"},
-              {data: "Department.name", title: "Department"},
-              {data: "year_started", title: "Year Started"},
-              {data: "lastGig", title: "Last Gig"}
-              // { data: "status", title: "Status" },
-              // { data: "event_type", title: "Event Type" }
-            ]
+            
           });
 
 
@@ -141,8 +129,9 @@ export class LeoController {
     }
   }
 
-  deleteLeo(leo) {
-    this.$http.delete(`/api/leos/${leo._id}`);
+  deleteLeo(leoId) {
+    console.log('hello')
+    //this.$http.delete(`/api/leos/${leoId}`);
   }
 }
 

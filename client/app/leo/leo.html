@@ -20,10 +20,74 @@
   </div>
 </div> -->
 
-<div class='container'>
-  <div class='row'>
+<div class='container main-content'>
+  <div class=''>
     <table class='table table-bordered' id="leoTable">
+      <thead>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Department</th>
+        <th>Year Started</th>
+        <th>Last Gig</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <tr class='' ng-repeat='leo in $ctrl.awesomeLeos'>
+          <td><a href='#' uib-tooltip='{{leo.name}}'>{{leo.name}}</a></td>
+          <td><a href='#' uib-tooltip='{{leo.name}}'>{{leo.phone}}</a></td>
+          <td><a href='#' uib-tooltip='{{leo.name}}'>{{leo.email}}</a></td>
+          <td><a href='#' uib-tooltip='{{leo.name}}'>{{leo.Department.name}}</a></td>
+          <td><a href='#' uib-tooltip='{{leo.info}}'>{{leo.year_started}}</a></td>
+          <td><a href='#' uib-tooltip='{{leo.info}}'>{{leo.lastGig}}</a></td>
+          <td class='text-center'>
+            <button type='button' class='close-btn' ng-click='$ctrl.deleteLeo(leo)'>&times;</button>
+          </td>
+        </tr>
+      </tbody>
+
     </table>
+
+  </div>
+
+  <div class="">
+    <form class="leo-form">
+      <label>Syncs in realtime across clients</label>
+        <div class="form-group" style="overflow: auto;">
+          <div class="col-xs-6">
+            <input type="text" class="form-control" placeholder="LEO Name." ng-model="$ctrl.name">
+          </div>
+
+          <div class="col-xs-6">
+            <input type="text" class="form-control" placeholder="LEO Phone." ng-model="$ctrl.phone">
+          </div>
+        </div>
+
+        <div class="form-group" style="overflow: auto;">
+          <div class="col-xs-6">
+            <input type="text" class="form-control" placeholder="LEO Email." ng-model="$ctrl.email">
+          </div>
+
+          <div class="col-xs-6">
+            <input type="text" class="form-control" placeholder="LEO Department ID." ng-model="$ctrl.department_id">
+          </div>
+        </div>
+
+
+
+        <div class="form-group" style="overflow: auto;">
+          <div class="col-xs-6">
+            <input type="text" class="form-control" placeholder="LEO Hire Date." ng-model="$ctrl.year_started">
+          </div>
+
+          <div class="col-xs-6">
+            <input type="text" class="form-control" placeholder="LEO Last Gig." ng-model="$ctrl.lastGig">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary pull-right" ng-click="$ctrl.addLeo()">Add New</button>
+    </form>
+
   </div>
 </div>
 
@@ -66,19 +130,3 @@
     <!--<div data-as-sortable-item-handle></div>-->
   <!--</li>-->
 <!--</ul>-->
-
-
-<form class="leo-form">
-  <label>Syncs in realtime across clients</label>
-  <p class="input-group">
-    <input type="text" class="form-control" placeholder="LEO Name." ng-model="$ctrl.name">
-    <input type="text" class="form-control" placeholder="LEO Phone." ng-model="$ctrl.phone">
-    <input type="text" class="form-control" placeholder="LEO Email." ng-model="$ctrl.email">
-    <input type="text" class="form-control" placeholder="LEO Department ID." ng-model="$ctrl.department_id">
-    <input type="text" class="form-control" placeholder="LEO Hire Date." ng-model="$ctrl.year_started">
-    <input type="text" class="form-control" placeholder="LEO Last Gig." ng-model="$ctrl.lastGig">
-    <button type="submit" class="btn btn-primary" ng-click="$ctrl.addLeo()">Add New</button>
-    <span class="input-group-btn">
-      </span>
-  </p>
-</form>
