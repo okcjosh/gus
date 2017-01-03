@@ -69,9 +69,7 @@ export class LeoController {
           $.fn.dataTable.ext.errMode = 'none';
           let leos = response.data;
 
-          let table = $('#leoTable').DataTable({
-            
-          });
+          let table = $('#leoTable').DataTable();
 
 
 
@@ -130,8 +128,8 @@ export class LeoController {
   }
 
   deleteLeo(leoId) {
-    console.log('hello')
-    //this.$http.delete(`/api/leos/${leoId}`);
+    // console.log('delete')
+    this.$http.delete(`/api/leos/${leoId}`);
   }
 }
 
