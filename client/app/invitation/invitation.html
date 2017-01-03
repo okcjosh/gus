@@ -1,32 +1,256 @@
-<div class="container">
+<!--<div class="container">-->
+  <!--<div class="row">-->
+    <!--<div class="row">-->
+      <!--<div class="col-md-6 text-info">-->
+        <!--Job Date: {{job.date}}-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+      <!--<div class="col-md-6 text-info">-->
+        <!--Job Location: {{job.venue}}-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+      <!--<div class="col-md-6 text-info">-->
+        <!--Job Address: {{job.address}}-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+      <!--<div class="col-md-6">-->
+        <!--<button type="button" class="btn btn-success btn-block btn-rounded" ui-sref='main' type="submit" ng-click="dosomething();">Yes, I accept this assignment</button>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<span>-->
+      <!--<div class=""> </div>-->
+    <!--</span>-->
+    <!--<div class="row">-->
+      <!--<div class="col-md-6">-->
+        <!--<button type="button" class="btn btn-danger btn-block btn-rounded" ui-sref='main' type="submit" ng-click="dosomething();">No, I reject this assignment </button>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+<div class="container main-content mb-20">
+  <h3 class="mb-20">View Job &mdash; <small>Oklahoma City Memorial Marathon</small></h3>
+
   <div class="row">
-    <div class="row">
-      <div class="col-md-6 text-info">
-        Job Date: {{job.date}}
-      </div>
+    <div class="col-md-4">
+      <ul class="list-group pw-lists">
+        <h5 class="mb-20">Client</h5>
+        <li class="list-group-item">
+          <strong>Name</strong>: {{ user.name }} </li>
+        <li class="list-group-item">
+          <strong>Email</strong>: {{ user.email }} </li>
+
+      </ul>
+      <ul class="list-group pw-lists">
+        <h5 class="mb-20">Job Summary</h5>
+        <li class="list-group-item">
+          <strong>Venue</strong>: {{ event.venue }} </li>
+        <li class="list-group-item">
+          <strong>Address</strong> {{ event.address }} </li>
+        <li class="list-group-item">
+          <strong>Job Type</strong>: {{ event.JobType.name}} </li>
+        <li class="list-group-item"><strong>Job Options</strong>: {{ event.job_type_specs }}</li>
+        <li class="list-group-item">
+          <strong>Start Date</strong>: {{ event.date }} </li>
+      </ul>
+      <ul class="list-group pw-lists">
+        <h5 class="mb-20">Coordinator</h5>
+        <li class="list-group-item">
+          <strong>Coordinator</strong>: {{ event.point_of_contact }} </li>
+        <li class="list-group-item">
+          <strong>Phone Number</strong>: {{ event.phone_number }} </li>
+        <li class="list-group-item">
+          <strong>Email</strong>: {{ event.email }} </li>
+
+
+      </ul>
+      <!--a data-toggle="modal" href="#chngPass" class="btn btn-success btn-xs btn-icon mb-20"><i class="fa fa-lock"></i> Change Password</a>
+  <a data-toggle="modal" href="#delEntry" class="btn btn-danger btn-xs btn-icon mb-20"><i class="fa fa-trash"></i> Delete Entry</a-->
+
     </div>
-    <div class="row">
-      <div class="col-md-6 text-info">
-        Job Location: {{job.venue}}
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 text-info">
-        Job Address: {{job.address}}
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <button type="button" class="btn btn-success btn-block btn-rounded" ui-sref='main' type="submit" ng-click="dosomething();">Yes, I accept this assignment</button>
-      </div>
-    </div>
-    <span>
-      <div class=""> </div>
-    </span>
-    <div class="row">
-      <div class="col-md-6">
-        <button type="button" class="btn btn-danger btn-block btn-rounded" ui-sref='main' type="submit" ng-click="dosomething();">No, I reject this assignment </button>
-      </div>
-    </div>
-  </div>
-</div>
+    <div class="col-md-8">
+      <h5 class="mb-20">Job Details</h5>
+      <form action="" method="post">
+
+        <div class="form-group">
+          <label for="entryTitle">Job Title</label>
+          <input type="text" class="form-control" readonly name="entryTitle" required="required" ng-model="event.venue" />
+        </div>
+
+        <div class="form-group">
+          <label for="entryDesc">Description</label>
+          <textarea class="form-control" readonly name="entryDesc" required="required" rows="4" ng-model="event.description"></textarea>
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="entryUsername">Client</label>
+              <input type="text" class="form-control" name="entryUsername" value="" />
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <label for="entryEmail">Email</label>
+              <input type="text" class="form-control" name="entryEmail" value="myContact@okcnm.org" />
+            </div>
+          </div>
+        </div>
+        <input name="catIdOld" type="hidden" value="11" />
+        <input name="entryTitleOld" type="hidden" value="+nA0ZaI7TxeLO3MbHsiRJ/RXhJpb6xnjCcUQzOipr/Q=" />
+
+        <!--<div class="col-md-3" id="approve-modal">-->
+          <!--<a id="modal-118275" href="#modal-container-118275" role="button" class="btn btn-success btn-icon btn-rounded" data-toggle="modal"><i class="fa fa-check-square-o" aria-hidden="true"></i>Approve Job</a>-->
+          <!--<div class="modal fade" id="modal-container-118275" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+            <!--<div class="modal-dialog modal-lg">-->
+              <!--<div class="modal-content">-->
+                <!--<div class="modal-header">-->
+                  <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">-->
+                    <!--&times;-->
+                  <!--</button>-->
+                  <!--<h4 class="modal-title" id="myModalLabel">-->
+                    <!--Assign Officers-->
+                  <!--</h4>-->
+                <!--</div>-->
+                <!--<div class="modal-body" style="overflow: auto;">-->
+
+                  <!--<script type="text/ng-template" id="list.html">-->
+                    <!--<ul dnd-list dnd-drop="onDrop(list, item, index)">-->
+                      <!--<li ng-repeat="item in list.items"-->
+                          <!--data-leo-id="{{item.leo_id}}"-->
+                          <!--dnd-draggable="getSelectedItemsIncluding(list, item)"-->
+                          <!--dnd-dragstart="onDragstart(list, event)"-->
+                          <!--dnd-moved="onMoved(list)"-->
+                          <!--dnd-dragend="list.dragging = false"-->
+                          <!--dnd-selected="item.selected = !item.selected"-->
+                          <!--ng-class="{'selected': item.selected}"-->
+                          <!--ng-hide="list.dragging && item.selected">-->
+                        <!--{{item.name}}-->
+                      <!--</li>-->
+                    <!--</ul>-->
+                  <!--</script>-->
+
+                  <!--<script type="text/ng-template" id="leoList.html">-->
+                    <!--<ul dnd-list dnd-drop="onDrop(list, item, index)">-->
+                      <!--<li ng-repeat="item in list.items | orderBy: leoSort"-->
+                          <!--data-leo-id="{{item.leo_id}}"-->
+                          <!--dnd-draggable="getSelectedItemsIncluding(list, item)"-->
+                          <!--dnd-dragstart="onDragstart(list, event)"-->
+                          <!--dnd-moved="onMoved(list)"-->
+                          <!--dnd-dragend="list.dragging = false"-->
+                          <!--dnd-selected="item.selected = !item.selected"-->
+                          <!--ng-class="{'selected': item.selected}"-->
+                          <!--ng-hide="list.dragging && item.selected">-->
+                        <!--{{item.name}}-->
+                      <!--</li>-->
+                    <!--</ul>-->
+                  <!--</script>-->
+
+                  <!--<script type="text/ng-template" id="container.html">-->
+                    <!--<div class="container-element box box-blue">-->
+                      <!--<h3>Container {{item.id}}</h3>-->
+                      <!--<div class="column" ng-repeat="list in item.columns" ng-include="'list.html'"></div>-->
+                      <!--<div class="clearfix"></div>-->
+                    <!--</div>-->
+                  <!--</script>-->
+
+                  <!--&lt;!&ndash; Template for a normal list item &ndash;&gt;-->
+                  <!--<script type="text/ng-template" id="item.html">-->
+                    <!--<div class="item">Item {{item.id}}</div>-->
+                  <!--</script>-->
+
+                  <!--&lt;!&ndash; Main area with dropzones and source code &ndash;&gt;-->
+                  <!--<div class="col-md-12 multiDemo">-->
+                    <!--<div class="row">-->
+
+                      <!--<div ng-repeat="list in leosList" class="col-md-3" id="leo-list">-->
+                        <!--<div class="dropzone box box-yellow">-->
+                          <!--&lt;!&ndash; The dropzone also uses the list template &ndash;&gt;-->
+                          <!--<h5>{{ list.listName }}</h5>-->
+                          <!--<div ng-include="'leoList.html'"></div>-->
+                        <!--</div>-->
+                      <!--</div>-->
+
+                      <!--<div ng-repeat="list in invitesList" class="col-md-3">-->
+                        <!--<div class="dropzone box box-yellow">-->
+                          <!--&lt;!&ndash; The dropzone also uses the list template &ndash;&gt;-->
+                          <!--<h5>{{ list.listName }}</h5>-->
+                          <!--<div ng-include="'list.html'"></div>-->
+                        <!--</div>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                  <!--</div>-->
+
+
+                  <!--<ul data-as-sortable="board.dragControlListeners" data-ng-model="items">-->
+                    <!--<li data-ng-repeat="item in items" data-as-sortable-item>-->
+                      <!--<div data-as-sortable-item-handle></div>-->
+                    <!--</li>-->
+                  <!--</ul>-->
+
+                  <!--<ul data-as-sortable="board.dragControlListeners" data-ng-model="items">-->
+                    <!--<li data-ng-repeat="item in items" data-as-sortable-item>-->
+                      <!--<div data-as-sortable-item-handle></div>-->
+                    <!--</li>-->
+                  <!--</ul>-->
+
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+
+                  <!--<div class="pull-left form-inline">-->
+                    <!--<div class="form-group">-->
+                      <!--<label>Sort by: </label>-->
+                      <!--<select class="form-control" ng-model="leoSort">-->
+                        <!--<option value="name">By Name</option>-->
+                        <!--<option value="lastGig">By Last Gig</option>-->
+                        <!--<option value="year_started">By Year started</option>-->
+                      <!--</select>-->
+                    <!--</div>-->
+                    <!--&nbsp;-->
+                    <!--&nbsp;-->
+                    <!--&nbsp;-->
+                    <!--<div class="form-group">-->
+                      <!--<label>Filter by: </label>-->
+                      <!--<select class="form-control" ng-model="leoFilter">-->
+                        <!--<option value="">&#45;&#45;&#45;&#45; Officers preffered Job Types &#45;&#45;&#45;&#45;</option>-->
+                        <!--<option ng-repeat="type in jobTypes" value="{{::type.name}}">{{::type.name}}</option>-->
+                      <!--</select>-->
+                    <!--</div>-->
+
+                    <!--&lt;!&ndash; CHECKBOXES for filter is too messy &ndash;&gt;-->
+                    <!--&lt;!&ndash; <div class="form-group">-->
+                      <!--<label>Filter by: </label>-->
+
+                      <!--<div ng-repeat="type in jobTypes" class="checkbox">-->
+                        <!--<label>-->
+                          <!--<input type="checkbox" value="">-->
+                          <!--{{type.name}}-->
+                        <!--</label>-->
+                      <!--</div>-->
+
+                    <!--</div> &ndash;&gt;-->
+
+                  <!--</div>-->
+
+                  <!--<button type="button" class="btn btn-default btn-rounded" data-dismiss="modal">-->
+                    <!--Close-->
+                  <!--</button>-->
+                  <!--<button type="button" class="btn btn-primary btn-rounded" data-dismiss="modal" ng-click="saveDrags()">-->
+                    <!--Save changes-->
+                  <!--</button>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--&lt;!&ndash; <button type="input" name="submit" value="saveEntry" class="btn btn-success btn-icon mb-20"><i class="fa fa-check-square-o" aria-hidden="true"></i> Approve Job</button> &ndash;&gt;-->
+        <!--<button type="input" name="submit" value="saveEntry" class="btn btn-danger btn-icon mb-20"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Decline Job</button>-->
+      <!--</form>-->
+    <!--</div>-->
+  <!--</div>-->
+
+<!--</div>-->
