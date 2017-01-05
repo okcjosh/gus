@@ -140,7 +140,7 @@ export class EventDetailsComponent {
 
     let leoAppendedInvites = invitations.map(invite => {
       let leoIndex = leos.findIndex(leo => {
-        return leo.leo_id == invite.leo_id
+        return leo._id == invite.leo_id
       });
       if (leoIndex >= 0) {
         let leo = leos[leoIndex];
