@@ -11,9 +11,8 @@ export class EventDetailsComponent {
     this.socket = socket;
     this.$state = $state;
     this.$scope = $scope;
-
     this.init($scope);
-
+    $scope.approve = this.approve.bind(this, $scope, $http);
     $scope.saveDrags = this.saveDrags.bind(this, $scope, $http);
 
     $scope.$on('$destroy', function() {
@@ -168,6 +167,9 @@ export class EventDetailsComponent {
     // });
   }
 
+  approve($scope, $http){
+    $http.get('/api/events/approve/' + $scope.selectedRow._id);
+  }
   saveDrags($scope, $http) {
     let invites = [],
       _self = this;
@@ -187,6 +189,7 @@ export class EventDetailsComponent {
         invites.push(inviteData);
       });
     });
+
 
     $http.post('/api/invitations', invites)
       .then(function(res) {
