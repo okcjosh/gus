@@ -21,9 +21,20 @@ export class EventDetailsComponent {
   }
 
   init($scope) {
+    let _self = this;
+    this.event_id = this.$state.params.event_id
     this.$http.get('/api/leos')
-      .then(response => {
-        $scope.leos = response.data;
+      .then(leos => {
+        $scope.leos = leos.data;
+
+        // Call to invitations
+        _self.$http.get('/api/invitations', {
+          params: {
+            party_id: _self.event_id
+          }
+        }).then(invitations => {
+          _self.initializeDragDrop(_self.$scope, invitations.data);
+        });
       });
   }
 
@@ -55,13 +66,6 @@ export class EventDetailsComponent {
         $scope.jobTypes = res.data;
       });
 
-    this.$http.get('/api/invitations', {
-      params: {
-        party_id: event_id
-      }
-    }).then(res => {
-      this.initializeDragDrop($scope, res.data);
-    });
   }
 
   initializeDragDrop($scope, invitations) {
@@ -168,7 +172,7 @@ export class EventDetailsComponent {
   }
 
   approve($scope, $http){
-    $http.get('/api/events/approve/' + $scope.selectedRow._id);
+    $http.get('/api/events/approve/' + $scope.event_id);
   }
   saveDrags($scope, $http) {
     let invites = [],
