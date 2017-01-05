@@ -111,8 +111,8 @@ export class DashboardComponent {
 
         let statusLabels = {
           'Created': 'warning',
-          'Accepted': 'info',
-          'Scheduled': 'success',
+          'Approved': 'success',
+          'Scheduled': 'info',
           'Rejected': 'danger',
           'Completed': 'primary'
         };
