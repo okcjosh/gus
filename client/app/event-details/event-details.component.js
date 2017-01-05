@@ -22,7 +22,8 @@ export class EventDetailsComponent {
 
   init($scope) {
     let _self = this;
-    this.event_id = this.$state.params.event_id
+    this.event_id = this.$state.params.event_id;
+    $scope.event_id = this.event_id;
     this.$http.get('/api/leos')
       .then(leos => {
         $scope.leos = leos.data;
