@@ -141,7 +141,9 @@ export class EventDetailsComponent {
     let leos = $scope.leos.slice(0);
     let remainingLeos = $scope.leos.slice(0);
 
-    let leoAppendedInvites = invitations.map(invite => {
+    let leoAppendedInvites = [];
+
+    invitations.map(invite => {
       let leoIndex = leos.findIndex(leo => {
         return leo._id == invite.leo_id
       });
@@ -150,7 +152,7 @@ export class EventDetailsComponent {
         invite.name = leo.name;
         remainingLeos.splice(leoIndex, 1);
 
-        return invite;
+        leoAppendedInvites.push(invite);
       }
     });
 
