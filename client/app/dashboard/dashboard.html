@@ -1,206 +1,200 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="container main-content" style="width: 98%">
-
-      <div class="col-lg-8">
-
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <b>All Jobs</b>
-          </div>
-          <div class="panel-body">
-            <table id="events" class="table dataTable table-striped table-bordered table-responsive"></table>
-          </div>
-        </div>
-        <div class="row">
-        </div>
+<div class="container-fluid main-content" style="width: 98%">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <b>All Jobs</b>
       </div>
-      <div class="selected-event-details-container col-lg-4">
-        <div ng-hide="selectedRow">
-          <span class="fa fa-ban text-muted" style="font-size: 70px; width: 100%; text-align: center;"></span>
-          <b class="text-muted" style="display: block; width: 100%; text-align: center;"> No Event Selected</b>
-        </div>
-        <div class="panel panel-default" ng-if="selectedRow">
-          <div class="panel-heading">
-            <b>Event Details</b>
-          </div>
-          <div class="panel-body">
-            <p> Venue: <span class="label label-default">{{ selectedRow.venue }}</span> </p>
-            <p> Address: <span class="label label-default">{{ selectedRow.address }}</span> </p>
-            <p> Phone number: <span class="label label-default">{{ selectedRow.number }}</span> </p>
-            <p> Point of Contact: <span class="label label-default">{{ selectedRow.point_of_contact }}</span> </p>
-            <p> Job Type: <span class="label label-default">{{ selectedRow.JobType.name }}</span> </p>
-            <p> Job Type Specifications: <span class="label label-default">{{ selectedRow.job_type_specs }}</span> </p>
-            <p> Prefered Officer Name: <span class="label label-default">{{ selectedRow.prefered_officer_name }}</span> </p>
-            <p> Recuring: <span class="label label-default">{{ selectedRow.is_recuring }}</span> </p>
-            <p> Recuring Data: <span class="label label-default">{{ selectedRow.recuring_data }}</span> </p>
-            <p> Status: <span class="label label-default">{{selectedRow.Status.name}}</span></p>
-          </div>
-
-          <div class="panel-footer" style="overflow: auto">
-
-            <div class="col-md-6" id="approve-modal">
-              <a id="modal-118275" href="#modal-container-118275" role="button" ng-click="approve()" class="btn btn-success btn-block btn-rounded" data-toggle="modal">APPROVE</a>
-              <div class="modal fade" id="modal-container-118275" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                      </button>
-                      <h4 class="modal-title" id="myModalLabel">
-                        Select Officers for Event
-                      </h4>
-                    </div>
-                    <div class="modal-body" style="overflow: auto;">
-
-                      <script type="text/ng-template" id="list.html">
-                        <ul dnd-list dnd-drop="onDrop(list, item, index)">
-                          <li ng-repeat="item in list.items"
-                              data-leo-id="{{item._id}}"
-                              dnd-draggable="getSelectedItemsIncluding(list, item)"
-                              dnd-dragstart="onDragstart(list, event)"
-                              dnd-moved="onMoved(list)"
-                              dnd-dragend="list.dragging = false"
-                              dnd-selected="item.selected = !item.selected"
-                              ng-class="{'selected': item.selected}"
-                              ng-hide="list.dragging && item.selected"
-                          >
-                            {{item.name}}
-                          </li>
-                        </ul>
-                      </script>
-
-                      <script type="text/ng-template" id="container.html">
-                        <div class="container-element box box-blue">
-                          <h3>Container {{item.id}}</h3>
-                          <div class="column" ng-repeat="list in item.columns" ng-include="'list.html'"></div>
-                          <div class="clearfix"></div>
-                        </div>
-                      </script>
-
-                      <!-- Template for a normal list item -->
-                      <script type="text/ng-template" id="item.html">
-                        <div class="item">Item {{item.id}}</div>
-                      </script>
-
-                      <!-- Main area with dropzones and source code -->
-                      <div class="col-md-12 multiDemo">
-                        <div class="row">
-
-                          <div ng-repeat="list in leosList" class="col-md-3" id="leo-list">
-                            <div class="dropzone box box-yellow">
-                              <!-- The dropzone also uses the list template -->
-                              <h5>{{ list.listName }}</h5>
-                              <div ng-include="'list.html'"></div>
-                            </div>
-                          </div>
-
-                          <div ng-repeat="list in invitesList" class="col-md-3">
-                            <div class="dropzone box box-yellow">
-                              <!-- The dropzone also uses the list template -->
-                              <h5>{{ list.listName }}</h5>
-                              <div ng-include="'list.html'"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-
-                      <ul data-as-sortable="board.dragControlListeners" data-ng-model="items">
-                        <li data-ng-repeat="item in items" data-as-sortable-item>
-                          <div data-as-sortable-item-handle></div>
-                        </li>
-                      </ul>
-
-                      <ul data-as-sortable="board.dragControlListeners" data-ng-model="items">
-                        <li data-ng-repeat="item in items" data-as-sortable-item>
-                          <div data-as-sortable-item-handle></div>
-                        </li>
-                      </ul>
-
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default btn-rounded" data-dismiss="modal">
-                        Close
-                      </button>
-                      <button type="button" class="btn btn-primary btn-rounded" data-dismiss="modal" ng-click="saveDrags()">
-                        Save changes
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6" id="reject-modal">
-              <a id="modal-349281" href="#modal-container-349281" role="button" class="btn btn-danger btn-block btn-rounded" data-toggle="modal">REJECT</a>
-              <div class="modal fade" id="modal-container-349281" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        ×
-                      </button>
-                      <h4 class="modal-title" id="myModalLabel">
-                        Reject Event
-                      </h4>
-                    </div>
-                    <div class="modal-body">
-                      <form class="form-horizontal">
-                        <fieldset>
-
-                          <!-- Form Name -->
-                          <legend>Form Name</legend>
-
-                          <!-- Multiple Checkboxes -->
-                          <div class="form-group">
-                            <label class="col-md-4 control-label" for="checkboxes">Notify Client of Rejection</label>
-                            <div class="col-md-4">
-                              <div class="checkbox">
-                                <label for="checkboxes-0">
-                                  <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
-                                  SMS Text
-                                </label>
-                              </div>
-                              <div class="checkbox">
-                                <label for="checkboxes-1">
-                                  <input type="checkbox" name="checkboxes" id="checkboxes-1" value="2">
-                                  Email
-                                </label>
-                              </div>
-                            </div>
-                          </div>
-
-                          <!-- Textarea -->
-                          <div class="form-group">
-                            <label class="col-md-4 control-label" for="textarea">Rejection Feedback</label>
-                            <div class="col-md-4">
-                              <textarea class="form-control" id="textarea" name="textarea">Your event registration has been rejected</textarea>
-                            </div>
-                          </div>
-
-                        </fieldset>
-                      </form>
-
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">
-                        Close
-                      </button>
-                      <button type="button" class="btn btn-primary" data-dismiss="modal">
-                        Save changes
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
+      <div class="panel-body">
+        <table id="events" class="table dataTable table-striped table-bordered table-responsive"></table>
       </div>
     </div>
+    <div class="row">
 
+    </div>
   </div>
-</div>
+      <!--<div class="selected-event-details-container col-lg-4">-->
+        <!--<div ng-hide="selectedRow">-->
+          <!--<span class="fa fa-ban text-muted" style="font-size: 70px; width: 100%; text-align: center;"></span>-->
+          <!--<b class="text-muted" style="display: block; width: 100%; text-align: center;"> No Event Selected</b>-->
+        <!--</div>-->
+        <!--<div class="panel panel-default" ng-if="selectedRow">-->
+          <!--<div class="panel-heading">-->
+            <!--<b>Event Details</b>-->
+          <!--</div>-->
+          <!--<div class="panel-body">-->
+            <!--<p> Venue: <span class="label label-default">{{ selectedRow.venue }}</span> </p>-->
+            <!--<p> Address: <span class="label label-default">{{ selectedRow.address }}</span> </p>-->
+            <!--<p> Phone number: <span class="label label-default">{{ selectedRow.number }}</span> </p>-->
+            <!--<p> Point of Contact: <span class="label label-default">{{ selectedRow.point_of_contact }}</span> </p>-->
+            <!--<p> Job Type: <span class="label label-default">{{ selectedRow.JobType.name }}</span> </p>-->
+            <!--<p> Job Type Specifications: <span class="label label-default">{{ selectedRow.job_type_specs }}</span> </p>-->
+            <!--<p> Prefered Officer Name: <span class="label label-default">{{ selectedRow.prefered_officer_name }}</span> </p>-->
+            <!--<p> Recuring: <span class="label label-default">{{ selectedRow.is_recuring }}</span> </p>-->
+            <!--<p> Recuring Data: <span class="label label-default">{{ selectedRow.recuring_data }}</span> </p>-->
+            <!--<p> Status: <span class="label label-default">{{selectedRow.Status.name}}</span></p>-->
+          <!--</div>-->
+
+          <!--&lt;!&ndash;<div class="panel-footer" style="overflow: auto">&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<div class="col-md-6" id="approve-modal">&ndash;&gt;-->
+              <!--&lt;!&ndash;<a id="modal-118275" href="#modal-container-118275" role="button" class="btn btn-success btn-block btn-rounded" data-toggle="modal">APPROVE</a>&ndash;&gt;-->
+              <!--&lt;!&ndash;<div class="modal fade" id="modal-container-118275" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="modal-dialog modal-lg">&ndash;&gt;-->
+                  <!--&lt;!&ndash;<div class="modal-content">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="modal-header">&ndash;&gt;-->
+                      <!--&lt;!&ndash;<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&ndash;&gt;-->
+                        <!--&lt;!&ndash;&times;&ndash;&gt;-->
+                      <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                      <!--&lt;!&ndash;<h4 class="modal-title" id="myModalLabel">&ndash;&gt;-->
+                        <!--&lt;!&ndash;Modal title&ndash;&gt;-->
+                      <!--&lt;!&ndash;</h4>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="modal-body" style="overflow: auto;">&ndash;&gt;-->
+
+                      <!--&lt;!&ndash;<script type="text/ng-template" id="list.html">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<ul dnd-list dnd-drop="onDrop(list, item, index)">&ndash;&gt;-->
+                          <!--&lt;!&ndash;<li ng-repeat="item in list.items"&ndash;&gt;-->
+                              <!--&lt;!&ndash;data-leo-id="{{item._id}}"&ndash;&gt;-->
+                              <!--&lt;!&ndash;dnd-draggable="getSelectedItemsIncluding(list, item)"&ndash;&gt;-->
+                              <!--&lt;!&ndash;dnd-dragstart="onDragstart(list, event)"&ndash;&gt;-->
+                              <!--&lt;!&ndash;dnd-moved="onMoved(list)"&ndash;&gt;-->
+                              <!--&lt;!&ndash;dnd-dragend="list.dragging = false"&ndash;&gt;-->
+                              <!--&lt;!&ndash;dnd-selected="item.selected = !item.selected"&ndash;&gt;-->
+                              <!--&lt;!&ndash;ng-class="{'selected': item.selected}"&ndash;&gt;-->
+                              <!--&lt;!&ndash;ng-hide="list.dragging && item.selected"&ndash;&gt;-->
+                          <!--&lt;!&ndash;&gt;&ndash;&gt;-->
+                            <!--&lt;!&ndash;{{item.name}}&ndash;&gt;-->
+                          <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                      <!--&lt;!&ndash;</script>&ndash;&gt;-->
+
+                      <!--&lt;!&ndash;<script type="text/ng-template" id="container.html">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="container-element box box-blue">&ndash;&gt;-->
+                          <!--&lt;!&ndash;<h3>Container {{item.id}}</h3>&ndash;&gt;-->
+                          <!--&lt;!&ndash;<div class="column" ng-repeat="list in item.columns" ng-include="'list.html'"></div>&ndash;&gt;-->
+                          <!--&lt;!&ndash;<div class="clearfix"></div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                      <!--&lt;!&ndash;</script>&ndash;&gt;-->
+
+                      <!--&lt;!&ndash;&lt;!&ndash; Template for a normal list item &ndash;&gt;&ndash;&gt;-->
+                      <!--&lt;!&ndash;<script type="text/ng-template" id="item.html">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="item">Item {{item.id}}</div>&ndash;&gt;-->
+                      <!--&lt;!&ndash;</script>&ndash;&gt;-->
+
+                      <!--&lt;!&ndash;&lt;!&ndash; Main area with dropzones and source code &ndash;&gt;&ndash;&gt;-->
+                      <!--&lt;!&ndash;<div class="col-md-12 multiDemo">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+
+                          <!--&lt;!&ndash;<div ng-repeat="list in leosList" class="col-md-3" id="leo-list">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="dropzone box box-yellow">&ndash;&gt;-->
+                              <!--&lt;!&ndash;&lt;!&ndash; The dropzone also uses the list template &ndash;&gt;&ndash;&gt;-->
+                              <!--&lt;!&ndash;<h5>{{ list.listName }}</h5>&ndash;&gt;-->
+                              <!--&lt;!&ndash;<div ng-include="'list.html'"></div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                          <!--&lt;!&ndash;<div ng-repeat="list in invitesList" class="col-md-3">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="dropzone box box-yellow">&ndash;&gt;-->
+                              <!--&lt;!&ndash;&lt;!&ndash; The dropzone also uses the list template &ndash;&gt;&ndash;&gt;-->
+                              <!--&lt;!&ndash;<h5>{{ list.listName }}</h5>&ndash;&gt;-->
+                              <!--&lt;!&ndash;<div ng-include="'list.html'"></div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                      <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+
+                      <!--&lt;!&ndash;<ul data-as-sortable="board.dragControlListeners" data-ng-model="items">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li data-ng-repeat="item in items" data-as-sortable-item>&ndash;&gt;-->
+                          <!--&lt;!&ndash;<div data-as-sortable-item-handle></div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                      <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+
+                      <!--&lt;!&ndash;<ul data-as-sortable="board.dragControlListeners" data-ng-model="items">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li data-ng-repeat="item in items" data-as-sortable-item>&ndash;&gt;-->
+                          <!--&lt;!&ndash;<div data-as-sortable-item-handle></div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                      <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="modal-footer">&ndash;&gt;-->
+                      <!--&lt;!&ndash;<button type="button" class="btn btn-default btn-rounded" data-dismiss="modal">&ndash;&gt;-->
+                        <!--&lt;!&ndash;Close&ndash;&gt;-->
+                      <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                      <!--&lt;!&ndash;<button type="button" class="btn btn-primary btn-rounded" data-dismiss="modal" ng-click="saveDrags()">&ndash;&gt;-->
+                        <!--&lt;!&ndash;Save changes&ndash;&gt;-->
+                      <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                  <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+              <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-md-6" id="reject-modal">&ndash;&gt;-->
+              <!--&lt;!&ndash;<a id="modal-349281" href="#modal-container-349281" role="button" class="btn btn-danger btn-block btn-rounded" data-toggle="modal">REJECT</a>&ndash;&gt;-->
+              <!--&lt;!&ndash;<div class="modal fade" id="modal-container-349281" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="modal-dialog modal-lg">&ndash;&gt;-->
+                  <!--&lt;!&ndash;<div class="modal-content">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="modal-header">&ndash;&gt;-->
+                      <!--&lt;!&ndash;<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&ndash;&gt;-->
+                        <!--&lt;!&ndash;×&ndash;&gt;-->
+                      <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                      <!--&lt;!&ndash;<h4 class="modal-title" id="myModalLabel">&ndash;&gt;-->
+                        <!--&lt;!&ndash;Modal title&ndash;&gt;-->
+                      <!--&lt;!&ndash;</h4>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="modal-body">&ndash;&gt;-->
+                      <!--&lt;!&ndash;<form class="form-horizontal">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<fieldset>&ndash;&gt;-->
+
+                          <!--&lt;!&ndash;&lt;!&ndash; Form Name &ndash;&gt;&ndash;&gt;-->
+                          <!--&lt;!&ndash;<legend>Form Name</legend>&ndash;&gt;-->
+
+                          <!--&lt;!&ndash;&lt;!&ndash; Multiple Checkboxes &ndash;&gt;&ndash;&gt;-->
+                          <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<label class="col-md-4 control-label" for="checkboxes">Notify Client of Rejection</label>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="col-md-4">&ndash;&gt;-->
+                              <!--&lt;!&ndash;<div class="checkbox">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<label for="checkboxes-0">&ndash;&gt;-->
+                                  <!--&lt;!&ndash;<input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">&ndash;&gt;-->
+                                  <!--&lt;!&ndash;SMS Text&ndash;&gt;-->
+                                <!--&lt;!&ndash;</label>&ndash;&gt;-->
+                              <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                              <!--&lt;!&ndash;<div class="checkbox">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<label for="checkboxes-1">&ndash;&gt;-->
+                                  <!--&lt;!&ndash;<input type="checkbox" name="checkboxes" id="checkboxes-1" value="2">&ndash;&gt;-->
+                                  <!--&lt;!&ndash;Email&ndash;&gt;-->
+                                <!--&lt;!&ndash;</label>&ndash;&gt;-->
+                              <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                          <!--&lt;!&ndash;&lt;!&ndash; Textarea &ndash;&gt;&ndash;&gt;-->
+                          <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<label class="col-md-4 control-label" for="textarea">Rejection Feedback</label>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="col-md-4">&ndash;&gt;-->
+                              <!--&lt;!&ndash;<textarea class="form-control" id="textarea" name="textarea">Your event registration has been rejected</textarea>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;</fieldset>&ndash;&gt;-->
+                      <!--&lt;!&ndash;</form>&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="modal-footer">&ndash;&gt;-->
+                      <!--&lt;!&ndash;<button type="button" class="btn btn-default" data-dismiss="modal">&ndash;&gt;-->
+                        <!--&lt;!&ndash;Close&ndash;&gt;-->
+                      <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                      <!--&lt;!&ndash;<button type="button" class="btn btn-primary" data-dismiss="modal">&ndash;&gt;-->
+                        <!--&lt;!&ndash;Save changes&ndash;&gt;-->
+                      <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                  <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+              <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--</div>-->
+
+      <!--</div>-->
+    </div>

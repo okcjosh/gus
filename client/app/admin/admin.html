@@ -1,4 +1,4 @@
-<div class='container'>
+<!-- <div class='container'>
   <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
   <ul class='list-group user-list'>
     <li class='list-group-item' ng-repeat='user in admin.users'>
@@ -9,4 +9,114 @@
         <a ng-click='admin.delete(user)' class='trash'><span class='fa fa-trash fa-2x'></span></a>
     </li>
   </ul>
+</div> -->
+
+
+<div class='container'>
+
+  <div class="panel panel-default margin-top-10">
+    <div class="panel-heading">
+      <strong>Users</strong>
+    </div>
+    <div class="panel-body">
+      <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
+      <div class="table-responsive">
+        <table class='table table-bordered' id="users-table">
+          <thead>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Action</th>
+          </thead>
+          <tbody>
+            <tr ng-repeat='user in admin.users'>
+              <td><strong>{{ user.name }}</strong></td>
+              <td>{{ user.email }}</td>
+              <td class='text-center'>
+                <a style='cursor: pointer' ng-click='admin.delete(user)' class='trash'>
+                  <span class='fa fa-trash fa-2x'></span>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong>Officers</strong>
+    </div>
+    <div class="panel-body">
+      <div class=''>
+        <div class="table-responsive">
+          <table class='table table-bordered' id="leo-table">
+            <thead>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Department</th>
+              <th>Year Started</th>
+              <th>Last Gig</th>
+              <th>Action</th>
+            </thead>
+            <tbody>
+              <tr class='' ng-repeat='leo in admin.awesomeLeos'>
+                <td><a href='#' uib-tooltip='{{leo.name}}'>{{leo.name}}</a></td>
+                <td><a href='#' uib-tooltip='{{leo.name}}'>{{leo.phone}}</a></td>
+                <td><a href='#' uib-tooltip='{{leo.name}}'>{{leo.email}}</a></td>
+                <td><a href='#' uib-tooltip='{{leo.name}}'>{{leo.Department.name}}</a></td>
+                <td><a href='#' uib-tooltip='{{leo.info}}'>{{leo.year_started}}</a></td>
+                <td><a href='#' uib-tooltip='{{leo.info}}'>{{leo.lastGig}}</a></td>
+                <td class='text-center'>
+                  <button type='button' class='close-btn' ng-click='admin.deleteLeo(leo)'>&times;</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="">
+        <form class="leo-form">
+          <label>Syncs in realtime across clients</label>
+            <div class="form-group" style="overflow: auto;">
+              <div class="col-xs-6">
+                <input type="text" class="form-control" placeholder="LEO Name." ng-model="admin.name">
+              </div>
+
+              <div class="col-xs-6">
+                <input type="text" class="form-control" placeholder="LEO Phone." ng-model="admin.phone">
+              </div>
+            </div>
+
+            <div class="form-group" style="overflow: auto;">
+              <div class="col-xs-6">
+                <input type="text" class="form-control" placeholder="LEO Email." ng-model="admin.email">
+              </div>
+
+              <div class="col-xs-6">
+                <input type="text" class="form-control" placeholder="LEO Department ID." ng-model="admin.department_id">
+              </div>
+            </div>
+
+
+
+            <div class="form-group" style="overflow: auto;">
+              <div class="col-xs-6">
+                <input type="text" class="form-control" placeholder="LEO Hire Date." ng-model="admin.year_started">
+              </div>
+
+              <div class="col-xs-6">
+                <input type="text" class="form-control" placeholder="LEO Last Gig." ng-model="admin.lastGig">
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary pull-right" ng-click="admin.addLeo()">Add New</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
 </div>

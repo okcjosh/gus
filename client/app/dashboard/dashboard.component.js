@@ -243,6 +243,7 @@ export class DashboardComponent {
 
     this.$http.get('/api/events')
       .then(response => {
+
         let statusLabels = {
           'Created': 'warning',
           'Accepted': 'info',

@@ -23,3 +23,11 @@ body {
 .btn-icon span {
   margin: 0px 5px 0px 5px;
 }
+
+button.close-btn {
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+}
