@@ -29,8 +29,8 @@ export class DashboardComponent {
     this.$scope.$state = $state;
     this.$interpolate = $interpolate;
     this.init($scope);
-    $scope.saveDrags = this.saveDrags.bind(this, $scope, $http);
-    $scope.approve = this.approve.bind(this, $scope, $http);
+    // $scope.saveDrags = this.saveDrags.bind(this, $scope, $http);
+    // $scope.approve = this.approve.bind(this, $scope, $http);
   }
 
   init($scope) {
