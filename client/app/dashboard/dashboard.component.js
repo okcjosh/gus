@@ -30,6 +30,7 @@ export class DashboardComponent {
     this.$interpolate = $interpolate;
     this.init($scope);
     $scope.saveDrags = this.saveDrags.bind(this, $scope, $http);
+    $scope.approve = this.approve.bind(this, $scope, $http);
   }
 
   init($scope) {
@@ -141,6 +142,11 @@ export class DashboardComponent {
     //   };
     // });
   }
+
+  approve($scope, $http){
+    $http.get('/api/events/approve/' + $scope.selectedRow._id);
+  }
+
 
   saveDrags($scope, $http) {
     var invites = [];

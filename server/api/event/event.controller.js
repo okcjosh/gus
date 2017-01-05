@@ -158,6 +158,12 @@ export function showByStatus(req, res) {
     .catch(handleError(res));
 }
 
+export function approve(req, res) {
+  var id = req.params._id
+  Event.seq.query("update Events set StatusId = 2 where _id =" + id);
+  res.status(200).end();
+}
+
 export function getEventCost(req, res) {
   return Event.find({
     where: {

@@ -11,6 +11,7 @@ router.get('/:id', controller.show);
 router.get('/:id/cost', controller.getEventCost);
 router.get('/status/:status_id', controller.showByStatus);
 router.post('/', auth.isAuthenticated(), controller.create);
+router.get('/approve/:_id', controller.approve);
 router.put('/:id', controller.upsert);
 router.patch('/:id', controller.patch);
 router.delete('/:id', controller.destroy);

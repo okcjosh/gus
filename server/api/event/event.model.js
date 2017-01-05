@@ -74,5 +74,6 @@ export default function(sequelize, DataTypes) {
       },
     }
   });
+  Event.seq = sequelize;
   return Event;
 }
