@@ -22,10 +22,10 @@ export class InvitationComponent {
       }, err => {
         alert('error: ' + err);
       });
-    this.$http.get('/api/users/me')
-      .then( response => {
-        this.$scope.user = response.data;
-      });
+    // this.$http.get('/api/users/me')
+    //   .then( response => {
+    //     this.$scope.user = response.data;
+    //   });
   }
 
 }
