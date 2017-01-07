@@ -15,6 +15,7 @@ require( 'datatables.net-responsive-bs');
 require( 'datatables.net-select');
 require( 'datatables.net-scroller');
 //require( 'datatables.net-scroller-bs');
+require( './../../assets/library/date-time-sort');
 
 export default class AdminController {
   /*@ngInject*/
@@ -38,8 +39,9 @@ export default class AdminController {
         let leos = response.data;
 
         setTimeout(function() {
-          let table = $('#leo-table').DataTable();
+          $.fn.dataTable.moment( 'MMM D, YYYY' );
 
+          let table = $('#leo-table').DataTable();
           // let usersTable = $('#users-table').DataTable();
         }, 1000);
 
