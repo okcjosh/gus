@@ -24,7 +24,7 @@ export class LeoController {
   phone = '';
   email = '';
   department_id = '';
-  year_started = '';
+  date_hired = '';
   lastGig = '';
 
   /*@ngInject*/
@@ -115,14 +115,14 @@ export class LeoController {
         phone: this.phone,
         email: this.email,
         department_id: this.department_id,
-        year_started: this.year_started,
+        date_hired: this.date_hired,
         lastGig: this.lastGig
       });
       this.name = '';
       this.phone = '';
       this.email = '';
       this.department_id = '';
-      this.year_started = '';
+      this.date_hired = '';
       this.lastGig = '';
     }
   }

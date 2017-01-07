@@ -1,5 +1,6 @@
 'use strict';
-
+const angular = require('angular');
+const moment = require('moment');
 let $ = require( 'jquery' );
 require( 'datatables.net' );
 require( 'datatables.net-buttons');
@@ -38,11 +39,13 @@ export default class AdminController {
 
         setTimeout(function() {
           let table = $('#leo-table').DataTable();
+
           // let usersTable = $('#users-table').DataTable();
         }, 1000);
 
       });
   }
+
 
   inviteLeo(leo) {
     this.$http.post('/api/invitations', {
@@ -53,6 +56,7 @@ export default class AdminController {
     });
   }
 
+
   addLeo() {
     if (this.name) {
       this.$http.post('/api/leos', {
@@ -60,14 +64,14 @@ export default class AdminController {
         phone: this.phone,
         email: this.email,
         department_id: this.department_id,
-        year_started: this.year_started,
+        date_hired: this.date_hired,
         lastGig: this.lastGig
       });
       this.name = '';
       this.phone = '';
       this.email = '';
       this.department_id = '';
-      this.year_started = '';
+      this.date_hired = '';
       this.lastGig = '';
     }
   }

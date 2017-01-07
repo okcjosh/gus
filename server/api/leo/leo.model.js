@@ -28,8 +28,8 @@ export default function(sequelize, DataTypes) {
     //     key: '_id'
     //   }
     // },
-    year_started: {
-      type: 'YEAR(4)',
+    date_hired: {
+      type: DataTypes.DATE,
       allowNull: true
     },
     lastGig: {
