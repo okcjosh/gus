@@ -15,6 +15,15 @@ export function authInterceptor($rootScope, $q, $cookies, $injector, Util) {
     },
 
     // Intercept 401s and redirect you to new
+    response(response) {
+      if(response.config.url === '/api/users/me' && ! response.data.phone_verified) {
+        (state || (state = $injector.get('$state')))
+        .go('verify_phone');
+      }
+      return response;
+    },
+
+    // Intercept 401s and redirect you to new
     responseError(response) {
       if(response.status === 401) {
         (state || (state = $injector.get('$state')))

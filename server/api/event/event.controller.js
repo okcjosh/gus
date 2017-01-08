@@ -91,10 +91,10 @@ export function CostCalculator(event) {
       count: event.crowd_size,
       total: (event.JobType.crowd_rate * (event.crowd_size / 10)) || 0
     },
-    alchohol: {
-      cost: event.JobType.alchohol,
-      count: event.alchohol,
-      total: (event.JobType.alchohol * yesNo(event.alchohol)) || 0
+    alcohol: {
+      cost: event.JobType.alcohol,
+      count: event.alcohol,
+      total: (event.JobType.alcohol * yesNo(event.alcohol)) || 0
     },
     police_vehicle: {
       cost: event.JobType.police_vehicle,
@@ -117,7 +117,7 @@ export function CostCalculator(event) {
                   c.officers.total +
                   c.time.total +
                   c.crowd.total +
-                  c.alchohol.total +
+                  c.alcohol.total +
                   c.police_vehicle.total +
                   c.barricade.total +
                   c.amplified_sound.total;

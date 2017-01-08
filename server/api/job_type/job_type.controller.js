@@ -105,7 +105,7 @@ export function update(req, res) {
 export function setGeneralCosts(req, res) {
 
   let cost = {
-    alchohol: req.body.alchohol,
+    alcohol: req.body.alcohol,
     police_vehicle: req.body.police_vehicle,
     barricade: req.body.barricade,
     amplified_sound: req.body.amplified_sound

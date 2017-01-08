@@ -21,7 +21,7 @@ export default function(sequelize, DataTypes) {
     officer_rate: DataTypes.INTEGER(11),
     crowd_rate: DataTypes.INTEGER(11),
     hour_rate: DataTypes.INTEGER(11),
-    alchohol: DataTypes.INTEGER(11),
+    alcohol: DataTypes.INTEGER(11),
     police_vehicle: DataTypes.INTEGER(11),
     barricade: DataTypes.INTEGER(11),
     amplified_sound: DataTypes.INTEGER(11)

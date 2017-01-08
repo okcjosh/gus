@@ -214,10 +214,10 @@
               <label for="alcoholServed" id="alcoholServedLabel" class="control-label col-md-3">Will alcohol be served? <span class="text-danger"><i class="fa fa-asterisk red" aria-hidden="true"></i></span></label>
               <div class="col-md-3">
                 <label class="radio-inline">
-                  <input type="radio" name="alchoholServed" ng-model="eventData.alchohol" id="alcoholServed1" value="yes"> yes
+                  <input type="radio" name="alcoholServed" ng-model="eventData.alcohol" id="alcoholServed1" value="yes"> yes
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="alchoholServed" ng-model="eventData.alchohol" id="alcoholServed2" value="no" checked="checked"> no
+                  <input type="radio" name="alcoholServed" ng-model="eventData.alcohol" id="alcoholServed2" value="no" checked="checked"> no
                 </label>
 
               </div>
@@ -304,9 +304,9 @@
                   <td>${{eventCost.crowd.total}}</td>
                 </tr>
                 <tr>
-                  <th>Cost for Alchohol</th>
-                  <td colspan="2">${{eventCost.alchohol.cost}}</td>
-                  <td>${{eventCost.alchohol.total}}</td>
+                  <th>Cost for Alcohol</th>
+                  <td colspan="2">${{eventCost.alcohol.cost}}</td>
+                  <td>${{eventCost.alcohol.total}}</td>
                 </tr>
                 <tr>
                   <th>Cost for Police Vehicle</th>

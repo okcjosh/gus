@@ -30,6 +30,17 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       defaultValue: 'user'
     },
+    phone: {
+      type: DataTypes.STRING,
+      unique: {
+        msg: 'The specified phone number is already in use.'
+      },
+    },
+    phone_verified: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    phone_verification_code: DataTypes.STRING,
     password: {
       type: DataTypes.STRING,
       validate: {

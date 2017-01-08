@@ -1,0 +1,26 @@
+<div class='container main-content col-xs-12 col-md-6 center-block'>
+  <div class='row'>
+    <div class='col-xs-12'>
+      <h1>Enter Verification Code</h1>
+    </div>
+    <div class='col-xs-12'>
+      <form class='form' name='form' ng-submit='vm.verify(form)' novalidate>
+
+        <div class='form-group'>
+          <!-- <label>Current Password</label> -->
+
+          <input type='text' name='code' class='form-control' placeholder="e.g. 1A2B3C" ng-model='vm.verificationCode' />
+          <p class='help-block' ng-show='form.code.$error.mongoose'>
+              {{ vm.errors.other }}
+          </p>
+        </div>
+
+        <p class='help-block'> {{ vm.message }} </p>
+        <a style='cursor: pointer' ng-click="vm.requestCode()" >Request verification code</a>
+
+        <button class='btn btn-lg btn-primary pull-right' ng-disabled="vm.submitted" type='submit'>Verify</button>
+      </form>
+
+    </div>
+  </div>
+</div>

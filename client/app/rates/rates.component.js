@@ -34,7 +34,7 @@ export class RatesComponent {
         $scope.jobTypes = res.data;
         let first = res.data[0];
         $scope.all = {
-          alchohol: first.alchohol,
+          alcohol: first.alcohol,
           police_vehicle: first.police_vehicle,
           barricade: first.barricade,
           amplified_sound: first.amplified_sound

@@ -5,10 +5,11 @@ import uiRouter from 'angular-ui-router';
 import routing from './account.routes';
 import login from './login';
 import settings from './settings';
+import verifyPhone from './verify_phone';
 import signup from './signup';
 import oauthButtons from '../../components/oauth-buttons';
 
-export default angular.module('es4App.account', [uiRouter, login, settings, signup, oauthButtons])
+export default angular.module('es4App.account', [uiRouter, login, settings, verifyPhone, signup, oauthButtons])
   .config(routing)
   .run(function($rootScope) {
     'ngInject';

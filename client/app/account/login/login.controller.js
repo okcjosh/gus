@@ -26,7 +26,8 @@ export default class LoginController {
         email: this.user.email,
         password: this.user.password
       })
-        .then(() => {
+        .then((u) => {
+          console.log(u);
           // Logged in, redirect to home
           this.$state.go('main');
         })

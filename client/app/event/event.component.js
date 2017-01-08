@@ -50,7 +50,7 @@ export class EventComponent {
           $s.newEventForm.officer_stay_hours.$modelValue > 0 &&
           $s.newEventForm.officerUniform.$valid &&
           $s.newEventForm.attendeesNum.$modelValue > 0 &&
-          $s.newEventForm.alchoholServed.$valid &&
+          $s.newEventForm.alcoholServed.$valid &&
           $s.newEventForm.policeVehicle.$valid &&
           $s.newEventForm.barricadeRequested.$valid &&
           $s.newEventForm.amplifiedSound.$valid ) {
@@ -355,7 +355,7 @@ export class EventComponent {
       officer_attire: $scope.eventData.officer_attire,
 
 
-      alchohol: $scope.eventData.alchohol,
+      alcohol: $scope.eventData.alcohol,
       barricades: $scope.eventData.barricades,
       police_vehicle: $scope.eventData.police_vehicle,
       amplified_sound: $scope.eventData.amplified_sound,
