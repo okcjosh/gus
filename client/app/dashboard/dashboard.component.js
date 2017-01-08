@@ -265,6 +265,7 @@ export class DashboardComponent {
           event.venueLink = _self.$interpolate(link)(_self.$scope);
           let colorClass = 'label label-' + statusLabels[event.Status.name];
           event.statusLabel = `<span class="${colorClass}">${event.Status.name}</span>`;
+          event.leo_count = Math.ceil(event.crowd_size / 20);
           return event;
         });
 
@@ -277,6 +278,7 @@ export class DashboardComponent {
             {data: "venueLink", title: "Venue"},
             {data: "address", title: "Location"},
             {data: "phone_number", title: "Phone Number"},
+            {data: "leo_count", title: "Officers Needed"},
             {data: "point_of_contact", title: "POC"},
             {data: "statusLabel", title: "Status", className: 'text-center'},
             {data: "JobType", title: "Job Type", visible: false},
