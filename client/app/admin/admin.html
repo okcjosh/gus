@@ -1,17 +1,3 @@
-<!-- <div class='container'>
-  <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
-  <ul class='list-group user-list'>
-    <li class='list-group-item' ng-repeat='user in admin.users'>
-	    <div class='user-info'>
-	        <strong>{{user.name}}</strong><br>
-	        <span class='text-muted'>{{user.email}}</span>
-	    </div>
-        <a ng-click='admin.delete(user)' class='trash'><span class='fa fa-trash fa-2x'></span></a>
-    </li>
-  </ul>
-</div> -->
-
-
 <div class='container'>
 
   <div class="panel panel-default margin-top-10">
@@ -56,8 +42,8 @@
               <th>Phone</th>
               <th>Email</th>
               <th>Department</th>
-              <th>Year Started</th>
-              <th>Last Gig</th>
+              <th>Date Hired</th>
+              <th>Last Job</th>
               <th>Action</th>
             </thead>
             <tbody>
@@ -66,10 +52,11 @@
                 <td><a href='#' uib-tooltip='{{leo.name}}'>{{leo.phone}}</a></td>
                 <td><a href='#' uib-tooltip='{{leo.name}}'>{{leo.email}}</a></td>
                 <td><a href='#' uib-tooltip='{{leo.name}}'>{{leo.Department.name}}</a></td>
-                <td><a href='#' uib-tooltip='{{leo.info}}'>{{leo.year_started}}</a></td>
-                <td><a href='#' uib-tooltip='{{leo.info}}'>{{leo.lastGig}}</a></td>
+                <td><a href='#' uib-tooltip='{{leo.info}}'>{{leo.date_hired | date}}</a></td>
+                <td><a href='#' uib-tooltip='{{leo.info}}'>{{leo.lastGig | date}}</a></td>
                 <td class='text-center'>
-                  <button type='button' class='close-btn' ng-click='admin.deleteLeo(leo)'>&times;</button>
+                  <a style='cursor: pointer' ng-click='admin.deleteLeo(leo)' class='trash'>
+                    <span class='fa fa-trash fa-2x'></span>
                 </td>
               </tr>
             </tbody>
@@ -79,7 +66,7 @@
 
       <div class="">
         <form class="leo-form">
-          <label>Syncs in realtime across clients</label>
+          <label>Create a new LEO here</label>
             <div class="form-group" style="overflow: auto;">
               <div class="col-xs-6">
                 <input type="text" class="form-control" placeholder="LEO Name." ng-model="admin.name">
@@ -104,13 +91,19 @@
 
             <div class="form-group" style="overflow: auto;">
               <div class="col-xs-6">
-                <input type="text" class="form-control" placeholder="LEO Hire Date." ng-model="admin.year_started">
+                <input type="date" class="form-control" placeholder="LEO Hire Date." ng-model="admin.date_hired">
               </div>
 
               <div class="col-xs-6">
-                <input type="text" class="form-control" placeholder="LEO Last Gig." ng-model="admin.lastGig">
+                <input type="date" class="form-control" placeholder="LEO Last Gig." ng-model="admin.lastGig">
               </div>
             </div>
+
+          <div class="form-group" style="overflow: auto;">
+            <div class="col-xs-6">
+              <input type="text" class="form-control" placeholder="Temporary Password." ng-model="admin.password">
+            </div>
+          </div>
 
             <button type="submit" class="btn btn-primary pull-right" ng-click="admin.addLeo()">Add New</button>
         </form>

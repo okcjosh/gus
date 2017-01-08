@@ -11,9 +11,8 @@ export class EventDetailsComponent {
     this.socket = socket;
     this.$state = $state;
     this.$scope = $scope;
-
     this.init($scope);
-
+    $scope.approve = this.approve.bind(this, $scope, $http);
     $scope.saveDrags = this.saveDrags.bind(this, $scope, $http);
 
     $scope.$on('$destroy', function() {
@@ -22,9 +21,21 @@ export class EventDetailsComponent {
   }
 
   init($scope) {
+    let _self = this;
+    this.event_id = this.$state.params.event_id;
+    $scope.event_id = this.event_id;
     this.$http.get('/api/leos')
-      .then(response => {
-        $scope.leos = response.data;
+      .then(leos => {
+        $scope.leos = leos.data;
+
+        // Call to invitations
+        _self.$http.get('/api/invitations', {
+          params: {
+            party_id: _self.event_id
+          }
+        }).then(invitations => {
+          _self.initializeDragDrop(_self.$scope, invitations.data);
+        });
       });
   }
 
@@ -56,13 +67,6 @@ export class EventDetailsComponent {
         $scope.jobTypes = res.data;
       });
 
-    this.$http.get('/api/invitations', {
-      params: {
-        party_id: event_id
-      }
-    }).then(res => {
-      this.initializeDragDrop($scope, res.data);
-    });
   }
 
   initializeDragDrop($scope, invitations) {
@@ -138,16 +142,18 @@ export class EventDetailsComponent {
     let leos = $scope.leos.slice(0);
     let remainingLeos = $scope.leos.slice(0);
 
-    let leoAppendedInvites = invitations.map(invite => {
+    let leoAppendedInvites = [];
+
+    invitations.map(invite => {
       let leoIndex = leos.findIndex(leo => {
-        return leo.leo_id == invite.leo_id
+        return leo._id == invite.leo_id
       });
       if (leoIndex >= 0) {
         let leo = leos[leoIndex];
         invite.name = leo.name;
         remainingLeos.splice(leoIndex, 1);
 
-        return invite;
+        leoAppendedInvites.push(invite);
       }
     });
 
@@ -168,6 +174,9 @@ export class EventDetailsComponent {
     // });
   }
 
+  approve($scope, $http){
+    $http.get('/api/events/approve/' + $scope.event_id);
+  }
   saveDrags($scope, $http) {
     let invites = [],
       _self = this;
@@ -187,6 +196,7 @@ export class EventDetailsComponent {
         invites.push(inviteData);
       });
     });
+
 
     $http.post('/api/invitations', invites)
       .then(function(res) {
