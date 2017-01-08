@@ -44,67 +44,6 @@ export class DashboardComponent {
     let $scope = this.$scope,
       $http = this.$http,
       _self = this;
-    // this.$http.get('/api/leos')
-    //   .then(response => {
-    //     this.dataSet = response.data;
-    //     //alert(this.dataSet[0].name);
-    //     let table =  $('#example').DataTable( {
-    //       data: this.dataSet,
-    //       //columnDefs: [{ orderable: false, className: 'select-checkbox', targets: 0 }],
-    //       select: { style: 'multi'},
-    //       buttons: [
-    //         {
-    //           extend:'selected',
-    //           text: 'Send Invites',
-    //           action: function ( e, dt, button, config ) {
-    //             let count = dt.rows( {selected: true }).indexes().length;
-    //             let idxs = dt.rows({selected:true}).indexes();
-    //             let $http = angular.injector(["ng"]).get("$http");
-    //             //alert(count );
-    //             for(let i = 0; i < count; i++) {
-    //               let guy = dt.row(idxs[i]).data();
-    //               //alert(guy.leo_id);
-    //               // $http.post('/api/invitations', {
-    //               //   job_id: '2',
-    //               //   leo_id: guy.leo_id,
-    //               //   expires: '2016-12-31',
-    //               //   job_invitation_status_id: '5'
-    //               // }, function(req, res) {
-    //               //   alert(res);
-    //               // });
-    //               $http({
-    //                 method: 'POST',
-    //                 url: '/api/invitations',
-    //                 data: {
-    //                   job_id: '2',
-    //                   leo_id: guy.leo_id,
-    //                   expires: '2016-12-31',
-    //                   job_invitation_status_id: '1'
-    //                 }
-    //               }).then(function (response) {
-    //                 //alert('sent to: ' + guy.name);
-    //                 // when the response is available
-    //               }, function (reason) {
-    //                 alert(reason.statusText);
-    //                 // or server returns response with an error status.
-    //               });
-    //             }
-    //           }
-    //         }
-    //       ],
-    //       columns: [
-    //         //{ data: "leo_id", title: "ID"},
-    //         { data: "name", title: "Name" },
-    //         { data: "phone", title: "Phone" },
-    //         { data: "email", title: "Email" },
-    //         //{ data: "department_id", title: "Department"},
-    //         { data: "year_started", title: "Start date" },
-    //         { data: "lastGig", title: "Last Job Worked" }
-    //        // { data: "phone_verified", title: "Phone Verified"}
-    //       ]
-    //     } );
-    //     table.buttons().container().appendTo( $('#buttons') );
-    //   });
 
     this.$http.get('/api/events')
       .then(response => {
@@ -131,6 +70,7 @@ export class DashboardComponent {
           let colorClass = 'label label-' + statusLabels[event.Status.name];
           event.statusLabel = `<span class="${colorClass}">${event.Status.name}</span>`;
           event.leo_count = Math.ceil(event.crowd_size / 20);
+          event.invite_count = Math.ceil(event.leo_count * .5);
           return event;
         });
 
@@ -144,6 +84,7 @@ export class DashboardComponent {
             {data: "address", title: "Location"},
             {data: "phone_number", title: "Phone Number"},
             {data: "leo_count", title: "Officers Needed"},
+            {data: "invite_count", title: "Invites Accepted"},
             {data: "point_of_contact", title: "POC"},
             {data: "statusLabel", title: "Status", className: 'text-center'},
             {data: "JobType", title: "Job Type", visible: false},
