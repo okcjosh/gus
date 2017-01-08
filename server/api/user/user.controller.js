@@ -50,6 +50,7 @@ export function create(req, res) {
       let token = jwt.sign({ _id: user._id }, config.secrets.session, {
         expiresIn: 60 * 60 * 5
       });
+      sendPhoneVerification(user._id);
       res.json({ token });
     })
     .catch(validationError(res));
@@ -126,6 +127,7 @@ export function me(req, res, next) {
     },
     attributes: [
       '_id',
+      'phone_verified',
       'name',
       'email',
       'role',
@@ -137,6 +139,64 @@ export function me(req, res, next) {
         return res.status(401).end();
       }
       res.json(user);
+    })
+    .catch(err => next(err));
+}
+
+function sendPhoneVerification(userId) {
+  // Twilio Credentials
+  let accountSid = 'AC9ce0d28ee69cd6ff89fdc1b8d0139099';
+  let authToken = '4890e088921ee4039f79b22d44d0ebb1';
+
+  //require the Twilio module and create a REST client
+  let client = require('twilio')(accountSid, authToken);
+
+
+  User.find({where: {
+    _id: userId
+  }}).then(function(u) {
+    let verificationCode = Math.random().toString(36).slice(3, 9).toUpperCase();
+
+    u.phone_verification_code = verificationCode;
+    u.save();
+
+    client.messages.create({
+      to: u.phone,
+      from: '+13102542363',
+      body: verificationCode
+    }, function(err, message) {
+      if(err) {
+        console.log(err);
+      } else {
+        console.log(message.sid);
+      }
+    });
+  });
+
+}
+
+export function generatePhoneCode(req, res, next) {
+  sendPhoneVerification(req.user._id);
+  res.json({message: 'Verification code requested'});
+}
+
+export function verifyPhone(req, res, next) {
+  let userId = req.user._id;
+
+  return User.find({
+    where: {
+      _id: userId
+    }
+  })
+    .then(user => { // don't ever give out the password or salt
+      if (user.phone_verification_code === req.body.code.toUpperCase()) {
+        user.phone_verified = true;
+        user.save();
+
+        res.json({message: 'Phone number successfully verified!'});
+      } else {
+        res.status(400).json({message: 'Verification Code is not correct!'});
+      }
     })
     .catch(err => next(err));
 }

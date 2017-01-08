@@ -15,7 +15,7 @@ require( 'datatables.net-responsive-bs');
 require( 'datatables.net-select');
 require( 'datatables.net-scroller');
 //require( 'datatables.net-scroller-bs');
-require( './../../assets/library/date-time-sort');
+require( './../../assets/lib/date-time-sort');
 
 export default class AdminController {
   /*@ngInject*/
