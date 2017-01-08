@@ -78,22 +78,27 @@ export class DashboardComponent {
           select: true,
           initComplete: function () {
             this.api().columns().every(function () {
+              //alert('col: ' + this.header().innerHTML );
               var column = this;
-              var select = $('<select><option value=""></option></select>')
-                .appendTo($(column.header()).empty())
-                .on('change', function () {
-                  var val = $.fn.dataTable.util.escapeRegex(
-                    $(this).val()
-                  );
+              if(this.header().innerHTML == 'Status') {
 
-                  column
-                    .search(val ? '^' + val + '$' : '', true, false)
-                    .draw();
-                });
+                var select = $('<select><option value=""></option></select>')
+                  .appendTo($(column.header()).empty())
+                  .on('change', function () {
+                    var val = $.fn.dataTable.util.escapeRegex(
+                      $(this).val()
+                    );
 
-              column.data().unique().sort().each(function (d, j) {
-                select.append('<option value="' + d + '">' + d + '</option>')
-              });
+                    column
+                      .search(val ? '^' + val + '$' : '', true, false)
+                      .draw();
+                  });
+
+                column.data().unique().sort().each(function (d, j) {
+                  //   select.append('<option value="' + d + '">' + d + '</option>')
+                  var val = $('<div/>').html(d).text();
+                  select.append( '<option value="' + val + '">' + val + '</option>' );              });
+              }
             });
           },
 
