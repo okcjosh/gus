@@ -9,16 +9,16 @@
           <div class="panel-body">
             <form class='form' name='form' ng-submit='vm.register(form)' novalidate>
                 <span class="hidden" ng-init="vm.setForm(form)"></span>
-                <div class='form-group' ng-class='{ "has-success": form.name.$valid && vm.submitted, "has-error": form.name.$invalid && vm.submitted }'>
+                <div class='form-group' ng-class='{ "has-success": form.first_name.$valid && vm.submitted, "has-error": form.first_name.$invalid && vm.submitted }'>
                     <label>First Name</label>
-                    <input type='text' name='name' class='form-control' ng-model='vm.user.name' required/>
-                    <p class='help-block' ng-show='form.name.$error.required && vm.submitted'>
+                    <input type='text' name='first_name' class='form-control' ng-model='vm.user.first_name' required/>
+                    <p class='help-block' ng-show='form.first_name.$error.required && vm.submitted'>
                         A name is required
                     </p>
-                    <div class='form-group' ng-class='{ "has-success": form.name.$valid && vm.submitted, "has-error": form.name.$invalid && vm.submitted }'>
+                    <div class='form-group' ng-class='{ "has-success": form.last_name.$valid && vm.submitted, "has-error": form.last_name.$invalid && vm.submitted }'>
                         <label>Last Name</label>
-                        <input type='text' name='lastname' class='form-control' ng-model='vm.user.lastname' required/>
-                        <p class='help-block' ng-show='form.lastname.$error.required && vm.submitted'>
+                        <input type='text' name='last_name' class='form-control' ng-model='vm.user.last_name' required/>
+                        <p class='help-block' ng-show='form.last_name.$error.required && vm.submitted'>
                             A last name is required
                         </p>
                     </div>

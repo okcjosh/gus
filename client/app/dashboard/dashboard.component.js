@@ -67,8 +67,14 @@ export class DashboardComponent {
                 ${event.venue}
             </a>`;
           event.venueLink = _self.$interpolate(link)(_self.$scope);
-          let colorClass = 'label label-' + statusLabels[event.Status.name];
-          event.statusLabel = `<span class="${colorClass}">${event.Status.name}</span>`;
+
+          if (event.Status) {
+            let colorClass = 'label label-' + statusLabels[event.Status.name];
+            event.statusLabel = `<span class="${colorClass}">${event.Status.name}</span>`;
+          } else {
+            event.statusLabel = 'Unassigned';
+          }
+
           event.leo_count = Math.ceil(event.crowd_size / 20);
           event.invite_count = Math.ceil(event.leo_count * .5);
           return event;
