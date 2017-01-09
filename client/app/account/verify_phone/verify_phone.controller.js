@@ -28,10 +28,11 @@ export default class VerifyPhoneController {
           }, 1000);
         })
         .catch((res) => {
-          form.code.$setValidity('mongoose', false);
+          this.submitted = false;
+          console.log('ERROR');
+         // form.code.$setValidity('mongoose', false);
           this.errors.other = 'Incorrect verification code';
           this.message = res.data.message;
-          this.submitted = false;
         });
     }
   }

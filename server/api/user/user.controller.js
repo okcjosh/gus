@@ -26,7 +26,8 @@ export function index(req, res) {
   return User.findAll({
     attributes: [
       '_id',
-      'name',
+      'first_name',
+      'last_name',
       'email',
       'role',
       'provider'
@@ -128,7 +129,8 @@ export function me(req, res, next) {
     attributes: [
       '_id',
       'phone_verified',
-      'name',
+      'first_name',
+      'last_name',
       'email',
       'role',
       'provider'
