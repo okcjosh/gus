@@ -13,6 +13,7 @@ let db = {
 };
 
 // Insert models below
+db.Lookup = db.sequelize.import('../api/lookup/lookup.model');
 db.User = db.sequelize.import('../api/user/user.model');
 db.Notification = db.sequelize.import('../api/notification/notification.model');
 db.Cocknball = db.sequelize.import('../api/cocknball/cocknball.model');
@@ -41,6 +42,9 @@ db.Department.hasMany(db.Leo);
 
 db.Event.belongsTo(db.JobType);
 db.JobType.hasMany(db.Event);
+
+db.Lookup.belongsTo(db.JobType);
+db.JobType.hasMany(db.Lookup);
 
 db.Event.belongsTo(db.User);
 db.User.hasMany(db.Event);

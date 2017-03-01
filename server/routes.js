@@ -31,6 +31,7 @@ export default function(app) {
   app.use('/api/invitations', require('./api/job_invitation'));
   app.use('/api/job_invitation_status', require('./api/job_invitation_status'));
   app.use('/api/job_types', require('./api/job_type'));
+  app.use('/api/lookups', require('./api/lookup'));
   app.use('/api/job_type_preferences', require('./api/job_type_preference'));
   app.use('/api/leo_scheduling', require('./api/leo_scheduling'));
   app.use('/api/new_appts', require('./api/new_appt'));

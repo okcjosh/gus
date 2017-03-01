@@ -1,3 +1,52 @@
+<script type="text/ng-template" id="editModal.html">
+  
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Editing Lookup</h4>
+  </div>
+  <div class="modal-body">
+    <div class="form">
+      <div class="form-group">
+        <select class="form-control" ng-model="editingLookup.JobTypeId" ng-options="type._id as type.name for type in jobTypes">
+         
+        </select>
+      </div>
+      <div class="form-group">
+        <input class="form-control" ng-model="editingLookup.description" />
+      </div>
+      <div class="form-group">
+        <input class="form-control" ng-model="editingLookup.extra_officers" />
+      </div>
+      <div class="form-group">
+        <input type="checkbox" class="form-control" ng-model="editingLookup.show_notes" />
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" ng-click="close()" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="button" ng-click="editLookup(editingLookup)" class="btn btn-primary">Save changes</button>
+  </div>   
+</script>
+<script type="text/ng-template" id="deleteModal.html">
+  
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Confirm delete Lookup</h4>
+  </div>
+  <div class="modal-body">
+    <div>
+      Type: <b>{{ deletingLookup.JobType.name }}</b><br />
+      Description: <b>{{ deletingLookup.description }}</b><br />
+      Extra Officers: <b>{{ deletingLookup.extra_officers }}</b><br />
+      Notes: <b>{{ deletingLookup.show_notes ? 'Yes' : 'No' }}</b><br />
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" ng-click="close()" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="button" ng-click="deleteLookup(editingLookup)" class="btn btn-danger">Confirm delete</button>
+  </div>  
+</script>
+
 <div class="container">
   <div class="row">
     <div class="span12">
@@ -273,79 +322,68 @@
                     <th>Description</th>
                     <th>Extra Officer Count</th>
                     <th>Show Notes</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td><strong>Asset Protection</strong></td>
-                    <td>Bank Security</td>
-                    <td>1</td>
-                    <td class="text-center"><input name="name" type="checkbox" value="val" /></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Asset Protection</strong></td>
-                    <td>Money Drop Security</td>
-                    <td>1</td>
-                    <td class="text-center"><input name="name" type="checkbox" value="val" /></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Asset Protection</strong></td>
-                    <td>Loss Prevention at Retail Stores</td>
-                    <td>0</td>
-                    <td class="text-center"><input name="name" type="checkbox" value="val" /></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Special Patrols</strong></td>
-                    <td>Neighborhood Patrol</td>
-                    <td>0</td>
-                    <td class="text-center"><input name="name" type="checkbox" value="val" /></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Special Patrols</strong></td>
-                    <td>Apartement Roving Patrol</td>
-                    <td>0</td>
-                    <td class="text-center"><input name="name" type="checkbox" value="val" /></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Special Patrols</strong></td>
-                    <td>Special Community Patrol</td>
-                    <td>2</td>
-                    <td class="text-center"><input name="name" type="checkbox" value="val" /></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Special Patrols</strong></td>
-                    <td>Other</td>
-                    <td>0</td>
-                    <td class="text-center"><input name="name" type="checkbox" value="val" checked="checked" /></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Traffic Direction</strong></td>
-                    <td>Parking Ingress/Egress</td>
-                    <td>0</td>
-                    <td class="text-center"><input name="name" type="checkbox" value="val" /></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Traffic Direction</strong></td>
-                    <td>Construction Safety/Control</td>
-                    <td>0</td>
-                    <td class="text-center"><input name="name" type="checkbox" value="val" /></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Traffic Direction</strong></td>
-                    <td>Intersection Control</td>
-                    <td>0</td>
-                    <td class="text-center"><input name="name" type="checkbox" value="val" /></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Traffic Direction</strong></td>
-                    <td>Other</td>
-                    <td>0</td>
-                    <td class="text-center"><input name="name" type="checkbox" value="val" checked="checked" /></td>
-                  </tr>
+                    <tr ng-repeat="lookup in lookups">
+                      <td><strong>{{ lookup.JobType.name }}</strong></td>
+                      <td>{{ lookup.description }}</td>
+                      <td>{{ lookup.extra_officers }}</td>
+                      <td class="text-center">
+                        <input disabled type="checkbox" ng-model="lookup.show_notes" >
+                      </td>
+                      <td><a style="cursor: pointer;" ng-click="editModal(lookup)">Edit</a></td>
+                      <td><a style="cursor: pointer;" ng-click="deleteModal(lookup)">Delete</a></td>
+                    </tr>
                   </tbody>
                 </table>
 
               </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  Add new Lookups
+                </div>
+                <div class="panel-body">
+                  <div class="form-horizontal">
+                    <div class="form-group">
+                      <div class="col-xs-6">
+                        <label>Job Type</label>
+                        <select class="form-control" ng-model="newLookup.JobTypeId">
+                          <option ng-value="jobType._id" ng-repeat="jobType in jobTypes">{{ jobType.name }}</option>
+                        </select>
+                      </div>
+
+                      <div class="col-xs-6">
+                        <label>Description</label>
+                        <input class="form-control" placeholder="Description" ng-model="newLookup.description" />
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-xs-6">
+                        <label>Extra Officer Count</label>
+                        <input class="form-control" type="number" ng-model="newLookup.extra_officers" />
+                      </div>
+
+                      <div class="col-xs-6">
+                        <label>Show Notes</label>
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" id="" aria-label="Show notes" ng-model="newLookup.show_notes" />
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button class="btn btn-primary pull-right" type="button" name="button" ng-click="addLookup(newLookup)">Save Lookup</button>
+                </div>
+              </div>
+                  
+
               <div class="">
                 <button class="btn btn-primary pull-right" type="button" name="button">Save</button>
               </div>
