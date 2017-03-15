@@ -4,6 +4,8 @@ import routing from './main.routes';
 const Flickity = require('flickity');
 // const jquery = require('jquery');
 let $ = require( 'jquery' );
+require('moment');
+require( 'fullcalendar' );
 require( 'datatables.net' );
 require( 'datatables.net-buttons');
 require( 'datatables.net-buttons-bs');
@@ -64,6 +66,11 @@ export class MainController {
         autoPlay: true,
         wrapAround: true
       });
+
+      this.$http.get('/api/events')
+        .then(res => res.data)
+        .then(events => events.map(event => ({ title: event.title || event.venue, start: event.date})))
+        .then(calendarEvents => $('#calendar').fullCalendar({ events: calendarEvents }));
   }
 
   addThing() {

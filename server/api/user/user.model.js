@@ -42,6 +42,7 @@ export default function(sequelize, DataTypes) {
       defaultValue: false
     },
     phone_verification_code: DataTypes.STRING,
+    forgot_password_code: DataTypes.STRING,
     password: {
       type: DataTypes.STRING,
       validate: {

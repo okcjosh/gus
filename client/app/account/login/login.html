@@ -43,9 +43,22 @@
               <button class='btn btn-primary btn-lg btn-login btn-block' type='submit'>
                 Login
               </button>
-              <button class='btn btn-primary btn-lg btn-login btn-block' type=''>
+              <button type="button" class='btn btn-primary btn-lg btn-login btn-block' ng-click="vm.showForgotInput = !vm.showForgotInput">
                 Forgot Password
               </button>
+              <div style="padding: 10px" ng-if="vm.showForgotInput">
+                <input type="email" ng-model="vm.forgotEmail" class="form-control" placeholder="Type in your email to reset your password">
+                <button style="margin-top: 10px" type="button" class="btn btn-block btn-primary" ng-click="vm.forgotPassword()">
+                  Retrieve
+                </button>
+                <div style="padding: 10px" ng-if="vm.showForgotCodeInput">
+                  <input style="margin-top: 10px" class="form-control" type="text" ng-model="vm.forgotPasswordCode" placeholder="Code sent to your email e.g. 345JFU78">
+                  <input style="margin-top: 10px" class="form-control" type="password" ng-model="vm.forgotNewPassword" placeholder="Choose a new password.">
+                  <input style="margin-top: 10px" class="form-control" type="password" ng-model="vm.repeatForgotNewPassword" placeholder="Repeat password">
+                  
+                  <button style="margin-top: 10px" class="btn btn-block btn-primary" type="button" ng-click="vm.submitForgotCode()">Submit Code</button>
+                </div>
+              </div>
               <button class='btn btn-rounded btn-info btn-lg btn-block' ui-sref='signup'>
                 Register
               </button>

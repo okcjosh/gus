@@ -10,12 +10,14 @@ export default class LoginController {
     login: undefined
   };
   submitted = false;
+  forgotEmail = '';
 
 
   /*@ngInject*/
-  constructor(Auth, $state) {
+  constructor(Auth, $state, $http, $scope) {
     this.Auth = Auth;
     this.$state = $state;
+    this.$http = $http;
   }
 
   login(form) {
@@ -35,5 +37,20 @@ export default class LoginController {
           this.errors.login = err.message;
         });
     }
+  }
+
+  forgotPassword() {
+    this.$http.get('/api/users/'+ this.forgotEmail +'/forgot_password')
+      .then(res => this.showForgotCodeInput = true)
+      .catch(err => console.log(err));
+  }
+
+  submitForgotCode() {
+    this.$http.put('/api/users/forgot_password', { 
+      code: this.forgotPasswordCode,
+      password: this.forgotNewPassword
+    })
+      .then(res => this.showForgotCodeInput = false)
+      .catch(err => console.log(err));
   }
 }

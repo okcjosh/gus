@@ -52,7 +52,9 @@ module.exports = function makeWebpackConfig(options) {
                 'angular-socket-io',
                 'angular-ui-bootstrap',
                 'angular-ui-router',
-                'lodash'
+                'lodash',
+                'moment',
+                'fullcalendar'
             ]
         };
     }
@@ -196,6 +198,7 @@ module.exports = function makeWebpackConfig(options) {
             loaders: ['style', 'css', 'sass'],
             include: [
                 path.resolve(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/*.scss'),
+                path.resolve(__dirname, 'node_modules/fullcalendar/dist/fullcalendar.min.css'),
                 path.resolve(__dirname, 'client/app/app.scss')
             ]
 

@@ -3,6 +3,8 @@
 import {User} from '../../sqldb';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
+import * as nodemailer from 'nodemailer';
+
 
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
@@ -157,7 +159,7 @@ function sendPhoneVerification(userId) {
   User.find({where: {
     _id: userId
   }}).then(function(u) {
-    let verificationCode = Math.random().toString(36).slice(3, 9).toUpperCase();
+    let verificationCode = generateRandomCode(6);
 
     u.phone_verification_code = verificationCode;
     u.save();
@@ -174,7 +176,11 @@ function sendPhoneVerification(userId) {
       }
     });
   });
+}
 
+function generateRandomCode(length) {
+  length = length || 6;
+  return Math.random().toString(36).slice(3, 3 + length).toUpperCase();
 }
 
 export function generatePhoneCode(req, res, next) {
@@ -201,6 +207,74 @@ export function verifyPhone(req, res, next) {
       }
     })
     .catch(err => next(err));
+}
+
+function sendMail(userEmail, content) {
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'someone@gmail.com',
+            pass: 'password'
+        }
+    });
+
+    // setup email data with unicode symbols
+    let mailOptions = {
+        from: '"ES4" <es4@es4.com>', // sender address
+        to: userEmail, // list of receivers
+        subject: 'Reset your password ✔', // Subject line
+        text: content, // plain text body
+        html: `<b>${content}</b>` // html body
+    };
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message %s sent: %s', info.messageId, info.response);
+    });
+  }
+
+export function requestForgotPassword(req, res) {
+  let email = req.params.email;
+
+  return User.find({
+    where: {
+      email: email
+    }
+  }).then(user => {
+      if(user) {
+        user.forgot_password_code = generateRandomCode(8);
+        sendMail(email, user.forgot_password_code);
+        return user.save()
+          .then(() => res.status(204).end())
+          .catch(validationError(res));
+      } else {
+        return res.status(403).end();
+      }
+    });
+}
+
+export function resetForgotPassword(req, res) {
+  let code = req.body.code;
+  let password = req.body.password;
+
+  return User.find({
+    where: {
+      forgot_password_code: code
+    }
+  }).then(user => {
+      if(user) {
+        user.password = password;
+        return user.save()
+          .then(() => res.status(204).end())
+          .catch(validationError(res));
+      } else {
+        return res.status(403).end();
+      }
+    });
 }
 
 /**

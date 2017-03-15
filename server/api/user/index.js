@@ -12,6 +12,8 @@ router.get('/me', auth.isAuthenticated(), controller.me);
 router.get('/me/generate_phone_code', auth.isAuthenticated(), controller.generatePhoneCode);
 router.post('/me/verify_phone', auth.isAuthenticated(), controller.verifyPhone);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
+router.get('/:email/forgot_password', controller.requestForgotPassword);
+router.put('/forgot_password', controller.resetForgotPassword);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
 
