@@ -212,10 +212,10 @@ export function verifyPhone(req, res, next) {
 function sendMail(userEmail, content) {
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
-        service: 'gmail',
+        service: 'myofficers',
         auth: {
-            user: 'someone@gmail.com',
-            pass: 'password'
+            user: 'do_not_reply@myofficers.com',
+            pass: '@AcHa+4eqE4r'
         }
     });
 
