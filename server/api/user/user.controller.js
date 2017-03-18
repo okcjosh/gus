@@ -213,6 +213,7 @@ function sendMail(userEmail, content) {
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
         service: 'myofficers',
+        host: 'ontinuity.co.uk',
         auth: {
             user: 'do_not_reply@myofficers.com',
             pass: '@AcHa+4eqE4r'
