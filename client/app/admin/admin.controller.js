@@ -67,7 +67,15 @@ export default class AdminController {
         email: this.email,
         department_id: this.department_id,
         date_hired: this.date_hired,
-        lastGig: this.lastGig
+        lastGig: this.lastGig,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        address: this.address,
+        city: this.city,
+        state: this.state,
+        zip: this.zip,
+        accountNumber: this.accountNumber,
+        routingNumber: this.routingNumber
       });
       this.name = '';
       this.phone = '';
@@ -75,6 +83,14 @@ export default class AdminController {
       this.department_id = '';
       this.date_hired = '';
       this.lastGig = '';
+      this.firstName = '';
+      this.lastName = '';
+      this.address = '';
+      this.city = '';
+      this.state = '';
+      this.zip = '';
+      this.accountNumber = '';
+      this.routingNumber = '';
     }
   }
 

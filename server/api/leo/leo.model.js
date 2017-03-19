@@ -16,7 +16,35 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.DECIMAL,
       allowNull: true
     },
-    email: {
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    address: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    state: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    zip: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    accountNumber: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    routingNumber: {
       type: DataTypes.STRING,
       allowNull: true
     },
