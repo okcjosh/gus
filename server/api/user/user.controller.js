@@ -212,17 +212,19 @@ export function verifyPhone(req, res, next) {
 function sendMail(userEmail, content) {
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
-        service: 'myofficers',
-        host: 'ontinuity.co.uk',
-        auth: {
-            user: 'do_not_reply@myofficers.com',
-            pass: '@AcHa+4eqE4r'
-        }
+      host: 'mail.ontinuity.co.uk',
+      port: 587,
+      secure: false, // upgrade later with STARTTLS
+      auth: {
+        user: 'do_not_reply@myofficers.com',
+        pass: '@AcHa+4eqE4r'
+      }
     });
+
 
     // setup email data with unicode symbols
     let mailOptions = {
-        from: '"ES4" <es4@es4.com>', // sender address
+        from: '"Password Reset myofficers.com" <password@myofficers.com>', // sender address
         to: userEmail, // list of receivers
         subject: 'Reset your password ✔', // Subject line
         text: content, // plain text body
