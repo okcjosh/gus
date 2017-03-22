@@ -61,6 +61,25 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
     },
 
     /**
+     * Authenticate leo and save token
+     *
+     * @param  {Object}   leo     - form-profile info
+     * @param  {Function} callback - function(error, leo)
+     * @return {Promise}
+     */
+    loginLeo({
+      email,
+      password
+    }, callback) {
+      $http.post('/api/leos/login', {
+        email,
+        password
+      }).then(res => {
+        callback(null, res.data.leo_id);
+      }).catch(err => callback(err));
+    },
+
+    /**
      * Delete access token and user info
      */
     logout() {

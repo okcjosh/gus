@@ -52,6 +52,10 @@
           <textarea class="form-control" readonly name="entryDesc" required="required" rows="4" ng-model="event.description"></textarea>
         </div>
 
+        <h5>Interested Officers</h5>
+        <ul>
+          <li ng-repeat="name in event.interested_officers.split(',')"> {{ name }}</li>
+        </ul>
 
         <div class="row">
           <div class="col-md-4">
@@ -70,7 +74,10 @@
         <input name="catIdOld" type="hidden" value="11" />
         <input name="entryTitleOld" type="hidden" value="+nA0ZaI7TxeLO3MbHsiRJ/RXhJpb6xnjCcUQzOipr/Q=" />
 
-        <div class="col-md-3" id="approve-modal">
+        <button ng-if="isLeo" class="btn btn-primary" type="button" ng-click="expressInterest()">Express interest</button>
+
+
+        <div ng-if="isAdminUser" class="col-md-3" id="approve-modal">
           <a id="modal-118275" href="#modal-container-118275" role="button" class="btn btn-success btn-icon btn-rounded" ng-click="approve()" data-toggle="modal"><i class="fa fa-check-square-o" aria-hidden="true"></i>Approve Job</a>
           <div class="modal fade" id="modal-container-118275" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -214,7 +221,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6" id="reject-modal">
+        <div ng-if="isAdminUser" class="col-md-6" id="reject-modal">
           <a id="modal-349281" href="#modal-container-349281" role="button" class="btn btn-danger btn-icon btn-rounded" data-toggle="modal"><i class="fa fa-exclamation-triangle" aria-hidden="true">Reject Job</i></a>
           <!--<button type="input" name="submit" value="saveEntry" class="btn btn-danger btn-icon mb-20"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Decline Job</button>-->
           <div class="modal fade" id="modal-container-349281" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -279,8 +286,9 @@
           </div>
         </div>
 
-        <!-- <button type="input" name="submit" value="saveEntry" class="btn btn-success btn-icon mb-20"><i class="fa fa-check-square-o" aria-hidden="true"></i> Approve Job</button> -->
-        <!--<button type="input" name="submit" value="saveEntry" class="btn btn-danger btn-icon mb-20"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Decline Job</button>-->
+
+        <!-- <button type="input" name="submit" value="saveEntry" class="btn btn-success btn-icon mb-20"><i class="fa fa-check-square-o" aria-hidden="true"></i> Approve Job</button>
+        <button type="input" name="submit" value="saveEntry" class="btn btn-danger btn-icon mb-20"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Decline Job</button> -->
       </form>
     </div>
   </div>

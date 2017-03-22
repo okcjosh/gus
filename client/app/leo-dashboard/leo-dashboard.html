@@ -1,0 +1,29 @@
+<header class="jumbotron bg-info">
+  <div class="container">
+  <h2>ES4</h2>
+  <p>Event Security Services, Scheduling & Staffing.</p>
+    <a ng-show="$ctrl.isLoggedIn()" class="btn btn-primary btn-lg btn-rounded" ui-sref="event">Register New Event</a>
+  </div>
+</header>
+<div class="container" style="width: 600px;">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Upcoming Events
+    </div>
+    <div class="panel-body">
+      <div id="calendar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Flickity HTML init -->
+<div class="carousel" data-flickity='{ "autoPlay": true, "wrapAround": true }'>
+  <img src="assets/images/us-police1.jpg" class="carousel-cell" />
+  <img src="assets/images/us-police2.jpg" class="carousel-cell" />
+  <img src="assets/images/img05.jpg" class="carousel-cell" />
+  <img src="assets/images/us-police4.jpg" class="carousel-cell" />
+  <img src="assets/images/us-police5.jpg" class="carousel-cell" />
+  <img src="assets/images/us-police6.jpg" class="carousel-cell" />
+  <img src="assets/images/us-police7.jpg" class="carousel-cell" />
+  <img src="assets/images/us-police8.jpg" class="carousel-cell" />
+</div>

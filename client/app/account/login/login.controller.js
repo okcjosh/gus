@@ -39,6 +39,26 @@ export default class LoginController {
     }
   }
 
+  loginLeo(form) {
+    this.submitted = true;
+
+    if(form.$valid) {
+      this.Auth.loginLeo({
+        email: this.user.email,
+        password: this.user.password
+      }, (err, id) => {
+          if (err) {
+            this.errors.login = err.message;
+            return;
+          }
+          window.localStorage.setItem('temp_leo_id', id);
+          
+          // Logged in, redirect to home
+          this.$state.go('leo-events', { leo_id: id });
+      });
+    }
+  }
+
   forgotPassword() {
     this.$http.get('/api/users/'+ this.forgotEmail +'/forgot_password')
       .then(res => this.showForgotCodeInput = true)

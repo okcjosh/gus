@@ -14,6 +14,7 @@ router.post('/', auth.isAuthenticated(), controller.create);
 router.get('/approve/:_id', controller.approve);
 router.put('/:id', controller.upsert);
 router.patch('/:id', controller.patch);
+router.put('/:event_id/interest/:leo_id', controller.expressInterest);
 router.delete('/:id', controller.destroy);
 
 module.exports = router;

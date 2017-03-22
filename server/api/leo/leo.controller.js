@@ -11,8 +11,10 @@
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import {Leo} from '../../sqldb';
+import {Leo, Event} from '../../sqldb';
 import {Department} from '../../sqldb';
+import {signToken} from '../../auth/auth.service';
+
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -84,6 +86,31 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
+export function showCompatibleEvents(req, res) {
+  Leo.findOne({
+    where: {
+      _id: req.params.id
+    }
+  })
+  .then(leo => {
+    if (leo) {
+      return leo.dislikes.split(',');
+    }
+  })
+  .then(dislikes => {
+    return Event.findAll({
+      where: {
+        JobTypeId:{
+          $notIn: dislikes
+        }
+      }
+    });
+  })
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
 // Creates a new Leo in the DB
 export function create(req, res) {
   return Leo.create(req.body)
@@ -132,4 +159,25 @@ export function destroy(req, res) {
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
+}
+
+// Login for a leo
+export function login(req, res) {
+  Leo.find({
+    where: {
+      email: req.body.email
+    }
+  })
+  .then(leo => {
+    if (leo) {
+      if (leo.password === req.body.password) {
+        let token = signToken(leo._id, leo.role);
+        res.json({ token, leo_id: leo._id });
+      } else {
+        res.status(400).json({ message: 'Wrong password'});
+      }
+    } else {
+      res.status(404).json({ message: 'Leo Not found'});
+    }
+  })
 }

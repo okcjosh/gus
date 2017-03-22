@@ -24,7 +24,7 @@ export default function(sequelize, DataTypes) {
     officer_arrival_time: DataTypes.STRING,
     hours_expected: DataTypes.INTEGER(11),
     officer_attire: DataTypes.STRING,
-
+    interested_officers: DataTypes.STRING,
     alcohol: DataTypes.STRING,
     barricades: DataTypes.STRING,
     police_vehicle: DataTypes.STRING,

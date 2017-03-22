@@ -12,6 +12,8 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    firstName: DataTypes.STRING,
+    lastName: DataTypes.STRING,
     phone: {
       type: DataTypes.DECIMAL,
       allowNull: true
@@ -19,6 +21,9 @@ export default function(sequelize, DataTypes) {
     email: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+    password: {
+      type: DataTypes.STRING
     },
     // department_id: {
     //   type: DataTypes.INTEGER(11),
@@ -28,6 +33,13 @@ export default function(sequelize, DataTypes) {
     //     key: '_id'
     //   }
     // },
+    dislikes: {
+      type: DataTypes.STRING
+    },
+    role: {
+      type: DataTypes.STRING,
+      defaultValue: 'leo'
+    },
     date_hired: {
       type: DataTypes.DATE,
       allowNull: true

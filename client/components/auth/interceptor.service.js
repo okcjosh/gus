@@ -25,9 +25,9 @@ export function authInterceptor($rootScope, $q, $cookies, $injector, Util) {
 
     // Intercept 401s and redirect you to new
     responseError(response) {
-      if(response.status === 401) {
-        (state || (state = $injector.get('$state')))
-        .go('login');
+      let state = (state || (state = $injector.get('$state')));
+      if(response.status === 401 && (state.current.name !== 'event-details')) {
+        state.go('login');
         // remove any stale tokens
         $cookies.remove('token');
       }

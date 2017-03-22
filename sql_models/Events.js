@@ -40,6 +40,9 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(1),
       allowNull: true
     },
+    interested_officers: {
+      type: DataTypes.STRING
+    },
     recuring_data: {
       type: DataTypes.STRING,
       allowNull: true

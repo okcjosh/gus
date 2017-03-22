@@ -27,6 +27,7 @@ export class MainController {
     this.socket = socket;
     this.isLoggedIn = Auth.isLoggedInSync;
     this.$scope = $scope;
+    this.$state = $state;
     this.$scope.$state = $state;
     this.$interpolate = $interpolate;
 
@@ -69,8 +70,15 @@ export class MainController {
 
       this.$http.get('/api/events')
         .then(res => res.data)
-        .then(events => events.map(event => ({ title: event.title || event.venue, start: event.date})))
-        .then(calendarEvents => $('#calendar').fullCalendar({ events: calendarEvents }));
+        .then(events => events.map(event => ({ id: event._id, title: event.title || event.venue, start: event.date})))
+        .then(calendarEvents => $('#calendar').fullCalendar({ 
+          events: calendarEvents,
+          eventClick: event => {
+            if (event) {
+              this.$state.go('event-details', { event_id: event.id})
+            }
+          }
+        }));
   }
 
   addThing() {

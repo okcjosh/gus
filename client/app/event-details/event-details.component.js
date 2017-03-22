@@ -14,6 +14,7 @@ export class EventDetailsComponent {
     this.init($scope);
     $scope.approve = this.approve.bind(this, $scope, $http);
     $scope.saveDrags = this.saveDrags.bind(this, $scope, $http);
+    $scope.expressInterest = this.expressInterest.bind(this);
 
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('event');
@@ -22,6 +23,8 @@ export class EventDetailsComponent {
 
   init($scope) {
     let _self = this;
+    $scope.isAdminUser = false;
+    $scope.isLeo = false;
     this.event_id = this.$state.params.event_id;
     $scope.event_id = this.event_id;
     this.$http.get('/api/leos')
@@ -58,9 +61,11 @@ export class EventDetailsComponent {
       .then(function(res) {
         if (res.status === 200) {
           $scope.user = res.data;
-          console.log(res.data);
+          if (res.data.role === 'admin') {
+            $scope.isAdminUser = true;
+          }
         }
-      });
+      }).catch(err => $scope.isLeo = true);
 
     this.$http.get('/api/job_types')
       .then(function(res) {
@@ -145,9 +150,7 @@ export class EventDetailsComponent {
     let leoAppendedInvites = [];
 
     invitations.map(invite => {
-      let leoIndex = leos.findIndex(leo => {
-        return leo._id == invite.leo_id
-      });
+      let leoIndex = leos.findIndex(leo => leo._id == invite.leo_id);
       if (leoIndex >= 0) {
         let leo = leos[leoIndex];
         invite.name = leo.name;
@@ -205,6 +208,14 @@ export class EventDetailsComponent {
           // Decide what you want to do after creating invitation.
         }
       });
+  }
+
+  expressInterest() {
+    let event_id = this.$state.params.event_id;
+    let leo_id = window.localStorage.getItem('temp_leo_id');
+
+    this.$http.put('/api/events/' + event_id + '/interest/' + leo_id)
+      .then(res => this.$scope.event = res.data);
   }
 
 }

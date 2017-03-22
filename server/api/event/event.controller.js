@@ -11,7 +11,7 @@
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import {Event, Status, JobType, User} from '../../sqldb';
+import {Event, Status, JobType, User, Leo} from '../../sqldb';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -225,6 +225,30 @@ export function patch(req, res) {
     .then(patchUpdates(req.body))
     .then(respondWithResult(res))
     .catch(handleError(res));
+}
+
+export function expressInterest(req, res) {
+  Leo.findOne({ where: { _id: req.params.leo_id }})
+    .then(leo => leo.firstName + ' ' + leo.lastName)
+    .then(name => {
+      Event.find({ where: { _id: req.params.event_id }})
+        .then(handleEntityNotFound(res))
+        .then(event => {
+          let interestedOfficers = [];
+          if (event.interested_officers) {
+            // Using set to make array unique
+            interestedOfficers = [... new Set(event.interested_officers.split(','))];
+          }
+
+          interestedOfficers.push(name);
+          event.interested_officers = interestedOfficers.join(',');
+
+          return event.save();
+        })
+        .then(respondWithResult(res))
+        .catch(handleError(res));
+    })
+  
 }
 
 // Deletes a Event from the DB
