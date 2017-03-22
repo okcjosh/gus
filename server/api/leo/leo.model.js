@@ -12,8 +12,7 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
+    email: DataTypes.STRING,
     phone: {
       type: DataTypes.DECIMAL,
       allowNull: true

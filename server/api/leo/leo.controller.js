@@ -113,6 +113,8 @@ export function showCompatibleEvents(req, res) {
 
 // Creates a new Leo in the DB
 export function create(req, res) {
+  req.body.dislikes = req.body.dislikes.join(',');
+
   return Leo.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
@@ -120,6 +122,8 @@ export function create(req, res) {
 
 // Upserts the given Leo in the DB at the specified ID
 export function upsert(req, res) {
+  req.body.dislikes = req.body.dislikes.join(',');
+
   if(req.body._id) {
     delete req.body._id;
   }
@@ -135,6 +139,8 @@ export function upsert(req, res) {
 
 // Updates an existing Leo in the DB
 export function patch(req, res) {
+  req.body.dislikes = req.body.dislikes.join(',');
+  
   if(req.body._id) {
     delete req.body._id;
   }

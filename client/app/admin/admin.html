@@ -67,58 +67,77 @@
           <label>Create a new LEO here</label>
             <div class="form-group" style="overflow: auto;">
               <div class="col-xs-6">
-                <input type="text" class="form-control" placeholder="LEO Name" ng-model="admin.name">
+                <input type="text" class="form-control" placeholder="LEO Name" ng-model="admin.newLeo.name">
               </div>
               <div class="col-xs-6">
-                <input type="text" class="form-control" placeholder="LEO Phone" ng-model="admin.phone">
+                <input type="text" class="form-control" placeholder="LEO Phone" ng-model="admin.newLeo.phone">
               </div>
             </div>
           <div class="form-group" style="overflow: auto;">
             <div class="col-xs-6">
-              <input type="text" class="form-control" placeholder="First Name" ng-model="admin.firstName">
+              <input type="text" class="form-control" placeholder="First Name" ng-model="admin.newLeo.firstName">
             </div>
             <div class="col-xs-6">
-              <input type="text" class="form-control" placeholder="Last Name" ng-model="admin.lastName">
+              <input type="text" class="form-control" placeholder="Last Name" ng-model="admin.newLeo.lastName">
             </div>
           </div>
           <div class="form-group" style="overflow: auto;">
+
+            <div class="col-xs-6">
+              <input type="text" class="form-control" placeholder="email" ng-model="admin.newLeo.email">
+            </div>
+            
+          </div>
+          <div class="form-group" style="overflow: auto;">
               <div class="col-xs-6">
-                <input type="text" class="form-control" placeholder="Address" ng-model="admin.address">
+                <input type="text" class="form-control" placeholder="Address" ng-model="admin.newLeo.address">
               </div>
               <div class="col-xs-6">
-                <input type="text" class="form-control" placeholder="City" ng-model="admin.city">
+                <input type="text" class="form-control" placeholder="City" ng-model="admin.newLeo.city">
               </div>
             </div>
           <div class="form-group" style="overflow: auto;">
             <div class="col-xs-6">
-              <input type="text" class="form-control" placeholder="State" ng-model="admin.state">
+              <input type="text" class="form-control" placeholder="State" ng-model="admin.newLeo.state">
             </div>
             <div class="col-xs-6">
-              <input type="text" class="form-control" placeholder="Zip" ng-model="admin.zip">
+              <input type="text" class="form-control" placeholder="Zip" ng-model="admin.newLeo.zip">
             </div>
           </div>
           <div class="form-group" style="overflow: auto;">
             <div class="col-xs-6">
-              <input type="text" class="form-control" placeholder="Account Number" ng-model="admin.accountNumber">
+              <input type="text" class="form-control" placeholder="Account Number" ng-model="admin.newLeo.accountNumber">
             </div>
             <div class="col-xs-6">
-              <input type="text" class="form-control" placeholder="Routing Number" ng-model="admin.routingNumber">
+              <input type="text" class="form-control" placeholder="Routing Number" ng-model="admin.newLeo.routingNumber">
             </div>
           </div>
             <div class="form-group" style="overflow: auto;">
               <div class="col-xs-6">
-                <input type="date" class="form-control" placeholder="LEO Hire Date." ng-model="admin.date_hired">
+                <input type="date" class="form-control" placeholder="LEO Hire Date." ng-model="admin.newLeo.date_hired">
               </div>
               <div class="col-xs-6">
-                <input type="date" class="form-control" placeholder="LEO Last Gig." ng-model="admin.lastGig">
+                <input type="date" class="form-control" placeholder="LEO Last Gig." ng-model="admin.newLeo.lastGig">
               </div>
             </div>
           <div class="form-group" style="overflow: auto;">
             <div class="col-xs-6">
-              <input type="text" class="form-control" placeholder="Temporary Password." ng-model="admin.password">
+              <input type="text" class="form-control" placeholder="Temporary Password." ng-model="admin.newLeo.password">
+            </div>
+
+            <div class="col-xs-6">
+              <div ng-repeat="job in admin.jobTypes" class="">
+                <label class="checkbox-inline">
+                  <input name="dislikes[]" type="checkbox" 
+                  ng-checked="admin.newLeo.dislikes.indexOf(job._id) > -1" 
+                  value="{{job._id}}"
+                  ng-click="admin.toggleJobType(job._id)"> {{ job.name }}
+                </label>
+              </div>
             </div>
           </div>
-            <button type="submit" class="btn btn-primary pull-right" ng-click="admin.addLeo()">Add New</button>
+
+          <button type="submit" class="btn btn-primary pull-right" ng-click="admin.addLeo()">Add New</button>
         </form>
       </div>
     </div>

@@ -25,6 +25,7 @@ export default class AdminController {
     this.$scope = $scope;
     this.$http = $http;
     this.socket = socket;
+    this.newLeo = { dislikes: [] };
   }
 
 
@@ -46,6 +47,9 @@ export default class AdminController {
         }, 1000);
 
       });
+
+    this.$http.get('/api/job_types')
+      .then(res => this.jobTypes = res.data);
   }
 
 
@@ -60,37 +64,9 @@ export default class AdminController {
 
 
   addLeo() {
-    if (this.name) {
-      this.$http.post('/api/leos', {
-        name: this.name,
-        phone: this.phone,
-        email: this.email,
-        department_id: this.department_id,
-        date_hired: this.date_hired,
-        lastGig: this.lastGig,
-        firstName: this.firstName,
-        lastName: this.lastName,
-        address: this.address,
-        city: this.city,
-        state: this.state,
-        zip: this.zip,
-        accountNumber: this.accountNumber,
-        routingNumber: this.routingNumber
-      });
-      this.name = '';
-      this.phone = '';
-      this.email = '';
-      this.department_id = '';
-      this.date_hired = '';
-      this.lastGig = '';
-      this.firstName = '';
-      this.lastName = '';
-      this.address = '';
-      this.city = '';
-      this.state = '';
-      this.zip = '';
-      this.accountNumber = '';
-      this.routingNumber = '';
+    if (this.newLeo.name) {
+      this.$http.post('/api/leos', this.newLeo)
+        .then(this.newLeo = { dislikes: [] });
     }
 
     // let braintree = require('braintree');
@@ -149,6 +125,20 @@ export default class AdminController {
     //   console.log(result)
     // });
   }
+
+  toggleJobType(id) {
+    var idx = this.newLeo.dislikes.indexOf(id);
+
+    // Is currently selected
+    if (idx > -1) {
+      this.newLeo.dislikes.splice(idx, 1);
+    }
+
+    // Is newly selected
+    else {
+      this.newLeo.dislikes.push(id);
+    }
+  };
 
   deleteLeo(leo) {
     // console.log(leo)
