@@ -1,5 +1,4 @@
 <div class='container'>
-
   <div class="panel panel-default margin-top-10">
     <div class="panel-heading">
       <strong>Users</strong>
@@ -28,7 +27,6 @@
       </div>
     </div>
   </div>
-
   <div class="panel panel-default">
     <div class="panel-heading">
       <strong>Officers</strong>
@@ -57,59 +55,72 @@
                 <td class='text-center'>
                   <a style='cursor: pointer' ng-click='admin.deleteLeo(leo)' class='trash'>
                     <span class='fa fa-trash fa-2x'></span>
+                  </a>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-
       <div class="">
         <form class="leo-form">
           <label>Create a new LEO here</label>
             <div class="form-group" style="overflow: auto;">
               <div class="col-xs-6">
-                <input type="text" class="form-control" placeholder="LEO Name." ng-model="admin.name">
+                <input type="text" class="form-control" placeholder="LEO Name" ng-model="admin.name">
               </div>
-
               <div class="col-xs-6">
-                <input type="text" class="form-control" placeholder="LEO Phone." ng-model="admin.phone">
+                <input type="text" class="form-control" placeholder="LEO Phone" ng-model="admin.phone">
               </div>
             </div>
-
-            <div class="form-group" style="overflow: auto;">
+          <div class="form-group" style="overflow: auto;">
+            <div class="col-xs-6">
+              <input type="text" class="form-control" placeholder="First Name" ng-model="admin.firstName">
+            </div>
+            <div class="col-xs-6">
+              <input type="text" class="form-control" placeholder="Last Name" ng-model="admin.lastName">
+            </div>
+          </div>
+          <div class="form-group" style="overflow: auto;">
               <div class="col-xs-6">
-                <input type="text" class="form-control" placeholder="LEO Email." ng-model="admin.email">
+                <input type="text" class="form-control" placeholder="Address" ng-model="admin.address">
               </div>
-
               <div class="col-xs-6">
-                <input type="text" class="form-control" placeholder="LEO Department ID." ng-model="admin.department_id">
+                <input type="text" class="form-control" placeholder="City" ng-model="admin.city">
               </div>
             </div>
-
-
-
+          <div class="form-group" style="overflow: auto;">
+            <div class="col-xs-6">
+              <input type="text" class="form-control" placeholder="State" ng-model="admin.state">
+            </div>
+            <div class="col-xs-6">
+              <input type="text" class="form-control" placeholder="Zip" ng-model="admin.zip">
+            </div>
+          </div>
+          <div class="form-group" style="overflow: auto;">
+            <div class="col-xs-6">
+              <input type="text" class="form-control" placeholder="Account Number" ng-model="admin.accountNumber">
+            </div>
+            <div class="col-xs-6">
+              <input type="text" class="form-control" placeholder="Routing Number" ng-model="admin.routingNumber">
+            </div>
+          </div>
             <div class="form-group" style="overflow: auto;">
               <div class="col-xs-6">
                 <input type="date" class="form-control" placeholder="LEO Hire Date." ng-model="admin.date_hired">
               </div>
-
               <div class="col-xs-6">
                 <input type="date" class="form-control" placeholder="LEO Last Gig." ng-model="admin.lastGig">
               </div>
             </div>
-
           <div class="form-group" style="overflow: auto;">
             <div class="col-xs-6">
               <input type="text" class="form-control" placeholder="Temporary Password." ng-model="admin.password">
             </div>
           </div>
-
             <button type="submit" class="btn btn-primary pull-right" ng-click="admin.addLeo()">Add New</button>
         </form>
-
       </div>
     </div>
   </div>
-
 </div>
