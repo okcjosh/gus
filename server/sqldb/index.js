@@ -13,6 +13,7 @@ let db = {
 };
 
 // Insert models below
+db.BtWebhook = db.sequelize.import('../api/bt_webhook/bt_webhook.model');
 db.Lookup = db.sequelize.import('../api/lookup/lookup.model');
 db.User = db.sequelize.import('../api/user/user.model');
 db.Notification = db.sequelize.import('../api/notification/notification.model');

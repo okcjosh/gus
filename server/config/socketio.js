@@ -16,6 +16,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/bt_webhook/bt_webhook.socket').register(socket);
   require('../api/lookup/lookup.socket').register(socket);
   require('../api/transaction/transaction.socket').register(socket);
   require('../api/notification/notification.socket').register(socket);
