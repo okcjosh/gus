@@ -88,32 +88,6 @@ export default function(app, btSignatureParam, btPayloadParam = null) {
   });
 
 
-  // app.post('/webhook/incoming', function (req, res) {
-  //   gateway.webhookNotification.parse(
-  //     req.body.bt_signature,
-  //     req.body.bt_payload,
-  //     function (err, webhookNotification) {
-  //       console.log("[Webhook Received " + webhookNotification.timestamp + "] | Kind: " + webhookNotification.kind);
-  //     }
-  //   );
-  //   res.status(200).send();
-  // });
-  //
-  // // Set bt_signature_param and bt_payload_param to the "bt_signature" and "bt_payload" POST parameters
-  // gateway.webhookNotification.parse(
-  //   btSignatureParam,
-  //   btPayloadParam,
-  //   function (err, webhookNotification) {
-  //     webhookNotification.kind
-  //     // "subscriptionWentPastDue"
-  //
-  //     webhookNotification.timestamp
-  //     // Sun Jan 1 00:00:00 UTC 2012
-  //     console.log(webhookNotification.kind);
-  //     console.log(webhookNotification.timestamp)
-  //   }
-  // );
-
   app.get('/transaction/:id', function (req, res) {
     let result;
     let transactionId = req.params.id;
