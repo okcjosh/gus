@@ -52,11 +52,10 @@ merchantAccountParams = {
   },
   tosAccepted: true,
   masterMerchantAccountId: "americanhustlersyndicate",
-  id: "blue_ladders_store",
+  id: "BIG_DUCKS",
 };
 
 gateway.merchantAccount.create(merchantAccountParams, function (err, result) {
   console.log(result)
 });
-
 

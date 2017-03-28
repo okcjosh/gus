@@ -17,12 +17,13 @@ let TRANSACTION_SUCCESS_STATUSES = [
   braintree.Transaction.Status.SubmittedForSettlement
 ];
 
-export default function(app) {
+export default function(app, btSignatureParam, btPayloadParam = null) {
   app.use(flash());
   app.use('/api/leos', require('./api/leo'));
   app.use('/api/events', require('./api/event'));
   app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
+  app.use('/api/bt_webhook', require('./api/bt_webhook'));
   app.use('/api/cocknballs', require('./api/cocknball'));
   app.use('/api/def_dept_preferences', require('./api/def_dept_preferences'));
   app.use('/api/dept_preferences', require('./api/dept_preferences'));
@@ -85,6 +86,33 @@ export default function(app) {
       console.log(res.clientToken);
     });
   });
+
+
+  // app.post('/webhook/incoming', function (req, res) {
+  //   gateway.webhookNotification.parse(
+  //     req.body.bt_signature,
+  //     req.body.bt_payload,
+  //     function (err, webhookNotification) {
+  //       console.log("[Webhook Received " + webhookNotification.timestamp + "] | Kind: " + webhookNotification.kind);
+  //     }
+  //   );
+  //   res.status(200).send();
+  // });
+  //
+  // // Set bt_signature_param and bt_payload_param to the "bt_signature" and "bt_payload" POST parameters
+  // gateway.webhookNotification.parse(
+  //   btSignatureParam,
+  //   btPayloadParam,
+  //   function (err, webhookNotification) {
+  //     webhookNotification.kind
+  //     // "subscriptionWentPastDue"
+  //
+  //     webhookNotification.timestamp
+  //     // Sun Jan 1 00:00:00 UTC 2012
+  //     console.log(webhookNotification.kind);
+  //     console.log(webhookNotification.timestamp)
+  //   }
+  // );
 
   app.get('/transaction/:id', function (req, res) {
     let result;
