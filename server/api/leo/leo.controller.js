@@ -116,6 +116,7 @@ export function create(req, res) {
   req.body.dislikes = req.body.dislikes.join(',');
 
   return Leo.create(req.body)
+    .then(createSubMerchantAccount(leo))
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
@@ -137,10 +138,11 @@ export function upsert(req, res) {
     .catch(handleError(res));
 }
 
+
 // Updates an existing Leo in the DB
 export function patch(req, res) {
   req.body.dislikes = req.body.dislikes.join(',');
-  
+
   if(req.body._id) {
     delete req.body._id;
   }
@@ -186,4 +188,64 @@ export function login(req, res) {
       res.status(404).json({ message: 'Leo Not found'});
     }
   })
+}
+
+export function createSubMerchantAccount(leo)
+{
+  let braintree = require('braintree');
+  let environment, gateway;
+
+  gateway = braintree.connect({
+    environment: braintree.Environment.Sandbox,
+    merchantId: 'swvg9scjkhfhq9rs',
+    publicKey: '78ghksfzt5z5hfcx',
+    privateKey: '1f210164c4fff82b6da4c29131f30379'
+  });
+
+  module.exports = gateway;
+
+  var merchantAccountParams;
+  merchantAccountParams = {
+    individual: {
+      firstName: leo.firstName,
+      lastName: leo.lastName,
+      email: leo.email,
+      phone: leo.phone,
+      // dateOfBirth: "1981-11-19",
+      // ssn: "456-45-4567",
+      address: {
+        streetAddress: leo.address,
+        locality: leo.city,
+        region: leo.state,
+        postalCode: leo.zip
+      }
+    },
+    // business: {
+    //   legalName: leo.name,
+    //   dbaName: leo.name + " ES4 Funding",
+    //   taxId: "98-7654321",
+    //   address: {
+    //     streetAddress: leo.address,
+    //     locality: leo.city,
+    //     region: leo.state,
+    //     postalCode: leo.zip
+    //   }
+    // },
+    funding: {
+      descriptor: leo.name,
+      destination: braintree.MerchantAccount.FundingDestination.Bank,
+      email: leo.email,
+      mobilePhone: leo.phone,
+      accountNumber: leo.accountNumber,
+      routingNumber: leo.routingNumber
+    },
+    tosAccepted: true,
+    masterMerchantAccountId: "americanhustlersyndicate",
+    id: leo.name,
+  };
+
+  gateway.merchantAccount.create(merchantAccountParams, function (err, result) {
+    console.log(result)
+    return result;
+  });
 }
