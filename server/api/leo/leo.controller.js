@@ -114,9 +114,9 @@ export function showCompatibleEvents(req, res) {
 // Creates a new Leo in the DB
 export function create(req, res) {
   req.body.dislikes = req.body.dislikes.join(',');
-
+  //console.log('in create: ' + req.body);
   return Leo.create(req.body)
-    .then(createSubMerchantAccount(leo))
+    .then(createSubMerchantAccount(req.body))
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
@@ -190,11 +190,11 @@ export function login(req, res) {
   })
 }
 
-export function createSubMerchantAccount(leo)
+function createSubMerchantAccount(leo)
 {
   let braintree = require('braintree');
   let environment, gateway;
-
+  //console.log(leo);
   gateway = braintree.connect({
     environment: braintree.Environment.Sandbox,
     merchantId: 'swvg9scjkhfhq9rs',
@@ -211,7 +211,7 @@ export function createSubMerchantAccount(leo)
       lastName: leo.lastName,
       email: leo.email,
       phone: leo.phone,
-      // dateOfBirth: "1981-11-19",
+      dateOfBirth: "1981-11-19",
       // ssn: "456-45-4567",
       address: {
         streetAddress: leo.address,
@@ -236,8 +236,9 @@ export function createSubMerchantAccount(leo)
       destination: braintree.MerchantAccount.FundingDestination.Bank,
       email: leo.email,
       mobilePhone: leo.phone,
-      accountNumber: leo.accountNumber,
-      routingNumber: leo.routingNumber
+      //routingNumber: leo.routingNumber,
+      routingNumber: '071101307',
+      accountNumber: leo.accountNumber
     },
     tosAccepted: true,
     masterMerchantAccountId: "americanhustlersyndicate",
