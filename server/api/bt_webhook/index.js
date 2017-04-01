@@ -23,6 +23,7 @@ router.post('/', controller.create);
 router.put('/:id', controller.upsert);
 router.patch('/:id', controller.patch);
 router.delete('/:id', controller.destroy);
+router.post('/incoming', controller.webhook);
 
 module.exports = router;
 
@@ -40,15 +41,3 @@ module.exports = router;
 //     console.log(webhookNotification.timestamp)
 //   }
 // );
-
-router.post('/webhook/incoming', function (req, res) {
-  gateway.webhookNotification.parse(
-    req.body.bt_signature,
-    req.body.bt_payload,
-    function (err, webhookNotification) {
-      console.log("[Webhook Received " + webhookNotification.timestamp + "] | Kind: " + webhookNotification.kind);
-    }
-  );
-  res.status(200).send();
-});
-

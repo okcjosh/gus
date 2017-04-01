@@ -246,7 +246,10 @@ function createSubMerchantAccount(leo)
   };
 
   gateway.merchantAccount.create(merchantAccountParams, function (err, result) {
-    console.log(result)
+    console.log(result);
+    if (err) {
+      throw new Error('Can\'t create Merchant Account');
+    }
     return result;
   });
 }

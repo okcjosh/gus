@@ -11,8 +11,9 @@
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import {BtWebhook} from '../../sqldb';
+import {BtWebhook, Leo} from '../../sqldb';
 
+let braintree = require('braintree');
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -131,6 +132,53 @@ export function destroy(req, res) {
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
+}
+
+export function webhook(req, res) {
+  var gateway = braintree.connect({
+    environment: braintree.Environment.Sandbox,
+    merchantId: 'swvg9scjkhfhq9rs',
+    publicKey: '78ghksfzt5z5hfcx',
+    privateKey: '1f210164c4fff82b6da4c29131f30379'
+  });
+
+  gateway.webhookNotification.parse(
+    req.body.bt_signature,
+    req.body.bt_payload,
+    function (err, webhookNotification) {
+      console.log('=====HOOK=====');
+
+      var approved = webhookNotification.kind ===
+        braintree.WebhookNotification.Kind.SubMerchantAccountApproved;
+      // true
+      console.log(braintree.merchantAccount, JSON.stringify(webhookNotification), '-=========');
+
+      if (approved) {
+        gateway.merchantAccount
+          .find(webhookNotification.merchantAccount.id,
+            function (err, merchantAccount) {
+              Leo.update(
+               { btApproved: true },
+               { where: {email: merchantAccount.individual.email} }
+              )
+                .then(() => res.send())
+                .catch(() => res.status(400).send());
+            });
+      } else {
+        res.end();
+      }
+      // webhookNotification.merchantAccount.status
+      // // "active"
+      // webhookNotification.merchantAccount.id
+      // // "blueLaddersStore"
+      // webhookNotification.merchantAccount.masterMerchantAccount.id
+      // // "14laddersMarketplace"
+      // notification.merchantAccount.masterMerchantAccount.status
+      // // "active"
+      console.log("[Webhook Received " + webhookNotification.timestamp + "] | Kind: " + webhookNotification.kind);
+    }
+  );
+  res.status(200).send();
 }
 
 

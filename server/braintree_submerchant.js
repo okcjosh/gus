@@ -18,10 +18,10 @@ module.exports = gateway;
 var merchantAccountParams;
 merchantAccountParams = {
   individual: {
-    firstName: "Jane",
+    firstName: "Shye",
     lastName: "Doe",
-    email: "jane@14ladders.com",
-    phone: "5553334444",
+    email: "sheyoootech@gmail.com",
+    phone: "5563334444",
     dateOfBirth: "1981-11-19",
     ssn: "456-45-4567",
     address: {
@@ -52,7 +52,7 @@ merchantAccountParams = {
   },
   tosAccepted: true,
   masterMerchantAccountId: "americanhustlersyndicate",
-  id: "BIG_DUCKS",
+  id: "sheyoh",
 };
 
 gateway.merchantAccount.create(merchantAccountParams, function (err, result) {

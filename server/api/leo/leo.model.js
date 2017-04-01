@@ -49,6 +49,10 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     },
+    btApproved: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
     password: {
       type: DataTypes.STRING
     },
