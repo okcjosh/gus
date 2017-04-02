@@ -28,24 +28,33 @@ export default class AdminController {
     this.newLeo = { dislikes: [] };
   }
 
-
-
   $onInit() {
+    let statusLabels = {
+      'Pending': 'warning',
+      'Declined': 'danger',
+      'Approved': 'success'
+    };
+
     this.$http.get('/api/leos')
       .then(response => {
-        this.awesomeLeos = response.data;
         this.socket.syncUpdates('leo', this.awesomeLeos);
 
         $.fn.dataTable.ext.errMode = 'none';
-        let leos = response.data;
+        let leos = response.data; // map
+        leos = leos.map((leo) => {
+          leo.btStatus = leo.btStatus || 'Pending';
+
+          let colorClass = 'label label-' + statusLabels[leo.btStatus];
+          leo.btStatus = `<span class="${colorClass}">${leo.btStatus}</span>`;
+          return leo;
+        });
+
+        this.awesomeLeos = leos;
 
         setTimeout(function() {
           $.fn.dataTable.moment( 'MMM D, YYYY' );
-
           let table = $('#leo-table').DataTable();
-          // let usersTable = $('#users-table').DataTable();
         }, 1000);
-
       });
 
     this.$http.get('/api/job_types')

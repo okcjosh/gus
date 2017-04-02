@@ -42,6 +42,7 @@
               <th>Department</th>
               <th>Date Hired</th>
               <th>Last Job</th>
+              <th>Brain Tree Status</th>
               <th>Action</th>
             </thead>
             <tbody>
@@ -52,6 +53,7 @@
                 <td><a href='#' uib-tooltip='{{leo.name}}'>{{leo.Department.name}}</a></td>
                 <td><a href='#' uib-tooltip='{{leo.info}}'>{{leo.date_hired | date}}</a></td>
                 <td><a href='#' uib-tooltip='{{leo.info}}'>{{leo.lastGig | date}}</a></td>
+                <td><a href='#' uib-tooltip='{{leo.info}}' ng-bind-html='leo.btStatus'></a></td>
                 <td class='text-center'>
                   <a style='cursor: pointer' ng-click='admin.deleteLeo(leo)' class='trash'>
                     <span class='fa fa-trash fa-2x'></span>

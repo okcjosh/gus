@@ -146,36 +146,26 @@ export function webhook(req, res) {
     req.body.bt_signature,
     req.body.bt_payload,
     function (err, webhookNotification) {
-      console.log('=====HOOK=====');
+      // console.log('=====HOOK=====');
 
       var approved = webhookNotification.kind ===
         braintree.WebhookNotification.Kind.SubMerchantAccountApproved;
-      // true
-      console.log(braintree.merchantAccount, JSON.stringify(webhookNotification), '-=========');
+      
+      // console.log(braintree.merchantAccount, JSON.stringify(webhookNotification), '<<<<<<<========');
 
-      if (approved) {
-        gateway.merchantAccount
-          .find(webhookNotification.merchantAccount.id,
-            function (err, merchantAccount) {
-              Leo.update(
-               { btApproved: true },
-               { where: {email: merchantAccount.individual.email} }
-              )
-                .then(() => res.send())
-                .catch(() => res.status(400).send());
-            });
-      } else {
-        res.end();
-      }
-      // webhookNotification.merchantAccount.status
-      // // "active"
-      // webhookNotification.merchantAccount.id
-      // // "blueLaddersStore"
-      // webhookNotification.merchantAccount.masterMerchantAccount.id
-      // // "14laddersMarketplace"
-      // notification.merchantAccount.masterMerchantAccount.status
-      // // "active"
-      console.log("[Webhook Received " + webhookNotification.timestamp + "] | Kind: " + webhookNotification.kind);
+      let status = approved ? 'Approved': 'Declined';
+
+      gateway.merchantAccount
+        .find(webhookNotification.merchantAccount.id,
+          function (err, merchantAccount) {
+            Leo.update(
+             { btStatus: status },
+             { where: {email: merchantAccount.individual.email} }
+            )
+              .then(() => res.send())
+              .catch(() => res.status(400).send());
+          });
+      // console.log("[Webhook Received " + webhookNotification.timestamp + "] | Kind: " + webhookNotification.kind);
     }
   );
   res.status(200).send();

@@ -39,9 +39,40 @@ import ngMessages from 'angular-messages';
 // import ngValidationMatch from 'angular-validation-match';
 
 
-angular.module('es4App', [ngCookies, ngResource, 'ngSanitize', 'dndLists', 'btford.socket-io', 'as.sortable', 'google.places', uiRouter,
-  uiBootstrap, _Auth, ngAnimate, account, admin, ngMessages, AccountsComponent, drag, navbar, footer, main, CheckoutComponent, DashboardComponent, RatesComponent, TransactionComponent, InvitationComponent, LeoDashboardController, event, eventDetails, leo, constants, socket, util
-])
+angular.module('es4App', 
+  [
+    ngCookies,
+    ngResource,
+    'ngSanitize',
+    'dndLists',
+    'btford.socket-io',
+    'as.sortable', 
+    'google.places', 
+    uiRouter,
+    uiBootstrap, 
+    _Auth, 
+    ngAnimate, 
+    account, 
+    admin, 
+    ngMessages, 
+    AccountsComponent, 
+    drag, 
+    navbar,
+    footer,
+    main,
+    CheckoutComponent,
+    DashboardComponent,
+    RatesComponent,
+    TransactionComponent,
+    InvitationComponent,
+    LeoDashboardController,
+    event,
+    eventDetails,
+    leo,
+    constants,
+    socket,
+    util
+  ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
     'ngInject';

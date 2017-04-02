@@ -52,7 +52,7 @@ merchantAccountParams = {
   },
   tosAccepted: true,
   masterMerchantAccountId: "americanhustlersyndicate",
-  id: "sheyoh",
+  id: "sheyih",
 };
 
 gateway.merchantAccount.create(merchantAccountParams, function (err, result) {

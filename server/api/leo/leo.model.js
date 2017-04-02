@@ -49,9 +49,9 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     },
-    btApproved: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false
+    btStatus: {
+      type: DataTypes.STRING,
+      defaultValue: 'Pending'
     },
     password: {
       type: DataTypes.STRING
