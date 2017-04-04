@@ -143,7 +143,8 @@ module.exports = function makeWebpackConfig(options) {
             loader: 'babel',
             include: [
                 path.resolve(__dirname, 'client/'),
-                path.resolve(__dirname, 'node_modules/lodash-es/')
+                path.resolve(__dirname, 'node_modules/lodash-es/'),
+                path.resolve(__dirname, 'node_modules/angular-toastr/dist/angular-toastr.tpls.js')
             ]
         }, {
             // TS LOADER
@@ -199,6 +200,7 @@ module.exports = function makeWebpackConfig(options) {
             include: [
                 path.resolve(__dirname, 'node_modules/bootstrap-sass/assets/stylesheets/*.scss'),
                 path.resolve(__dirname, 'node_modules/fullcalendar/dist/fullcalendar.min.css'),
+                path.resolve(__dirname, 'node_modules/angular-toastr/dist/angular-toastr.css'),
                 path.resolve(__dirname, 'client/app/app.scss')
             ]
 

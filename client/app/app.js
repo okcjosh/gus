@@ -34,29 +34,30 @@ import socket from '../components/socket/socket.service';
 import './app.scss';
 import ngAnimate from 'angular-animate';
 import ngMessages from 'angular-messages';
+import 'angular-toastr';
 
 
 // import ngValidationMatch from 'angular-validation-match';
 
 
-angular.module('es4App', 
+angular.module('es4App',
   [
     ngCookies,
     ngResource,
     'ngSanitize',
     'dndLists',
     'btford.socket-io',
-    'as.sortable', 
-    'google.places', 
+    'as.sortable',
+    'google.places',
     uiRouter,
-    uiBootstrap, 
-    _Auth, 
-    ngAnimate, 
-    account, 
-    admin, 
-    ngMessages, 
-    AccountsComponent, 
-    drag, 
+    uiBootstrap,
+    _Auth,
+    ngAnimate,
+    account,
+    admin,
+    ngMessages,
+    AccountsComponent,
+    drag,
     navbar,
     footer,
     main,
@@ -71,7 +72,8 @@ angular.module('es4App',
     leo,
     constants,
     socket,
-    util
+    util,
+    'toastr'
   ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {

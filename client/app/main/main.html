@@ -1,10 +1,11 @@
 <header class="jumbotron bg-info">
   <div class="container">
-  <h2>ES4</h2>
+  <h2>myofficers.com</h2>
   <p>Event Security Services, Scheduling & Staffing.</p>
     <a ng-show="$ctrl.isLoggedIn()" class="btn btn-primary btn-lg btn-rounded" ui-sref="event">Register New Event</a>
   </div>
 </header>
+<li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active">
 <div class="container">
   <div class="panel panel-primary">
     <div class="panel-heading">
@@ -15,6 +16,7 @@
     </div>
   </div>
 </div>
+</li>
 
 <!-- Flickity HTML init -->
 <div class="carousel" data-flickity='{ "autoPlay": true, "wrapAround": true }'>

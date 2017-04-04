@@ -6,12 +6,14 @@ export class EventComponent {
   awesomeEvents = [];
 
   /*@ngInject*/
-  constructor($http, $scope, socket, $state, $q) {
+  constructor($http, $scope, socket, $state, $q, toastr) {
     this.$http = $http;
     this.socket = socket;
     this.$state = $state;
     this.$scope = $scope;
     this.$q = $q;
+    this.toastr = toastr;
+
 
     $scope.loadRecuringModal = this.loadRecuringModal;//.bind(null, $scope);
 
@@ -34,6 +36,9 @@ export class EventComponent {
           $s.newEventForm.email.$valid ) {
           return true;
         } else {
+          if (!$s.newEventForm.email.$valid) {
+            this.toastr.error('invalid email address');
+          }
           return false;
         }
         break;
@@ -222,21 +227,21 @@ export class EventComponent {
     });
 
     $('#creationEventDate').datetimepicker({
-      format: "DD MMMM YYYY HH:mm",
+      format: "DD MMMM YYYY LT",
       minDate: moment().add(7, 'days')
     });
 
     $('#creationEventDateGroup').datetimepicker({
-      format: "DD MMMM YYYY HH:mm",
+      format: "DD MMMM YYYY LT",
       minDate: moment().add(7, 'days')
     });
 
     $('#OfficerArriveTime').datetimepicker({
-      format: "HH:mm"
+      format: "LT"
     });
 
     $('#OfficerArriveTimeGroup').datetimepicker({
-      format: "HH:mm"
+      format: "LT"
     });
 
     $('#creationdateafter').datetimepicker({

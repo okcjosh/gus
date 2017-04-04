@@ -149,7 +149,7 @@
                   </div>
                   <div class="col-md-3">
                     <label class="radio-inline">
-                    <input type="radio" name="jobRecuring" ng-click="showRecurringModal()" id="inlineRadio2" ng-model="eventData.is_recuring" value="1" class="recuringJob"> Recuring Job
+                    <input type="radio" name="jobRecuring" ng-click="showRecurringModal()" id="inlineRadio2" ng-model="eventData.is_recuring" value="1" class="recuringJob"> Recurring Job
                   </label>
                   </div>
                 </div>
@@ -166,7 +166,7 @@
                   </span>
 
                 </div>
-                <span id="helpBlock" class="help-block"><span class="text-danger"><i class="fa fa-info-circle" aria-hidden="true"></i> A minimum of 7 days is required between the start of the event and the registration.</span></span>
+                <span id="helpBlock" class="help-block"><span class="text-danger"><i class="fa fa-info-circle" aria-hidden="true"></i> A surcharge may be applied for events being registered less than 7 days before event date.</span></span>
               </div>
 
               <label for="attendeesNum" id="attendeesNumLabel" class="control-label col-md-3">Number of Attendees Expected</label>
@@ -244,7 +244,7 @@
                 </label>
 
               </div>
-              <label for="amplifiedSound" id="amplifiedSound" class="control-label col-md-3">Music or other amplified sound/explosions?</label>
+              <label for="amplifiedSound" id="amplifiedSound" class="control-label col-md-3">Music or other amplified sound/explosions?<span class="text-danger"><i class="fa fa-asterisk red" aria-hidden="true"></i></span></label>
               <div class="col-md-3">
                 <label class="radio-inline">
                   <input type="radio" name="amplifiedSound" ng-model="eventData.amplified_sound" id="amplifiedSound1" value="yes"> yes
