@@ -4,7 +4,8 @@ export default function($stateProvider) {
   'ngInject';
   $stateProvider
     .state('invitation', {
-      url: '/invitation/:event_id',
+      url: '/invitation/:invitation_id/event/:event_id',
       template: '<invitation></invitation>',
+      controllerAs: 'vm'
     });
 }

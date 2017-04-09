@@ -16,16 +16,15 @@ gateway = braintree.connect({
 
 module.exports = gateway;
 
-
 gateway.transaction.sale({
-  merchantAccountId: "blue_ladders_store",
-  amount: "1999.00",
-  paymentMethodNonce: "fake-valid-nonce",
-  serviceFeeAmount: "serviceFeeAmount"
-}, function (err, result) {
-  console.log(result);
-  console.log(serviceFeeAmount)
-
-
-
+  merchantAccountId: 'blue_ladders_store',
+  amount: '1999.00',
+  paymentMethodNonce: 'fake-valid-nonce',
+  serviceFeeAmount,
+  options: {
+    submitForSettlement: true
+  }
+}, function(err, result) {
+  console.log(err, result);
+  console.log(serviceFeeAmount);
 });

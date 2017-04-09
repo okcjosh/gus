@@ -221,6 +221,59 @@
             </div>
           </div>
         </div>
+
+        <div ng-if="isAdminUser" class="col-md-3" id="complete-modal">
+          <a id="modal-338275" href="#modal-container-338275" role="button" class="btn btn-primary btn-icon btn-rounded" data-toggle="modal"><i class="fa fa-check-square-o" aria-hidden="true"></i>Complete Job</a>
+          <div class="modal fade" id="modal-container-338275" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                  </button>
+                  <h4 class="modal-title" id="myModalLabel">
+                    Assigned Officers
+                  </h4>
+                </div>
+                <div class="modal-body" style="overflow: auto;">
+                  
+                  <div class="col-md-12">
+                    <div class="row">
+                      Cost of the event
+                      <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        <input ng-model="$ctrl.eventCost" type="number" class="form-control">
+                      </div>
+                      
+                    </div>
+                    <br />
+                    <h4>Leos to be paid</h4>
+                    <div class="row">
+                      <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="leo in $ctrl.receivingLeos">
+                          Name: <b>{{leo.name}}</b>
+                          BT Status: <b>{{leo.btStatus}}</b>
+                        </li>
+                      </ul>
+                      
+                    </div>
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+
+                  <button type="button" class="btn btn-default btn-rounded" data-dismiss="modal">
+                    Close
+                  </button>
+                  <button type="button" class="btn btn-primary btn-rounded" data-dismiss="modal" ng-click="$ctrl.complete()">
+                    Complete
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div ng-if="isAdminUser" class="col-md-6" id="reject-modal">
           <a id="modal-349281" href="#modal-container-349281" role="button" class="btn btn-danger btn-icon btn-rounded" data-toggle="modal"><i class="fa fa-exclamation-triangle" aria-hidden="true">Reject Job</i></a>
           <!--<button type="input" name="submit" value="saveEntry" class="btn btn-danger btn-icon mb-20"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Decline Job</button>-->
@@ -293,5 +346,3 @@
     </div>
   </div>
 </div>
-
-<!--Hello World-->

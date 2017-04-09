@@ -103,7 +103,7 @@
         <input name="entryTitleOld" type="hidden" value="+nA0ZaI7TxeLO3MbHsiRJ/RXhJpb6xnjCcUQzOipr/Q=" />
         <div class="row">
           <div class="col-md-6">
-            <button type="button" class="btn btn-success btn-block btn-rounded" ui-sref='main' type="submit" ng-click="dosomething();">Yes, I accept this assignment</button>
+            <button type="button" class="btn btn-success btn-block btn-rounded" type="button" ng-click="$ctrl.acceptInvite();">Yes, I accept this assignment</button>
           </div>
         </div>
         <span>
@@ -111,7 +111,7 @@
         </span>
         <div class="row">
           <div class="col-md-6">
-            <button type="button" class="btn btn-danger btn-block btn-rounded" ui-sref='main' type="submit" ng-click="dosomething();">No, I reject this assignment </button>
+            <button type="button" class="btn btn-danger btn-block btn-rounded" type="button" ng-click="$ctrl.rejectInvite();">No, I reject this assignment </button>
           </div>
         </div>
       </form>

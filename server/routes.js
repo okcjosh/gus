@@ -116,9 +116,9 @@ export default function(app, btSignatureParam, btPayloadParam = null) {
 
   app.post('/checkout', function (req, res) {
     let transactionErrors;
-    let amount = req.body.amount; // In production you should not take amounts directly from clients, I second this
+    // let amount = req.body.amount; // In production you should not take amounts directly from clients, I second this
     let nonce = req.body.payment_method_nonce;
-    console.log('nonce = ' +  nonce);
+    console.log('nonce = ' + nonce);
     //let amount = req.body.event_id; //////////////********
 
     Event.find({
@@ -127,7 +127,6 @@ export default function(app, btSignatureParam, btPayloadParam = null) {
       },
       include: [JobType]
     }).then(function(event) {
-
       gateway.transaction.sale({
         amount: CostCalculator(event).grand_total,
         paymentMethodNonce: nonce,
@@ -154,9 +153,7 @@ export default function(app, btSignatureParam, btPayloadParam = null) {
           res.status(400).send({msg: 'Error processing payment'});
         }
       });
-
     });
-
   });
 
   // All undefined asset or api routes should return a 404

@@ -28,13 +28,24 @@ export class InvitationComponent {
     //   });
   }
 
+  acceptInvite() {
+    const id = this.$state.params.invitation_id;
+    this.$http.put('/api/invitations/' + id, { status: 'Accepted' })
+      .then(() => this.$state.go('main'));
+  }
+
+  rejectInvite() {
+    const id = this.$state.params.invitation_id;
+    this.$http.put('/api/invitations/' + id, { status: 'Rejected' })
+      .then(() => this.$state.go('main'));
+  }
+
 }
 
 export default angular.module('gusApp.invitation', [uiRouter])
   .config(routes)
   .component('invitation', {
     template: require('./invitation.html'),
-    controller: InvitationComponent,
-    controllerAs: 'invitationCtrl'
+    controller: InvitationComponent
   })
   .name;

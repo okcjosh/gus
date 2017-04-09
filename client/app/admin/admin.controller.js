@@ -1,21 +1,21 @@
 'use strict';
-const angular = require('angular');
-const moment = require('moment');
-let $ = require( 'jquery' );
-require( 'datatables.net' );
-require( 'datatables.net-buttons');
-require( 'datatables.net-buttons-bs');
-require( 'datatables.net-bs');
-require( 'datatables.net-buttons-bs');
-require( 'datatables.net-fixedheader');
-//require( 'datatables.net-fixedheader-bs');
-require( 'datatables.net-keytable');
-require( 'datatables.net-responsive');
-require( 'datatables.net-responsive-bs');
-require( 'datatables.net-select');
-require( 'datatables.net-scroller');
-//require( 'datatables.net-scroller-bs');
-require( './../../assets/lib/date-time-sort');
+require('angular');
+require('moment');
+const $ = require('jquery');
+require('datatables.net');
+require('datatables.net-buttons');
+require('datatables.net-buttons-bs');
+require('datatables.net-bs');
+require('datatables.net-buttons-bs');
+require('datatables.net-fixedheader');
+//require('datatables.net-fixedheader-bs');
+require('datatables.net-keytable');
+require('datatables.net-responsive');
+require('datatables.net-responsive-bs');
+require('datatables.net-select');
+require('datatables.net-scroller');
+//require('datatables.net-scroller-bs');
+require('./../../assets/lib/date-time-sort');
 
 export default class AdminController {
   /*@ngInject*/
@@ -30,9 +30,9 @@ export default class AdminController {
 
   $onInit() {
     let statusLabels = {
-      'Pending': 'warning',
-      'Declined': 'danger',
-      'Approved': 'success'
+      Pending: 'warning',
+      Declined: 'danger',
+      Approved: 'success'
     };
 
     this.$http.get('/api/leos')
@@ -41,7 +41,7 @@ export default class AdminController {
 
         $.fn.dataTable.ext.errMode = 'none';
         let leos = response.data; // map
-        leos = leos.map((leo) => {
+        leos = leos.map(leo => {
           leo.btStatus = leo.btStatus || 'Pending';
 
           let colorClass = 'label label-' + statusLabels[leo.btStatus];
@@ -52,8 +52,8 @@ export default class AdminController {
         this.awesomeLeos = leos;
 
         setTimeout(function() {
-          $.fn.dataTable.moment( 'MMM D, YYYY' );
-          let table = $('#leo-table').DataTable();
+          $.fn.dataTable.moment('MMM D, YYYY');
+          $('#leo-table').DataTable();
         }, 1000);
       });
 
@@ -73,7 +73,7 @@ export default class AdminController {
 
 
   addLeo() {
-    if (this.newLeo.name) {
+    if(this.newLeo.name) {
       this.$http.post('/api/leos', this.newLeo)
         .then(this.newLeo = { dislikes: [] });
     }
@@ -83,15 +83,13 @@ export default class AdminController {
     var idx = this.newLeo.dislikes.indexOf(id);
 
     // Is currently selected
-    if (idx > -1) {
+    if(idx > -1) {
       this.newLeo.dislikes.splice(idx, 1);
-    }
-
-    // Is newly selected
-    else {
+    } else {
+      // Is newly selected
       this.newLeo.dislikes.push(id);
     }
-  };
+  }
 
   deleteLeo(leo) {
     // console.log(leo)

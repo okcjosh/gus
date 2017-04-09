@@ -4,6 +4,8 @@ const uiRouter = require('angular-ui-router');
 import routing from './event-details.routes';
 export class EventDetailsComponent {
   awesomeEvents = [];
+  eventCost = 0;
+  receivingLeos = [];
 
   /*@ngInject*/
   constructor($http, $scope, socket, $state) {
@@ -28,23 +30,23 @@ export class EventDetailsComponent {
     this.event_id = this.$state.params.event_id;
     $scope.event_id = this.event_id;
     this.$http.get('/api/leos')
-      .then(leos => {
-        $scope.leos = leos.data;
+      .then(res => {
+        $scope.leos = res.data;
 
         // Call to invitations
-        _self.$http.get('/api/invitations', {
+        this.$http.get('/api/invitations', {
           params: {
-            party_id: _self.event_id
+            event_id: this.event_id
           }
-        }).then(invitations => {
-          _self.initializeDragDrop(_self.$scope, invitations.data);
+        }).then(invitationsRes => {
+          this.initializeDragDrop(_self.$scope, invitationsRes.data);
         });
       });
   }
 
   $onInit() {
-    let $scope = this.$scope,
-      event_id = this.$state.params.event_id;
+    let $scope = this.$scope;
+    let event_id = this.$state.params.event_id;
 
     $scope.leoSort = 'lastGig';
 
@@ -71,7 +73,10 @@ export class EventDetailsComponent {
       .then(function(res) {
         $scope.jobTypes = res.data;
       });
-
+    this.$http.get(`/api/events/${event_id}/cost`)
+      .then(res => this.eventCost = res.data.grand_total);
+    this.$http.get(`/api/events/${event_id}/leos?status=Accepted`)
+      .then(res => this.receivingLeos = res.data);
   }
 
   initializeDragDrop($scope, invitations) {
@@ -106,7 +111,7 @@ export class EventDetailsComponent {
      * true, the dnd-list directive won't do the insertion itself.
      */
     $scope.onDrop = function(list, items, index) {
-      angular.forEach(items, function(item) { item.selected = false; });
+      items.forEach(item => { item.selected = false; });
       list.items = list.items.slice(0, index)
         .concat(items)
         .concat(list.items.slice(index));
@@ -144,15 +149,17 @@ export class EventDetailsComponent {
       items: [],
       dragging: false
     }];
+
     let leos = $scope.leos.slice(0);
     let remainingLeos = $scope.leos.slice(0);
 
     let leoAppendedInvites = [];
 
-    invitations.map(invite => {
-      let leoIndex = leos.findIndex(leo => leo._id == invite.leo_id);
-      if (leoIndex >= 0) {
-        let leo = leos[leoIndex];
+    invitations.forEach(invite => {
+      let leoIndex = remainingLeos.findIndex(leo => leo._id === invite.leo_id);
+
+      if(leoIndex >= 0) {
+        let leo = remainingLeos[leoIndex];
         invite.name = leo.name;
         remainingLeos.splice(leoIndex, 1);
 
@@ -160,39 +167,38 @@ export class EventDetailsComponent {
       }
     });
 
-    $scope.leosList[0].items = remainingLeos;
+    $scope.leosList[0].items = remainingLeos.map(leo => ({
+      event_id: this.event_id,
+      leo_id: leo._id,
+      name: leo.name
+    }));
+
+    console.log($scope.leosList[0].items);
 
     leoAppendedInvites.forEach(invite => {
-      $scope.invitesList[parseInt(invite.pick) - 1]
+      $scope.invitesList[parseInt(invite.pick, 10) - 1]
         .items.push(invite);
     });
-
-    // $scope.jobsList = invitations.map((invitations, index) => {
-    //   return {
-    //     round: index + 1,
-    //     listName: 'Round ' + index +1,
-    //     items: [],
-    //     dragging: false
-    //   };
-    // });
   }
 
-  approve($scope, $http){
+  approve($scope, $http) {
     $http.get('/api/events/approve/' + $scope.event_id);
   }
+
   saveDrags($scope, $http) {
-    let invites = [],
-      _self = this;
+    let invites = [];
+    let event_id = this.$state.params.event_id;
+    console.log(this.$scope.leos);
 
-    $scope.invitesList.forEach(function(invite) {
-
+    $scope.invitesList.forEach(invite => {
       let draggedLeos = invite.items;
-      draggedLeos.forEach(function(leo) {
+      console.info(draggedLeos, invite);
 
-        let inviteData = {
-          party_id: _self.event_id,
+      draggedLeos.forEach(invitedLeo => {
+        const inviteData = {
+          event_id,
           pick: invite.round,
-          leo_id: leo._id,
+          leo_id: invitedLeo.leo_id,
           expires: 0
         };
 
@@ -200,14 +206,21 @@ export class EventDetailsComponent {
       });
     });
 
-
-    $http.post('/api/invitations', invites)
+    $http.post(`/api/invitations/${event_id}`, invites)
       .then(function(res) {
-        if (res.status === 201) {
+        if(res.status === 201) {
           // Invitation successfully created!!!
           // Decide what you want to do after creating invitation.
         }
       });
+  }
+
+  complete() {
+    let event_id = this.$state.params.event_id;
+
+    this.$http.post(`/api/events/${event_id}/complete`, {
+      amount: this.eventCost
+    }).then(res => console.log(res));
   }
 
   expressInterest() {
@@ -217,7 +230,6 @@ export class EventDetailsComponent {
     this.$http.put('/api/events/' + event_id + '/interest/' + leo_id)
       .then(res => this.$scope.event = res.data);
   }
-
 }
 
 
@@ -226,5 +238,9 @@ export default angular.module('es42App.event-details', [uiRouter])
   .component('eventDetails', {
     template: require('./event-details.html'),
     controller: EventDetailsComponent,
+    bindings: {
+      eventCost: '=?',
+      receivingLeos: '=?'
+    }
   })
   .name;

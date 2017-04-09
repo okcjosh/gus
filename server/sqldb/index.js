@@ -60,7 +60,5 @@ db.Status.hasMany(db.Event);
 db.Transaction.belongsTo(db.Event);
 db.Event.hasOne(db.Transaction);
 
-
-
 db.sequelize.sync();
 module.exports = db;

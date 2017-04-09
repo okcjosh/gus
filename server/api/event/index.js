@@ -8,6 +8,8 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);
+router.get('/:id/leos', controller.leosForEvent);
+router.post('/:id/complete', controller.completeEventPayment);
 router.get('/:id/cost', controller.getEventCost);
 router.get('/status/:status_id', controller.showByStatus);
 router.post('/', auth.isAuthenticated(), controller.create);

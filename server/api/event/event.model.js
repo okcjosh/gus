@@ -30,7 +30,10 @@ export default function(sequelize, DataTypes) {
     police_vehicle: DataTypes.STRING,
     amplified_sound: DataTypes.STRING,
 
-    operational_details: DataTypes.STRING
+    operational_details: DataTypes.STRING,
+
+    btTransactionId: DataTypes.STRING,
+    paymentStatus: DataTypes.STRING
 
 
     // address: DataTypes.STRING,

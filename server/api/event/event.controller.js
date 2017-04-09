@@ -11,7 +11,8 @@
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import {Event, Status, JobType, User, Leo} from '../../sqldb';
+import {Event, Status, JobType, User, Leo, JobInvitation} from '../../sqldb';
+import gateway from './../../gateway';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -65,6 +66,65 @@ function handleError(res, statusCode) {
   };
 }
 
+function getLeosForEvent(eventId, status) {
+  let query = {
+    where: {
+      event_id: eventId
+    }
+  };
+
+  status && (query.where.status = status);
+
+  return JobInvitation.findAll(query)
+    .then(invitations => {
+      let leo_ids = invitations.map(invite => invite.leo_id);
+      return Leo.findAll({
+        where: {
+          _id: { $in: leo_ids }
+        }
+      });
+    });
+}
+
+function payLeo(leo, amount) {
+  return new Promise((resolve, reject) => {
+    gateway.transaction.sale({
+      merchantAccountId: leo.name,
+      amount: parseInt(amount, 10),
+      paymentMethodNonce: 'fake-valid-nonce',
+      serviceFeeAmount: 11 * .25,
+      options: {
+        submitForSettlement: true
+      }
+    }, function(err, result) {
+      // console.log(err, result);
+      if(err) {
+        return reject(err);
+      }
+      resolve(result);
+    });
+  });
+}
+
+function chargeForService(amount) {
+  return new Promise((resolve, reject) => {
+    gateway.transaction.sale({
+      merchantAccountId: 'americanhustlersyndicate',
+      amount: parseInt(amount, 10),
+      paymentMethodNonce: 'fake-valid-nonce',
+      options: {
+        submitForSettlement: true
+      }
+    }, function(err, result) {
+      // console.log(err, result);
+      if(err) {
+        return reject(err);
+      }
+      resolve(result);
+    });
+  });
+}
+
 // Pass the event with the JobType included for which the cost is to be calculted
 export function CostCalculator(event) {
   function yesNo(v) {
@@ -78,7 +138,7 @@ export function CostCalculator(event) {
     },
     officers: {
       cost: event.JobType.officer_rate,
-      count: Math.ceil(event.crowd_size / 20),//event.prefered_officer_name.split(',').length,
+      count: Math.ceil(event.crowd_size / 20), //event.prefered_officer_name.split(',').length,
       total: (event.JobType.officer_rate * Math.ceil(event.crowd_size / 20)) || 0//(event.prefered_officer_name.split(',').length)) || 0
     },
     time: {
@@ -110,17 +170,22 @@ export function CostCalculator(event) {
       cost: event.JobType.amplified_sound,
       count: event.amplified_sound,
       total: (event.JobType.amplified_sound * yesNo(event.amplified_sound)) || 0
-    }
+    },
   };
 
-  c.grand_total = c.base.total +
-                  c.officers.total +
-                  c.time.total +
-                  c.crowd.total +
-                  c.alcohol.total +
-                  c.police_vehicle.total +
-                  c.barricade.total +
-                  c.amplified_sound.total;
+  c.grand_total = c.base.total
+                + c.officers.total
+                + c.time.total
+                + c.crowd.total
+                + c.alcohol.total
+                + c.police_vehicle.total
+                + c.barricade.total
+                + c.amplified_sound.total;
+
+  // The extra 7% for MyOfficers
+  c.service_charge = c.grand_total * 0.07;
+  // Add Service Charge to Grand Total
+  c.grand_total += c.service_charge;
 
   return c;
 }
@@ -131,7 +196,7 @@ export function index(req, res) {
     include: [JobType, Status]
   })
     .then(respondWithResult(res))
-    .catch(handleError(res));
+    .catch(() => handleError(res));
 }
 
 // Gets a single Event from the DB
@@ -143,6 +208,66 @@ export function show(req, res) {
     include: [JobType, User, Status]
   })
     .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+export function leosForEvent(req, res) {
+  return getLeosForEvent(req.params.id, req.query.status)
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+export function completeEventPayment(req, res) {
+  return getLeosForEvent(req.params.id, 'Accepted')
+    .then(handleEntityNotFound(res))
+    .then(leos => {
+      return Event.findOne({ where: { _id: req.params.id }, include: [JobType]})
+        .then(event => {
+          let amount = req.body.amount || CostCalculator(event);
+          let leoShare = amount - (amount * .07);
+
+          chargeForService(amount * .07)
+            .then(result => {
+              Event.update({
+                btTransactionId: result.transaction.id,
+                paymentStatus: result.transaction.status
+              }, { where: {
+                _id: req.params.id
+              }});
+            })
+            .catch(() => {
+              Event.update({
+                paymentStatus: 'Error'
+              }, { where: {
+                _id: req.params.id
+              }});
+            });
+
+          // divide leoShare among number of leos who accepted the job
+          leos.forEach(leo => {
+            payLeo(leo, leoShare / leos.length)
+              .then(result => {
+                JobInvitation.update({
+                  btTransactionId: result.transaction.id,
+                  paymentStatus: result.transaction.status
+                }, { where: {
+                  event_id: req.params.id,
+                  leo_id: leo._id
+                }});
+              })
+              .catch(() => {
+                JobInvitation.update({
+                  paymentStatus: 'Error'
+                }, { where: {
+                  event_id: req.params.id,
+                  leo_id: leo._id
+                }});
+              });
+          });
+          return event;
+        });
+    })
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -159,8 +284,8 @@ export function showByStatus(req, res) {
 }
 
 export function approve(req, res) {
-  var id = req.params._id
-  Event.seq.query("update Events set StatusId = 2 where _id =" + id);
+  var id = req.params._id;
+  Event.seq.query('update Events set StatusId = 2 where _id =' + id);
   res.status(200).end();
 }
 
@@ -235,7 +360,7 @@ export function expressInterest(req, res) {
         .then(handleEntityNotFound(res))
         .then(event => {
           let interestedOfficers = [];
-          if (event.interested_officers) {
+          if(event.interested_officers) {
             // Using set to make array unique
             interestedOfficers = [... new Set(event.interested_officers.split(','))];
           }
@@ -247,8 +372,7 @@ export function expressInterest(req, res) {
         })
         .then(respondWithResult(res))
         .catch(handleError(res));
-    })
-  
+    });
 }
 
 // Deletes a Event from the DB
