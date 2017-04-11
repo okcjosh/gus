@@ -10,11 +10,14 @@
 
 'use strict';
 
-import jsonpatch from 'fast-json-patch';
-import {Leo, Event} from '../../sqldb';
-import {Department} from '../../sqldb';
-import {signToken} from '../../auth/auth.service';
+import braintree from 'braintree';
 
+import jsonpatch from 'fast-json-patch';
+
+import gateway from './../../gateway';
+
+import {Leo, Event, Department} from './../../sqldb';
+import {signToken} from './../../auth/auth.service';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -67,6 +70,61 @@ function handleError(res, statusCode) {
   };
 }
 
+// Create SubMerchant Account with leo
+function createSubMerchantAccount(leo) {
+  return new Promise((resolve, reject) => {
+    let merchantAccountParams = {
+      individual: {
+        firstName: leo.firstName,
+        lastName: leo.lastName,
+        email: leo.email,
+        // TODO: verify validity of phone number
+        phone: leo.phone,
+        dateOfBirth: '1981-11-19',
+        // ssn: "456-45-4567",
+        address: {
+          streetAddress: leo.address,
+          locality: leo.city,
+          region: leo.state,
+          postalCode: leo.zip
+        }
+      },
+      // business: {
+      //   legalName: leo.name,
+      //   dbaName: leo.name + " ES4 Funding",
+      //   taxId: "98-7654321",
+      //   address: {
+      //     streetAddress: leo.address,
+      //     locality: leo.city,
+      //     region: leo.state,
+      //     postalCode: leo.zip
+      //   }
+      // },
+      funding: {
+        descriptor: leo.name,
+        destination: braintree.MerchantAccount.FundingDestination.Bank,
+        email: leo.email,
+        // TODO: verify validity of phone number
+        mobilePhone: leo.phone,
+        routingNumber: leo.routingNumber,
+        accountNumber: leo.accountNumber
+      },
+      tosAccepted: true,
+      masterMerchantAccountId: 'americanhustlersyndicate',
+      id: leo.merchantId,
+    };
+
+    gateway.merchantAccount.create(merchantAccountParams, function(err, result) {
+      console.log(err, result);
+      if(err) {
+        return reject(err);
+      }
+
+      result.success ? resolve(result) : reject(result);
+    });
+  });
+}
+
 // Gets a list of Leos
 export function index(req, res) {
   return Leo.findAll({order: 'lastGig ASC', include: [Department]})
@@ -93,7 +151,7 @@ export function showCompatibleEvents(req, res) {
     }
   })
   .then(leo => {
-    if (leo) {
+    if(leo) {
       return leo.dislikes.split(',');
     }
   })
@@ -113,12 +171,25 @@ export function showCompatibleEvents(req, res) {
 
 // Creates a new Leo in the DB
 export function create(req, res) {
-  req.body.dislikes = req.body.dislikes.join(',');
-  //console.log('in create: ' + req.body);
-  return Leo.create(req.body)
-    .then(createSubMerchantAccount(req.body))
+  let leo = req.body;
+
+  leo.phone = leo.phone || '5555555555';
+  leo.state && (leo.state = leo.state.toUpperCase());
+  leo.routingNumber = leo.routingNumber || '071101307';
+
+  leo.dislikes = leo.dislikes.join(',');
+
+  return Leo.create(leo)
+    .then(newLeo => {
+      return createSubMerchantAccount(newLeo)
+        .then(() => Promise.resolve(newLeo))
+        .catch(err => {
+          newLeo.destroy();
+          return Promise.reject(err);
+        });
+    })
     .then(respondWithResult(res, 201))
-    .catch(handleError(res));
+    .catch(err => res.status(400).json(err));
 }
 
 // Upserts the given Leo in the DB at the specified ID
@@ -137,7 +208,6 @@ export function upsert(req, res) {
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
-
 
 // Updates an existing Leo in the DB
 export function patch(req, res) {
@@ -188,68 +258,4 @@ export function login(req, res) {
       res.status(404).json({ message: 'Leo Not found'});
     }
   })
-}
-
-function createSubMerchantAccount(leo)
-{
-  let braintree = require('braintree');
-  let environment, gateway;
-  //console.log(leo);
-  gateway = braintree.connect({
-    environment: braintree.Environment.Sandbox,
-    merchantId: 'swvg9scjkhfhq9rs',
-    publicKey: '78ghksfzt5z5hfcx',
-    privateKey: '1f210164c4fff82b6da4c29131f30379'
-  });
-
-  module.exports = gateway;
-
-  var merchantAccountParams;
-  merchantAccountParams = {
-    individual: {
-      firstName: leo.firstName,
-      lastName: leo.lastName,
-      email: leo.email,
-      phone: leo.phone,
-      dateOfBirth: "1981-11-19",
-      // ssn: "456-45-4567",
-      address: {
-        streetAddress: leo.address,
-        locality: leo.city,
-        region: leo.state,
-        postalCode: leo.zip
-      }
-    },
-    // business: {
-    //   legalName: leo.name,
-    //   dbaName: leo.name + " ES4 Funding",
-    //   taxId: "98-7654321",
-    //   address: {
-    //     streetAddress: leo.address,
-    //     locality: leo.city,
-    //     region: leo.state,
-    //     postalCode: leo.zip
-    //   }
-    // },
-    funding: {
-      descriptor: leo.name,
-      destination: braintree.MerchantAccount.FundingDestination.Bank,
-      email: leo.email,
-      mobilePhone: leo.phone,
-      //routingNumber: leo.routingNumber,
-      routingNumber: '071101307',
-      accountNumber: leo.accountNumber
-    },
-    tosAccepted: true,
-    masterMerchantAccountId: "americanhustlersyndicate",
-    id: leo.name,
-  };
-
-  gateway.merchantAccount.create(merchantAccountParams, function (err, result) {
-    console.log(result);
-    if (err) {
-      throw new Error('Can\'t create Merchant Account');
-    }
-    return result;
-  });
 }

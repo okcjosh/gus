@@ -1,5 +1,7 @@
 'use strict';
 
+import shortid from 'shortid';
+
 export default function(sequelize, DataTypes) {
   return sequelize.define('Leo', {
     _id: {
@@ -40,6 +42,10 @@ export default function(sequelize, DataTypes) {
     zip: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+    merchantId: {
+      type: DataTypes.STRING,
+      defaultValue: shortid.generate
     },
     accountNumber: {
       type: DataTypes.STRING,

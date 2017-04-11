@@ -9,11 +9,12 @@
  */
 
 'use strict';
+import braintree from 'braintree';
 
 import jsonpatch from 'fast-json-patch';
 import {BtWebhook, Leo} from '../../sqldb';
+import gateway from './../../gateway';
 
-let braintree = require('braintree');
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -134,41 +135,64 @@ export function destroy(req, res) {
     .catch(handleError(res));
 }
 
-export function webhook(req, res) {
-  var gateway = braintree.connect({
-    environment: braintree.Environment.Sandbox,
-    merchantId: 'swvg9scjkhfhq9rs',
-    publicKey: '78ghksfzt5z5hfcx',
-    privateKey: '1f210164c4fff82b6da4c29131f30379'
-  });
+function subMerchantAccountApproved(merchantAccount, res) {
+  Leo.update(
+    { btStatus: 'Approved' },
+    { where: { merchantId: merchantAccount.id } }
+  )
+    .then(() => res.end())
+    .catch(() => res.status(400).send());
+}
 
+function subMerchantAccountDeclined(merchantAccount, res) {
+  Leo.update(
+    { btStatus: 'Declined' },
+    { where: { merchantId: merchantAccount.id } }
+  )
+    .then(() => res.end())
+    .catch(() => res.status(400).send());
+}
+
+export function webhook(req, res) {
   gateway.webhookNotification.parse(
     req.body.bt_signature,
     req.body.bt_payload,
-    function (err, webhookNotification) {
-      // console.log('=====HOOK=====');
+    function(err, webhookNotification) {
+      if(err) {
+        res.sendStatus(400);
+      }
+      // console.log(webhookNotification, '=========HOOK=========');
 
-      var approved = webhookNotification.kind ===
-        braintree.WebhookNotification.Kind.SubMerchantAccountApproved;
-      
+      var kinds = braintree.WebhookNotification.Kind;
       // console.log(braintree.merchantAccount, JSON.stringify(webhookNotification), '<<<<<<<========');
-
-      let status = approved ? 'Approved': 'Declined';
-
-      gateway.merchantAccount
-        .find(webhookNotification.merchantAccount.id,
-          function (err, merchantAccount) {
-            Leo.update(
-             { btStatus: status },
-             { where: {email: merchantAccount.individual.email} }
-            )
-              .then(() => res.send())
-              .catch(() => res.status(400).send());
-          });
       // console.log("[Webhook Received " + webhookNotification.timestamp + "] | Kind: " + webhookNotification.kind);
+
+      switch (webhookNotification.kind) {
+      case kinds.Check:
+        res.end();
+        break;
+
+      case kinds.SubMerchantAccountApproved:
+        subMerchantAccountApproved(webhookNotification.merchantAccount, res);
+        break;
+
+      case kinds.SubMerchantAccountDeclined:
+        subMerchantAccountDeclined(webhookNotification.merchantAccount, res);
+        break;
+
+      case kinds.TransactionDisbursed:
+        res.end();
+        console.log('Manage Disbursement');
+        break;
+
+      case kinds.DisbursementException:
+        res.end();
+        console.log('Manage disburse exception');
+        break;
+
+      default:
+        console.log(webhookNotification);
+      }
     }
   );
-  res.status(200).send();
 }
-
-

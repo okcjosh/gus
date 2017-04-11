@@ -183,7 +183,7 @@ export function CostCalculator(event) {
                 + c.amplified_sound.total;
 
   // The extra 7% for MyOfficers
-  c.service_charge = c.grand_total * 0.07;
+  c.service_charge = parseInt(c.grand_total * 0.07, 10);
   // Add Service Charge to Grand Total
   c.grand_total += c.service_charge;
 
@@ -297,7 +297,7 @@ export function getEventCost(req, res) {
     include: [JobType]
   }).then(function(event) {
     var c = CostCalculator(event);
-    res.send(c);
+    res.json(c);
   });
 }
 

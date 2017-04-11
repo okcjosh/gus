@@ -242,9 +242,74 @@
                       Cost of the event
                       <div class="input-group">
                         <span class="input-group-addon">$</span>
-                        <input ng-model="$ctrl.eventCost" type="number" class="form-control">
+                        <input ng-model="$ctrl.adjustedAmount" type="number" class="form-control">
                       </div>
                       
+                    </div>
+
+                    <div class="row">
+                      <table class="table table-bordered table-responsive table-hover">
+                        <thead>
+                          <th>Element</th>
+                          <th>Rate</th>
+                          <th>Needed</th>
+                          <th>Cost</th>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th>Cost for {{event.JobType.name}}</th>
+                            <td colspan="2">${{$ctrl.eventCost.base.cost}}</td>
+                            <td>${{$ctrl.eventCost.base.total}}</td>
+                          </tr>
+                          <tr>
+                            <th>Cost for Officers</th>
+                            <td>${{$ctrl.eventCost.officers.cost}} per officer</td>
+                            <td>{{$ctrl.eventCost.officers.count}} officer(s)</td>
+                            <td>${{$ctrl.eventCost.officers.total}}</td>
+                          </tr>
+                          <tr>
+                            <th>Cost for duration of Job</th>
+                            <td>${{$ctrl.eventCost.time.cost}} per hour</td>
+                            <td>{{$ctrl.eventCost.time.count}} hour(s)</td>
+                            <td>${{$ctrl.eventCost.time.total}}</td>
+                          </tr>
+                          <tr>
+                            <th>Cost for Crowd</th>
+                            <td>${{$ctrl.eventCost.crowd.cost}} / 10 people</td>
+                            <td>{{$ctrl.eventCost.crowd.count}} hour(s)</td>
+                            <td>${{$ctrl.eventCost.crowd.total}}</td>
+                          </tr>
+                          <tr>
+                            <th>Cost for Alcohol</th>
+                            <td colspan="2">${{$ctrl.eventCost.alcohol.cost}}</td>
+                            <td>${{$ctrl.eventCost.alcohol.total}}</td>
+                          </tr>
+                          <tr>
+                            <th>Cost for Police Vehicle</th>
+                            <td colspan="2">${{$ctrl.eventCost.police_vehicle.cost}}</td>
+                            <td>${{$ctrl.eventCost.police_vehicle.total}}</td>
+                          </tr>
+                          <tr>
+                            <th>Cost for Barricade</th>
+                            <td colspan="2">${{$ctrl.eventCost.barricade.cost}}</td>
+                            <td>${{$ctrl.eventCost.barricade.total}}</td>
+                          </tr>
+                          <tr>
+                            <th>Cost for Amplified Sound</th>
+                            <td colspan="2">${{$ctrl.eventCost.amplified_sound.cost}}</td>
+                            <td>${{$ctrl.eventCost.amplified_sound.total}}</td>
+                          </tr>
+                          <tr>
+                            <th>Service Charge</th>
+                            <td colspan="2">${{$ctrl.eventCost.service_charge}}</td>
+                            <td>${{$ctrl.eventCost.service_charge}}</td>
+                          </tr>
+                          <tr>
+                            <th colspan="3">Grand Total ==></th>
+                            <td>${{$ctrl.eventCost.grand_total}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                     <br />
                     <h4>Leos to be paid</h4>

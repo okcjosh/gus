@@ -4,7 +4,8 @@ const uiRouter = require('angular-ui-router');
 import routing from './event-details.routes';
 export class EventDetailsComponent {
   awesomeEvents = [];
-  eventCost = 0;
+  adjustedAmount = 0;
+  eventCost = {};
   receivingLeos = [];
 
   /*@ngInject*/
@@ -74,7 +75,10 @@ export class EventDetailsComponent {
         $scope.jobTypes = res.data;
       });
     this.$http.get(`/api/events/${event_id}/cost`)
-      .then(res => this.eventCost = res.data.grand_total);
+      .then(res => {
+        this.eventCost = res.data;
+        this.adjustedAmount = res.data.grand_total;
+      });
     this.$http.get(`/api/events/${event_id}/leos?status=Accepted`)
       .then(res => this.receivingLeos = res.data);
   }
@@ -219,7 +223,7 @@ export class EventDetailsComponent {
     let event_id = this.$state.params.event_id;
 
     this.$http.post(`/api/events/${event_id}/complete`, {
-      amount: this.eventCost
+      amount: this.adjustedAmount
     }).then(res => console.log(res));
   }
 
@@ -240,6 +244,7 @@ export default angular.module('es42App.event-details', [uiRouter])
     controller: EventDetailsComponent,
     bindings: {
       eventCost: '=?',
+      adjustedAmount: '=?',
       receivingLeos: '=?'
     }
   })

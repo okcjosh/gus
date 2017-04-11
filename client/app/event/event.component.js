@@ -84,7 +84,6 @@ export class EventComponent {
     this.$http.get('/api/events')
       .then(response => {
         this.awesomeEvents = response.data;
-        this.socket.syncUpdates('event', this.awesomeEvents);
       });
 
     this.$scope.progress = 1;
@@ -92,6 +91,7 @@ export class EventComponent {
       // Check for validity of filled data
       if(_self.checkStepValid($scope.progress)) {
         if($scope.progress == 2) {
+          // To submit the Event
           _self.postEvent($scope)
             .then(function(data) {
               // Store created event on scope
@@ -100,10 +100,8 @@ export class EventComponent {
               $scope.progress++;
             });
         } else if($scope.progress == 3) {
+          // To go to checkout page
           $state.go('checkout', { event_id: $scope.event._id });
-
-          console.log($scope.eventData);
-          // _self.postEvent($scope); // If data was submitted successfully User will be redirected
         } else {
           $scope.progress++;
         }
@@ -201,8 +199,6 @@ export class EventComponent {
     });
 
     var str;
-
-    // eveweb
 
     $('#jobSpecs option').each(function() {
       $(this).hide();
@@ -328,16 +324,13 @@ export class EventComponent {
   }
 
   jQueryShowErrorStep(step) {
-    $(step + ' :input[required=\'required\']').each(function() {
+    $(`${step} :input[required='required']`).each(function() {
       if(!$(this).val()) {
         $(this).addClass('hasError');
-      } else {
-        if($(this).hasClass('hasError')) {
-          $(this).removeClass('hasError');
-        }
+      } else if($(this).hasClass('hasError')) {
+        $(this).removeClass('hasError');
       }
     });
-
   }
 
   postEvent($scope) {
@@ -374,13 +367,13 @@ export class EventComponent {
 
     this.$http.post('/api/events', eventPayload)
       .then(function(res) {
-        console.log(res.data)
-        if (res.status === 201) {
+        console.log(res.data);
+        if(res.status === 201) {
           d.resolve(res.data);
           //$state.go('checkout', { event_id: res.data._id });
         } else {
           d.reject(res);
-          console.log('Error' + res.statusText);
+          console.log(`Error ${res.statusText}`);
         }
       });
 

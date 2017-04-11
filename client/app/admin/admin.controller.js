@@ -28,28 +28,26 @@ export default class AdminController {
     this.newLeo = { dislikes: [] };
   }
 
-  $onInit() {
+  transformLeoForTable(leo) {
     let statusLabels = {
       Pending: 'warning',
       Declined: 'danger',
       Approved: 'success'
     };
 
+    leo.btStatus = leo.btStatus || 'Pending';
+
+    let colorClass = `label label-${statusLabels[leo.btStatus]}`;
+    leo.btStatus = `<span class="${colorClass}">${leo.btStatus}</span>`;
+    return leo;
+  }
+
+  $onInit() {
     this.$http.get('/api/leos')
       .then(response => {
-        this.socket.syncUpdates('leo', this.awesomeLeos);
-
         $.fn.dataTable.ext.errMode = 'none';
-        let leos = response.data; // map
-        leos = leos.map(leo => {
-          leo.btStatus = leo.btStatus || 'Pending';
-
-          let colorClass = 'label label-' + statusLabels[leo.btStatus];
-          leo.btStatus = `<span class="${colorClass}">${leo.btStatus}</span>`;
-          return leo;
-        });
-
-        this.awesomeLeos = leos;
+        // Map through leos to display labels  properly
+        this.awesomeLeos = response.data.map(this.transformLeoForTable);
 
         setTimeout(function() {
           $.fn.dataTable.moment('MMM D, YYYY');
@@ -75,7 +73,14 @@ export default class AdminController {
   addLeo() {
     if(this.newLeo.name) {
       this.$http.post('/api/leos', this.newLeo)
-        .then(this.newLeo = { dislikes: [] });
+        .then(res => {
+          this.awesomeLeos.push(this.transformLeoForTable(res.data));
+          this.newLeo = { dislikes: [] };
+        }, err => {
+          alert('Could not create LEO, due to incorrect info');
+        });
+    } else {
+      alert('Fill all feilds');
     }
   }
 
@@ -92,8 +97,8 @@ export default class AdminController {
   }
 
   deleteLeo(leo) {
-    // console.log(leo)
-    this.$http.delete(`/api/leos/${leo._id}`);
+    this.$http.delete(`/api/leos/${leo._id}`)
+      .then(() => this.awesomeLeos.splice(this.awesomeLeos.indexOf(leo), 1));
   }
 
   delete(user) {
