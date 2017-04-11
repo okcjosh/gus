@@ -17,10 +17,6 @@ export class EventComponent {
 
 
     $scope.loadRecuringModal = this.loadRecuringModal;//.bind(null, $scope);
-
-    $scope.$on('$destroy', function() {
-      socket.unsyncUpdates('event');
-    });
   }
 
   checkStepValid(step) {
@@ -79,20 +75,14 @@ export class EventComponent {
   $onInit() {
     var $scope = this.$scope;
     var $state = this.$state;
-    var _self = this;
-
-    this.$http.get('/api/events')
-      .then(response => {
-        this.awesomeEvents = response.data;
-      });
 
     this.$scope.progress = 1;
-    this.$scope.nextStep = function() {
+    this.$scope.nextStep = () => {
       // Check for validity of filled data
-      if(_self.checkStepValid($scope.progress)) {
+      if(this.checkStepValid($scope.progress)) {
         if($scope.progress == 2) {
           // To submit the Event
-          _self.postEvent($scope)
+          this.postEvent($scope)
             .then(function(data) {
               // Store created event on scope
               $scope.event = data.event;
@@ -106,7 +96,8 @@ export class EventComponent {
           $scope.progress++;
         }
       } else {
-        console.log('Not Valid', $scope.newEventForm);
+        console.log('Not Valid ===>>>', $scope.newEventForm);
+        alert('Not Valid');
       }
     };
 
@@ -133,63 +124,16 @@ export class EventComponent {
       officerName: []
     };
 
-    this.$http.get('/api/job_types')
-      .then(function(res) {
-        _self.$scope.jobTypes = res.data;
+    this.$q.all([
+      this.$http.get('/api/leos'),
+      this.$http.get('/api/job_types?lookups=true')
+    ])
+      .then(responses => {
+        this.$scope.awesomeLeos = responses[0].data;
+        this.$scope.jobTypes = responses[1].data;
+
+        setTimeout(() => this.initializeJQueryPlugins(), 0);
       });
-
-    this.$scope.jobTypeSpecs = [
-      { value: '39', data_job: '8', type_spec: 'Apartment Roving Patrol' },
-      { value: '53', data_job: '13', type_spec: 'Appartment Roving Patrol' },
-      { value: '54', data_job: '13', type_spec: 'Bank Security' },
-      { value: '55', data_job: '13', type_spec: 'Construction Safety / Control' },
-      { value: '15', data_job: '1', type_spec: 'Intersection Control' },
-      { value: '19', data_job: '2', type_spec: 'Intersection Control' },
-      { value: '23', data_job: '3', type_spec: 'Intersection Control' },
-      { value: '27', data_job: '4', type_spec: 'Intersection Control' },
-      { value: '31', data_job: '5', type_spec: 'Intersection Control' },
-      { value: '43', data_job: '10', type_spec: 'Intersection Control' },
-      { value: '47', data_job: '11', type_spec: 'Intersection Control' },
-      { value: '56', data_job: '13', type_spec: 'Intersection Control' },
-      { value: '16', data_job: '1', type_spec: 'Money Drop Security' },
-      { value: '20', data_job: '2', type_spec: 'Money Drop Security' },
-      { value: '24', data_job: '3', type_spec: 'Money Drop Security' },
-      { value: '32', data_job: '5', type_spec: 'Money Drop Security' },
-      { value: '36', data_job: '7', type_spec: 'Money Drop Security' },
-      { value: '40', data_job: '8', type_spec: 'Money Drop Security' },
-      { value: '42', data_job: '9', type_spec: 'Money Drop Security' },
-      { value: '57', data_job: '13', type_spec: 'Money Drop Security' },
-      { value: '17', data_job: '1', type_spec: 'Neighborhood Patrol' },
-      { value: '21', data_job: '2', type_spec: 'Neighborhood Patrol' },
-      { value: '25', data_job: '3', type_spec: 'Neighborhood Patrol' },
-      { value: '28', data_job: '4', type_spec: 'Neighborhood Patrol' },
-      { value: '33', data_job: '5', type_spec: 'Neighborhood Patrol' },
-      { value: '37', data_job: '7', type_spec: 'Neighborhood Patrol' },
-      { value: '41', data_job: '8', type_spec: 'Neighborhood Patrol' },
-      { value: '44', data_job: '10', type_spec: 'Neighborhood Patrol' },
-      { value: '48', data_job: '11', type_spec: 'Neighborhood Patrol' },
-      { value: '58', data_job: '13', type_spec: 'Neighborhood Patrol' },
-      { value: '30', data_job: '4', type_spec: 'Other' },
-      { value: '35', data_job: '6', type_spec: 'Other' },
-      { value: '38', data_job: '7', type_spec: 'Other' },
-      { value: '46', data_job: '10', type_spec: 'Other' },
-      { value: '51', data_job: '11', type_spec: 'Other' },
-      { value: '61', data_job: '13', type_spec: 'Other' },
-      { value: '18', data_job: '1', type_spec: 'Parking ingress / egress' },
-      { value: '22', data_job: '2', type_spec: 'Parking ingress / egress' },
-      { value: '26', data_job: '3', type_spec: 'Parking ingress / egress' },
-      { value: '29', data_job: '4', type_spec: 'Parking ingress / egress' },
-      { value: '34', data_job: '5', type_spec: 'Parking ingress / egress' },
-      { value: '49', data_job: '11', type_spec: 'Parking ingress / egress' },
-      { value: '52', data_job: '12', type_spec: 'Parking ingress / egress' },
-      { value: '59', data_job: '13', type_spec: 'Parking ingress / egress' },
-      { value: '45', data_job: '10', type_spec: 'Special Community Patrol' },
-      { value: '50', data_job: '11', type_spec: 'Special Community Patrol' },
-      { value: '60', data_job: '13', type_spec: 'Special Community Patrol' }
-    ];
-
-    // Wait for angular to load jobTypes in ng-repeat
-    setTimeout(function() { _self.initializeJQueryPlugins(); }, 1000);
   }
 
   initializeJQueryPlugins() {
@@ -198,29 +142,11 @@ export class EventComponent {
       size: 10
     });
 
-    var str;
-
-    $('#jobSpecs option').each(function() {
-      $(this).hide();
-    });
+    $('#officer-select').selectpicker('refresh');
 
     $('#jobType').change(function() {
-      $('#jobSpecs').selectpicker('deselectAll');
-      $('#jobSpecs').prop('disabled', 'disabled');
-      $('#jobSpecs option').each(function() {
-        $(this).hide();
-      });
-      $('#jobType option:selected').each(function() {
-        str = $(this).val();
-      });
-      if(str.length >= 1) {
-        $(`#jobSpecs option[data-job=${str}]`).each(function() {
-          $(this).show();
-        });
-        $('#jobSpecs').prop('disabled', false);
-      }
-      $('.selectpicker').selectpicker('render');
-      $('.selectpicker').selectpicker('refresh');
+      $('#jobSpecs').selectpicker('val', []);
+      $('#jobSpecs').selectpicker('refresh');
     });
 
     $('#creationEventDate').datetimepicker({
@@ -341,7 +267,7 @@ export class EventComponent {
       phone_number: $scope.eventData.phoneNumber,
       point_of_contact: $scope.eventData.poContact,
       email: $scope.eventData.email,
-      JobTypeId: $scope.eventData.jobType,
+      JobTypeId: $scope.eventData.jobType._id,
       job_type_specs: $scope.eventData.jobSpecs.join(','),
       prefered_officer_name: $scope.eventData.officerName.join(','),
       is_recuring: $scope.eventData.is_recuring,

@@ -19,10 +19,10 @@ export default function(sequelize, DataTypes) {
     leo_id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      // references: {
-      //   model: 'Leo',
-      //   key: '_id'
-      // }
+      references: {
+        model: 'Leo',
+        key: '_id'
+      }
     },
     expires: {
       type: DataTypes.DATE,

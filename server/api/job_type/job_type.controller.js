@@ -11,7 +11,7 @@
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import {JobType} from '../../sqldb';
+import {JobType, Lookup} from '../../sqldb';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -65,7 +65,11 @@ function handleError(res, statusCode) {
 
 // Gets a list of JobTypes
 export function index(req, res) {
-  return JobType.findAll()
+  let options = {};
+  if(req.query.lookups) {
+    options.include = [Lookup];
+  }
+  return JobType.findAll(options)
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

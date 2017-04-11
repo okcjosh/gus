@@ -70,20 +70,12 @@ function getLeosForEvent(eventId, status) {
   let query = {
     where: {
       event_id: eventId
-    }
+    }, include: [Leo]
   };
 
   status && (query.where.status = status);
 
-  return JobInvitation.findAll(query)
-    .then(invitations => {
-      let leo_ids = invitations.map(invite => invite.leo_id);
-      return Leo.findAll({
-        where: {
-          _id: { $in: leo_ids }
-        }
-      });
-    });
+  return JobInvitation.findAll(query);
 }
 
 function payLeo(leo, amount) {

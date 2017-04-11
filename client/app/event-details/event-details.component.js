@@ -4,6 +4,7 @@ const uiRouter = require('angular-ui-router');
 import routing from './event-details.routes';
 export class EventDetailsComponent {
   awesomeEvents = [];
+  leoInvites = [];
   adjustedAmount = 0;
   eventCost = {};
   receivingLeos = [];
@@ -79,8 +80,16 @@ export class EventDetailsComponent {
         this.eventCost = res.data;
         this.adjustedAmount = res.data.grand_total;
       });
-    this.$http.get(`/api/events/${event_id}/leos?status=Accepted`)
-      .then(res => this.receivingLeos = res.data);
+    // this.$http.get(`/api/events/${event_id}/leos_invite?status=Accepted`)
+    //   .then(res => this.receivingLeos = res.data);
+
+    this.$http.get(`/api/events/${event_id}/leos_invite`)
+      .then(res => {
+        this.leoInvites = res.data;
+        this.receivingLeos = this.leoInvites
+          .filter(inv => inv.status === 'Accepted')
+          .map(inv => inv.Leo);
+      });
   }
 
   initializeDragDrop($scope, invitations) {
@@ -245,7 +254,8 @@ export default angular.module('es42App.event-details', [uiRouter])
     bindings: {
       eventCost: '=?',
       adjustedAmount: '=?',
-      receivingLeos: '=?'
+      receivingLeos: '=?',
+      leoInvites: '=?'
     }
   })
   .name;

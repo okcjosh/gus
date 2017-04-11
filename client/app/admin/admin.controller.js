@@ -59,7 +59,6 @@ export default class AdminController {
       .then(res => this.jobTypes = res.data);
   }
 
-
   inviteLeo(leo) {
     this.$http.post('/api/invitations', {
       job_id: '2',
@@ -68,7 +67,6 @@ export default class AdminController {
       job_invitation_status_id: '1'
     });
   }
-
 
   addLeo() {
     if(this.newLeo.name) {

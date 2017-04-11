@@ -99,20 +99,17 @@
               <label for="jobType" id="jobTypeLabel" class="control-label col-md-3">Job Type</label>
               <div class="col-md-9">
                 <select name="jobType" required ng-model="eventData.jobType" id="jobType" class="form-control">
-
                   <option value="">Please select the Job Type</option>
-                  <option ng-repeat="j in jobTypes" value="{{j._id}}">{{j.name}}</option>
-
+                  <option ng-repeat="job in jobTypes" ng-value="job">{{job.name}}</option>
                 </select>
               </div>
             </div>
 
             <div class="form-group">
-              <label for="jobSpecs" id="jobSpecsLabel" class="control-label col-md-3">Job Type Specific Options</label>
+              <label for="jobSpecs" id="jobSpecsLabel" class="control-label col-md-3">Job Type Specific Options (Lookups)</label>
               <div class="col-md-9">
                 <select class="selectpicker form-control" ng-model="eventData.jobSpecs" multiple name="jobSpecs" id="jobSpecs" title="Select a Job Type first">
-                  <option ng-repeat="spec in jobTypeSpecs" value="{{spec.value}}" data-job="{{spec.data_job}}">{{spec.type_spec}}</option>
-
+                  <option ng-repeat="spec in eventData.jobType.Lookups" value="{{spec._id}}"><b>{{eventData.jobType.name}}</b> - {{spec.description}}</option>
                 </select>
               </div>
             </div>
@@ -121,10 +118,8 @@
               <label for="officerName" id="officerNameLabel" class="control-label col-md-3">Name(s) of preferred officer(s)</label>
               <div class="col-md-9">
 
-                <select class="selectpicker form-control" ng-model="eventData.officerName" multiple name="officerName" title="Please Select">
-                  <option value="6" data-subtext="Dallas">Lance Jones</option>
-                  <option value="2" data-subtext="Edmond">Roger Lockwood</option>
-                  <option value="5" data-subtext="Oklahoma City">Joshua Tree</option>
+                <select class="selectpicker form-control" ng-model="eventData.officerName" multiple name="officerName" id="officer-select" title="Please Select Officers">
+                  <option ng-repeat="leo in awesomeLeos" value="{{leo._id}}">{{leo.firstName}} {{leo.lastName}}</option>
                 </select>
               </div>
             </div>

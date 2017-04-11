@@ -52,6 +52,22 @@
           <textarea class="form-control" readonly name="entryDesc" required="required" rows="4" ng-model="event.description"></textarea>
         </div>
 
+        <h5>Invited Officers</h5>
+        <table class="table table-bordered">
+          <thead>
+            <th>Name</th>
+            <th>Invitation Status</th>
+            <th>Leo Merchant Status</th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="inv in $ctrl.leoInvites">
+              <td>{{inv.Leo.firstName}} {{inv.Leo.lastName}}</td>
+              <td>{{inv.status}}</td>
+              <td>{{inv.Leo.btStatus}}</td>
+            </tr>
+          </tbody>
+        </table>
+
         <h5>Interested Officers</h5>
         <ul>
           <li ng-repeat="name in event.interested_officers.split(',')"> {{ name }}</li>
