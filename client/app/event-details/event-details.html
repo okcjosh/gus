@@ -1,5 +1,5 @@
 <div class="container main-content mb-20">
-  <h3 class="mb-20">View Job &mdash; <small>Oklahoma City Memorial Marathon</small></h3>
+  <h3 class="mb-20">View Job &mdash; <small>{{ event.venue }}</small></h3>
 
   <div class="row">
     <div class="col-md-4">
@@ -126,7 +126,7 @@
 
                   <script type="text/ng-template" id="leoList.html">
                     <ul dnd-list dnd-drop="onDrop(list, item, index)">
-                      <li ng-repeat="item in list.items | orderBy: leoSort"
+                      <li ng-repeat="item in list.items"
                           data-leo-id="{{item.leo_id}}"
                           dnd-draggable="getSelectedItemsIncluding(list, item)"
                           dnd-dragstart="onDragstart(list, event)"
@@ -153,6 +153,22 @@
                     <div class="item">Item {{item.id}}</div>
                   </script>
 
+                  <!-- Auto select parameters -->
+                  <div class="">
+                    <div class="form-inline" style="margin-bottom: 10px">
+                      <div class="form-group">
+                        <input class="form-control" min="0" id="auto-round-one-input" style="width: 100px" placeholder="Round 1" type="number">
+                        <input class="form-control" min="0" id="auto-round-two-input" style="width: 100px" placeholder="Round 2" type="number">
+                        <input class="form-control" min="0" id="auto-round-three-input" style="width: 100px" placeholder="Round 3" type="number">
+                      </div>
+
+                      <button type="button" ng-click="$ctrl.autoSelect()" class="btn btn-default btn-rounded">
+                        Auto select
+                      </button>
+                    </div>
+
+                  </div>
+
                   <!-- Main area with dropzones and source code -->
                   <div class="col-md-12 multiDemo">
                     <div class="row">
@@ -175,7 +191,6 @@
                     </div>
                   </div>
 
-
                   <ul data-as-sortable="board.dragControlListeners" data-ng-model="items">
                     <li data-ng-repeat="item in items" data-as-sortable-item>
                       <div data-as-sortable-item-handle></div>
@@ -194,7 +209,7 @@
                   <div class="pull-left form-inline">
                     <div class="form-group">
                       <label>Sort by: </label>
-                      <select class="form-control" ng-model="leoSort">
+                      <select class="form-control" ng-change="$ctrl.orderByChange(leoSort)" ng-model="leoSort">
                         <option value="name">By Name</option>
                         <option value="lastGig">By Last Gig</option>
                         <option value="year_started">By Year started</option>

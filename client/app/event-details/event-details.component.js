@@ -10,15 +10,17 @@ export class EventDetailsComponent {
   receivingLeos = [];
 
   /*@ngInject*/
-  constructor($http, $scope, socket, $state) {
+  constructor($http, $scope, socket, $state, orderByFilter) {
     this.$http = $http;
     this.socket = socket;
     this.$state = $state;
     this.$scope = $scope;
+    this.orderBy = orderByFilter;
     this.init($scope);
     $scope.approve = this.approve.bind(this, $scope, $http);
     $scope.saveDrags = this.saveDrags.bind(this, $scope, $http);
     $scope.expressInterest = this.expressInterest.bind(this);
+    // $scope.orderByChange = this.orderByChange.bind(this);
 
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('event');
@@ -26,7 +28,6 @@ export class EventDetailsComponent {
   }
 
   init($scope) {
-    let _self = this;
     $scope.isAdminUser = false;
     $scope.isLeo = false;
     this.event_id = this.$state.params.event_id;
@@ -41,7 +42,7 @@ export class EventDetailsComponent {
             event_id: this.event_id
           }
         }).then(invitationsRes => {
-          this.initializeDragDrop(_self.$scope, invitationsRes.data);
+          this.initializeDragDrop(this.$scope, invitationsRes.data);
         });
       });
   }
@@ -54,22 +55,23 @@ export class EventDetailsComponent {
 
     this.event_id = event_id;
 
-    this.$http.get('/api/events/' + event_id)
+    this.$http.get(`/api/events/${event_id}`)
       .then(function(res) {
-        if (res.status === 200) {
+        if(res.status === 200) {
           $scope.event = res.data;
         }
       });
 
     this.$http.get('/api/users/me')
       .then(function(res) {
-        if (res.status === 200) {
+        if(res.status === 200) {
           $scope.user = res.data;
-          if (res.data.role === 'admin') {
+          if(res.data.role === 'admin') {
             $scope.isAdminUser = true;
           }
         }
-      }).catch(err => $scope.isLeo = true);
+      })
+      .catch(() => $scope.isLeo = true);
 
     this.$http.get('/api/job_types')
       .then(function(res) {
@@ -163,15 +165,27 @@ export class EventDetailsComponent {
       dragging: false
     }];
 
-    let leos = $scope.leos.slice(0);
-    let remainingLeos = $scope.leos.slice(0);
+    let remainingLeos = this.addInvitesToLists(invitations);
 
+    $scope.leosList[0].items = remainingLeos.map(leo => ({
+      event_id: this.event_id,
+      leo_id: leo._id,
+      name: leo.name,
+      lastGig: leo.lastGig,
+      year_started: leo.year_started
+    }));
+  }
+
+  addInvitesToLists(invitations) {
+    // let invitations = [];
     let leoAppendedInvites = [];
+
+    let remainingLeos = this.$scope.leos.slice(0);
 
     invitations.forEach(invite => {
       let leoIndex = remainingLeos.findIndex(leo => leo._id === invite.leo_id);
 
-      if(leoIndex >= 0) {
+      if(leoIndex > -1) {
         let leo = remainingLeos[leoIndex];
         invite.name = leo.name;
         remainingLeos.splice(leoIndex, 1);
@@ -180,18 +194,48 @@ export class EventDetailsComponent {
       }
     });
 
-    $scope.leosList[0].items = remainingLeos.map(leo => ({
-      event_id: this.event_id,
-      leo_id: leo._id,
-      name: leo.name
-    }));
-
-    console.log($scope.leosList[0].items);
-
     leoAppendedInvites.forEach(invite => {
-      $scope.invitesList[parseInt(invite.pick, 10) - 1]
-        .items.push(invite);
+      const roundIndex = parseInt(invite.pick, 10) - 1;
+
+      this.$scope.invitesList[roundIndex].items.push(invite);
     });
+
+    return remainingLeos;
+  }
+
+  orderByChange(newValue) {
+    const leos = this.$scope.leosList[0].items.slice(0);
+
+    this.$scope.leosList[0].items = this.orderBy(leos, newValue, false);
+  }
+
+  autoSelect() {
+    const roundInputOne = $('#auto-round-one-input');
+    const roundInputTwo = $('#auto-round-two-input');
+    const roundInputThree = $('#auto-round-three-input');
+
+    const r1 = parseInt(roundInputOne.val(), 10) || 0;
+    const r2 = parseInt(roundInputTwo.val(), 10) || 0;
+    const r3 = parseInt(roundInputThree.val(), 10) || 0;
+
+    const sc = this.$scope;
+    var roundPicks = [r1, r2, r3];
+
+    roundPicks.forEach((picks, index) => {
+      if(picks > 0) {
+        const selectedLeoInvites = sc.leosList[0].items.splice(0, picks);
+
+        const invites = selectedLeoInvites.map(inv => {
+          inv.pick = index + 1;
+          return inv;
+        });
+        this.addInvitesToLists(invites);
+      }
+    });
+
+    roundInputOne.val(0);
+    roundInputTwo.val(0);
+    roundInputThree.val(0);
   }
 
   approve($scope, $http) {
