@@ -2,7 +2,7 @@
 
 describe('Component: LeoComponent', function() {
   // load the controller's module
-  beforeEach(module('es4App.leo'));
+  beforeEach(module('myofficersApp.leo'));
 
   let LeoComponent;
 

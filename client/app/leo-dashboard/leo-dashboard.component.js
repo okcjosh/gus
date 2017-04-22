@@ -61,7 +61,7 @@ export class LeoDashboardController {
   }
 }
 
-export default angular.module('es4App.leoDashboard', [uiRouter])
+export default angular.module('myofficersApp.leoDashboard', [uiRouter])
   .config(routing)
   .component('leoDashboard', {
     template: require('./leo-dashboard.html'),

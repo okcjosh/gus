@@ -33,7 +33,7 @@ let all = {
 
   // Secret for session, you will want to change this and make it an environment letiable
   secrets: {
-    session: 'es4-secret'
+    session: 'myofficers-secret'
   },
 
   facebook: {

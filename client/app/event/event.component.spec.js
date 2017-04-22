@@ -2,7 +2,7 @@
 
 describe('Component: EventComponent', function() {
   // load the controller's module
-  beforeEach(module('es42App.event'));
+  beforeEach(module('myofficers2App.event'));
 
   let EventComponent;
 

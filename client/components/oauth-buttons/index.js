@@ -10,7 +10,7 @@ export function OauthButtonsController($window) {
   };
 }
 
-export default angular.module('es4App.oauthButtons', [])
+export default angular.module('myofficersApp.oauthButtons', [])
   .directive('oauthButtons', function() {
     return {
       template: require('./oauth-buttons.html'),

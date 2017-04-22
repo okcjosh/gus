@@ -16,7 +16,7 @@ function addInterceptor($httpProvider) {
   $httpProvider.interceptors.push('authInterceptor');
 }
 
-export default angular.module('es4App.auth', [constants, util, ngCookies, uiRouter])
+export default angular.module('myofficersApp.auth', [constants, util, ngCookies, uiRouter])
   .factory('authInterceptor', authInterceptor)
   .run(routerDecorator)
   .factory('Auth', AuthService)

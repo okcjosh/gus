@@ -80,6 +80,6 @@ function Socket(socketFactory) {
   };
 }
 
-export default angular.module('es4App.socket', [])
+export default angular.module('myofficersApp.socket', [])
   .factory('socket', Socket)
   .name;
