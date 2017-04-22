@@ -43,8 +43,8 @@ export default function(app, btSignatureParam, btPayloadParam = null) {
   function formatErrors() {
     let formattedErrors = '';
 
-    for (let i in errors) { // eslint-disable-line no-inner-declarations, lets-on-top
-      if (errors.hasOwnProperty(i)) {
+    for(let i in errors) { // eslint-disable-line no-inner-declarations, lets-on-top
+      if(errors.hasOwnProperty(i)) {
         formattedErrors += 'Error: ' + errors[i].code + ': ' + errors[i].message + '\n';
       }
     }
@@ -79,7 +79,7 @@ export default function(app, btSignatureParam, btPayloadParam = null) {
   //   });
   // });
 
-  app.post('/checkout/transaction/token', function (request, response) {
+  app.post('/checkout/transaction/token', function(request, response) {
     gateway.clientToken.generate({}, function (err, res) {
       if (err) throw err;
       response.json(res.clientToken);
@@ -88,7 +88,7 @@ export default function(app, btSignatureParam, btPayloadParam = null) {
   });
 
 
-  app.get('/transaction/:id', function (req, res) {
+  app.get('/transaction/:id', function(req, res) {
     let result;
     let transactionId = req.params.id;
 
@@ -114,7 +114,7 @@ export default function(app, btSignatureParam, btPayloadParam = null) {
     });
   });
 
-  app.post('/checkout', function (req, res) {
+  app.post('/checkout', function(req, res) {
     let transactionErrors;
     // let amount = req.body.amount; // In production you should not take amounts directly from clients, I second this
     let nonce = req.body.payment_method_nonce;
@@ -159,6 +159,12 @@ export default function(app, btSignatureParam, btPayloadParam = null) {
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
     .get(errors[404]);
+
+  // Serve the Landing page
+  app.route('/welcome')
+    .get((req, res) => {
+      res.sendFile(path.resolve(`${app.get('appPath')}/landing.html`));
+    });
 
   // All other routes should redirect to the index.html
   app.route('/*')

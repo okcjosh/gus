@@ -1,0 +1,1856 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>
+    ES4
+  </title>
+  <meta charset="utf-8">
+  <meta name="description" content="CopsForHire.com is the only online service that provides a complete, and fully automated off-duty management solution for departments, cops, and companies seeking their unique services.">
+  <meta name="keywords" content="hire real cops, hire off duty, hire officer, police for hire, police officers for hire, off duty police officers, offdutypoliceofficers, off-duty police, hire a cop, hire cops, security real police, real police, real police protection, personal cop, personal protection, event security, real cops for event, hire real officer, hire police, cops for hire">
+  <meta name="author" content="metatags generator">
+  <meta name="robots" content="index, follow">
+  <meta name="revisit-after" content="7 days">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400o,500,700|Merriweather:400,400i,700">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.css">
+  <!--<link rel="stylesheet" href="/index-v2.css">-->
+  <!--<script type="text/javascript" src="/index.js"></script>-->
+  <style>
+    html,
+    body {
+      min-width: 260px;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f7f7;
+      font-family: 'Source Sans Pro', sans-serif;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      overflow-x: auto;
+      overflow-y: auto;
+      font-size: 16px;
+    }
+
+    html.has-menu-active {
+      overflow: hidden;
+    }
+
+    body {
+      line-height: 1.2rem;
+      color: #444;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      line-height: 3rem;
+      font-weight: 100;
+    }
+
+    @media screen and (max-width: 400px) {
+      h1 {
+        font-size: 2.5rem;
+        line-height: 2.7rem;
+      }
+    }
+
+    h2 {
+      font-size: 2.3rem;
+      line-height: 2.5rem;
+    }
+
+    h3 {
+      font-size: 2rem;
+      line-height: 2.3rem;
+    }
+
+    h4 {
+      font-size: 1.7rem;
+      line-height: 2.2rem;
+    }
+
+    h5 {
+      font-size: 1.4rem;
+      line-height: 1.6rem;
+    }
+
+    h6 {
+      font-size: 1rem;
+      line-height: 1.2rem;
+    }
+
+    .cfh-blue {
+      color: #4793cd !important;
+    }
+
+    .cfh-bg-blue {
+      background-color: #4793cd !important;
+      color: #fff !important;
+    }
+
+    .cfh-bg-blue-faded {
+      background-color: rgba(71, 147, 205, 0.7) !important;
+      color: #fff !important;
+    }
+
+    .cfh-bg-blue-faded:hover {
+      background-color: rgba(71, 147, 205, 0.9) !important;
+    }
+
+    .cfh-light-blue {
+      color: #c8dff0 !important;
+    }
+
+    .cfh-bg-light-blue {
+      background-color: #c8dff0 !important;
+      color: #fff !important;
+    }
+
+    .cfh-dark-blue {
+      color: #255d88 !important;
+    }
+
+    .cfh-bg-dark-blue {
+      background-color: #255d88 !important;
+      color: #fff !important;
+    }
+
+    .cfh-bg-dark-blue-faded {
+      background-color: rgba(37, 93, 136, 0.6) !important;
+      color: #fff !important;
+    }
+
+    .cfh-bg-dark-blue-faded:hover {
+      background-color: rgba(37, 93, 136, 0.8) !important;
+    }
+
+    .cfh-green {
+      color: #3e9a3c !important;
+    }
+
+    .cfh-bg-green {
+      background-color: #3e9a3c !important;
+      color: #fff !important;
+    }
+
+    .cfh-grey {
+      color: #444 !important;
+    }
+
+    .cfh-bg-grey {
+      background-color: #444 !important;
+      color: #fff !important;
+    }
+
+    .cfh-light-grey {
+      color: #e3e3e3 !important;
+    }
+
+    .cfh-bg-light-grey {
+      background-color: #e3e3e3 !important;
+      color: #444 !important;
+    }
+
+    .cfh-lighter-grey {
+      color: #ececec !important;
+    }
+
+    .cfh-bg-lighter-grey {
+      background-color: #ececec !important;
+      color: #444 !important;
+    }
+
+    .cfh-lightest-grey {
+      color: #f6f6f6 !important;
+    }
+
+    .cfh-bg-lightest-grey {
+      background-color: #f6f6f6 !important;
+      color: #444 !important;
+    }
+
+    .cfh-red {
+      color: #e04000 !important;
+    }
+
+    .white {
+      color: #fff !important;
+    }
+
+    .bg-white {
+      background-color: #fff !important;
+      color: #444;
+    }
+
+    .small-title {
+      padding: 16px 0;
+    }
+
+    .small-text {
+      font-size: 1rem;
+      line-height: 1.2rem;
+    }
+
+    .center {
+      margin: 0 auto;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+
+    .will-animate {
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      -ms-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    .flex {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: box;
+      display: flex;
+      -webkit-box-align: center;
+      -moz-box-align: center;
+      -o-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -moz-box-pack: center;
+      -o-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-flex: 1;
+      -moz-box-flex: 1;
+      -o-box-flex: 1;
+      box-flex: 1;
+      -webkit-flex: auto;
+      -ms-flex: auto;
+      flex: auto;
+    }
+
+    .flex.full {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+    }
+
+    a:not(.button) {
+      color: #4793cd;
+    }
+
+    a:not(.button):visited {
+      color: #4793cd;
+    }
+
+    a:not(.button):active,
+    a:not(.button):focus {
+      color: #255d88;
+    }
+
+    a:not(.button):hover {
+      color: #255d88;
+    }
+
+    a.white {
+      border-color: #c8dff0 !important;
+    }
+
+    .button {
+      padding: 24px 36px;
+    }
+
+    @media screen and (min-width: 769px) and (max-width: 1180px) {
+      .button.can-wrap {
+        white-space: normal;
+        padding: 32px 16px;
+      }
+    }
+
+    .button:active,
+    .button:focus,
+    .button.is-active {
+      border-color: #255d88;
+    }
+
+    .button.is-primary {
+      background-color: #4793cd;
+    }
+
+    .button.is-primary:hover {
+      background-color: #255d88;
+    }
+
+    .button.is-primary .is-active,
+    .button.is-primary:focus {
+      background-color: #255d88;
+    }
+
+    img {
+      border: 0;
+    }
+
+    main section {
+      min-height: 144px;
+      overflow: hidden;
+      position: relative;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: box;
+      display: flex;
+      -webkit-box-align: center;
+      -moz-box-align: center;
+      -o-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -moz-box-pack: center;
+      -o-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-flex: 1;
+      -moz-box-flex: 1;
+      -o-box-flex: 1;
+      box-flex: 1;
+      -webkit-flex: auto;
+      -ms-flex: auto;
+      flex: auto;
+      -webkit-box-lines: multiple;
+      -moz-box-lines: multiple;
+      -o-box-lines: multiple;
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+    }
+
+    main section:not(.hero) {
+      padding: 64px;
+    }
+
+    @media screen and (max-width: 768px) {
+      main section:not(.hero) {
+        padding: 32px;
+        height: auto;
+      }
+      main section:not(.hero).smaller,
+      main section:not(.hero).small,
+      main section:not(.hero).medium,
+      main section:not(.hero).large,
+      main section:not(.hero).larger {
+        height: auto;
+      }
+    }
+
+    main section.smaller {
+      height: 168px;
+      padding: 16px;
+    }
+
+    main section.smaller.insurance {
+      min-height: 224px;
+      padding: 16px 32px;
+    }
+
+    main section.small {
+      height: 320px;
+      padding: 24px;
+    }
+
+    main section.medium {
+      height: 408px;
+      padding: 32px;
+    }
+
+    @media screen and (max-width: 600px) {
+      main section.medium {
+        min-height: 408px;
+        padding: 24px;
+      }
+    }
+
+    main section.large {
+      height: 504px;
+      padding: 48px;
+    }
+
+    @media screen and (max-width: 600px) {
+      main section.large {
+        padding: 32px;
+      }
+    }
+
+    main section.larger {
+      height: 544px;
+      padding: 56px;
+    }
+
+    @media screen and (max-width: 600px) {
+      main section.larger {
+        padding: 32px;
+      }
+    }
+
+    main section.landing-team {
+      background: url("http://lorempixel.com/700/400") center center no-repeat;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      background-size: cover;
+    }
+
+    @media screen and (min-width: 768px) {
+      main section.landing-team {
+        background-position: 0 20%;
+      }
+    }
+
+    main section h3,
+    main section h4 {
+      font-weight: bold;
+    }
+
+    main section .container {
+      margin: 0;
+      width: 100%;
+      line-height: 1.6rem;
+    }
+
+    @media screen and (min-width: 1025px) {
+      main section .container {
+        font-size: 1.3rem;
+        line-height: 1.8rem;
+      }
+    }
+
+    main section .columns {
+      width: 100%;
+      height: auto;
+      -webkit-box-flex: 1;
+      -moz-box-flex: 1;
+      -o-box-flex: 1;
+      box-flex: 1;
+      -webkit-flex: auto;
+      -ms-flex: auto;
+      flex: auto;
+      margin: 0;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: box;
+      display: flex;
+    }
+
+    @media screen and (max-width: 769px) {
+      main section .columns {
+        -webkit-box-lines: multiple;
+        -moz-box-lines: multiple;
+        -o-box-lines: multiple;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+      }
+    }
+
+    main section .columns:last-child {
+      margin-bottom: 0;
+    }
+
+    main section .columns.reverse {
+      -webkit-box-direction: reverse;
+      -moz-box-direction: reverse;
+      -o-box-direction: reverse;
+      -webkit-box-orient: horizontal;
+      -moz-box-orient: horizontal;
+      -o-box-orient: horizontal;
+      -webkit-flex-direction: row-reverse;
+      -ms-flex-direction: row-reverse;
+      flex-direction: row-reverse;
+    }
+
+    main section .columns .column {
+      -webkit-align-self: center;
+      align-self: center;
+      -ms-flex-item-align: center;
+      -webkit-box-pack: center;
+      -moz-box-pack: center;
+      -o-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-flex: 1;
+      -moz-box-flex: 1;
+      -o-box-flex: 1;
+      box-flex: 1;
+      -webkit-flex: 0 1 auto;
+      -ms-flex: 0 1 auto;
+      flex: 0 1 auto;
+      padding: 16px;
+      margin: 0 auto;
+    }
+
+    @media screen and (max-width: 768px) {
+      main section .columns .column {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    main section.features .container .columns .column {
+      -webkit-align-self: flex-start;
+      align-self: flex-start;
+      -ms-flex-item-align: start;
+      -webkit-box-flex: 1;
+      -moz-box-flex: 1;
+      -o-box-flex: 1;
+      box-flex: 1;
+      -webkit-flex: 0 1 auto;
+      -ms-flex: 0 1 auto;
+      flex: 0 1 auto;
+      width: 100%;
+      padding: 0;
+    }
+
+    main section.features .container .columns .column .small-title {
+      color: #aaa;
+    }
+
+    main section.features .container .columns .column .feature {
+      padding: 16px;
+      min-height: 10rem;
+    }
+
+    @media screen and (min-width: 769px) {
+      main section.features .container .columns .column .feature {
+        padding: 32px 24px;
+        min-height: 16rem;
+      }
+    }
+
+    main section.features .container .columns .column .feature h5 {
+      color: #255d88;
+      margin-bottom: 8px;
+    }
+
+    .insurance-logo {
+      width: auto;
+      height: 64px;
+    }
+
+    @media screen and (max-width: 960px) {
+      main.main section {
+        height: auto;
+      }
+    }
+
+    main.main section .container {
+      width: 100%;
+      font-size: 1.1rem;
+      line-height: 1.4rem;
+    }
+
+    @media screen and (min-width: 1025px) {
+      main.main section .container {
+        font-size: 1.2rem;
+        line-height: 1.5rem;
+      }
+    }
+
+    main.main section .container .columns {
+      width: 100%;
+      -webkit-box-align: center;
+      -moz-box-align: center;
+      -o-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      -ms-flex-line-pack: center;
+      -webkit-align-content: center;
+      align-content: center;
+      -webkit-box-pack: center;
+      -moz-box-pack: center;
+      -o-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+    }
+
+    main.main section .container .columns .column {
+      text-align: center;
+      -webkit-box-align: center;
+      -moz-box-align: center;
+      -o-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      -webkit-align-self: center;
+      align-self: center;
+      -ms-flex-item-align: center;
+      -webkit-box-pack: center;
+      -moz-box-pack: center;
+      -o-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      margin: 0 auto;
+      -webkit-box-flex: 1;
+      -moz-box-flex: 1;
+      -o-box-flex: 1;
+      box-flex: 1;
+      -webkit-flex: 0 1 auto;
+      -ms-flex: 0 1 auto;
+      flex: 0 1 auto;
+      -webkit-box-orient: vertical;
+      -moz-box-orient: vertical;
+      -o-box-orient: vertical;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+    }
+
+    main.main section .container .columns .column.middle {
+      max-width: 700px;
+    }
+
+    @media screen and (max-width: 768px) {
+      main.main section .container .columns .column.middle p {
+        text-align: center;
+      }
+    }
+
+    main.main section .container .landing-icon {
+      padding: 8px;
+      max-height: 90px;
+      max-width: 100px;
+    }
+
+    main.main section.hero {
+      position: relative;
+      height: 496px;
+      max-height: 736px;
+      font-weight: 400;
+      background: url("http://lorempixel.com/700/500/people") center center no-repeat;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      background-size: cover;
+    }
+
+    @media screen and (min-width: 769px) {
+      main.main section.hero {
+        height: 736px;
+      }
+    }
+
+    main.main section.hero .container {
+      position: absolute;
+      left: 0;
+      right: 0;
+      background-color: transparent;
+      z-index: 100;
+      padding: 16px;
+      margin: 48px auto 0 auto;
+    }
+
+    @media screen and (max-width: 768px) {
+      main.main section.hero .container {
+        margin-top: 64px;
+      }
+    }
+
+    main.main section.hero .container .quick-blurb {
+      font-size: 1.3rem;
+      padding: 32px;
+    }
+
+    main.main section.hero .container .quick-blurb p {
+      padding: 48px 0 0 0;
+      line-height: 1.8rem;
+    }
+
+    @media screen and (max-width: 768px) {
+      main.main section.hero .container .quick-blurb p {
+        padding: 8px 0 0 0;
+      }
+    }
+
+    main.main section.how-it-works .container .columns .column {
+      -webkit-align-self: flex-start;
+      align-self: flex-start;
+      -ms-flex-item-align: start;
+      width: 100%;
+    }
+
+    main.main section.how-it-works .container .columns .column h5,
+    main.main section.how-it-works .container .columns .column h4 {
+      white-space: nowrap;
+    }
+
+    main.main section.how-it-works .container .columns .column h5 {
+      color: #bfd9ee;
+    }
+
+    main.main section.how-it-works .container .columns .column .landing-icon {
+      max-height: 80px;
+      padding: 8px;
+      margin: 16px;
+    }
+
+    main.main section.how-it-works .container .columns .column p {
+      color: #bfd9ee;
+    }
+
+    @media screen and (max-width: 768px) {
+      main.main section.landing-careers .container .columns .column p {
+        text-align: center !important;
+      }
+    }
+
+    main.company section .container.is-image {
+      height: auto;
+      max-height: 404px;
+    }
+
+    main.company.privacy h6,
+    main.company.terms h6 {
+      font-size: 1em;
+    }
+
+    main.company.privacy h6,
+    main.company.terms h6,
+    main.company.privacy p,
+    main.company.terms p {
+      margin-bottom: 24px;
+    }
+
+    main.company.news {
+      padding: 0;
+    }
+
+    main.company.news section {
+      display: block;
+      padding: 0;
+      border-bottom: 1px solid #d0d0d0;
+    }
+
+    main.company.news section.events article .columns .column {
+      text-align: left;
+      margin: 0;
+      padding: 0;
+    }
+
+    main.company.news section.events article .columns .column>div {
+      padding: 8px 0;
+    }
+
+    main.company.news section.events article .columns .column.event-cover {
+      max-width: 300px;
+      padding: 16px;
+    }
+
+    main.company.news section.events article .columns .column.event-cover img {
+      max-width: 300px;
+      z-index: 1;
+    }
+
+    main.company.news section .header {
+      padding: 80px 128px 24px 64px;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: #7c7c7c;
+    }
+
+    @media screen and (max-width: 600px) {
+      main.company.news section .header {
+        padding: 32px;
+      }
+    }
+
+    main.company.news section .header .container {
+      margin: 0 auto;
+    }
+
+    main.company.news section article {
+      padding: 24px 128px;
+    }
+
+    main.company.news section article:hover {
+      background-color: #fff !important;
+    }
+
+    main.company.news section article:hover .columns .column.event-cover .image-has-overlay .overlay {
+      background-color: rgba(37, 93, 136, 0);
+    }
+
+    @media screen and (max-width: 600px) {
+      main.company.news section article {
+        padding: 24px 32px;
+      }
+    }
+
+    main.company.news section article:nth-of-type(odd) {
+      background-color: #ececec;
+    }
+
+    main.company.news section article .container {
+      margin: 0 auto;
+    }
+
+    main.company.news section article .container>div {
+      padding: 8px 0;
+      margin: 0 auto;
+    }
+
+    main.company.news section article .container .date,
+    main.company.news section article .container .source,
+    main.company.news section article .container .links {
+      font-size: 1rem;
+    }
+
+    main.company.news section article .container .title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin: 0;
+      line-height: 1.7rem;
+    }
+
+    main.company.news section article .container .description {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+
+    main.company.news section article .container .links a:hover,
+    main.company.news section article .container .source a:hover {
+      border-bottom: 1px solid #4793cd;
+    }
+
+    main.company.news section article .container .links span,
+    main.company.news section article .container .source span {
+      color: #b4b4b4;
+    }
+
+    main.company.event-detail section .container {
+      display: block;
+      min-height: 48px;
+    }
+
+    main.company.event-detail section .container .columns .column {
+      text-align: left;
+    }
+
+    main.company.event-detail section .container .columns .column.has-cover {
+      width: 100%;
+    }
+
+    @media screen and (max-width: 768px) {
+      main.company.event-detail section .container .columns .column {
+        text-align: center;
+      }
+    }
+
+    main.company.event-detail section.back {
+      padding: 0;
+      height: 48px;
+      max-height: 48px;
+      min-height: 32px;
+    }
+
+    main.company.event-detail section.back .container {
+      padding-top: 8px;
+    }
+
+    main.company.event-detail section.back .container .columns .column {
+      width: 100%;
+      text-align: left;
+    }
+
+    main.company.event-detail section.back .container a {
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    main.company.event-detail section.back .container a:hover {
+      text-decoration: underline;
+    }
+
+    main.company.team .staff,
+    main.company.event-detail .staff,
+    main.company.team .gallery,
+    main.company.event-detail .gallery {
+      padding: 32px 16px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      main.company.team .staff,
+      main.company.event-detail .staff,
+      main.company.team .gallery,
+      main.company.event-detail .gallery {
+        padding: 32px 0;
+      }
+    }
+
+    main.company.team .staff .container,
+    main.company.event-detail .staff .container,
+    main.company.team .gallery .container,
+    main.company.event-detail .gallery .container {
+      max-width: 100%;
+    }
+
+    main.company.team .staff .container .columns,
+    main.company.event-detail .staff .container .columns,
+    main.company.team .gallery .container .columns,
+    main.company.event-detail .gallery .container .columns {
+      -webkit-box-lines: multiple;
+      -moz-box-lines: multiple;
+      -o-box-lines: multiple;
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      -webkit-box-pack: center;
+      -moz-box-pack: center;
+      -o-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    main.company.team .staff .container .columns .column,
+    main.company.event-detail .staff .container .columns .column,
+    main.company.team .gallery .container .columns .column,
+    main.company.event-detail .gallery .container .columns .column {
+      margin: 16px 0;
+      width: auto;
+    }
+
+    main.company.team .staff .container .columns .column .card,
+    main.company.event-detail .staff .container .columns .column .card,
+    main.company.team .gallery .container .columns .column .card,
+    main.company.event-detail .gallery .container .columns .column .card {
+      margin: 0 auto;
+      max-width: 300px;
+      -webkit-box-flex: 0;
+      -moz-box-flex: 0;
+      -o-box-flex: 0;
+      box-flex: 0;
+      -webkit-flex: none;
+      -ms-flex: none;
+      flex: none;
+    }
+
+    main.company.team .staff .container .columns .column .card.team,
+    main.company.event-detail .staff .container .columns .column .card.team,
+    main.company.team .gallery .container .columns .column .card.team,
+    main.company.event-detail .gallery .container .columns .column .card.team {
+      min-height: 460px;
+    }
+
+    main.company.team .staff .container .columns .column .card .card-content,
+    main.company.event-detail .staff .container .columns .column .card .card-content,
+    main.company.team .gallery .container .columns .column .card .card-content,
+    main.company.event-detail .gallery .container .columns .column .card .card-content {
+      font-size: 1rem;
+    }
+
+    main.company.team .staff .container .columns .column .card .card-content .title,
+    main.company.event-detail .staff .container .columns .column .card .card-content .title,
+    main.company.team .gallery .container .columns .column .card .card-content .title,
+    main.company.event-detail .gallery .container .columns .column .card .card-content .title {
+      white-space: nowrap;
+      padding-bottom: 4px;
+      font-weight: normal;
+    }
+
+    @media screen and (max-width: 780px) {
+      main.company.team .staff .container .columns .column .card,
+      main.company.event-detail .staff .container .columns .column .card,
+      main.company.team .gallery .container .columns .column .card,
+      main.company.event-detail .gallery .container .columns .column .card {
+        margin: 0 auto;
+        text-align: left;
+      }
+      main.company.team .staff .container .columns .column .card .card-content .title,
+      main.company.event-detail .staff .container .columns .column .card .card-content .title,
+      main.company.team .gallery .container .columns .column .card .card-content .title,
+      main.company.event-detail .gallery .container .columns .column .card .card-content .title {
+        font-size: 1.4rem;
+      }
+    }
+
+    @media screen and (max-width: 500px) {
+      main.company.team .staff .container .columns .column,
+      main.company.event-detail .staff .container .columns .column,
+      main.company.team .gallery .container .columns .column,
+      main.company.event-detail .gallery .container .columns .column {
+        max-width: 100%;
+      }
+    }
+
+    main.company.careers .intro .column {
+      -webkit-align-self: flex-start;
+      align-self: flex-start;
+      -ms-flex-item-align: start;
+    }
+
+    @media screen and (max-width: 768px) {
+      main.company.careers .intro .column {
+        padding-bottom: 56px;
+      }
+    }
+
+    main.company.careers .intro .column p {
+      font-size: 1.1rem;
+      font-weight: 300;
+    }
+
+    main.company.careers .container .positions .position,
+    main.company.careers .container .positions h3 {
+      margin: 0 auto;
+    }
+
+    main.company.careers .container .positions .position {
+      padding: 16px 0;
+    }
+
+    main.company.careers .container .positions .position>div {
+      margin: 16px 0;
+    }
+
+    main.company.careers .container .positions .position .title {
+      font-size: 1.3rem;
+      font-weight: 400;
+    }
+
+    main.company.careers .container .positions .position .description {
+      padding: 16px 0 24px 0;
+    }
+
+    main.company.careers .container .positions .position ul {
+      padding-left: 24px;
+      padding-bottom: 24px;
+      list-style: disc;
+    }
+
+    main.marketplace section .container.is-image {
+      height: auto;
+      max-height: 404px;
+    }
+
+    main.marketplace.the-marketplace .is-image img {
+      width: 100%;
+    }
+
+    main.marketplace.faq .faq-list h4 {
+      padding: 24px 0;
+    }
+
+    main.marketplace.faq .faq-list .toc ul {
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+
+    main.marketplace.faq .faq-list .toc ul ul {
+      margin-left: 24px;
+    }
+
+    main.marketplace.faq .faq-list .faq {
+      padding: 48px 0;
+    }
+
+    main.marketplace.faq .faq-list .faq .question:before,
+    main.marketplace.faq .faq-list .faq .answer:before {
+      font-weight: bold;
+    }
+
+    main.marketplace.faq .faq-list .faq .question {
+      margin-bottom: 16px;
+      font-weight: bold;
+    }
+
+    main.marketplace.faq .faq-list .faq .question:before {
+      content: 'Q: ';
+    }
+
+    main.marketplace.faq .faq-list .faq .answer:before {
+      content: 'A: ';
+    }
+
+    main.marketplace.faq .faq-list .faq ol {
+      padding-left: 60px;
+    }
+
+    main.marketplace.faq .faq-list .faq ol li {
+      margin-bottom: 24px;
+    }
+
+    main.marketplace.faq .faq-list .faq blockquote {
+      background-color: #f6f6f6;
+      padding: 16px;
+      margin: 16px 0;
+    }
+
+    .feature .container {
+      max-width: 36em;
+    }
+
+    .feature h1 {
+      font-size: 2.5rem;
+      color: #255d88;
+      font-weight: 400;
+      letter-spacing: -1px;
+    }
+
+    .feature h2,
+    .feature h3,
+    .feature h4 {
+      font-weight: bold;
+    }
+
+    .feature a[name] {
+      color: #444;
+    }
+
+    .feature h2 {
+      font-size: 1.75rem;
+    }
+
+    .feature h3 {
+      font-size: 1.375rem;
+      font-weight: 400;
+      color: #000;
+    }
+
+    .feature h4 {
+      font-size: 1rem;
+    }
+
+    .feature p {
+      margin: 0.5em 0 0.5em;
+      font-size: 1rem;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    .feature p.small {
+      font-size: 0.875rem;
+    }
+
+    .feature p.introduction {
+      font: normal 1.125rem/1.75 Merriweather, serif;
+      color: #666;
+    }
+
+    .feature p.overview {
+      font-size: 1.2rem;
+    }
+
+    .feature .section-break {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #ccc;
+    }
+
+    .feature div.overview ul {
+      margin: 0 0 1rem;
+    }
+
+    .feature div.overview li {
+      font-size: 1.25rem;
+    }
+
+    .feature .note,
+    .feature .notice {
+      border: 1px solid #ccc;
+      padding: 0.5rem 1rem;
+      margin: 0.5rem 0 1rem;
+      font-size: 1.125rem;
+    }
+
+    .feature .notice {
+      background: #ffc;
+      margin-bottom: 1.5rem;
+      margin-left: -1em;
+      margin-right: -1em;
+    }
+
+    .feature li {
+      margin: 0.5em 0 0.5em;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .feature ol {
+      margin-left: 2rem;
+    }
+
+    .feature ol.legal {
+      list-style: upper-alpha;
+    }
+
+    .feature ol.legal ol {
+      list-style: decimal;
+    }
+
+    .feature ol.legal ol ol {
+      list-style: lower-alpha;
+    }
+
+    .feature ol.legal ol ol ol {
+      list-style: lower-roman;
+    }
+
+    .feature ol.legal ol ol ol ol {
+      list-style: lower-alpha;
+    }
+
+    .feature table {
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .feature table tr {
+      background: #eee;
+      border-top: 1px solid #ccc;
+    }
+
+    .feature table th,
+    .feature table td {
+      padding: 8px 6px;
+      width: 50%;
+    }
+
+    .feature table th p,
+    .feature table td p {
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .feature table td {
+      border-top: #ccc;
+    }
+
+    .feature table th {
+      font-weight: normal;
+    }
+
+    .painless1099 {
+      border: 1px solid #ccc;
+      margin: 1rem -1rem;
+      position: relative;
+      padding: 1rem 1rem 1rem 275px;
+    }
+
+    .painless1099 img {
+      position: absolute;
+      left: 15px;
+      top: 20px;
+    }
+
+    .painless1099 p {
+      margin: 0;
+    }
+
+    header.header {
+      width: 100%;
+      background-color: transparent;
+      padding: 0 16px;
+      z-index: 200;
+    }
+
+    header.header.is-absolute {
+      position: absolute;
+    }
+
+    header.header .max-width {
+      max-width: 1200px;
+    }
+
+    header.header .nav {
+      background-color: transparent;
+    }
+
+    header.header .nav .nav-left .is-brand {
+      padding: 16px 0;
+    }
+
+    header.header .nav .nav-left .is-brand img {
+      max-height: 90px;
+      border: none !important;
+    }
+
+    header.header .nav .nav-toggle {
+      position: fixed;
+      top: 0;
+      right: 16px;
+      margin: 16px 8px;
+      border: 1px solid #e3e3e3;
+      z-index: 300;
+    }
+
+    header.header .nav .nav-toggle:hover,
+    header.header .nav .nav-toggle.is-active {
+      background-color: #1e4a6d;
+    }
+
+    header.header .nav .nav-toggle span {
+      background-color: #fff;
+    }
+
+    header.header .nav #nav-menu {
+      position: fixed;
+      display: block !important;
+      right: -100%;
+      left: auto;
+      top: 0;
+      bottom: 0;
+      height: 100%;
+      width: 100%;
+      max-width: 260px;
+      text-align: left;
+      z-index: 200;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    header.header .nav #nav-menu.is-active {
+      right: 0;
+    }
+
+    @media screen and (max-width: 420px) {
+      header.header .nav #nav-menu.is-active {
+        max-width: 100%;
+      }
+    }
+
+    header.header .nav #nav-menu .menu {
+      padding: 16px;
+    }
+
+    header.header .nav #nav-menu .menu section {
+      padding: 16px 0;
+    }
+
+    header.header .nav #nav-menu .menu section .menu-label {
+      font-size: 1.4rem;
+      padding: 16px 0;
+      color: #60a1d4;
+    }
+
+    header.header .nav #nav-menu .menu section .menu-list .menu-item a {
+      color: #b0d0e9;
+      padding: 16px;
+      border: none;
+      font-size: 1.1rem;
+      line-height: 1.6rem;
+      width: auto;
+    }
+
+    header.header .nav #nav-menu .menu section .menu-list .menu-item a:hover {
+      background-color: #4793cd;
+      color: #fff;
+    }
+
+    header.header .subnav {
+      margin-top: 16px;
+      font-weight: 400;
+    }
+
+    header.header .subnav .nav-left .tabs ul {
+      margin-bottom: -2px;
+      border-bottom: 4px solid transparent;
+    }
+
+    header.header .subnav .nav-left .tabs ul li a {
+      border-bottom: 4px solid transparent;
+    }
+
+    header.header .subnav .nav-left .tabs ul li.is-active a {
+      color: #fff;
+      border-bottom: 4px solid #fff;
+    }
+
+    header.header .subnav .nav-left .tabs ul li:not(.is-active) a {
+      color: #b5d4eb;
+    }
+
+    header.header .subnav .nav-left .tabs ul li:not(.is-active) a:hover {
+      color: #dae9f5;
+      border-bottom: 4px solid #dae9f5;
+    }
+
+    footer.footer {
+      padding: 0;
+    }
+
+    footer.footer a:not(.button) {
+      color: #c8dff0;
+    }
+
+    footer.footer a:not(.button):hover {
+      color: #fff;
+      border-bottom-color: #fff !important;
+    }
+
+    footer.footer a.button {
+      border-bottom-color: #fff;
+    }
+
+    footer.footer a.button:not(.icon):visited:hover,
+    footer.footer a.button:not(.icon):hover {
+      border-bottom-color: #b5b5b5;
+    }
+
+    footer.footer section {
+      padding: 48px;
+      margin: 0;
+    }
+
+    @media screen and (max-width: 768px) {
+      footer.footer section {
+        padding: 32px 16px;
+      }
+    }
+
+    footer.footer section.get-started {
+      padding: 80px;
+    }
+
+    @media screen and (max-width: 768px) {
+      footer.footer section.get-started {
+        padding: 32px;
+      }
+    }
+
+    footer.footer section.get-started .container .columns {
+      -webkit-box-pack: center;
+      -moz-box-pack: center;
+      -o-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -moz-box-align: center;
+      -o-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+
+    footer.footer section.get-started .container .columns .column {
+      font-size: 1.2rem;
+      line-height: 1.6rem;
+    }
+
+    @media screen and (max-width: 768px) {
+      footer.footer section.get-started .container .columns .column {
+        text-align: center;
+      }
+    }
+
+    footer.footer section.map {
+      min-height: 408px;
+      padding-bottom: 8px;
+    }
+
+    footer.footer section.map .container {
+      margin: 0;
+    }
+
+    @media screen and (max-width: 768px) {
+      footer.footer section.map .container .columns {
+        -webkit-box-lines: multiple;
+        -moz-box-lines: multiple;
+        -o-box-lines: multiple;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+      }
+    }
+
+    footer.footer section.map .container .columns .column {
+      margin: 16px 24px 0 32px;
+      -webkit-align-self: flex-start;
+      align-self: flex-start;
+      -ms-flex-item-align: start;
+      -webkit-box-flex: 1;
+      -moz-box-flex: 1;
+      -o-box-flex: 1;
+      box-flex: 1;
+      -webkit-flex: auto;
+      -ms-flex: auto;
+      flex: auto;
+      padding: 16px;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: box;
+      display: flex;
+    }
+
+    footer.footer .menu .menu-label,
+    footer.footer .menu .menu-list .menu-item a {
+      white-space: nowrap;
+    }
+
+    footer.footer .menu .menu-label {
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+      color: #60a1d4;
+    }
+
+    footer.footer .menu .menu-list .menu-item {
+      padding: 4px 8px;
+    }
+
+    footer.footer .menu .menu-list .menu-item a {
+      color: #b0d0e9;
+      font-size: 1.1rem;
+      line-height: 1.6rem;
+      border: none;
+    }
+
+    footer.footer .menu .menu-list .menu-item a:hover {
+      background-color: #4793cd;
+      color: #fff;
+    }
+
+    footer.footer .copyright {
+      color: #4692cd;
+      text-align: center;
+      -webkit-box-pack: end;
+      -moz-box-pack: end;
+      -o-box-pack: end;
+      -ms-flex-pack: end;
+      -webkit-justify-content: flex-end;
+      justify-content: flex-end;
+      -webkit-align-self: flex-end;
+      align-self: flex-end;
+      -ms-flex-item-align: end;
+      padding-top: 16px;
+    }
+
+    @media screen and (max-width: 768px) {
+      footer.footer .copyright {
+        text-align: left;
+        padding-left: 36px;
+      }
+    }
+
+  </style>
+  <script>
+    !function(e,t,a,n,c,s,l){e.GoogleAnalyticsObject=c,e[c]=e[c]||function(){(e[c].q=e[c].q||[]).push(arguments)},e[c].l=1*new Date,s=t.createElement(a),l=t.getElementsByTagName(a)[0],s.async=1,s.src=n,l.parentNode.insertBefore(s,l)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-54498517-1","auto"),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){function e(){var e=(t.getAttribute("class"),a.getAttribute("class"));"nav-toggle cfh-bg-dark-blue-faded"==e?(a.className="nav-toggle cfh-bg-dark-blue-faded is-active",t.className="nav-right nav-menu box cfh-bg-dark-blue will-animate is-active",setTimeout(function(){document.getElementsByTagName("html")[0].setAttribute("class","has-menu-active")},250)):(a.className="nav-toggle cfh-bg-dark-blue-faded",t.className="nav-right nav-menu box cfh-bg-dark-blue will-animate",setTimeout(function(){document.getElementsByTagName("html")[0].setAttribute("class","")},100))}var t=document.getElementById("nav-menu"),a=document.getElementById("nav-toggle");a.addEventListener("click",e);for(var n=function(e){e.target.blur()},c=document.getElementsByTagName("a"),s=0;s<c.length;s++)c[s].addEventListener("mouseup",function(e){n(e)},!1)},!1);
+  </script>
+</head>
+
+<body>
+  <header class="header is-absolute">
+    <nav class="nav max-width center">
+      <div class="nav-left">
+        <a class="nav-item is-brand" href="/"><img src="http://lorempixel.com/400/200" alt="CopsForHire Home"></a>
+      </div>
+      <div class="nav-toggle cfh-bg-dark-blue-faded" id="nav-toggle"><span></span><span></span><span></span></div>
+      <div class="nav-right nav-menu"><span class="nav-item actions"><a class="button cfh-bg-dark-blue-faded" href="/new"><span>Login</span></a>&nbsp; &nbsp;
+        &nbsp;<a class="button cfh-bg-blue-faded" href="/signup"><span>Signup</span></a></span>
+      </div>
+      <div class="nav-right nav-menu box cfh-bg-dark-blue will-animate" id="nav-menu">
+        <aside class="menu">
+          <section>
+            <h2 class="hide" style="display:none;">Home</h2>
+            <ul class="menu-list">
+              <li class="menu-item"><a href="/">Home</a></li>
+            </ul>
+          </section>
+          <section>
+            <h2 class="menu-label">Marketplace</h2>
+            <ul class="menu-list">
+              <li class="menu-item"><a href="/marketplace/marketplace.html">The Marketplace</a></li>
+              <li class="menu-item"><a href="/marketplace/customers.html">Customers</a></li>
+              <li class="menu-item"><a href="/marketplace/cops.html">Cops</a></li>
+              <li class="menu-item"><a href="/marketplace/departments.html">Departments</a></li>
+              <li class="menu-item"><a href="/marketplace/insurance.html">Insurance</a></li>
+              <li class="menu-item"><a href="/marketplace/faq.html">FAQ</a></li>
+            </ul>
+          </section>
+          <section>
+            <h2 class="menu-label">Company</h2>
+            <ul class="menu-list">
+              <li class="menu-item"><a href="/company/about.html">About Us</a></li>
+              <li class="menu-item"><a href="/company/news.html">News</a></li>
+              <li class="menu-item"><a href="/company/team.html">The Team</a></li>
+              <li class="menu-item"><a href="/company/careers.html">Careers</a></li>
+              <li class="menu-item"><a href="/company/privacy.html">Privacy</a></li>
+              <li class="menu-item"><a href="/company/terms.html">Terms</a></li>
+            </ul>
+          </section>
+          <section>
+            <h2 class="menu-label">Connect with Us</h2>
+            <ul class="menu-list">
+              <li class="menu-item"><a target="_blank" href="https://www.google.com/maps/place/The+Steam+Plant,+113+Thurston+Ave+NE,+Olympia,+WA+98501/@47.0472373,-122.903489,17z/data=!3m1!4b1!4m5!3m4!1s0x549175197909e79f:0x7a746c29ef453709!8m2!3d47.0472373!4d-122.9013003">The Steam Plant Building<br>113 Thurston Ave NE, Olympia, WA</a></li>
+              <li class="menu-item"><a href="mailto:info@copsforhire.com">info@copsforhire.com</a></li>
+              <li class="menu-item"><a href="http://www.linkedin.com/company/cops-for-hire/" target="_blank">LinkedIn</a></li>
+              <li class="menu-item"><a href="http://www.facebook.com/copsforhire/" target="_blank">Facebook</a></li>
+              <li class="menu-item"><a href="https://twitter.com/copsforhire" target="_blank">Twitter</a></li>
+            </ul>
+          </section>
+        </aside>
+      </div>
+    </nav>
+  </header>
+  <main class="main">
+    <section class="hero">
+      <h2 class="hide" style="display:none;">CopsForHire</h2>
+      <div class="container flex full white">
+        <div class="columns">
+          <div class="column">
+            <h1 class="bold">A cop when you need one!</h1>
+            <div class="quick-blurb">
+              <p>CopsForHire is the first and only online marketplace for hiring off-duty, commissioned law officers.</p>
+              <p class="is-hidden-mobile">CopsForHire provides a complete and fully automated off-duty management solution for Department and Cops, and
+                gives Customers access to the best trained and qualified security professionals available!</p><br><br><br>
+              <a class="button large is-outlined" href="https://app.copsforhire.com/signup">Signup Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="smaller cfh-bg-lighter-grey insurance">
+      <h2 class="hide" style="display:none;">Insurance</h2>
+      <div class="container">
+        <div class="columns">
+          <div class="column is-3"><img class="insurance-logo" src="http://lorempixel.com/400/200" alt="CFH Insurance"></div>
+          <div class="column middle is-6 has-text-center">
+            <p class="cfh-dark-blue bold">Protection for Customers, Departments and Cops!</p><br>
+            <p class="small-text">CopsForHire is pleased to announce that we now provide liability and accident insurance for off-duty!</p>
+          </div>
+          <div class="column is-3"><a class="button is-outlined can-wrap" href="/marketplace/insurance.html">Our Insurance</a></div>
+        </div>
+      </div>
+    </section>
+    <section class="medium cfh-bg-blue how-it-works">
+      <h2 class="hide" style="display:none;">How It Works</h2>
+      <div class="container">
+        <div class="columns">
+          <div class="column">
+            <h5 class="small-title">HOW IT WORKS</h5>
+          </div>
+        </div><br>
+        <div class="columns">
+          <div class="column is-4">
+            <h4><span>1.</span>&nbsp;Sign Up</h4><img class="landing-icon" src="http://lorempixel.com/400/200" alt="Sign Up">
+            <p>Set up your Events.</p>
+          </div>
+          <div class="column is-4">
+            <h4><span>2.</span>&nbsp;Post Events</h4><img class="landing-icon" src="http://lorempixel.com/400/200" alt="Post Events">
+            <p>The best trained and qualified Cops.</p>
+          </div>
+          <div class="column is-4">
+            <h4><span>3.</span>&nbsp;You're Covered</h4><img class="landing-icon" src="http://lorempixel.com/400/200" alt="You're Covered">
+            <p>Local department approves <b>real cops</b> for your off-duty work</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="medium cfh-bg-lightest-grey">
+      <h2 class="hide" style="display:none;">The Marketplace</h2>
+      <div class="container">
+        <div class="columns">
+          <div class="column is-3"><img class="landing-icon" src="http://lorempixel.com/400/200" alt="Marketplace"></div>
+          <div class="column middle is-6">
+            <p class="has-text-left">Whether you represent a Police or Sheriff's Department hoping to more efficiently manage off-duty, are a Customer
+              looking to fill your security needs, or are a Cop looking for new off-duty opportunities, the CopsForHire marketplace
+              is your solution - login to an existing profile, or create a new one.</p>
+          </div>
+          <div class="column is-3"><a class="button is-outlined can-wrap" href="/marketplace/marketplace.html">About the Marketplace</a></div>
+        </div>
+      </div>
+    </section>
+    <section class="medium cfh-bg-lighter-grey">
+      <h2 class="hide" style="display:none;">For Customers</h2>
+      <div class="container">
+        <div class="columns">
+          <div class="column is-3"><img class="landing-icon" src="http://lorempixel.com/400/200" alt="Customers"></div>
+          <div class="column middle is-6">
+            <p class="has-text-left"><i>"I recently hired COPS FOR HIRE for security at the Sand Point Country Club here in
+              Seattle. On Halloween, we have upwards of 1,000 people coming into our
+              community through a single gate. The officer hired showed up early for the job,
+              followed all procedures to the letter, was cheerful, professional and I am crediting
+              him for what turned out to be an un-eventful evening. I would and will
+              recommend CopsForHire to anyone needing these services. I will most certainly
+              use CopsForHire for any and all future events.</i><br><br><i>The experience could not have been any better."</i><br><br><b>- Joe F., Property Manager</b></p>
+          </div>
+          <div class="column is-3"><a class="button is-outlined can-wrap" href="/marketplace/customers.html">More info for Customers</a></div>
+        </div>
+      </div>
+    </section>
+    <section class="medium cfh-bg-lightest-grey">
+      <h2 class="hide" style="display:none;">For Cops</h2>
+      <div class="container">
+        <div class="columns">
+          <div class="column is-3"><img class="landing-icon" src="http://lorempixel.com/400/200" alt="Cops"></div>
+          <div class="column middle is-6">
+            <p class="has-text-left"><i>“The whole thing is incredibly streamlined and so easy to use!”</i><br><br><b>- William D., Seattle Police Department</b></p>
+          </div>
+          <div class="column is-3"><a class="button is-outlined can-wrap" href="/marketplace/cops.html">More info for Cops</a></div>
+        </div>
+      </div>
+    </section>
+    <section class="medium cfh-bg-lighter-grey">
+      <h2 class="hide" style="display:none;">For Departments</h2>
+      <div class="container">
+        <div class="columns">
+          <div class="column is-3"><img class="landing-icon" src="http://lorempixel.com/400/200" alt="Departments"></div>
+          <div class="column middle is-6">
+            <p class="has-text-left"><i>"CopsForHire simplified the entire process for everyone - the department, the
+            officers, and employers - while providing better information around when, where,
+            and how much work our commissioned officers are doing off-duty."</i><br><br><b>- Brian Maxey, Chief Operating Officer, Seattle Police Department</b></p>
+          </div>
+          <div class="column is-3"><a class="button is-outlined can-wrap" href="/marketplace/departments.html">More info for Departments</a></div>
+        </div>
+      </div>
+    </section>
+    <section class="cfh-bg-lightest-grey features">
+      <h2 class="hide" style="display:none;">Features</h2>
+      <div class="container">
+        <div class="columns">
+          <div class="column">
+            <h5 class="small-title">KEY FEATURES</h5>
+          </div>
+        </div><br>
+        <div class="columns">
+          <div class="column">
+            <div class="feature has-text-centered">
+              <h5 class="bold">Access</h5>
+              <p>CopsForHire provides a direct connection between Customers and the best trained law enforcement available –
+                commissioned Cops.</p>
+            </div>
+            <div class="feature">
+              <h5 class="bold">Simple</h5>
+              <p>The CopsForHire Marketplace takes a complicated, manual process, and makes it infinitely easier by connecting
+                Customers, Cops and Departments.</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="feature has-text-centered">
+              <h5 class="bold">Trustworthy</h5>
+              <p>Transactions within The CopsForHire Marketplace are 100% secure and in complete compliance with the US Patriot
+                Act.
+              </p>
+            </div>
+            <div class="feature has-text-centered">
+              <h5 class="bold">Connected</h5>
+              <p>Email and text notifications let Cops know when Events are posted, and Customers know when Cops sign up.</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="feature has-text-centered">
+              <h5 class="bold">Everywhere</h5>
+              <p>The CopsForHire marketplace is a web-based application, available on all of your devices.</p>
+            </div>
+            <div class="feature has-text-centered">
+              <h5 class="bold">Accountable</h5>
+              <p>The CopsForHire Marketplace provides a centralized resource for all off-duty activity.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="small cfh-bg-lighter-grey landing-careers">
+      <h2 class="hide" style="display:none;">Careers</h2>
+      <div class="container">
+        <div class="columns">
+          <div class="column is-two-thirds">
+            <p class="has-text-left">CopsForHire is a small, innovative startup in the process of transforming a multi-billion dollar marketplace.
+              We’re located in a beautiful, modern office space in downtown Olympia, Washington. We’re always on the lookout
+              for talented, highly collaborative team members that can help us grow.</p>
+          </div>
+          <div class="column is-one-third"><a class="button is-outlined can-wrap" href="/company/careers.html">More info on Careers</a></div>
+        </div>
+      </div>
+    </section>
+    <section class="small cfh-bg-lightest-grey landing-team">
+      <h2 class="hide" style="display:none;">Our Team</h2>
+      <div class="container has-text-centered">
+        <div class="white">Meet the team working to change the way Cops and Customers connect.</div><br><a class="button is-outlined can-wrap"
+          href="/company/team.html">Meet the Team</a></div>
+    </section>
+  </main>
+  <footer class="footer">
+    <section class="cfh-bg-blue get-started">
+      <h2 class="hide" style="display:none;">Get Started</h2>
+      <div class="container">
+        <div class="columns">
+          <div class="column is-two-thirds">
+            <h2>Ready to get started?</h2><br><br>
+            <p>Currently launched in the Pacific Northwest! Expanding to the rest of the United States soon!</p><br><br><a href="https://app.copsforhire.com/login">Already have a profile? Login Now</a><br><br></div>
+          <div class="column has-text-centered"><a class="button large cfh-bg-blue" href="https://app.copsforhire.com/signup">Sign up today</a></div>
+        </div>
+      </div>
+    </section>
+    <section class="medium map cfh-bg-dark-blue flex">
+      <h2 class="hide" style="display:none;">Footer</h2>
+      <div class="container">
+        <div class="columns is-mobile">
+          <div class="column is-inline-flex">
+            <aside class="menu">
+              <p class="menu-label">Marketplace</p>
+              <ul class="menu-list">
+                <li class="menu-item"><a href="/">Home</a></li>
+                <li class="menu-item"><a href="/marketplace/marketplace.html">The Marketplace</a></li>
+                <li class="menu-item"><a href="/marketplace/customers.html">Customers</a></li>
+                <li class="menu-item"><a href="/marketplace/cops.html">Cops</a></li>
+                <li class="menu-item"><a href="/marketplace/departments.html">Departments</a></li>
+                <li class="menu-item"><a href="/marketplace/insurance.html">Insurance</a></li>
+                <li class="menu-item"><a href="/marketplace/faq.html">FAQ</a></li>
+              </ul>
+            </aside>
+          </div>
+          <div class="column is-inline-flex">
+            <aside class="menu">
+              <p class="menu-label">Company</p>
+              <ul class="menu-list">
+                <li class="menu-item"><a href="/company/about.html">About Us</a></li>
+                <li class="menu-item"><a href="/company/news.html">News</a></li>
+                <li class="menu-item"><a href="/company/team.html">The Team</a></li>
+                <li class="menu-item"><a href="/company/careers.html">Careers</a></li>
+                <li class="menu-item"><a href="/company/privacy.html">Privacy</a></li>
+                <li class="menu-item"><a href="/company/terms.html">Terms</a></li>
+              </ul>
+            </aside>
+          </div>
+          <div class="column is-inline-flex">
+            <aside class="menu">
+              <p class="menu-label">Connect With Us</p>
+              <ul class="menu-list">
+                <li class="menu-item"><a target="_blank" href="https://www.google.com/maps/place/The+Steam+Plant,+113+Thurston+Ave+NE,+Olympia,+WA+98501/@47.0472373,-122.903489,17z/data=!3m1!4b1!4m5!3m4!1s0x549175197909e79f:0x7a746c29ef453709!8m2!3d47.0472373!4d-122.9013003">The Steam Plant Building<br>113 Thurston Ave NE, Olympia, WA</a></li>
+                <li class="menu-item"><a href="mailto:info@copsforhire.com">info@copsforhire.com</a></li>
+                <li class="menu-item"><a href="http://www.linkedin.com/company/cops-for-hire/" target="_blank">LinkedIn</a></li>
+                <li class="menu-item"><a href="http://www.facebook.com/copsforhire/" target="_blank">Facebook</a></li>
+                <li class="menu-item"><a href="https://twitter.com/copsforhire" target="_blank">Twitter</a></li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+        <div class="copyright">&copy; 2016 CopsForHire, Inc.</div>
+      </div>
+    </section>
+  </footer>
+</body>
+
+</html>
