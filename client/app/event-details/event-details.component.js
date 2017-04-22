@@ -290,7 +290,7 @@ export class EventDetailsComponent {
 }
 
 
-export default angular.module('es42App.event-details', [uiRouter])
+export default angular.module('myofficers2App.event-details', [uiRouter])
   .config(routing)
   .component('eventDetails', {
     template: require('./event-details.html'),

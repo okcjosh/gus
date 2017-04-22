@@ -3,6 +3,6 @@
 import angular from 'angular';
 import {UtilService} from './util.service';
 
-export default angular.module('es4App.util', [])
+export default angular.module('myofficersApp.util', [])
   .factory('Util', UtilService)
   .name;

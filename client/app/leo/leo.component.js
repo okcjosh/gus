@@ -133,7 +133,7 @@ export class LeoController {
   }
 }
 
-export default angular.module('es4App.leo', [uiRouter])
+export default angular.module('myofficersApp.leo', [uiRouter])
   .config(routing)
   .component('leo', {
     template: require('./leo.html'),

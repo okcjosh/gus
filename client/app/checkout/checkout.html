@@ -1,6 +1,6 @@
 <header class="jumbotron bg-info">
   <div class="container">
-    <h2>ES4</h2>
+    <h2>MYOFFICERS.COM</h2>
     <p>Event Security Services, Scheduling & Staffing.</p>
   </div>
 </header>
@@ -8,13 +8,12 @@
   <div class='checkout container'>
     <div class='content col-lg-6 center-block'>
       <header>
-        <h1>Hi, <br/> Your Event is Ready to be Scheduled! </h1>
-        <p>Make a payment below PayPal or a card</p>
+        <p>Make a Payment</p>
       </header>
       <div class="panel panel-default">
         <div class="panel-body">
           <h3 ng-show="event.venue">
-            Payment for event at {{ event.venue }}
+            {{ event.venue }}
           </h3>
           <br />
           <form id='payment-form' action='/checkout' method='post'>

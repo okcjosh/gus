@@ -109,7 +109,7 @@ export class DragComponent {
 }
 
 
-export default angular.module('es42App.drag', [uiRouter])
+export default angular.module('myofficers2App.drag', [uiRouter])
   .config(routing)
   .component('drag', {
     template: require('./drag.html'),

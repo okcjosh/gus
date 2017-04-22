@@ -100,7 +100,7 @@ export function TransactionComponent($scope, $http, $location, $state) {
 //   for (message in messages){}}
 
 
-export default angular.module('es4App.transaction', [uiRouter])
+export default angular.module('myofficersApp.transaction', [uiRouter])
   .component('transaction', {
     template: require('./transaction.html'),
     controller: TransactionComponent,

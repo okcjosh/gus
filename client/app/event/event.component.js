@@ -316,7 +316,7 @@ export class EventComponent {
 }
 
 
-export default angular.module('es42App.event', [uiRouter])
+export default angular.module('myofficers2App.event', [uiRouter])
   .config(routing)
   .component('event', {
     template: require('./event.html'),

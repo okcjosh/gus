@@ -56,7 +56,7 @@
             <div class="form-group">
               <label for="nameOfVenue" id="nameOfVenueLabel" class="control-label col-md-3">Venue Name</label>
               <div class="col-md-9">
-                <input name="nameOfVenue" type="text" ng-model="eventData.nameOfVenue" required id="nameOfVenue" class="form-control" placeholder="Enter the Name of the venue" />
+                <input name="nameOfVenue" type="text" ng-model="eventData.nameOfVenue" required id="nameOfVenue" class="form-control" placeholder="Enter the Name of the Venue"/>
               </div>
             </div>
 
@@ -64,7 +64,7 @@
               <label for="address" id="addressLabel" class="control-label col-md-3">Venue Address</label>
               <div class="col-md-9">
                 <div id="locationField">
-                  <input class="form-control" ng-model="eventData.location" required id="autocomplete" placeholder="Enter your address" name="address" g-places-autocomplete autocomplete="off" type="text"></input>
+                  <input class="form-control" ng-model="eventData.location" required id="autocomplete" placeholder="Enter Venue Address" name="address" g-places-autocomplete autocomplete="off" type="text">
                 </div>
               </div>
             </div>
@@ -72,21 +72,21 @@
             <div class="form-group">
               <label for="poContact" id="poContactLabel" class="control-label col-md-3">Venue Manager / Point of Contact</label>
               <div class="col-md-9">
-                <input name="poContact" ng-model="eventData.poContact" required type="text" id="poContact" class="form-control" placeholder="Enter point of Contact" />
+                <input name="poContact" ng-model="eventData.poContact" required type="text" id="poContact" class="form-control" placeholder="Enter the Venue Point of Contact" />
               </div>
             </div>
 
             <div class="form-group">
-              <label for="phoneNumber" id="phoneNumberLabel" class="control-label col-md-3">Venue Phone Number</label>
+              <label for="phoneNumber" id="phoneNumberLabel" class="control-label col-md-3">Venue Point of Contact Phone Number</label>
               <div class="col-md-9">
-                <input name="phoneNumber" ng-model="eventData.phoneNumber" required type="tel" id="phoneNumber" class="form-control" placeholder="Enter your phone number" />
+                <input name="phoneNumber" ng-model="eventData.phoneNumber" required type="tel" id="phoneNumber" class="form-control" placeholder="Enter Venue Point of Contact Phone Number" />
               </div>
             </div>
 
             <div class="form-group">
-              <label for="email" id="emailLabel" class="control-label col-md-3">Venue Email</label>
+              <label for="email" id="emailLabel" class="control-label col-md-3">Venue Point of Contact Email</label>
               <div class="col-md-9">
-                <input name="email" ng-model="eventData.email" required type="email" id="email" class="form-control" placeholder="Coordinator email address" />
+                <input name="email" ng-model="eventData.email" required type="email" id="email" class="form-control" placeholder="Enter Venue Point of Contact Email Address" />
               </div>
             </div>
 
@@ -166,7 +166,7 @@
 
               <label for="attendeesNum" id="attendeesNumLabel" class="control-label col-md-3">Number of Attendees Expected</label>
               <div class="col-md-2">
-                <input type="number" value="" min="0" ng-model="eventData.crowd_size" name="attendeesNum" class="form-control" id="attendeesNum" placeholder="0">
+                <input type="number" value="" min="1" ng-model="eventData.crowd_size" name="attendeesNum" class="form-control" id="attendeesNum" placeholder="1">
               </div>
 
 
@@ -185,7 +185,7 @@
               </div>
               <label for="OfficerStayHours" id="OfficerStayHoursLabel" class="control-label col-md-3">Number of hours requested</label>
               <div class="col-md-2">
-                <input type="number" value="" ng-model="eventData.hours_expected" min="0" name="officer_stay_hours" class="form-control" id="OfficerStayHours" placeholder="1">
+                <input type="number" value=""  ng-model="eventData.hours_expected" min="1" name="officer_stay_hours" class="form-control" id="OfficerStayHours" placeholder="1">
               </div>
             </div>
 

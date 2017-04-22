@@ -40,7 +40,7 @@ import 'angular-toastr';
 // import ngValidationMatch from 'angular-validation-match';
 
 
-angular.module('es4App',
+angular.module('myofficersApp',
   [
     ngCookies,
     ngResource,
@@ -92,7 +92,7 @@ angular.module('es4App',
 angular.element(document)
   .ready(() => {
     angular.bootstrap(document,
-      ['es4App'], {
+      ['myofficersApp'], {
 
         strictDi: false
 

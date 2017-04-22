@@ -71,7 +71,7 @@ export class MainController {
       this.$http.get('/api/events')
         .then(res => res.data)
         .then(events => events.map(event => ({ id: event._id, title: event.title || event.venue, start: event.date})))
-        .then(calendarEvents => $('#calendar').fullCalendar({ 
+        .then(calendarEvents => $('#calendar').fullCalendar({
           events: calendarEvents,
           eventClick: event => {
             if (event) {
@@ -95,7 +95,7 @@ export class MainController {
   }
 }
 
-export default angular.module('es4App.main', [uiRouter])
+export default angular.module('myofficersApp.main', [uiRouter])
   .config(routing)
   .component('main', {
     template: require('./main.html'),

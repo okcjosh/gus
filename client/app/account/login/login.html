@@ -48,7 +48,7 @@
 
             <div class="col-xs-12 " style="margin-bottom: 20px; padding: 0px;">
               <button ng-hide='vm.isLeoLogin' class='btn btn-primary btn-lg btn-login btn-block' type='submit'>
-                Login as User or Admin
+                Login
               </button>
               <button ng-show='vm.isLeoLogin' class='btn btn-primary btn-lg btn-login btn-block' ng-click='vm.loginLeo(form)' type='button'>
                 Login as Leo
@@ -65,13 +65,10 @@
                   <input style="margin-top: 10px" class="form-control" type="text" ng-model="vm.forgotPasswordCode" placeholder="Code sent to your email e.g. 345JFU78">
                   <input style="margin-top: 10px" class="form-control" type="password" ng-model="vm.forgotNewPassword" placeholder="Choose a new password.">
                   <input style="margin-top: 10px" class="form-control" type="password" ng-model="vm.repeatForgotNewPassword" placeholder="Repeat password">
-                  
+
                   <button style="margin-top: 10px" class="btn btn-block btn-primary" type="button" ng-click="vm.submitForgotCode()">Submit Code</button>
                 </div>
               </div>
-              <button class='btn btn-rounded btn-info btn-lg btn-block' ui-sref='signup'>
-                Register
-              </button>
             </div>
           </form>
 
