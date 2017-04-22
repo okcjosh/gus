@@ -1,10 +1,10 @@
 'use strict';
 
+import jwt from 'jsonwebtoken';
 import {User} from '../../sqldb';
 import config from '../../config/environment';
-import jwt from 'jsonwebtoken';
-import * as nodemailer from 'nodemailer';
 
+import { transport } from './../../email';
 
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
@@ -209,37 +209,6 @@ export function verifyPhone(req, res, next) {
     .catch(err => next(err));
 }
 
-function sendMail(userEmail, content) {
-    // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
-      host: 'mail.ontinuity.co.uk',
-      port: 587,
-      secure: false, // upgrade later with STARTTLS
-      auth: {
-        user: 'do_not_reply@myofficers.com',
-        pass: '@AcHa+4eqE4r'
-      }
-    });
-
-
-    // setup email data with unicode symbols
-    let mailOptions = {
-        from: '"Password Reset myofficers.com" <password@myofficers.com>', // sender address
-        to: userEmail, // list of receivers
-        subject: 'Reset your password ✔', // Subject line
-        text: content, // plain text body
-        html: `<b>${content}</b>` // html body
-    };
-
-    // send mail with defined transport object
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return console.log(error);
-        }
-        console.log('Message %s sent: %s', info.messageId, info.response);
-    });
-  }
-
 export function requestForgotPassword(req, res) {
   let email = req.params.email;
 
@@ -248,16 +217,32 @@ export function requestForgotPassword(req, res) {
       email: email
     }
   }).then(user => {
-      if(user) {
-        user.forgot_password_code = generateRandomCode(8);
-        sendMail(email, user.forgot_password_code);
-        return user.save()
-          .then(() => res.status(204).end())
-          .catch(validationError(res));
-      } else {
-        return res.status(403).end();
-      }
-    });
+    if(user) {
+      user.forgot_password_code = generateRandomCode(8);
+      let content = user.forgot_password_code;
+
+      // setup email data with unicode symbols
+      let mailOptions = {
+        from: '"Password Reset myofficers.com" <password@myofficers.com>', // sender address
+        to: email, // list of receivers
+        subject: 'Reset your password ✔', // Subject line
+        text: content, // plain text body
+        html: `<b>${content}</b>` // html body
+      };
+
+      // send mail with defined transport object
+      transport.sendMail(mailOptions, (error, info) => {
+        if(error) { return console.log(error); }
+        console.log('Message %s sent: %s', info.messageId, info.response);
+      });
+      
+      return user.save()
+        .then(() => res.status(204).end())
+        .catch(validationError(res));
+    } else {
+      return res.status(403).end();
+    }
+  });
 }
 
 export function resetForgotPassword(req, res) {
@@ -269,15 +254,15 @@ export function resetForgotPassword(req, res) {
       forgot_password_code: code
     }
   }).then(user => {
-      if(user) {
-        user.password = password;
-        return user.save()
-          .then(() => res.status(204).end())
-          .catch(validationError(res));
-      } else {
-        return res.status(403).end();
-      }
-    });
+    if(user) {
+      user.password = password;
+      return user.save()
+        .then(() => res.status(204).end())
+        .catch(validationError(res));
+    } else {
+      return res.status(403).end();
+    }
+  });
 }
 
 /**

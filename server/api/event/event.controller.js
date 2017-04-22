@@ -11,8 +11,12 @@
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import {Event, Status, JobType, User, Leo, JobInvitation} from '../../sqldb';
+
 import gateway from './../../gateway';
+
+import {Event, Status, JobType, User, Leo, JobInvitation} from '../../sqldb';
+
+import { sendEventCompletionEmail } from './../../email';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -259,6 +263,11 @@ export function completeEventPayment(req, res) {
           });
           return event;
         });
+    })
+    .then(event => {
+
+      sendEventCompletionEmail(event);
+      return event;
     })
     .then(respondWithResult(res))
     .catch(handleError(res));

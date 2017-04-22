@@ -12,13 +12,14 @@
 
 import jsonpatch from 'fast-json-patch';
 import {JobInvitation, Leo} from '../../sqldb';
-// import Promise from 'bluebird';
 
 import client from './../../twilio';
 
-const realServer = 'es4.io';
-const devServer = '';
-const localServer = '192.168.0.17';
+import { sendInvitationEmail } from './../../email';
+
+const DEV_SERVER = '';
+const REAL_SERVER = 'es4.io';
+const LOCAL_SERVER = '192.168.0.17';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -73,7 +74,7 @@ function handleError(res, statusCode) {
 function sendInvitationSMSToLeo(invite) {
   // console.log(leoId, invite, '=============================');
   let msg = 'You have been selected to work a security detail for DPD. '
-    + `Please visit http://${realServer}/invitation/${invite._id}/event/${invite.event_id} to accept this job.`;
+    + `Please visit http://${REAL_SERVER}/invitation/${invite._id}/event/${invite.event_id} to accept this job.`;
 
   Leo.findOne({
     where: { _id: invite.leo_id }
@@ -119,7 +120,7 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
-// Creates a new JobInvitation in the DB
+// Creates JobInvitations in the DB
 export function create(req, res) {
   let event_id = req.params.event_id;
 
@@ -139,6 +140,7 @@ export function create(req, res) {
         inviteIds.push(invite._id);
 
         if(newlyCreated) {
+          sendInvitationEmail(invite);
           sendInvitationSMSToLeo(invite);
         }
       });
