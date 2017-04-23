@@ -48,7 +48,11 @@ function sendEventCompletionEmail(event) {
       let emailTemplate = data.toString().slice(0);
       // Do replace of whatever is needed
       // tempEmail = tempEmail.replace("/invitation/", "/invitation/" + event.party_id);
+
+      // event.User.email for Customer that registered the event
       sendEmail(event.User.email, 'ES4 Event Completion Notification', emailTemplate);
+      // event.email for the coordinator of the event
+      sendEmail(event.email, 'ES4 Event Completion Notification', emailTemplate);
     } else {
       console.log(`Error reading file: ${err}`);
     }

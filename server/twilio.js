@@ -24,6 +24,11 @@ function sendText(to, body) {
 // Event with Included User field to get user phone
 function sendEventCompletionText(event) {
   const msg = `Your event ${event.venue} has been completed`;
+
+  // This is for the phone_number of the coordinator of the event
+  // sendText(event.phone_number, msg);
+
+  // This is for the customer that registered the event
   sendText(event.User.phone, msg);
 }
 
