@@ -18,7 +18,7 @@ import { sendText } from './../../twilio';
 import { sendInvitationEmail } from './../../email';
 
 const DEV_SERVER = '';
-const REAL_SERVER = 'es4.io';
+const REAL_SERVER = 'myofficers.com';
 const LOCAL_SERVER = '192.168.0.17';
 
 function respondWithResult(res, statusCode) {

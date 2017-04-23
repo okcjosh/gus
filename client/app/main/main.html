@@ -3,6 +3,9 @@
   <h2>myofficers.com</h2>
   <p>Event Security Services, Scheduling & Staffing.</p>
     <a ng-show="$ctrl.isLoggedIn()" class="btn btn-primary btn-lg btn-rounded" ui-sref="event">Register New Event</a>
+    <a ng-show="$ctrl.isLoggedIn()" class="btn btn-primary btn-lg btn-rounded" ui-sref="admin">Admin</a>
+    <a ng-show="$ctrl.isAdmin()" class="btn btn-primary btn-lg btn-rounded" ui-sref="dashboard">Dashboard</a>
+    <a ng-show="$ctrl.isAdmin()" class="btn btn-primary btn-lg btn-rounded" ui-sref="rates">Config</a>
   </div>
 </header>
 <li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active">
