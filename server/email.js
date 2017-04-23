@@ -39,6 +39,7 @@ function sendInvitationEmail(invitation) {
     });
 }
 
+// Event with Included User field
 function sendEventCompletionEmail(event) {
   console.log('Sending email for completion of event: ' + event);
 
@@ -47,7 +48,7 @@ function sendEventCompletionEmail(event) {
       let emailTemplate = data.toString().slice(0);
       // Do replace of whatever is needed
       // tempEmail = tempEmail.replace("/invitation/", "/invitation/" + event.party_id);
-      sendEmail(event.email, 'ES4 Event Completion Notification', emailTemplate);
+      sendEmail(event.User.email, 'ES4 Event Completion Notification', emailTemplate);
     } else {
       console.log(`Error reading file: ${err}`);
     }

@@ -2,22 +2,22 @@
 const angular = require('angular');
 
 const uiRouter = require('angular-ui-router');
-const jquery = require('jquery');
+const $ = require('jquery');
+// const jquery = require('jquery');
 import routes from './dashboard.routes';
 
-let $ = require( 'jquery' );
-require( 'datatables.net' );
-require( 'datatables.net-buttons');
-require( 'datatables.net-buttons-bs');
-require( 'datatables.net-bs');
-require( 'datatables.net-buttons-bs');
-require( 'datatables.net-fixedheader');
-//require( 'datatables.net-fixedheader-bs');
-require( 'datatables.net-keytable');
-require( 'datatables.net-responsive');
-require( 'datatables.net-responsive-bs');
-require( 'datatables.net-select');
-require( 'datatables.net-scroller');
+require('datatables.net');
+require('datatables.net-buttons');
+require('datatables.net-buttons-bs');
+require('datatables.net-bs');
+require('datatables.net-buttons-bs');
+require('datatables.net-fixedheader');
+//require('datatables.net-fixedheader-bs');
+require('datatables.net-keytable');
+require('datatables.net-responsive');
+require('datatables.net-responsive-bs');
+require('datatables.net-select');
+require('datatables.net-scroller');
 //require( 'datatables.net-scroller-bs');
 
 export class DashboardComponent {
@@ -41,19 +41,16 @@ export class DashboardComponent {
   }
 
   $onInit() {
-    let $scope = this.$scope,
-      $http = this.$http,
-      _self = this;
+    const _self = this;
 
     this.$http.get('/api/events')
       .then(response => {
-
-        let statusLabels = {
-          'Created': 'warning',
-          'Approved': 'success',
-          'Scheduled': 'info',
-          'Rejected': 'danger',
-          'Completed': 'primary'
+        const statusLabels = {
+          Created: 'warning',
+          Approved: 'success',
+          Scheduled: 'info',
+          Rejected: 'danger',
+          Completed: 'primary'
         };
 
         this.dataSet = response.data.map(function(event) {
@@ -69,7 +66,7 @@ export class DashboardComponent {
           event.venueLink = _self.$interpolate(link)(_self.$scope);
 
           if (event.Status) {
-            let colorClass = 'label label-' + statusLabels[event.Status.name];
+            let colorClass = `label label-${statusLabels[event.Status.name]}`;
             event.statusLabel = `<span class="${colorClass}">${event.Status.name}</span>`;
           } else {
             event.statusLabel = 'Unassigned';
@@ -80,10 +77,11 @@ export class DashboardComponent {
           return event;
         });
 
-        let table = $('#events').DataTable({
+        const table = $('#events').DataTable({
           select: true,
-          initComplete: function () {
-            this.api().columns().every(function () {
+          initComplete: function() {
+            this.api().columns()
+            .every(function() {
               //alert('col: ' + this.header().innerHTML );
               var column = this;
               if(this.header().innerHTML == 'Status') {
@@ -101,9 +99,9 @@ export class DashboardComponent {
                   });
 
                 column.data().unique().sort().each(function (d, j) {
-                  //   select.append('<option value="' + d + '">' + d + '</option>')
+                  // select.append('<option value="' + d + '">' + d + '</option>')
                   var val = $('<div/>').html(d).text();
-                  select.append( '<option value="' + val + '">' + val + '</option>' );              });
+                  select.append('<option value="' + val + '">' + val + '</option>');});
               }
             });
           },

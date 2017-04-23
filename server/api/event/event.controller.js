@@ -17,6 +17,7 @@ import gateway from './../../gateway';
 import {Event, Status, JobType, User, Leo, JobInvitation} from '../../sqldb';
 
 import { sendEventCompletionEmail } from './../../email';
+import { sendEventCompletionText } from './../../twilio';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -218,7 +219,7 @@ export function completeEventPayment(req, res) {
   return getLeosForEvent(req.params.id, 'Accepted')
     .then(handleEntityNotFound(res))
     .then(leos => {
-      return Event.findOne({ where: { _id: req.params.id }, include: [JobType]})
+      return Event.findOne({ where: { _id: req.params.id }, include: [User, JobType]})
         .then(event => {
           let amount = req.body.amount || CostCalculator(event);
           let leoShare = amount - (amount * .07);
@@ -265,8 +266,11 @@ export function completeEventPayment(req, res) {
         });
     })
     .then(event => {
-
+      sendEventCompletionText(event);
       sendEventCompletionEmail(event);
+      // 5 is Completed Status Id
+      event.StatusId = 5;
+      event.save();
       return event;
     })
     .then(respondWithResult(res))

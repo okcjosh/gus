@@ -13,7 +13,7 @@
 import jsonpatch from 'fast-json-patch';
 import {JobInvitation, Leo} from '../../sqldb';
 
-import client from './../../twilio';
+import { sendText } from './../../twilio';
 
 import { sendInvitationEmail } from './../../email';
 
@@ -80,17 +80,7 @@ function sendInvitationSMSToLeo(invite) {
     where: { _id: invite.leo_id }
   })
   .then(leo => {
-    client.sms.messages.create({
-      to: leo.phone,
-      from: '+12146438974',
-      body: msg
-    }, (err, sms) => {
-      if(err) {
-          console.log(err);
-      } else {
-          console.log(`Text sent: ${sms.sid}`);
-      }
-    });
+    sendText(leo.phone, msg);
   });
 }
 
