@@ -26,6 +26,7 @@ export class MainController {
     this.$http = $http;
     this.socket = socket;
     this.isLoggedIn = Auth.isLoggedInSync;
+    this.isAdmin = Auth.isAdminSync;
     this.$scope = $scope;
     this.$state = $state;
     this.$scope.$state = $state;
