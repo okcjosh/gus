@@ -1,5 +1,6 @@
 'use strict';
 const angular = require('angular');
+const moment = require('moment');
 
 const uiRouter = require('angular-ui-router');
 
@@ -15,10 +16,18 @@ export class InvitationComponent {
 
   $onInit() {
     //alert(this.$state.params.event_id);
-    var event = this.$state.params.event_id;
-    this.$http.get('/api/events/' + event)
-      .then(response => {
-        this.$scope.event = response.data;
+    var event_id = this.$state.params.event_id;
+    this.$http.get('/api/events/' + event_id)
+      .then(res => {
+        if (res.status === 200) {
+          let event = res.data;
+          event.startDate = moment(event.date).format('llll');
+
+          event.endDate = moment(event.date).add(event.hours_expected, 'h')
+                                            .format('llll');
+
+          this.$scope.event = res.data;
+        }
       }, err => {
         alert('error: ' + err);
       });

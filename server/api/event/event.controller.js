@@ -14,7 +14,7 @@ import jsonpatch from 'fast-json-patch';
 
 import gateway from './../../gateway';
 
-import {Event, Status, JobType, User, Leo, JobInvitation} from '../../sqldb';
+import {Event, Status, JobType, User, Leo, JobInvitation, Lookup} from '../../sqldb';
 
 import { sendEventCompletionEmail } from './../../email';
 import { sendEventCompletionText } from './../../twilio';
@@ -202,7 +202,7 @@ export function show(req, res) {
     where: {
       _id: req.params.id
     },
-    include: [JobType, User, Status]
+    include: [JobType, User, Status, Lookup]
   })
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))

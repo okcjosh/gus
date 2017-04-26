@@ -1,6 +1,8 @@
 'use strict';
 const angular = require('angular');
 const uiRouter = require('angular-ui-router');
+const moment = require('moment');
+
 import routing from './event-details.routes';
 export class EventDetailsComponent {
   awesomeEvents = [];
@@ -58,6 +60,12 @@ export class EventDetailsComponent {
     this.$http.get(`/api/events/${event_id}`)
       .then(function(res) {
         if(res.status === 200) {
+          let event = res.data;
+          event.startDate = moment(event.date).format('llll');
+
+          event.endDate = moment(event.date).add(event.hours_expected, 'h')
+                                            .format('llll');
+
           $scope.event = res.data;
         }
       });
@@ -81,6 +89,10 @@ export class EventDetailsComponent {
       .then(res => {
         this.eventCost = res.data;
         this.adjustedAmount = res.data.grand_total;
+      });
+    this.$http.get('/api/lookups')
+      .then(res => {
+        console.log(res);
       });
     // this.$http.get(`/api/events/${event_id}/leos_invite?status=Accepted`)
     //   .then(res => this.receivingLeos = res.data);

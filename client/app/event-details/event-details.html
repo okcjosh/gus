@@ -19,9 +19,20 @@
           <strong>Address</strong> {{ event.address }} </li>
         <li class="list-group-item">
           <strong>Job Type</strong>: {{ event.JobType.name}} </li>
-        <li class="list-group-item"><strong>Job Options</strong>: {{ event.job_type_specs }}</li>
+        <li class="list-group-item"><strong>Job Options</strong>: {{ event.Lookup.description }}</li>
+        <li class="list-group-item"><strong>Crowd Size</strong>: {{ event.crowd_size }}</li>
         <li class="list-group-item">
-          <strong>Start Date</strong>: {{ event.date }} </li>
+          <strong>Start Time</strong>: {{ event.startDate }} </li>
+        <li class="list-group-item">
+          <strong>End Time</strong>: {{ event.endDate }} </li>
+        <li class="list-group-item">
+          <strong>Officer Uniform</strong>: {{ event.officer_attire }} </li>
+        <li class="list-group-item">
+          <strong>Officer Arrival</strong>: {{ event.officer_arrival_time }} </li>
+        <li class="list-group-item"><strong>Alcohol</strong>: {{ event.alcohol ? 'Yes' : 'No' }} </li>
+        <li class="list-group-item"><strong>Barricades</strong>: {{ event.barricades ? 'Yes' : 'No' }} </li>
+        <li class="list-group-item"><strong>Police Vehicle</strong>: {{ event.police_vehicle ? 'Yes' : 'No' }} </li>
+        <li class="list-group-item"><strong>Amplified Sound</strong>: {{ event.amplified_sound ? 'Yes' : 'No' }} </li>
       </ul>
       <ul class="list-group pw-lists">
         <h5 class="mb-20">Coordinator</h5>
