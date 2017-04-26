@@ -58,15 +58,15 @@ export class EventDetailsComponent {
     this.event_id = event_id;
 
     this.$http.get(`/api/events/${event_id}`)
-      .then(function(res) {
+      .then((res) => {
         if(res.status === 200) {
           let event = res.data;
           event.startDate = moment(event.date).format('llll');
 
           event.endDate = moment(event.date).add(event.hours_expected, 'h')
                                             .format('llll');
-
           $scope.event = res.data;
+          this.initMap(event.address);
         }
       });
 
@@ -90,10 +90,7 @@ export class EventDetailsComponent {
         this.eventCost = res.data;
         this.adjustedAmount = res.data.grand_total;
       });
-    this.$http.get('/api/lookups')
-      .then(res => {
-        console.log(res);
-      });
+
     // this.$http.get(`/api/events/${event_id}/leos_invite?status=Accepted`)
     //   .then(res => this.receivingLeos = res.data);
 
@@ -104,6 +101,28 @@ export class EventDetailsComponent {
           .filter(inv => inv.status === 'Accepted')
           .map(inv => inv.Leo);
       });
+  }
+
+  initMap(address) {
+    var geocoder = new google.maps.Geocoder();
+    // Create a map object and specify the DOM element for display.
+    const map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: -34.397, lng: 150.644},
+      scrollwheel: false,
+      zoom: 10
+    });
+
+    geocoder.geocode({ address }, function(results, status) {
+      if(status === 'OK') {
+        map.setCenter(results[0].geometry.location);
+        const marker = new google.maps.Marker({
+          map,
+          position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
   }
 
   initializeDragDrop($scope, invitations) {

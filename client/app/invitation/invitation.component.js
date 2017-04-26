@@ -26,6 +26,7 @@ export class InvitationComponent {
           event.endDate = moment(event.date).add(event.hours_expected, 'h')
                                             .format('llll');
 
+          this.initMap(event.address);
           this.$scope.event = res.data;
         }
       }, err => {
@@ -35,6 +36,28 @@ export class InvitationComponent {
     //   .then( response => {
     //     this.$scope.user = response.data;
     //   });
+  }
+
+  initMap(address) {
+    var geocoder = new google.maps.Geocoder();
+    // Create a map object and specify the DOM element for display.
+    const map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: -34.397, lng: 150.644},
+      scrollwheel: false,
+      zoom: 10
+    });
+
+    geocoder.geocode({ address }, function(results, status) {
+      if(status === 'OK') {
+        map.setCenter(results[0].geometry.location);
+        const marker = new google.maps.Marker({
+          map,
+          position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
   }
 
   acceptInvite() {
