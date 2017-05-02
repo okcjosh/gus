@@ -13,6 +13,4 @@ router.put('/:id', controller.upsert);
 router.patch('/:id', controller.patch);
 router.delete('/:id', controller.destroy);
 
-router.post('/login', controller.login);
-
 module.exports = router;

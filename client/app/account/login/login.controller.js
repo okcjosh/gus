@@ -28,8 +28,7 @@ export default class LoginController {
         email: this.user.email,
         password: this.user.password
       })
-        .then((u) => {
-          console.log(u);
+        .then(u => {
           // Logged in, redirect to home
           this.$state.go('main');
         })
@@ -40,37 +39,37 @@ export default class LoginController {
   }
 
   loginLeo(form) {
-    this.submitted = true;
+    // this.submitted = true;
 
-    if(form.$valid) {
-      this.Auth.loginLeo({
-        email: this.user.email,
-        password: this.user.password
-      }, (err, id) => {
-          if (err) {
-            this.errors.login = err.message;
-            return;
-          }
-          window.localStorage.setItem('temp_leo_id', id);
-          
-          // Logged in, redirect to home
-          this.$state.go('leo-events', { leo_id: id });
-      });
-    }
+    // if(form.$valid) {
+    //   this.Auth.loginLeo({
+    //     email: this.user.email,
+    //     password: this.user.password
+    //   }, (err, id) => {
+    //       if (err) {
+    //         this.errors.login = err.message;
+    //         return;
+    //       }
+    //       window.localStorage.setItem('temp_leo_id', id);
+
+    //       // Logged in, redirect to home
+    //       this.$state.go('leo-events', { leo_id: id });
+    //   });
+    // }
   }
 
   forgotPassword() {
-    this.$http.get('/api/users/'+ this.forgotEmail +'/forgot_password')
-      .then(res => this.showForgotCodeInput = true)
+    this.$http.get('/api/users/' + this.forgotEmail + '/forgot_password')
+      .then(() => this.showForgotCodeInput = true)
       .catch(err => console.log(err));
   }
 
   submitForgotCode() {
-    this.$http.put('/api/users/forgot_password', { 
+    this.$http.put('/api/users/forgot_password', {
       code: this.forgotPasswordCode,
       password: this.forgotNewPassword
     })
-      .then(res => this.showForgotCodeInput = false)
+      .then(() => this.showForgotCodeInput = false)
       .catch(err => console.log(err));
   }
 }

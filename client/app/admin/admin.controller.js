@@ -59,17 +59,12 @@ export default class AdminController {
       .then(res => this.jobTypes = res.data);
   }
 
-  inviteLeo(leo) {
-    this.$http.post('/api/invitations', {
-      job_id: '2',
-      leo_id: leo.leo_id,
-      expires: '2016-12-31',
-      job_invitation_status_id: '1'
-    });
-  }
-
   addLeo() {
     if(this.newLeo.name) {
+      if(this.newLeo.address && this.newLeo.address.formatted_address) {
+        this.newLeo.address = this.newLeo.address.formatted_address;
+      }
+
       this.$http.post('/api/leos', this.newLeo)
         .then(res => {
           this.awesomeLeos.push(this.transformLeoForTable(res.data));

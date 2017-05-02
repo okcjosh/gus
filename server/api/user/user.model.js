@@ -31,6 +31,10 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       defaultValue: 'user'
     },
+    type: {
+      type: DataTypes.STRING,
+      defaultValue: 'user'
+    },
     phone: {
       type: DataTypes.STRING,
       unique: {

@@ -57,6 +57,8 @@ db.Status.hasMany(db.Event);
 
 db.JobInvitation.belongsTo(db.Leo, { foreignKey: 'leo_id' });
 
+db.Leo.belongsTo(db.User, { foreignKey: 'user_id' });
+
 //db.JobInvitation.belongsTo(db.JobInvitationStatus);
 //db.JobInvitationStatus.hasMany(db.JobInvitation);
 

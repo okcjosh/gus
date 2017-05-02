@@ -26,6 +26,9 @@ function handleError(res, statusCode) {
  */
 export function index(req, res) {
   return User.findAll({
+    where: {
+      role: { $or: [{ $eq: 'admin'}, { $eq: 'user' }] }
+    },
     attributes: [
       '_id',
       'first_name',
@@ -42,13 +45,21 @@ export function index(req, res) {
 }
 
 /**
+ * Creates a new user and return user instance
+ */
+export function createNewUser(data, role, type) {
+  let newUser = User.build(data);
+  newUser.setDataValue('provider', 'local');
+  newUser.setDataValue('role', role);
+  newUser.setDataValue('type', type);
+  return newUser.save();
+}
+
+/**
  * Creates a new user
  */
 export function create(req, res) {
-  let newUser = User.build(req.body);
-  newUser.setDataValue('provider', 'local');
-  newUser.setDataValue('role', 'user');
-  return newUser.save()
+  createNewUser(req.body, 'user', 'user')
     .then(function(user) {
       let token = jwt.sign({ _id: user._id }, config.secrets.session, {
         expiresIn: 60 * 60 * 5
@@ -148,13 +159,7 @@ export function me(req, res, next) {
 }
 
 function sendPhoneVerification(userId) {
-  // Twilio Credentials
-  let accountSid = 'AC9ce0d28ee69cd6ff89fdc1b8d0139099';
-  let authToken = '4890e088921ee4039f79b22d44d0ebb1';
-
-  //require the Twilio module and create a REST client
-  let client = require('twilio')(accountSid, authToken);
-
+  let client = require('./../../twilio').twilio;
 
   User.find({where: {
     _id: userId
@@ -180,7 +185,9 @@ function sendPhoneVerification(userId) {
 
 function generateRandomCode(length) {
   length = length || 6;
-  return Math.random().toString(36).slice(3, 3 + length).toUpperCase();
+  return Math.random().toString(36)
+          .slice(3, 3 + length)
+          .toUpperCase();
 }
 
 export function generatePhoneCode(req, res, next) {
@@ -197,7 +204,7 @@ export function verifyPhone(req, res, next) {
     }
   })
     .then(user => { // don't ever give out the password or salt
-      if (user.phone_verification_code === req.body.code.toUpperCase()) {
+      if(user.phone_verification_code === req.body.code.toUpperCase()) {
         user.phone_verified = true;
         user.save();
 
@@ -235,7 +242,7 @@ export function requestForgotPassword(req, res) {
         if(error) { return console.log(error); }
         console.log('Message %s sent: %s', info.messageId, info.response);
       });
-      
+
       return user.save()
         .then(() => res.status(204).end())
         .catch(validationError(res));

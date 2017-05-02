@@ -16,8 +16,9 @@ import jsonpatch from 'fast-json-patch';
 
 import gateway from './../../gateway';
 
-import {Leo, Event, Department} from './../../sqldb';
-import {signToken} from './../../auth/auth.service';
+import { createNewUser } from './../user/user.controller';
+
+import {Leo, User, Event, Department} from './../../sqldb';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -127,7 +128,7 @@ function createSubMerchantAccount(leo) {
 
 // Gets a list of Leos
 export function index(req, res) {
-  return Leo.findAll({order: 'lastGig ASC', include: [Department]})
+  return Leo.findAll({order: 'lastGig ASC', include: [Department, User]})
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -150,20 +151,20 @@ export function showCompatibleEvents(req, res) {
       _id: req.params.id
     }
   })
-  .then(leo => {
-    if(leo) {
-      return leo.dislikes.split(',');
-    }
-  })
-  .then(dislikes => {
-    return Event.findAll({
-      where: {
-        JobTypeId:{
-          $notIn: dislikes
-        }
+    .then(leo => {
+      if(leo) {
+        return leo.dislikes.split(',');
       }
-    });
-  })
+    })
+    .then(dislikes => {
+      return Event.findAll({
+        where: {
+          JobTypeId: {
+            $notIn: dislikes
+          }
+        }
+      });
+    })
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -171,25 +172,33 @@ export function showCompatibleEvents(req, res) {
 
 // Creates a new Leo in the DB
 export function create(req, res) {
-  let leo = req.body;
+  createNewUser(req.body, 'leo', 'leo')
+    .then(newUser => {
+      let leo = req.body;
 
-  leo.phone = leo.phone || '5555555555';
-  leo.state && (leo.state = leo.state.toUpperCase());
-  leo.routingNumber = leo.routingNumber || '071101307';
+      leo.user_id = newUser._id;
+      leo.phone = leo.phone || '5555555555';
+      leo.state && (leo.state = leo.state.toUpperCase());
+      leo.routingNumber = leo.routingNumber || '071101307';
 
-  leo.dislikes = leo.dislikes.join(',');
+      leo.dislikes = leo.dislikes.join(',');
 
-  return Leo.create(leo)
-    .then(newLeo => {
-      return createSubMerchantAccount(newLeo)
-        .then(() => Promise.resolve(newLeo))
+      return Leo.create(leo)
+        .then(newLeo => {
+          return createSubMerchantAccount(newLeo)
+            .then(() => Promise.resolve(newLeo))
+            .catch(err => {
+              newLeo.destroy();
+              newUser.destroy();
+              return Promise.reject(err);
+            });
+        })
+        .then(respondWithResult(res, 201))
         .catch(err => {
-          newLeo.destroy();
-          return Promise.reject(err);
+          newUser.destroy();
+          res.status(400).json(err);
         });
-    })
-    .then(respondWithResult(res, 201))
-    .catch(err => res.status(400).json(err));
+    });
 }
 
 // Upserts the given Leo in the DB at the specified ID
@@ -222,6 +231,11 @@ export function patch(req, res) {
     }
   })
     .then(handleEntityNotFound(res))
+    .then(leo => {
+      User.find({ where: { _id: leo.user_id } })
+        .then(patchUpdates(req.body));
+      return leo;
+    })
     .then(patchUpdates(req.body))
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -235,27 +249,14 @@ export function destroy(req, res) {
     }
   })
     .then(handleEntityNotFound(res))
+    .then(leo => {
+      User.destroy({
+        where: {
+          _id: leo.user_id
+        }
+      });
+      return leo;
+    })
     .then(removeEntity(res))
     .catch(handleError(res));
-}
-
-// Login for a leo
-export function login(req, res) {
-  Leo.find({
-    where: {
-      email: req.body.email
-    }
-  })
-  .then(leo => {
-    if (leo) {
-      if (leo.password === req.body.password) {
-        let token = signToken(leo._id, leo.role);
-        res.json({ token, leo_id: leo._id });
-      } else {
-        res.status(400).json({ message: 'Wrong password'});
-      }
-    } else {
-      res.status(404).json({ message: 'Leo Not found'});
-    }
-  })
 }

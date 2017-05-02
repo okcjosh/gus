@@ -10,6 +10,10 @@ export default function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
+    user_id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false

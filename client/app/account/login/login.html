@@ -28,12 +28,6 @@
               <input placeholder="Password" type='password' name='password' class='form-control' ng-model='vm.user.password' required>
             </div>
 
-            <div class='form-group'>
-              <label>Login as Leo</label>
-
-              <input type='checkbox' class='form-control' ng-model='vm.isLeoLogin'>
-            </div>
-
             <div class='form-group has-error'>
               <p class='help-block' ng-show='form.email.$error.required && form.password.$error.required && vm.submitted'>
                 Please enter your email and password.
@@ -47,11 +41,8 @@
             </div>
 
             <div class="col-xs-12 " style="margin-bottom: 20px; padding: 0px;">
-              <button ng-hide='vm.isLeoLogin' class='btn btn-primary btn-lg btn-login btn-block' type='submit'>
+              <button class='btn btn-primary btn-lg btn-login btn-block' type='submit'>
                 Login
-              </button>
-              <button ng-show='vm.isLeoLogin' class='btn btn-primary btn-lg btn-login btn-block' ng-click='vm.loginLeo(form)' type='button'>
-                Login as Leo
               </button>
               <button type="button" class='btn btn-primary btn-lg btn-login btn-block' ng-click="vm.showForgotInput = !vm.showForgotInput">
                 Forgot Password
