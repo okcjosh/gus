@@ -17,7 +17,7 @@ db.BtWebhook = db.sequelize.import('../api/bt_webhook/bt_webhook.model');
 db.Lookup = db.sequelize.import('../api/lookup/lookup.model');
 db.User = db.sequelize.import('../api/user/user.model');
 db.Notification = db.sequelize.import('../api/notification/notification.model');
-db.Cocknball = db.sequelize.import('../api/cocknball/cocknball.model');
+
 db.Session = db.sequelize.import('../api/session/session.model');
 db.DeptPreferences = db.sequelize.import('../api/dept_preferences/dept_preferences.model'); //
 db.DefDeptPreferences = db.sequelize.import('../api/def_dept_preferences/def_dept_preferences.model');

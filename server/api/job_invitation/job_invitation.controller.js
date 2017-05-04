@@ -16,6 +16,7 @@ import {JobInvitation, Leo} from '../../sqldb';
 import { sendText } from './../../twilio';
 
 import { sendInvitationEmail } from './../../email';
+let cookieParser = require('cookie-parser');
 
 const DEV_SERVER = '';
 const REAL_SERVER = 'myofficers.com';

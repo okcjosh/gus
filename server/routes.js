@@ -24,7 +24,7 @@ export default function(app, btSignatureParam, btPayloadParam = null) {
   app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
   app.use('/api/bt_webhook', require('./api/bt_webhook'));
-  app.use('/api/cocknballs', require('./api/cocknball'));
+
   app.use('/api/def_dept_preferences', require('./api/def_dept_preferences'));
   app.use('/api/dept_preferences', require('./api/dept_preferences'));
   app.use('/api/departments', require('./api/department'));
