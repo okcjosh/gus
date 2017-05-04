@@ -47,8 +47,6 @@ db.JobType.hasMany(db.Event);
 db.Lookup.belongsTo(db.JobType);
 db.JobType.hasMany(db.Lookup);
 
-db.Event.belongsTo(db.Lookup, { foreignKey: 'job_type_specs' });
-
 db.Event.belongsTo(db.User);
 db.User.hasMany(db.Event);
 
