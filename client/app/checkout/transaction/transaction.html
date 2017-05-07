@@ -8,89 +8,89 @@
             <img src='assets/images/success.svg'>
           </section>
           <section>
-            <p class="pay-success-message">Payment for your event was successful, you can print the receipt for your event here</p>
+            <p class="pay-success-message">Thank You! We have received your event reservation request and pre-authorized your card. You will be contacted when your event is approved.</p>
           </section>
-          <section><a href="javascript:window.print()" class="btn btn-success btn-icon btn-lg"> <span class="fa fa-print"></span> Print Receipt </a></section>
+          <section><a href="javascript:window.print()" class="btn btn-success btn-icon btn-lg"> <span class="fa fa-print"></span> Print Reservation Estimate </a></section>
         </div>
       </div>
     </div>
     <aside class="drawer dark col-lg-4">
       <header>
         <div class="content text-center">
-          <h3> <img src="assets/images/ps4Logo.png" class="visible-print receipt-logo"> MYOFFICERS.COM Receipt</h3>
+          <h3> <img src="assets/images/ps4Logo.png" class="visible-print receipt-logo"> MYOFFICERS.COM Event Reservation Estimate</h3>
         </div>
       </header>
       <article class="content compact">
-        <section>
-          <h5>Transaction</h5>
-          <table cellpadding="0" cellspacing="0" class="table">
-            <tbody>
-              <tr>
-                <th>Transaction ID</th>
-                <td>{{transaction.id}}</td>
-              </tr>
-              <tr>
-                <th>Type</th>
-                <td>{{transaction.type}}</td>
-              </tr>
-              <tr>
-                <th>Amount</th>
-                <td>{{transaction.amount}}</td>
-              </tr>
-              <tr>
-                <th>Status</th>
-                <td>{{transaction.status}}</td>
-              </tr>
-              <tr>
-                <th>Date</th>
-                <td>{{transaction.createdAt}}</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
         <section>
           <h5>Event Details</h5>
           <table cellpadding="0" cellspacing="0" class="table">
             <tbody>
               <tr>
-                <th>Event Name</th>
-                <td>{{event.title}}</td>
+                <th>Venue</th>
+                <td>{{event.venue}}</td>
+              </tr>
+              <tr>
+                <th>Event ID</th>
+                <td>{{event._id}}</td>
               </tr>
               <tr>
                 <th>Address</th>
                 <td>{{event.address}}</td>
               </tr>
               <tr>
-                <th>Venue</th>
-                <td>{{event.venue}}</td>
-              </tr>
-              <tr>
                 <th>Phone Number</th>
                 <td>{{event.phone_number}}</td>
               </tr>
-              <tr>
-                <th>Job Type</th>
-                <td>{{event.job_type.name}}</td>
-              </tr>
-              <tr>
-                <th>Job Specifications</th>
-                <td>{{event.job_type_specs}}</td>
-              </tr>
+              <!--<tr>-->
+                <!--<th>Job Type</th>-->
+                <!--<td>{{event.job_type.name}}</td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<th>Job Specifications</th>-->
+                <!--<td>{{event.job_type_specs}}</td>-->
+              <!--</tr>-->
               <tr>
                 <th>Date</th>
-                <td>{{event.date}}</td>
+                <td>{{ event.date | date: 'MM/dd/yyyy' }}</td>
               </tr>
             </tbody>
           </table>
         </section>
         <section>
-          <h5>Payment</h5>
+          <h5>Transaction</h5>
           <table cellpadding="0" cellspacing="0" class="table">
             <tbody>
-              <tr>
-                <th>Token</th>
-                <td>{{transaction.creditCard.token}}</td>
-              </tr>
+            <tr>
+              <th>Transaction ID</th>
+              <td>{{transaction.id}}</td>
+            </tr>
+            <tr>
+              <th>Type</th>
+              <td>{{transaction.type}}</td>
+            </tr>
+            <tr>
+              <th>Amount</th>
+              <td>{{transaction.amount}}</td>
+            </tr>
+            <tr>
+              <th>Status</th>
+              <td>{{transaction.status}}</td>
+            </tr>
+            <tr>
+              <th>Date</th>
+              <td>{{transaction.createdAt | date: 'MM/dd/yyyy'}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </section>
+        <section>
+          <h5>Pre-Authorization</h5>
+          <table cellpadding="0" cellspacing="0" class="table">
+            <tbody>
+              <!--<tr>-->
+                <!--<th>Token</th>-->
+                <!--<td>{{transaction.creditCard.token}}</td>-->
+              <!--</tr>-->
               <tr>
                 <th>Bin</th>
                 <td>{{transaction.creditCard.bin}}</td>

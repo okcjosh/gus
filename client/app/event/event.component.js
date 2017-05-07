@@ -47,7 +47,7 @@ export class EventComponent {
       // Because the datetimepicker plugin is jquery not angular, so selecting date doesn't set to a model, so we have to get it manually
       if($s.newEventForm.jobType.$valid
         && $s.newEventForm.jobSpecs.$valid
-        && $s.newEventForm.officerName.$valid
+        // && $s.newEventForm.officerName.$valid
         && $s.newEventForm.jobRecuring.$valid
         && $s.newEventForm.officer_stay_hours.$modelValue > 0
         && $s.newEventForm.officerUniform.$valid
