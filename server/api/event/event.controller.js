@@ -202,7 +202,7 @@ export function show(req, res) {
     where: {
       _id: req.params.id
     },
-    include: [JobType, User, Status, Lookup]
+    include: [JobType, User, Status]
   })
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
