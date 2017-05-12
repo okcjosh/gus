@@ -33,7 +33,7 @@
         <li class="list-group-item"><strong>Barricades</strong>: {{ event.barricades ? 'Yes' : 'No' }} </li>
         <li class="list-group-item"><strong>Police Vehicle</strong>: {{ event.police_vehicle ? 'Yes' : 'No' }} </li>
         <li class="list-group-item"><strong>Amplified Sound</strong>: {{ event.amplified_sound ? 'Yes' : 'No' }} </li>
-        
+
         <div id="map" style="height: 500px"></div>
       </ul>
       <ul class="list-group pw-lists">
@@ -105,167 +105,171 @@
 
         <button ng-if="isLeo" class="btn btn-primary" type="button" ng-click="expressInterest()">Express interest</button>
 
-        <div ng-if="isAdminUser" class="col-md-3" id="approve-modal">
-          <a id="modal-118275" href="#modal-container-118275" role="button" class="btn btn-success btn-icon btn-rounded" ng-click="approve()" data-toggle="modal"><i class="fa fa-check-square-o" aria-hidden="true"></i>Approve Job</a>
-          <div class="modal fade" id="modal-container-118275" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                  </button>
-                  <h4 class="modal-title" id="myModalLabel">
-                    Assign Officers
-                  </h4>
-                </div>
-                <div class="modal-body" style="overflow: auto;">
+        <div>
+          <div ng-if="isAdminUser && event.StatusId == 1" class="col-md-3" id="approve-modal">
+            <a id="modal-118275" href="#modal-container-118275" role="button" class="btn btn-success btn-icon btn-rounded" ng-click="approve()" data-toggle="modal"><i class="fa fa-check-square-o" aria-hidden="true"></i>Approve Job</a>
+            <div class="modal fade" id="modal-container-118275" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                      &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                      Assign Officers
+                    </h4>
+                  </div>
+                  <div class="modal-body" style="overflow: auto;">
 
-                  <script type="text/ng-template" id="list.html">
-                    <ul dnd-list dnd-drop="onDrop(list, item, index)">
-                      <li ng-repeat="item in list.items"
-                          data-leo-id="{{item.leo_id}}"
-                          dnd-draggable="getSelectedItemsIncluding(list, item)"
-                          dnd-dragstart="onDragstart(list, event)"
-                          dnd-moved="onMoved(list)"
-                          dnd-dragend="list.dragging = false"
-                          dnd-selected="item.selected = !item.selected"
-                          ng-class="{'selected': item.selected}"
-                          ng-hide="list.dragging && item.selected">
-                        {{item.name}}
-                      </li>
-                    </ul>
-                  </script>
+                    <script type="text/ng-template" id="list.html">
+                      <ul dnd-list dnd-drop="onDrop(list, item, index)">
+                        <li ng-repeat="item in list.items"
+                            data-leo-id="{{item.leo_id}}"
+                            dnd-draggable="getSelectedItemsIncluding(list, item)"
+                            dnd-dragstart="onDragstart(list, event)"
+                            dnd-moved="onMoved(list)"
+                            dnd-dragend="list.dragging = false"
+                            dnd-selected="item.selected = !item.selected"
+                            ng-class="{'selected': item.selected}"
+                            ng-hide="list.dragging && item.selected">
+                          {{item.name}}
+                        </li>
+                      </ul>
+                    </script>
 
-                  <script type="text/ng-template" id="leoList.html">
-                    <ul dnd-list dnd-drop="onDrop(list, item, index)">
-                      <li ng-repeat="item in list.items"
-                          data-leo-id="{{item.leo_id}}"
-                          dnd-draggable="getSelectedItemsIncluding(list, item)"
-                          dnd-dragstart="onDragstart(list, event)"
-                          dnd-moved="onMoved(list)"
-                          dnd-dragend="list.dragging = false"
-                          dnd-selected="item.selected = !item.selected"
-                          ng-class="{'selected': item.selected}"
-                          ng-hide="list.dragging && item.selected">
-                        {{item.name}}
-                      </li>
-                    </ul>
-                  </script>
+                    <script type="text/ng-template" id="leoList.html">
+                      <ul dnd-list dnd-drop="onDrop(list, item, index)">
+                        <li ng-repeat="item in list.items"
+                            data-leo-id="{{item.leo_id}}"
+                            dnd-draggable="getSelectedItemsIncluding(list, item)"
+                            dnd-dragstart="onDragstart(list, event)"
+                            dnd-moved="onMoved(list)"
+                            dnd-dragend="list.dragging = false"
+                            dnd-selected="item.selected = !item.selected"
+                            ng-class="{'selected': item.selected}"
+                            ng-hide="list.dragging && item.selected">
+                          {{item.name}}
+                        </li>
+                      </ul>
+                    </script>
 
-                  <script type="text/ng-template" id="container.html">
-                    <div class="container-element box box-blue">
-                      <h3>Container {{item.id}}</h3>
-                      <div class="column" ng-repeat="list in item.columns" ng-include="'list.html'"></div>
-                      <div class="clearfix"></div>
+                    <script type="text/ng-template" id="container.html">
+                      <div class="container-element box box-blue">
+                        <h3>Container {{item.id}}</h3>
+                        <div class="column" ng-repeat="list in item.columns" ng-include="'list.html'"></div>
+                        <div class="clearfix"></div>
+                      </div>
+                    </script>
+
+                    <!-- Template for a normal list item -->
+                    <script type="text/ng-template" id="item.html">
+                      <div class="item">Item {{item.id}}</div>
+                    </script>
+
+                    <!-- Auto select parameters -->
+                    <div class="">
+                      <div class="form-inline" style="margin-bottom: 10px">
+                        <div class="form-group">
+                          <input class="form-control" min="0" id="auto-round-one-input" style="width: 100px" placeholder="Round 1" type="number">
+                          <input class="form-control" min="0" id="auto-round-two-input" style="width: 100px" placeholder="Round 2" type="number">
+                          <input class="form-control" min="0" id="auto-round-three-input" style="width: 100px" placeholder="Round 3" type="number">
+                        </div>
+
+                        <button type="button" ng-click="$ctrl.autoSelect()" class="btn btn-default btn-rounded">
+                          Auto select
+                        </button>
+                      </div>
+
                     </div>
-                  </script>
 
-                  <!-- Template for a normal list item -->
-                  <script type="text/ng-template" id="item.html">
-                    <div class="item">Item {{item.id}}</div>
-                  </script>
+                    <!-- Main area with dropzones and source code -->
+                    <div class="col-md-12 multiDemo">
+                      <div class="row">
 
-                  <!-- Auto select parameters -->
-                  <div class="">
-                    <div class="form-inline" style="margin-bottom: 10px">
+                        <div ng-repeat="list in leosList" class="col-md-3" id="leo-list">
+                          <div class="dropzone box box-yellow">
+                            <!-- The dropzone also uses the list template -->
+                            <h5>{{ list.listName }}</h5>
+                            <div ng-include="'leoList.html'"></div>
+                          </div>
+                        </div>
+
+                        <div ng-repeat="list in invitesList" class="col-md-3">
+                          <div class="dropzone box box-yellow">
+                            <!-- The dropzone also uses the list template -->
+                            <h5>{{ list.listName }}</h5>
+                            <div ng-include="'list.html'"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <ul data-as-sortable="board.dragControlListeners" data-ng-model="items">
+                      <li data-ng-repeat="item in items" data-as-sortable-item>
+                        <div data-as-sortable-item-handle></div>
+                      </li>
+                    </ul>
+
+                    <ul data-as-sortable="board.dragControlListeners" data-ng-model="items">
+                      <li data-ng-repeat="item in items" data-as-sortable-item>
+                        <div data-as-sortable-item-handle></div>
+                      </li>
+                    </ul>
+
+                  </div>
+                  <div class="modal-footer">
+
+                    <div class="pull-left form-inline">
                       <div class="form-group">
-                        <input class="form-control" min="0" id="auto-round-one-input" style="width: 100px" placeholder="Round 1" type="number">
-                        <input class="form-control" min="0" id="auto-round-two-input" style="width: 100px" placeholder="Round 2" type="number">
-                        <input class="form-control" min="0" id="auto-round-three-input" style="width: 100px" placeholder="Round 3" type="number">
+                        <label>Sort by: </label>
+                        <select class="form-control" ng-change="$ctrl.orderByChange(leoSort)" ng-model="leoSort">
+                          <option value="name">By Name</option>
+                          <option value="lastGig">By Last Gig</option>
+                          <option value="year_started">By Year started</option>
+                        </select>
+                      </div>
+                      &nbsp;
+                      &nbsp;
+                      &nbsp;
+                      <div class="form-group">
+                        <label>Filter by: </label>
+                        <select class="form-control" ng-model="leoFilter">
+                          <option value="">---- Officers preffered Job Types ----</option>
+                          <option ng-repeat="type in jobTypes" value="{{::type.name}}">{{::type.name}}</option>
+                        </select>
                       </div>
 
-                      <button type="button" ng-click="$ctrl.autoSelect()" class="btn btn-default btn-rounded">
-                        Auto select
-                      </button>
-                    </div>
+                      <!-- CHECKBOXES for filter is too messy -->
+                      <!-- <div class="form-group">
+                        <label>Filter by: </label>
 
-                  </div>
-
-                  <!-- Main area with dropzones and source code -->
-                  <div class="col-md-12 multiDemo">
-                    <div class="row">
-
-                      <div ng-repeat="list in leosList" class="col-md-3" id="leo-list">
-                        <div class="dropzone box box-yellow">
-                          <!-- The dropzone also uses the list template -->
-                          <h5>{{ list.listName }}</h5>
-                          <div ng-include="'leoList.html'"></div>
+                        <div ng-repeat="type in jobTypes" class="checkbox">
+                          <label>
+                            <input type="checkbox" value="">
+                            {{type.name}}
+                          </label>
                         </div>
-                      </div>
 
-                      <div ng-repeat="list in invitesList" class="col-md-3">
-                        <div class="dropzone box box-yellow">
-                          <!-- The dropzone also uses the list template -->
-                          <h5>{{ list.listName }}</h5>
-                          <div ng-include="'list.html'"></div>
-                        </div>
-                      </div>
+                      </div> -->
+
                     </div>
+
+                    <button type="button" class="btn btn-default btn-rounded" data-dismiss="modal">
+                      Close
+                    </button>
+                    <button type="button" class="btn btn-primary btn-rounded" data-dismiss="modal" ng-click="saveDrags()">
+                      Save changes
+                    </button>
                   </div>
-
-                  <ul data-as-sortable="board.dragControlListeners" data-ng-model="items">
-                    <li data-ng-repeat="item in items" data-as-sortable-item>
-                      <div data-as-sortable-item-handle></div>
-                    </li>
-                  </ul>
-
-                  <ul data-as-sortable="board.dragControlListeners" data-ng-model="items">
-                    <li data-ng-repeat="item in items" data-as-sortable-item>
-                      <div data-as-sortable-item-handle></div>
-                    </li>
-                  </ul>
-
-                </div>
-                <div class="modal-footer">
-
-                  <div class="pull-left form-inline">
-                    <div class="form-group">
-                      <label>Sort by: </label>
-                      <select class="form-control" ng-change="$ctrl.orderByChange(leoSort)" ng-model="leoSort">
-                        <option value="name">By Name</option>
-                        <option value="lastGig">By Last Gig</option>
-                        <option value="year_started">By Year started</option>
-                      </select>
-                    </div>
-                    &nbsp;
-                    &nbsp;
-                    &nbsp;
-                    <div class="form-group">
-                      <label>Filter by: </label>
-                      <select class="form-control" ng-model="leoFilter">
-                        <option value="">---- Officers preffered Job Types ----</option>
-                        <option ng-repeat="type in jobTypes" value="{{::type.name}}">{{::type.name}}</option>
-                      </select>
-                    </div>
-
-                    <!-- CHECKBOXES for filter is too messy -->
-                    <!-- <div class="form-group">
-                      <label>Filter by: </label>
-
-                      <div ng-repeat="type in jobTypes" class="checkbox">
-                        <label>
-                          <input type="checkbox" value="">
-                          {{type.name}}
-                        </label>
-                      </div>
-
-                    </div> -->
-
-                  </div>
-
-                  <button type="button" class="btn btn-default btn-rounded" data-dismiss="modal">
-                    Close
-                  </button>
-                  <button type="button" class="btn btn-primary btn-rounded" data-dismiss="modal" ng-click="saveDrags()">
-                    Save changes
-                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div ng-if="isAdminUser" class="col-md-3" id="complete-modal">
+
+
+        <div ng-if="isAdminUser && event.StatusId != 1" class="col-md-3" id="complete-modal">
           <a id="modal-338275" href="#modal-container-338275" role="button" class="btn btn-primary btn-icon btn-rounded" data-toggle="modal"><i class="fa fa-check-square-o" aria-hidden="true"></i>Complete Job</a>
           <div class="modal fade" id="modal-container-338275" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -382,7 +386,7 @@
           </div>
         </div>
 
-        <div ng-if="isAdminUser" class="col-md-6" id="reject-modal">
+        <div ng-if="isAdminUser && event.StatusId == 1" class="col-md-6" id="reject-modal">
           <a id="modal-349281" href="#modal-container-349281" role="button" class="btn btn-danger btn-icon btn-rounded" data-toggle="modal"><i class="fa fa-exclamation-triangle" aria-hidden="true">Reject Job</i></a>
           <!--<button type="input" name="submit" value="saveEntry" class="btn btn-danger btn-icon mb-20"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Decline Job</button>-->
           <div class="modal fade" id="modal-container-349281" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -450,7 +454,7 @@
 
         <!-- <button type="input" name="submit" value="saveEntry" class="btn btn-success btn-icon mb-20"><i class="fa fa-check-square-o" aria-hidden="true"></i> Approve Job</button>
         <button type="input" name="submit" value="saveEntry" class="btn btn-danger btn-icon mb-20"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Decline Job</button> -->
-      </form>
+</form>
     </div>
   </div>
 </div>
