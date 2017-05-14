@@ -301,6 +301,21 @@ export function showByStatus(req, res) {
     .catch(handleError(res));
 }
 
+export function getStatus(req, res) {
+  var StatusId;
+  return Event.find({
+    where: {
+      status_id: req.params.StatusId
+
+    }
+
+  })
+
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
 export function approve(req, res) {
   var id = req.params._id;
   Event.seq.query('update Events set StatusId = 2 where _id =' + id);
