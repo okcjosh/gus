@@ -12,7 +12,7 @@ router.get('/:id/leos_invite', controller.leosForEvent);
 router.post('/:id/complete', controller.completeEventPayment);
 router.get('/:id/cost', controller.getEventCost);
 router.get('/:id/status/:status_id', controller.showByStatus);
-router.get('/:id/status_id', controller.getStatus);
+// router.get('/:id/status_id', controller.getStatus);
 router.post('/', auth.isAuthenticated(), controller.create);
 router.get('/approve/:_id', controller.approve);
 router.put('/:id', controller.upsert);
