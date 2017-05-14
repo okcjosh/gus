@@ -10,6 +10,7 @@ export class EventDetailsComponent {
   adjustedAmount = 0;
   eventCost = {};
   receivingLeos = [];
+  eventStatusId = [];
 
   /*@ngInject*/
   constructor($http, $scope, socket, $state, orderByFilter) {
@@ -68,6 +69,7 @@ export class EventDetailsComponent {
           $scope.event = res.data;
           this.initMap(event.address);
         }
+
       });
 
     this.$http.get('/api/users/me')
@@ -90,7 +92,10 @@ export class EventDetailsComponent {
         this.eventCost = res.data;
         this.adjustedAmount = res.data.grand_total;
       });
-
+    this.$http.get(`/api/events/${event_id}/status`)
+      .then(res => {
+        this.eventStatusId = res.data;
+      });
     // this.$http.get(`/api/events/${event_id}/leos_invite?status=Accepted`)
     //   .then(res => this.receivingLeos = res.data);
 
@@ -102,6 +107,7 @@ export class EventDetailsComponent {
           .map(inv => inv.Leo);
       });
   }
+
 
   initMap(address) {
     var geocoder = new google.maps.Geocoder();
