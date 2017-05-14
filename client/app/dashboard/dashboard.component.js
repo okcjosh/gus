@@ -121,7 +121,7 @@ export class DashboardComponent {
             {data: "job_type_specs", title: "Job Specs", visible: false},
             {data: "prefered_officer_name", title: "Prefered Officer", visible: false},
             {data: "is_recuring", title: "Is Recuring", visible: false},
-            {data: "recuring_data", title: "Recuring", visible: false},
+            //{data: "recuring_data", title: "Recuring", visible: false},
             {data: "date", title: "Date", visible: false},
             // { data: "status", title: "Status" },
             // { data: "event_type", title: "Event Type" }
