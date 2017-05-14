@@ -14,6 +14,9 @@ import jsonpatch from 'fast-json-patch';
 
 import gateway from './../../gateway';
 
+import shortid from 'shortid';
+import moment from 'moment';
+
 import {Event, Status, JobType, User, Leo, JobInvitation, Lookup} from '../../sqldb';
 
 import { sendEventCompletionEmail } from './../../email';
@@ -128,6 +131,8 @@ export function CostCalculator(event) {
     return v == 'yes' ? 1 : 0;
   }
 
+  event.JobType = event.JobType || {};
+
   var c = {
     base: {
       cost: event.JobType.base_price,
@@ -190,7 +195,15 @@ export function CostCalculator(event) {
 // Gets a list of Events
 export function index(req, res) {
   return Event.findAll({
-    include: [JobType, Status]
+    include: [JobType, Status],
+    // where: {
+    //   date: {
+    //     $gt: Date.now()
+    //   }
+    // },
+    // order: [
+    //   ['date', 'ASC']
+    // ]
   })
     .then(respondWithResult(res))
     .catch(() => handleError(res));
@@ -306,8 +319,54 @@ export function getEventCost(req, res) {
   });
 }
 
-// Creates a new Event in the DB
+// Creates a new Event or series of events in the DB
 export function create(req, res) {
+  req.body.UserId = req.user._id;
+  let eventData = req.body;
+
+  // This will run if the event is a recurring event
+  if(eventData.is_recuring) {
+    eventData.recuring_collection_id = shortid.generate();
+    var recuringEvents = eventData.recuring_data.map(data => {
+      let newEvent = Object.assign({}, eventData);
+
+      newEvent.date = data.start;
+      newEvent.hours_expected = moment(data.end).diff(moment(data.start), 'h');
+      delete newEvent.recuring_data;
+      // Reflect.deleteProperty(newEvent, 'recuring_data');
+
+      return newEvent;
+    });
+    // console.log(recuringEvents.length, recuringEvents, '======');
+
+    return Event.bulkCreate(recuringEvents)
+      .then(() => {
+        let totalCost = 0;
+
+        return Event.findAll({
+          where: {
+            recuring_collection_id: eventData.recuring_collection_id
+          },
+          include: [JobType, User]
+        })
+          .then(reloadedEvents => {
+            reloadedEvents.forEach((reloadedEvent, ind) => {
+              totalCost += CostCalculator(reloadedEvent).base.total;
+
+              if(ind === reloadedEvents.length - 1) {
+                res.status(201).json({
+                  event: reloadedEvent,
+                  cost: CostCalculator(reloadedEvent),
+                  totalCost: totalCost
+                });
+              }
+            });
+          });
+      })
+      .catch(handleError(res));
+  }
+
+  // This will run if the event is a Single event
   return Event.create(req.body)
     .then(function(event) {
       event.setUser(req.user._id)
@@ -322,7 +381,6 @@ export function create(req, res) {
           });
         });
     })
-    //.then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
 

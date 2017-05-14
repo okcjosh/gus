@@ -144,7 +144,8 @@ module.exports = function makeWebpackConfig(options) {
             include: [
                 path.resolve(__dirname, 'client/'),
                 path.resolve(__dirname, 'node_modules/lodash-es/'),
-                path.resolve(__dirname, 'node_modules/angular-toastr/dist/angular-toastr.tpls.js')
+                path.resolve(__dirname, 'node_modules/angular-toastr/dist/angular-toastr.tpls.js'),
+                path.resolve(__dirname, 'node_modules/fullcalendar/dist/fullcalendar.js')
             ]
         }, {
             // TS LOADER

@@ -1,8 +1,12 @@
 'use strict';
 const angular = require('angular');
 const uiRouter = require('angular-ui-router');
-const $ = window.$;
+let $ = window.$;
+
+const moment = require('moment');
+
 import routing from './event.routes';
+
 export class EventComponent {
   awesomeEvents = [];
 
@@ -79,7 +83,7 @@ export class EventComponent {
     this.$scope.progress = 1;
     this.$scope.nextStep = () => {
       // Check for validity of filled data
-      if(this.checkStepValid($scope.progress)) {
+      if(true || this.checkStepValid($scope.progress)) {
         if($scope.progress == 2) {
           // To submit the Event
           this.postEvent($scope)
@@ -112,6 +116,28 @@ export class EventComponent {
     this.$scope.showRecurringModal = function() {
       $('#recuringJobSelect').prop('disabled', false);
       $('#recurrentJob').modal('show');
+
+      setTimeout(() => {
+        $('#recurring-calendar').fullCalendar('today');
+        $('#recurring-calendar').fullCalendar('changeView', 'agendaWeek');
+      }, 1000);
+    };
+
+    this.$scope.setRecurringEvents = function() {
+      let events = $('#recurring-calendar').fullCalendar('clientEvents');
+
+      events = events.map(e => {
+        // moment objects
+        // if no end is specified, automatically fullcalendar means 2 hours
+        let twoHoursFromStart = e.start.clone().add(2, 'h');
+                                  //.toDate();
+
+        e.end = e.end ? e.end : twoHoursFromStart;
+        e.start = e.start;//.toDate();
+        return e;
+      });
+
+      $scope.eventData.recuring_data = events;
     };
 
     this.$scope.eventData = {
@@ -183,52 +209,26 @@ export class EventComponent {
         .maxDate(e.date);
     });
 
-    // Recurring modal pop func
-    // $('.recuringJob').change(function() {
-    //   $('#recuringJobSelect').prop('selectedIndex', 0);
-    //   var rVal = $(this).val();
-    //   if (rVal == '1') {
-    //     $('#recuringJobSelect').prop('disabled', false);
-    //     $('#recurrentJob').modal('show');
-    //   } else {
-    //     $('#recuringJobSelect').prop('disabled', 'disabled');
-    //     $('#recurrentJob').modal('hide');
-    //   }
-    // });
+    $('#recurring-calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+      },
+      allDaySlot: false,
+      editable: true,
+      droppable: true
+    });
 
+    $('#external-events .fc-event').each(function() {
+      // make the event draggable using jQuery UI
+      $(this).draggable({
+        zIndex: 999,
+        revert: true,      // will cause the event to go back to its
+        revertDuration: 0  //  original position after the drag
+      });
+    });
 
-    // endia
-
-    // $('#creationEventDate').datetimepicker({
-		// 	format: 'DD MMMM YYYY hh:mm',
-		// 	minDate: moment().add(7, 'days')
-		// });
-    //
-		// $('#creationEventDateGroup').datetimepicker({
-		// 	format: 'DD MMMM YYYY hh:mm',
-		// 	minDate: moment().add(7, 'days')
-		// });
-    //
-		// $('#creationEventTime').datetimepicker({
-		// 	format: 'LT'
-		// });
-    //
-		// $('#creationEventTimeGroup').datetimepicker({
-		// 	format: 'LT'
-		// });
-    //
-    // $(' [name='jobRecuring']').change(function(){
-		// 	//$('#recuringJobSelect').prop('selectedIndex',0);
-		// 	var rVal = $(this).val();
-		// 	if(rVal == '1') {
-		// 		$('#recuringJobSelect').prop('disabled', false);
-		// 		$('#recurrentJob').modal('show');
-		// 	} else {
-		// 		$('#recuringJobSelect').prop('disabled', 'disabled');
-		// 		$('#recurrentJob').modal('hide');
-		// 	}
-		// });
-    //
 
     /** ******************************
      * Required Fields
@@ -271,7 +271,7 @@ export class EventComponent {
       job_type_specs: $scope.eventData.jobSpecs.join(','),
       prefered_officer_name: $scope.eventData.officerName.join(','),
       is_recuring: $scope.eventData.is_recuring,
-      recuring_data: $scope.eventData.recuringInterval,
+      recuring_data: $scope.eventData.recuring_data,
       date: $scope.eventData.creationEventDate,
 
       description: $scope.eventData.description,
@@ -304,10 +304,6 @@ export class EventComponent {
       });
 
     return d.promise;
-  }
-
-  loadRecuringModal() {
-    console.log(this.$scope);
   }
 
   deleteEvent(event) {
