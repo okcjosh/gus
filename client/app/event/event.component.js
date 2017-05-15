@@ -83,7 +83,7 @@ export class EventComponent {
     this.$scope.progress = 1;
     this.$scope.nextStep = () => {
       // Check for validity of filled data
-      if(true || this.checkStepValid($scope.progress)) {
+      if(this.checkStepValid($scope.progress)) {
         if($scope.progress == 2) {
           // To submit the Event
           this.postEvent($scope)
