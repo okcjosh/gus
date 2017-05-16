@@ -163,7 +163,7 @@ export function webhook(req, res) {
       }
       // console.log(webhookNotification, '=========HOOK=========');
 
-      var kinds = braintree.WebhookNotification.Kind;
+      let kinds = braintree.WebhookNotification.Kind;
       // console.log(braintree.merchantAccount, JSON.stringify(webhookNotification), '<<<<<<<========');
       // console.log("[Webhook Received " + webhookNotification.timestamp + "] | Kind: " + webhookNotification.kind);
 

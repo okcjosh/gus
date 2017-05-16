@@ -1,8 +1,8 @@
 'use strict';
 
-var proxyquire = require('proxyquire').noPreserveCache();
+let proxyquire = require('proxyquire').noPreserveCache();
 
-var jobInvitationCtrlStub = {
+let jobInvitationCtrlStub = {
   index: 'jobInvitationCtrl.index',
   show: 'jobInvitationCtrl.show',
   create: 'jobInvitationCtrl.create',
@@ -11,7 +11,7 @@ var jobInvitationCtrlStub = {
   destroy: 'jobInvitationCtrl.destroy'
 };
 
-var routerStub = {
+let routerStub = {
   get: sinon.spy(),
   put: sinon.spy(),
   patch: sinon.spy(),
@@ -20,7 +20,7 @@ var routerStub = {
 };
 
 // require the index with our stubbed out modules
-var jobInvitationIndex = proxyquire('./index.js', {
+let jobInvitationIndex = proxyquire('./index.js', {
   express: {
     Router() {
       return routerStub;

@@ -4,7 +4,7 @@ describe('Component: DashboardComponent', function() {
   // load the controller's module
   beforeEach(module('gusApp.rates'));
 
-  var DashboardComponent;
+  let DashboardComponent;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function($componentController) {

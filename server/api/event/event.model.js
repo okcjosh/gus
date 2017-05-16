@@ -1,7 +1,7 @@
 'use strict';
 
 export default function(sequelize, DataTypes) {
-  var Event = sequelize.define('Event', {
+  let Event = sequelize.define('Event', {
     _id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -39,7 +39,7 @@ export default function(sequelize, DataTypes) {
     instanceMethods: {
       // Hide password from JSON of user
       toJSON: function () {
-        var e = Object.assign({}, this.get());
+        let e = Object.assign({}, this.get());
         if (e.User) {
           delete e.User.password;
           delete e.User.provider;

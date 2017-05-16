@@ -118,7 +118,7 @@ export default function(sequelize, DataTypes) {
     instanceMethods: {
       // Hide password from JSON of user
       toJSON: function () {
-        var values = Object.assign({}, this.get());
+        let values = Object.assign({}, this.get());
 
         delete values.password;
         delete values.provider;

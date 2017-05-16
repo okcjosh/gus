@@ -1,13 +1,13 @@
 'use strict';
 
-var app = require('../..');
+let app = require('../..');
 import request from 'supertest';
 
-var newNotification;
+let newNotification;
 
 describe('Notification API:', function() {
   describe('GET /api/notifications', function() {
-    var notifications;
+    let notifications;
 
     beforeEach(function(done) {
       request(app)
@@ -54,7 +54,7 @@ describe('Notification API:', function() {
   });
 
   describe('GET /api/notifications/:id', function() {
-    var notification;
+    let notification;
 
     beforeEach(function(done) {
       request(app)
@@ -81,7 +81,7 @@ describe('Notification API:', function() {
   });
 
   describe('PUT /api/notifications/:id', function() {
-    var updatedNotification;
+    let updatedNotification;
 
     beforeEach(function(done) {
       request(app)
@@ -130,7 +130,7 @@ describe('Notification API:', function() {
   });
 
   describe('PATCH /api/notifications/:id', function() {
-    var patchedNotification;
+    let patchedNotification;
 
     beforeEach(function(done) {
       request(app)

@@ -2,9 +2,9 @@
 
 /* globals sinon, describe, expect, it */
 
-var proxyquire = require('proxyquire').noPreserveCache();
+let proxyquire = require('proxyquire').noPreserveCache();
 
-var btWebhookCtrlStub = {
+let btWebhookCtrlStub = {
   index: 'btWebhookCtrl.index',
   show: 'btWebhookCtrl.show',
   create: 'btWebhookCtrl.create',
@@ -13,7 +13,7 @@ var btWebhookCtrlStub = {
   destroy: 'btWebhookCtrl.destroy'
 };
 
-var routerStub = {
+let routerStub = {
   get: sinon.spy(),
   put: sinon.spy(),
   patch: sinon.spy(),
@@ -22,7 +22,7 @@ var routerStub = {
 };
 
 // require the index with our stubbed out modules
-var btWebhookIndex = proxyquire('./index.js', {
+let btWebhookIndex = proxyquire('./index.js', {
   express: {
     Router() {
       return routerStub;

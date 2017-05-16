@@ -1,10 +1,10 @@
 'use strict';
 
-var express = require('express');
-var controller = require('./event.controller');
+let express = require('express');
+let controller = require('./event.controller');
 import * as auth from '../../auth/auth.service';
 
-var router = express.Router();
+let router = express.Router();
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);

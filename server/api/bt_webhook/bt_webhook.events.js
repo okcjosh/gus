@@ -5,14 +5,14 @@
 'use strict';
 
 import {EventEmitter} from 'events';
-var BtWebhook = require('../../sqldb').BtWebhook;
-var BtWebhookEvents = new EventEmitter();
+let BtWebhook = require('../../sqldb').BtWebhook;
+let BtWebhookEvents = new EventEmitter();
 
 // Set max event listeners (0 == unlimited)
 BtWebhookEvents.setMaxListeners(0);
 
 // Model events
-var events = {
+let events = {
   afterCreate: 'save',
   afterUpdate: 'save',
   afterDestroy: 'remove'
@@ -20,7 +20,7 @@ var events = {
 
 // Register the event emitter to the model events
 function registerEvents(BtWebhook) {
-  for(var e in events) {
+  for(let e in events) {
     let event = events[e];
     BtWebhook.hook(e, emitEvent(event));
   }

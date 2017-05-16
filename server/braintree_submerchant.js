@@ -15,7 +15,7 @@ gateway = braintree.connect({
 
 module.exports = gateway;
 
-var merchantAccountParams;
+let merchantAccountParams;
 merchantAccountParams = {
   individual: {
     firstName: "Shye",

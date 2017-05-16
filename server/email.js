@@ -9,7 +9,7 @@ const DEV_SERVER = '';
 const REAL_SERVER = 'http://es4.io';
 const LOCAL_SERVER = '192.168.0.17';
 
-var transport = mailer.createTransport({
+let transport = mailer.createTransport({
   host: 'mail.ontinuity.co.uk',
   port: 587,
   secure: false, // upgrade later with STARTTLS
@@ -60,7 +60,7 @@ function sendEventCompletionEmail(event) {
 }
 
 function sendEmail(to, subject, body) {
-  var mailoptions = {
+  let mailoptions = {
     from: 'es4mailer@gmail.com',
     to,
     subject,

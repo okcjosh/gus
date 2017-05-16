@@ -1,13 +1,13 @@
 'use strict';
 
-var app = require('../..');
+let app = require('../..');
 import request from 'supertest';
 
-var newJobInvitationStatus;
+let newJobInvitationStatus;
 
 describe('JobInvitationStatus API:', function() {
   describe('GET /api/job_invitation_status', function() {
-    var jobInvitationStatuss;
+    let jobInvitationStatuss;
 
     beforeEach(function(done) {
       request(app)
@@ -54,7 +54,7 @@ describe('JobInvitationStatus API:', function() {
   });
 
   describe('GET /api/job_invitation_status/:id', function() {
-    var jobInvitationStatus;
+    let jobInvitationStatus;
 
     beforeEach(function(done) {
       request(app)
@@ -81,7 +81,7 @@ describe('JobInvitationStatus API:', function() {
   });
 
   describe('PUT /api/job_invitation_status/:id', function() {
-    var updatedJobInvitationStatus;
+    let updatedJobInvitationStatus;
 
     beforeEach(function(done) {
       request(app)
@@ -130,7 +130,7 @@ describe('JobInvitationStatus API:', function() {
   });
 
   describe('PATCH /api/job_invitation_status/:id', function() {
-    var patchedJobInvitationStatus;
+    let patchedJobInvitationStatus;
 
     beforeEach(function(done) {
       request(app)

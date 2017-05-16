@@ -83,13 +83,13 @@ export class DashboardComponent {
             this.api().columns()
             .every(function() {
               //alert('col: ' + this.header().innerHTML );
-              var column = this;
+              let column = this;
               if(this.header().innerHTML == 'Status') {
 
-                var select = $('<select><option value=""></option></select>')
+                let select = $('<select><option value=""></option></select>')
                   .appendTo($(column.header()).empty())
                   .on('change', function () {
-                    var val = $.fn.dataTable.util.escapeRegex(
+                    let val = $.fn.dataTable.util.escapeRegex(
                       $(this).val()
                     );
 
@@ -100,7 +100,7 @@ export class DashboardComponent {
 
                 column.data().unique().sort().each(function (d, j) {
                   // select.append('<option value="' + d + '">' + d + '</option>')
-                  var val = $('<div/>').html(d).text();
+                  let val = $('<div/>').html(d).text();
                   select.append('<option value="' + val + '">' + val + '</option>');});
               }
             });

@@ -1,8 +1,8 @@
 'use strict';
 
-var proxyquire = require('proxyquire').noPreserveCache();
+let proxyquire = require('proxyquire').noPreserveCache();
 
-var seniorityClassCtrlStub = {
+let seniorityClassCtrlStub = {
   index: 'seniorityClassCtrl.index',
   show: 'seniorityClassCtrl.show',
   create: 'seniorityClassCtrl.create',
@@ -11,7 +11,7 @@ var seniorityClassCtrlStub = {
   destroy: 'seniorityClassCtrl.destroy'
 };
 
-var routerStub = {
+let routerStub = {
   get: sinon.spy(),
   put: sinon.spy(),
   patch: sinon.spy(),
@@ -20,7 +20,7 @@ var routerStub = {
 };
 
 // require the index with our stubbed out modules
-var seniorityClassIndex = proxyquire('./index.js', {
+let seniorityClassIndex = proxyquire('./index.js', {
   express: {
     Router() {
       return routerStub;

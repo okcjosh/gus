@@ -5,21 +5,21 @@
 'use strict';
 
 import {EventEmitter} from 'events';
-var JobInvitationStatus = require('../../sqldb').JobInvitationStatus;
-var JobInvitationStatusEvents = new EventEmitter();
+let JobInvitationStatus = require('../../sqldb').JobInvitationStatus;
+let JobInvitationStatusEvents = new EventEmitter();
 
 // Set max event listeners (0 == unlimited)
 JobInvitationStatusEvents.setMaxListeners(0);
 
 // Model events
-var events = {
+let events = {
   afterCreate: 'save',
   afterUpdate: 'save',
   afterDestroy: 'remove'
 };
 
 // Register the event emitter to the model events
-for(var e in events) {
+for(let e in events) {
   let event = events[e];
   JobInvitationStatus.hook(e, emitEvent(event));
 }

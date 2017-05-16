@@ -78,7 +78,7 @@ export default class AdminController {
   }
 
   toggleJobType(id) {
-    var idx = this.newLeo.dislikes.indexOf(id);
+    let idx = this.newLeo.dislikes.indexOf(id);
 
     // Is currently selected
     if(idx > -1) {

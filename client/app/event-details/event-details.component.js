@@ -110,7 +110,7 @@ export class EventDetailsComponent {
 
 
   initMap(address) {
-    var geocoder = new google.maps.Geocoder();
+    let geocoder = new google.maps.Geocoder();
     // Create a map object and specify the DOM element for display.
     const map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: -34.397, lng: 150.644},
@@ -256,7 +256,7 @@ export class EventDetailsComponent {
     const r3 = parseInt(roundInputThree.val(), 10) || 0;
 
     const sc = this.$scope;
-    var roundPicks = [r1, r2, r3];
+    let roundPicks = [r1, r2, r3];
 
     roundPicks.forEach((picks, index) => {
       if(picks > 0) {

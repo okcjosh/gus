@@ -1,9 +1,9 @@
 'use strict';
 
-var express = require('express');
-var controller = require('./bt_webhook.controller');
+let express = require('express');
+let controller = require('./bt_webhook.controller');
 
-var router = express.Router();
+let router = express.Router();
 
 let braintree = require('braintree');
 let environment, gateway;

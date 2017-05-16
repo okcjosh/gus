@@ -10,7 +10,7 @@ const uiRouter = require('angular-ui-router');
 // }
 export function TransactionComponent($scope, $http, $location, $state) {
   //alert('tranid: ' + $location.search()['tranid']);
-  //var tranid = $location.search()['tranid'];
+  //let tranid = $location.search()['tranid'];
   let tranid = $state.params.tranid;
   $http.get('/transaction/' + tranid).then(function(response) {
     $scope.transaction = response.data.BTtransaction;

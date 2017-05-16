@@ -1,8 +1,8 @@
 'use strict';
 
-var proxyquire = require('proxyquire').noPreserveCache();
+let proxyquire = require('proxyquire').noPreserveCache();
 
-var deptPreferencesCtrlStub = {
+let deptPreferencesCtrlStub = {
   index: 'deptPreferencesCtrl.index',
   show: 'deptPreferencesCtrl.show',
   create: 'deptPreferencesCtrl.create',
@@ -11,7 +11,7 @@ var deptPreferencesCtrlStub = {
   destroy: 'deptPreferencesCtrl.destroy'
 };
 
-var routerStub = {
+let routerStub = {
   get: sinon.spy(),
   put: sinon.spy(),
   patch: sinon.spy(),
@@ -20,7 +20,7 @@ var routerStub = {
 };
 
 // require the index with our stubbed out modules
-var deptPreferencesIndex = proxyquire('./index.js', {
+let deptPreferencesIndex = proxyquire('./index.js', {
   express: {
     Router() {
       return routerStub;

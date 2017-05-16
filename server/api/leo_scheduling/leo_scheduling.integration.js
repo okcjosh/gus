@@ -1,13 +1,13 @@
 'use strict';
 
-var app = require('../..');
+let app = require('../..');
 import request from 'supertest';
 
-var newLeoScheduling;
+let newLeoScheduling;
 
 describe('LeoScheduling API:', function() {
   describe('GET /api/leo_scheduling', function() {
-    var leoSchedulings;
+    let leoSchedulings;
 
     beforeEach(function(done) {
       request(app)
@@ -54,7 +54,7 @@ describe('LeoScheduling API:', function() {
   });
 
   describe('GET /api/leo_scheduling/:id', function() {
-    var leoScheduling;
+    let leoScheduling;
 
     beforeEach(function(done) {
       request(app)
@@ -81,7 +81,7 @@ describe('LeoScheduling API:', function() {
   });
 
   describe('PUT /api/leo_scheduling/:id', function() {
-    var updatedLeoScheduling;
+    let updatedLeoScheduling;
 
     beforeEach(function(done) {
       request(app)
@@ -130,7 +130,7 @@ describe('LeoScheduling API:', function() {
   });
 
   describe('PATCH /api/leo_scheduling/:id', function() {
-    var patchedLeoScheduling;
+    let patchedLeoScheduling;
 
     beforeEach(function(done) {
       request(app)

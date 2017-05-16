@@ -2,14 +2,14 @@
 
 /* globals describe, expect, it, beforeEach, afterEach */
 
-var app = require('../..');
+let app = require('../..');
 import request from 'supertest';
 
-var newBtWebhook;
+let newBtWebhook;
 
 describe('BtWebhook API:', function() {
   describe('GET /api/bt_webhooks', function() {
-    var btWebhooks;
+    let btWebhooks;
 
     beforeEach(function(done) {
       request(app)
@@ -56,7 +56,7 @@ describe('BtWebhook API:', function() {
   });
 
   describe('GET /api/bt_webhooks/:id', function() {
-    var btWebhook;
+    let btWebhook;
 
     beforeEach(function(done) {
       request(app)
@@ -83,7 +83,7 @@ describe('BtWebhook API:', function() {
   });
 
   describe('PUT /api/bt_webhooks/:id', function() {
-    var updatedBtWebhook;
+    let updatedBtWebhook;
 
     beforeEach(function(done) {
       request(app)
@@ -132,7 +132,7 @@ describe('BtWebhook API:', function() {
   });
 
   describe('PATCH /api/bt_webhooks/:id', function() {
-    var patchedBtWebhook;
+    let patchedBtWebhook;
 
     beforeEach(function(done) {
       request(app)

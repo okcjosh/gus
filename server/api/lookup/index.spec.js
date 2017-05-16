@@ -1,8 +1,8 @@
 'use strict';
 
-var proxyquire = require('proxyquire').noPreserveCache();
+let proxyquire = require('proxyquire').noPreserveCache();
 
-var lookupCtrlStub = {
+let lookupCtrlStub = {
   index: 'lookupCtrl.index',
   show: 'lookupCtrl.show',
   create: 'lookupCtrl.create',
@@ -11,7 +11,7 @@ var lookupCtrlStub = {
   destroy: 'lookupCtrl.destroy'
 };
 
-var routerStub = {
+let routerStub = {
   get: sinon.spy(),
   put: sinon.spy(),
   patch: sinon.spy(),
@@ -20,7 +20,7 @@ var routerStub = {
 };
 
 // require the index with our stubbed out modules
-var lookupIndex = proxyquire('./index.js', {
+let lookupIndex = proxyquire('./index.js', {
   express: {
     Router() {
       return routerStub;

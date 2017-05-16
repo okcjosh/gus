@@ -1,8 +1,8 @@
 'use strict';
 
-var proxyquire = require('proxyquire').noPreserveCache();
+let proxyquire = require('proxyquire').noPreserveCache();
 
-var statusCtrlStub = {
+let statusCtrlStub = {
   index: 'statusCtrl.index',
   show: 'statusCtrl.show',
   create: 'statusCtrl.create',
@@ -11,7 +11,7 @@ var statusCtrlStub = {
   destroy: 'statusCtrl.destroy'
 };
 
-var routerStub = {
+let routerStub = {
   get: sinon.spy(),
   put: sinon.spy(),
   patch: sinon.spy(),
@@ -20,7 +20,7 @@ var routerStub = {
 };
 
 // require the index with our stubbed out modules
-var statusIndex = proxyquire('./index.js', {
+let statusIndex = proxyquire('./index.js', {
   express: {
     Router() {
       return routerStub;

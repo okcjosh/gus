@@ -1,14 +1,14 @@
 // Require schedule
-var schedule = require('schedulejs');
+let schedule = require('schedulejs');
 
 // To make schedules easier to read, we'll be using the text parser from later,
 // if you manually specify the later schedules, you don't need to require it here
-var later = require('later'),
+let later = require('later'),
   p = later.parse.text;
 
 // Step 1: Define the work items (tasks), property names don't matter at this
 // point, we'll fix them up later using schedule.task
-var workItems = [
+let workItems = [
   {
     name: 'Purchase supplies',
     length: 2,                      // lengths specified in hours
@@ -72,7 +72,7 @@ var workItems = [
 ];
 
 // Step 2: Define our resources, we'll fix up property names with schedule.resources
-var people = [
+let people = [
   {
     name: 'Bob',
     // Bob likes to sleep in a bit on the weekends
@@ -86,7 +86,7 @@ var people = [
 ];
 
 // Step 3: Tasks aren't in the right format, need to create a generator
-var t = schedule.tasks()
+let t = schedule.tasks()
   .id(function(d) { return d.name; })
   // our length is in hours, convert to minutes
   .duration(function(d) { return d.length * 60; })
@@ -97,18 +97,18 @@ var t = schedule.tasks()
   // resources are the people the tasks have been assigned to
   .resources(function(d) { return d.assignedTo; });
 
-var tasks = t(workItems);
+let tasks = t(workItems);
 
 // Step 4: Resources aren't in the right format either, need to create a generator
-var r = schedule.resources()
+let r = schedule.resources()
   .id(function(d) { return d.name; })
   .schedule(function(d) { return d.availability ? p(d.availability) : undefined; });
 
-var resources = r(people);
+let resources = r(people);
 
 // Step 5: Pick a start date for the schedule and set correct timezone
-var start = new Date(2013, 2, 21);
+let start = new Date(2013, 2, 21);
 schedule.date.localTime();
 
 // Step 6: Create the schedule
-var s = schedule.create(tasks, resources, null, start);
+let s = schedule.create(tasks, resources, null, start);

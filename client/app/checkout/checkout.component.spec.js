@@ -4,7 +4,7 @@ describe('Component: CheckoutComponent', function() {
   // load the controller's module
   beforeEach(module('gusApp.checkout'));
 
-  var CheckoutComponent;
+  let CheckoutComponent;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function($componentController) {

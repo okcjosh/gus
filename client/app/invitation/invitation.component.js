@@ -16,7 +16,7 @@ export class InvitationComponent {
 
   $onInit() {
     //alert(this.$state.params.event_id);
-    var event_id = this.$state.params.event_id;
+    let event_id = this.$state.params.event_id;
     this.$http.get('/api/events/' + event_id)
       .then(res => {
         if (res.status === 200) {
@@ -39,7 +39,7 @@ export class InvitationComponent {
   }
 
   initMap(address) {
-    var geocoder = new google.maps.Geocoder();
+    let geocoder = new google.maps.Geocoder();
     // Create a map object and specify the DOM element for display.
     const map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: -34.397, lng: 150.644},

@@ -133,7 +133,7 @@ export function CostCalculator(event) {
 
   event.JobType = event.JobType || {};
 
-  var c = {
+  let c = {
     base: {
       cost: event.JobType.base_price,
       total: event.JobType.base_price || 0
@@ -302,7 +302,7 @@ export function showByStatus(req, res) {
 }
 
 // export function getStatus(req, res) {
-//   var StatusId;
+//   let StatusId;
 //   return Event.find({
 //     where: {
 //       status_id: req.params.StatusId
@@ -317,7 +317,7 @@ export function showByStatus(req, res) {
 // }
 
 export function approve(req, res) {
-  var id = req.params._id;
+  let id = req.params._id;
   Event.seq.query('update Events set StatusId = 2 where _id =' + id);
   res.status(200).end();
 }
@@ -329,7 +329,7 @@ export function getEventCost(req, res) {
     },
     include: [JobType]
   }).then(function(event) {
-    var c = CostCalculator(event);
+    let c = CostCalculator(event);
     res.json(c);
   });
 }
@@ -342,7 +342,7 @@ export function create(req, res) {
   // This will run if the event is a recurring event
   if(eventData.is_recuring) {
     eventData.recuring_collection_id = shortid.generate();
-    var recuringEvents = eventData.recuring_data.map(data => {
+    let recuringEvents = eventData.recuring_data.map(data => {
       let newEvent = Object.assign({}, eventData);
 
       newEvent.date = data.start;

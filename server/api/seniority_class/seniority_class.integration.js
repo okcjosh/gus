@@ -1,13 +1,13 @@
 'use strict';
 
-var app = require('../..');
+let app = require('../..');
 import request from 'supertest';
 
-var newSeniorityClass;
+let newSeniorityClass;
 
 describe('SeniorityClass API:', function() {
   describe('GET /api/seniority_classes', function() {
-    var seniorityClasss;
+    let seniorityClasss;
 
     beforeEach(function(done) {
       request(app)
@@ -54,7 +54,7 @@ describe('SeniorityClass API:', function() {
   });
 
   describe('GET /api/seniority_classes/:id', function() {
-    var seniorityClass;
+    let seniorityClass;
 
     beforeEach(function(done) {
       request(app)
@@ -81,7 +81,7 @@ describe('SeniorityClass API:', function() {
   });
 
   describe('PUT /api/seniority_classes/:id', function() {
-    var updatedSeniorityClass;
+    let updatedSeniorityClass;
 
     beforeEach(function(done) {
       request(app)
@@ -130,7 +130,7 @@ describe('SeniorityClass API:', function() {
   });
 
   describe('PATCH /api/seniority_classes/:id', function() {
-    var patchedSeniorityClass;
+    let patchedSeniorityClass;
 
     beforeEach(function(done) {
       request(app)

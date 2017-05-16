@@ -4,7 +4,7 @@ describe('Component: DragComponent', function() {
   // load the controller's module
   beforeEach(module('gusApp.drag'));
 
-  var DragComponent;
+  let DragComponent;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function($componentController) {

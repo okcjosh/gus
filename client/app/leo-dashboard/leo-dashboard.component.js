@@ -37,7 +37,7 @@ export class LeoDashboardController {
   }
 
   $onInit() {
-    var flkty = new Flickity( '.carousel', {
+    let flkty = new Flickity( '.carousel', {
       // options
       autoPlay: true,
       wrapAround: true

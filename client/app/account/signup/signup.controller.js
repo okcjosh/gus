@@ -28,7 +28,7 @@ export default class SignupController {
   $onInit() {
     let self = this;
 
-    var telInput = $("#phone"),
+    let telInput = $("#phone"),
       errorMsg = $("#error-msg"),
       validMsg = $("#valid-msg");
 
@@ -37,7 +37,7 @@ export default class SignupController {
       //utilsScript: "../../build/js/utils.js"
     });
 
-    var reset = function() {
+    let reset = function() {
       telInput.removeClass("has-error");
       errorMsg.addClass("hide");
       validMsg.addClass("hide");
@@ -84,7 +84,7 @@ export default class SignupController {
 
           // Update validity of form fields that match the sequelize errors
           if (err.name) {
-            for (var field in err.fields) {
+            for (let field in err.fields) {
               console.log(field, form);
               form[field].$setValidity('mongoose', false);
               this.errors[field] = err.message;

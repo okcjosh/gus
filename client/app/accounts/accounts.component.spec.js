@@ -4,7 +4,7 @@ describe('Component: AccountsComponent', function() {
   // load the controller's module
   beforeEach(module('gusApp.accounts'));
 
-  var AccountsComponent;
+  let AccountsComponent;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function($componentController) {

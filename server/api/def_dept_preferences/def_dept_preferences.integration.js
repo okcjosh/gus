@@ -1,13 +1,13 @@
 'use strict';
 
-var app = require('../..');
+let app = require('../..');
 import request from 'supertest';
 
-var newDefDeptPreferences;
+let newDefDeptPreferences;
 
 describe('DefDeptPreferences API:', function() {
   describe('GET /def_dept_preferences', function() {
-    var defDeptPreferencess;
+    let defDeptPreferencess;
 
     beforeEach(function(done) {
       request(app)
@@ -54,7 +54,7 @@ describe('DefDeptPreferences API:', function() {
   });
 
   describe('GET /def_dept_preferences/:id', function() {
-    var defDeptPreferences;
+    let defDeptPreferences;
 
     beforeEach(function(done) {
       request(app)
@@ -81,7 +81,7 @@ describe('DefDeptPreferences API:', function() {
   });
 
   describe('PUT /def_dept_preferences/:id', function() {
-    var updatedDefDeptPreferences;
+    let updatedDefDeptPreferences;
 
     beforeEach(function(done) {
       request(app)
@@ -130,7 +130,7 @@ describe('DefDeptPreferences API:', function() {
   });
 
   describe('PATCH /def_dept_preferences/:id', function() {
-    var patchedDefDeptPreferences;
+    let patchedDefDeptPreferences;
 
     beforeEach(function(done) {
       request(app)

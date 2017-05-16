@@ -1,8 +1,8 @@
 'use strict';
 
-var proxyquire = require('proxyquire').noPreserveCache();
+let proxyquire = require('proxyquire').noPreserveCache();
 
-var notificationCtrlStub = {
+let notificationCtrlStub = {
   index: 'notificationCtrl.index',
   show: 'notificationCtrl.show',
   create: 'notificationCtrl.create',
@@ -11,7 +11,7 @@ var notificationCtrlStub = {
   destroy: 'notificationCtrl.destroy'
 };
 
-var routerStub = {
+let routerStub = {
   get: sinon.spy(),
   put: sinon.spy(),
   patch: sinon.spy(),
@@ -20,7 +20,7 @@ var routerStub = {
 };
 
 // require the index with our stubbed out modules
-var notificationIndex = proxyquire('./index.js', {
+let notificationIndex = proxyquire('./index.js', {
   express: {
     Router() {
       return routerStub;

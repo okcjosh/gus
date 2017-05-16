@@ -25,7 +25,7 @@ export class EventComponent {
 
   checkStepValid(step) {
     // return true; // uncomment for testing event form to move without validation
-    var $s = this.$scope;
+    let $s = this.$scope;
     switch (step) {
     case 1:
       this.jQueryShowErrorStep('#step1');
@@ -77,8 +77,8 @@ export class EventComponent {
   }
 
   $onInit() {
-    var $scope = this.$scope;
-    var $state = this.$state;
+    let $scope = this.$scope;
+    let $state = this.$state;
 
     this.$scope.progress = 1;
     this.$scope.nextStep = () => {
@@ -260,7 +260,7 @@ export class EventComponent {
   }
 
   postEvent($scope) {
-    var eventPayload = {
+    let eventPayload = {
       title: $scope.eventData.title,
       venue: $scope.eventData.nameOfVenue,
       address: $scope.eventData.location ? $scope.eventData.location.formatted_address : $scope.eventData.location,

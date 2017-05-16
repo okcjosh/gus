@@ -1,13 +1,13 @@
 'use strict';
 
-var app = require('../..');
+let app = require('../..');
 import request from 'supertest';
 
-var newSession;
+let newSession;
 
 describe('Session API:', function() {
   describe('GET /api/sessions', function() {
-    var sessions;
+    let sessions;
 
     beforeEach(function(done) {
       request(app)
@@ -54,7 +54,7 @@ describe('Session API:', function() {
   });
 
   describe('GET /api/sessions/:id', function() {
-    var session;
+    let session;
 
     beforeEach(function(done) {
       request(app)
@@ -81,7 +81,7 @@ describe('Session API:', function() {
   });
 
   describe('PUT /api/sessions/:id', function() {
-    var updatedSession;
+    let updatedSession;
 
     beforeEach(function(done) {
       request(app)
@@ -130,7 +130,7 @@ describe('Session API:', function() {
   });
 
   describe('PATCH /api/sessions/:id', function() {
-    var patchedSession;
+    let patchedSession;
 
     beforeEach(function(done) {
       request(app)

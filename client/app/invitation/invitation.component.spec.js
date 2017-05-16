@@ -4,7 +4,7 @@ describe('Component: InvitationComponent', function() {
   // load the controller's module
   beforeEach(module('gusApp.invitation'));
 
-  var InvitationComponent;
+  let InvitationComponent;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function($componentController) {

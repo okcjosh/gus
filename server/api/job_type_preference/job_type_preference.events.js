@@ -5,21 +5,21 @@
 'use strict';
 
 import {EventEmitter} from 'events';
-var JobTypePreference = require('../../sqldb').JobTypePreference;
-var JobTypePreferenceEvents = new EventEmitter();
+let JobTypePreference = require('../../sqldb').JobTypePreference;
+let JobTypePreferenceEvents = new EventEmitter();
 
 // Set max event listeners (0 == unlimited)
 JobTypePreferenceEvents.setMaxListeners(0);
 
 // Model events
-var events = {
+let events = {
   afterCreate: 'save',
   afterUpdate: 'save',
   afterDestroy: 'remove'
 };
 
 // Register the event emitter to the model events
-for(var e in events) {
+for(let e in events) {
   let event = events[e];
   JobTypePreference.hook(e, emitEvent(event));
 }

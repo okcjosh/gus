@@ -7,13 +7,13 @@
 import LookupEvents from './lookup.events';
 
 // Model events to emit
-var events = ['save', 'remove'];
+let events = ['save', 'remove'];
 
 export function register(socket) {
   // Bind model events to socket events
-  for(var i = 0, eventsLength = events.length; i < eventsLength; i++) {
-    var event = events[i];
-    var listener = createListener(`lookup:${event}`, socket);
+  for(let i = 0, eventsLength = events.length; i < eventsLength; i++) {
+    let event = events[i];
+    let listener = createListener(`lookup:${event}`, socket);
 
     LookupEvents.on(event, listener);
     socket.on('disconnect', removeListener(event, listener));

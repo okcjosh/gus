@@ -1,9 +1,9 @@
 'use strict';
 
-var express = require('express');
-var controller = require('./leo_scheduling.controller');
+let express = require('express');
+let controller = require('./leo_scheduling.controller');
 
-var router = express.Router();
+let router = express.Router();
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);

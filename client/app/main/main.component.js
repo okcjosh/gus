@@ -63,7 +63,7 @@ export class MainController {
         });
       })
 
-      var flkty = new Flickity( '.carousel', {
+      let flkty = new Flickity( '.carousel', {
         // options
         autoPlay: true,
         wrapAround: true
