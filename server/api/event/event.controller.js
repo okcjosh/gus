@@ -337,6 +337,7 @@ export function getEventCost(req, res) {
 // Creates a new Event or series of events in the DB
 export function create(req, res) {
   req.body.UserId = req.user._id;
+  req.body.is_recuring = parseInt(req.body.is_recuring, 10);
   let eventData = req.body;
 
   // This will run if the event is a recurring event
