@@ -44,7 +44,7 @@ angular.module('myofficersApp',
   [
     ngCookies,
     ngResource,
-    'ngSanitize',
+    ngSanitize,
     'dndLists',
     'btford.socket-io',
     'as.sortable',
@@ -77,6 +77,7 @@ angular.module('myofficersApp',
   ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
+    //noinspection BadExpressionStatementJS
     'ngInject';
     // Redirect to new if route requires auth and you're not logged in
 

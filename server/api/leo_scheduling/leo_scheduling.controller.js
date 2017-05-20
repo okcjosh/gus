@@ -1,3 +1,4 @@
+/* eslint-disable prefer-reflect */
 /**
  * Using Rails-like standard naming convention for endpoints.
  * GET     /api/leo_scheduling              ->  index

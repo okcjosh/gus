@@ -26,7 +26,7 @@ for(let e in events) {
 
 function emitEvent(event) {
   return function(doc, options, done) {
-    JobEvents.emit(event + ':' + doc._id, doc);
+    JobEvents.emit(`${event}:${doc._id}`, doc);
     JobEvents.emit(event, doc);
     done(null);
   };

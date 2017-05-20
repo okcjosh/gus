@@ -1,7 +1,7 @@
 'use strict';
 
 let proxyquire = require('proxyquire').noPreserveCache();
-
+let sinon = require('sinon');
 let defDeptPreferencesCtrlStub = {
   index: 'defDeptPreferencesCtrl.index',
   show: 'defDeptPreferencesCtrl.show',

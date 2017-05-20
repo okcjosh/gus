@@ -1,3 +1,4 @@
+/* eslint-disable camelcase,no-unused-vars */
 'use strict';
 const angular = require('angular');
 const uiRouter = require('angular-ui-router');
@@ -9,17 +10,17 @@ export function CheckoutComponent($scope, $http, $state) {
   let event_id = $state.params.event_id;
   $scope.event_id = event_id;
 
-  if (! event_id) {
+  if(!event_id) {
     $state.go('event');
-    return ;
+    return;
   }
 
-  $http.get('api/events/' + event_id)
+  $http.get(`api/events/${event_id}`)
     .then(res => {
       $scope.event = res.data;
     });
 
-    $http.get('api/events/' + event_id + '/cost')
+  $http.get(`api/events/${event_id}/cost`)
       .then(res => {
         $scope.cost = res.data;
       });
@@ -28,6 +29,8 @@ export function CheckoutComponent($scope, $http, $state) {
     .then(response => {
       this.clientToken = response.data;
       // console.log(this.clientToken);
+      braintree.setup = function(clientToken, s, param3) {
+      };
       braintree.setup(this.clientToken,
         'dropin', {
           container: 'dropin'

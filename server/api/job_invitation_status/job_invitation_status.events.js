@@ -26,7 +26,7 @@ for(let e in events) {
 
 function emitEvent(event) {
   return function(doc, options, done) {
-    JobInvitationStatusEvents.emit(event + ':' + doc._id, doc);
+    JobInvitationStatusEvents.emit(`${event}:${doc._id}`, doc);
     JobInvitationStatusEvents.emit(event, doc);
     done(null);
   };

@@ -26,7 +26,7 @@ for(let e in events) {
 
 function emitEvent(event) {
   return function(doc, options, done) {
-    SessionEvents.emit(event + ':' + doc._id, doc);
+    SessionEvents.emit(`${event}:${doc._id}`, doc);
     SessionEvents.emit(event, doc);
     done(null);
   };

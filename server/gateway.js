@@ -1,7 +1,9 @@
+/* eslint-disable no-process-env */
 'use strict';
 
 let braintree = require('braintree');
-let environment, gateway;
+let environment;
+let gateway;
 require('dotenv').load();
 environment = process.env.BT_ENVIRONMENT.charAt(0).toUpperCase() + process.env.BT_ENVIRONMENT.slice(1);
 

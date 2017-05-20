@@ -26,7 +26,7 @@ for(let e in events) {
 
 function emitEvent(event) {
   return function(doc, options, done) {
-    NewApptEvents.emit(event + ':' + doc._id, doc);
+    NewApptEvents.emit(`${event}:${doc._id}`, doc);
     NewApptEvents.emit(event, doc);
     done(null);
   };

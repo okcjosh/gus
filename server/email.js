@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const fs = require('fs');
 const mailer = require('nodemailer');
 
@@ -20,7 +21,7 @@ let transport = mailer.createTransport({
 });
 
 function sendInvitationEmail(invitation) {
-  console.log('Sending email for event: ' + invitation.event_id);
+  console.log(`Sending email for event: ${invitation.event_id}`);
 
   Leo.find({ where: { _id: invitation.leo_id } })
     .then(leo => {
@@ -41,7 +42,7 @@ function sendInvitationEmail(invitation) {
 
 // Event with Included User field
 function sendEventCompletionEmail(event) {
-  console.log('Sending email for completion of event: ' + event);
+  console.log(`Sending email for completion of event: ${event}`);
 
   fs.readFile(`${EMAIL_TEMPLATES_DIR}/job-notification.html`, function(err, data) {
     if(!err) {

@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * This plug-in for DataTables represents the ultimate option in extensibility
  * for sorting date / time strings correctly. It uses

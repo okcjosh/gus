@@ -1,10 +1,12 @@
+/* eslint-disable no-unused-vars */
 /**
  * Created by joshuajohnson on 3/15/17.
  */
 'use strict';
 
 let braintree = require('braintree');
-let environment, gateway;
+let environment;
+let gateway;
 let serviceFeeAmount = 11 * .25;
 
 gateway = braintree.connect({

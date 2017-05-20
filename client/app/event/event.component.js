@@ -1,3 +1,4 @@
+/* eslint-disable camelcase,no-alert,no-invalid-this */
 'use strict';
 const angular = require('angular');
 const uiRouter = require('angular-ui-router');
@@ -8,7 +9,7 @@ const moment = require('moment');
 import routing from './event.routes';
 
 export class EventComponent {
-  awesomeEvents = [];
+  loadRecuringModal;
 
   /*@ngInject*/
   constructor($http, $scope, socket, $state, $q, toastr) {
@@ -20,14 +21,13 @@ export class EventComponent {
     this.toastr = toastr;
 
 
-    $scope.loadRecuringModal = this.loadRecuringModal;//.bind(null, $scope);
+    $scope.loadRecuringModal = this.loadRecuringModal;
   }
 
   checkStepValid(step) {
     // return true; // uncomment for testing event form to move without validation
     let $s = this.$scope;
-    switch (step) {
-    case 1:
+    if(step === 1) {
       this.jQueryShowErrorStep('#step1');
       if($s.newEventForm.nameOfVenue.$valid
         && $s.newEventForm.address.$valid
@@ -41,38 +41,24 @@ export class EventComponent {
         }
         return false;
       }
-      break;
-
-    case 2:
+    } else if(step === 2) {
       this.jQueryShowErrorStep('#step2');
       $s.eventData.creationEventDate = document.getElementById('creationEventDate').value;
-      // Because the datetimepicker plugin is jquery not angular, so selecting date doesn't set to a model, so we have to get it manually
       $s.eventData.officer_arrival_time = document.getElementById('OfficerArriveTime').value;
-      // Because the datetimepicker plugin is jquery not angular, so selecting date doesn't set to a model, so we have to get it manually
-      if($s.newEventForm.jobType.$valid
-        && $s.newEventForm.jobSpecs.$valid
-        // && $s.newEventForm.officerName.$valid
-        && $s.newEventForm.jobRecuring.$valid
-        && $s.newEventForm.officer_stay_hours.$modelValue > 0
-        && $s.newEventForm.officerUniform.$valid
-        && $s.newEventForm.attendeesNum.$modelValue > 0
-        && $s.newEventForm.alcoholServed.$valid
-        && $s.newEventForm.policeVehicle.$valid
-        && $s.newEventForm.barricadeRequested.$valid
-        && $s.newEventForm.amplifiedSound.$valid) {
-        return true;
-      } else {
-        return false;
-      }
-      break;
-
-    case 3:
+      return !!($s.newEventForm.jobType.$valid
+      && $s.newEventForm.jobSpecs.$valid
+      // && $s.newEventForm.officerName.$valid
+      && $s.newEventForm.jobRecuring.$valid
+      && $s.newEventForm.officer_stay_hours.$modelValue > 0
+      && $s.newEventForm.officerUniform.$valid
+      && $s.newEventForm.attendeesNum.$modelValue > 0
+      && $s.newEventForm.alcoholServed.$valid
+      && $s.newEventForm.policeVehicle.$valid
+      && $s.newEventForm.barricadeRequested.$valid
+      && $s.newEventForm.amplifiedSound.$valid);
+    } else if(step === 3) {
       this.jQueryShowErrorStep('#step3');
-
-      return true; // No fields yet for third step
-      break;
-
-    default:
+      return true;
     }
   }
 
@@ -84,7 +70,7 @@ export class EventComponent {
     this.$scope.nextStep = () => {
       // Check for validity of filled data
       if(this.checkStepValid($scope.progress)) {
-        if($scope.progress == 2) {
+        if($scope.progress === 2) {
           // To submit the Event
           this.postEvent($scope)
             .then(function(data) {
@@ -93,7 +79,7 @@ export class EventComponent {
               $scope.eventCost = data.cost;
               $scope.progress++;
             });
-        } else if($scope.progress == 3) {
+        } else if($scope.progress === 3) {
           // To go to checkout page
           $state.go('checkout', { event_id: $scope.event._id });
         } else {
@@ -118,7 +104,10 @@ export class EventComponent {
       $('#recurrentJob').modal('show');
 
       setTimeout(() => {
+        //language=JQuery-CSS
+        //noinspection JSJQueryEfficiency
         $('#recurring-calendar').fullCalendar('today');
+        //noinspection JSJQueryEfficiency
         $('#recurring-calendar').fullCalendar('changeView', 'agendaWeek');
       }, 1000);
     };
@@ -133,6 +122,7 @@ export class EventComponent {
                                   //.toDate();
 
         e.end = e.end ? e.end : twoHoursFromStart;
+        //noinspection SillyAssignmentJS
         e.start = e.start;//.toDate();
         return e;
       });
@@ -141,7 +131,8 @@ export class EventComponent {
     };
 
     this.$scope.eventData = {
-      creationEventDate: moment().add(7, 'days').format('DD MMMM YYYY hh:mm'),
+      creationEventDate: moment().add(7, 'days')
+        .format('DD MMMM YYYY hh:mm'),
       is_recuring: '0',
       hours_expected: 0,
       crowd_size: 0,
@@ -163,15 +154,19 @@ export class EventComponent {
   }
 
   initializeJQueryPlugins() {
+    //noinspection JSUnresolvedFunction
     $('.selectpicker').selectpicker({
       style: 'btn-default',
       size: 10
     });
 
+    //noinspection JSUnresolvedFunction
     $('#officer-select').selectpicker('refresh');
 
     $('#jobType').change(function() {
+      //noinspection JSJQueryEfficiency,JSUnresolvedFunction
       $('#jobSpecs').selectpicker('val', []);
+      //noinspection JSJQueryEfficiency,JSUnresolvedFunction
       $('#jobSpecs').selectpicker('refresh');
     });
 
@@ -192,18 +187,21 @@ export class EventComponent {
     $('#OfficerArriveTimeGroup').datetimepicker({
       format: 'LT'
     });
-
+    //noinspection JSJQueryEfficiency,JSUnresolvedFunction
     $('#creationdateafter').datetimepicker({
       format: 'DD MMMM YYYY'
     });
+    //noinspection JSJQueryEfficiency,JSUnresolvedFunction
     $('#creationdatebefore').datetimepicker({
       format: 'DD MMMM YYYY',
       useCurrent: false
     });
+    //noinspection JSJQueryEfficiency,JSUnresolvedFunction
     $('#creationdateafter').on('dp.change', function(e) {
       $('#creationdatebefore').data('DateTimePicker')
         .minDate(e.date);
     });
+    //noinspection JSJQueryEfficiency,JSUnresolvedFunction
     $('#creationdatebefore').on('dp.change', function(e) {
       $('#creationdateafter').data('DateTimePicker')
         .maxDate(e.date);
@@ -220,33 +218,33 @@ export class EventComponent {
       droppable: true
     });
 
-    $('#external-events .fc-event').each(function() {
+    //noinspection JSJQueryEfficiency
+    $('#external-events ').find('.fc-event'.each(function() {
       // make the event draggable using jQuery UI
       $(this).draggable({
         zIndex: 999,
         revert: true,      // will cause the event to go back to its
         revertDuration: 0  //  original position after the drag
       });
-    });
-
+    }),
 
     /** ******************************
      * Required Fields
      ****************************** **/
+      //noinspection JSJQueryEfficiency
     $('form :input[required=\'required\']').blur(function() {
       if(!$(this).val()) {
         $(this).addClass('hasError');
-      } else {
-        if($(this).hasClass('hasError')) {
-          $(this).removeClass('hasError');
-        }
+      } else if($(this).hasClass('hasError')) {
+        $(this).removeClass('hasError');
       }
-    });
+    }),
+    //noinspection JSJQueryEfficiency
     $('form :input[required=\'required\']').change(function() {
       if($(this).hasClass('hasError')) {
         $(this).removeClass('hasError');
       }
-    });
+    }));
   }
 
   jQueryShowErrorStep(step) {

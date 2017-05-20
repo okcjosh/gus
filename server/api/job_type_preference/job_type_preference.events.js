@@ -26,7 +26,7 @@ for(let e in events) {
 
 function emitEvent(event) {
   return function(doc, options, done) {
-    JobTypePreferenceEvents.emit(event + ':' + doc._id, doc);
+    JobTypePreferenceEvents.emit(`${event}:${doc._id}`, doc);
     JobTypePreferenceEvents.emit(event, doc);
     done(null);
   };

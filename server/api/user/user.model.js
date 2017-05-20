@@ -1,3 +1,4 @@
+/* eslint-disable camelcase,consistent-this,prefer-rest-params,no-sync */
 'use strict';
 
 import crypto from 'crypto';
@@ -8,7 +9,7 @@ let validatePresenceOf = function(value) {
 };
 
 export default function(sequelize, DataTypes) {
-  let User = sequelize.define('User', {
+  return sequelize.define('User', {
 
     _id: {
       type: DataTypes.INTEGER,
@@ -117,16 +118,16 @@ export default function(sequelize, DataTypes) {
      */
     instanceMethods: {
       // Hide password from JSON of user
-      toJSON: function () {
+      toJSON() {
         let values = Object.assign({}, this.get());
-
-        delete values.password;
-        delete values.provider;
-        delete values.salt;
-        delete values.facebook;
-        delete values.twitter;
-        delete values.google;
-        delete values.github;
+        Reflect.deleteProperty(
+          values.provider,
+          values.salt,
+          values.facebook,
+          values.twitter,
+          values.google,
+          values.github
+        );
         return values;
       },
       /**
@@ -151,8 +152,7 @@ export default function(sequelize, DataTypes) {
           if(_this.password === pwdGen) {
             return callback(null, true);
           }
-          else {
-            return callback(null, false);}
+          return callback(null, false);
         });
       },
 
@@ -207,7 +207,7 @@ export default function(sequelize, DataTypes) {
 
         if(!callback) {
           return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength)
-                       .toString('base64');
+            .toString('base64');
         }
 
         return crypto.pbkdf2(password, salt, defaultIterations, defaultKeyLength,
@@ -251,6 +251,5 @@ export default function(sequelize, DataTypes) {
       }
     }
   });
-
-  return User;
 }
+

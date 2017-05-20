@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use strict';
 
 let express = require('express');
@@ -6,7 +7,8 @@ let controller = require('./bt_webhook.controller');
 let router = express.Router();
 
 let braintree = require('braintree');
-let environment, gateway;
+let environment;
+let gateway;
 
 gateway = braintree.connect({
   environment: braintree.Environment.Sandbox,

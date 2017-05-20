@@ -1,3 +1,4 @@
+/* eslint-disable no-undef,no-unused-vars,no-duplicate-imports */
 'use strict';
 
 import {
@@ -5,7 +6,8 @@ import {
 } from './index';
 
 describe('Controller: OauthButtonsController', function() {
-  let controller, $window;
+  let controller;
+  let $window;
 
   beforeEach(() => {
     angular.module('test', [])

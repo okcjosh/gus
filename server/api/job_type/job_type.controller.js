@@ -1,3 +1,4 @@
+/* eslint-disable camelcase,prefer-reflect */
 /**
  * Using Rails-like standard naming convention for endpoints.
  * GET     /api/job_types              ->  index
@@ -95,7 +96,6 @@ export function create(req, res) {
 
 // Upserts the given JobType in the DB at the specified ID
 export function update(req, res) {
-
   return JobType.update(req.body, {
     where: {
       _id: req.params.id
@@ -107,7 +107,6 @@ export function update(req, res) {
 
 // Updates all rows in the table to have the general costs
 export function setGeneralCosts(req, res) {
-
   let cost = {
     alcohol: req.body.alcohol,
     police_vehicle: req.body.police_vehicle,

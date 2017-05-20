@@ -1,3 +1,4 @@
+/* eslint-disable prefer-rest-params,no-unused-vars */
 'use strict';
 
 import angular from 'angular';
@@ -22,6 +23,7 @@ export function Modal($rootScope, $uibModal) {
   }
 
   // Public API here
+  /** @namespace angular.noop */
   return {
 
     /* Confirmation modals */
@@ -39,7 +41,8 @@ export function Modal($rootScope, $uibModal) {
          * @param  {All}           - any additional args are passed straight to del callback
          */
         return function() {
-          let args = Array.prototype.slice.call(arguments);
+          let args;
+          args = Reflect.apply(arguments);
           let name = args.shift();
           let deleteModal;
 
@@ -65,7 +68,7 @@ export function Modal($rootScope, $uibModal) {
           }, 'modal-danger');
 
           deleteModal.result.then(function(event) {
-            del.apply(event, args);
+            Reflect.apply.del(event, args);
           });
         };
       }

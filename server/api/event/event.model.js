@@ -1,3 +1,4 @@
+/* eslint-disable camelcase,object-shorthand,prefer-reflect */
 'use strict';
 
 export default function(sequelize, DataTypes) {
@@ -38,9 +39,9 @@ export default function(sequelize, DataTypes) {
     timestamps: true,
     instanceMethods: {
       // Hide password from JSON of user
-      toJSON: function () {
+      toJSON: function() {
         let e = Object.assign({}, this.get());
-        if (e.User) {
+        if(e.User) {
           delete e.User.password;
           delete e.User.provider;
           delete e.User.salt;

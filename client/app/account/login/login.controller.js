@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+import * as console from 'nodemon/lib/utils/index';
 'use strict';
 
 export default class LoginController {
@@ -11,10 +13,12 @@ export default class LoginController {
   };
   submitted = false;
   forgotEmail = '';
+  forgotNewPassword ;
+  forgotPasswordCode;
 
 
   /*@ngInject*/
-  constructor(Auth, $state, $http, $scope) {
+  constructor(Auth, $state, $http) {
     this.Auth = Auth;
     this.$state = $state;
     this.$http = $http;
@@ -38,29 +42,11 @@ export default class LoginController {
     }
   }
 
-  loginLeo(form) {
-    // this.submitted = true;
-
-    // if(form.$valid) {
-    //   this.Auth.loginLeo({
-    //     email: this.user.email,
-    //     password: this.user.password
-    //   }, (err, id) => {
-    //       if (err) {
-    //         this.errors.login = err.message;
-    //         return;
-    //       }
-    //       window.localStorage.setItem('temp_leo_id', id);
-
-    //       // Logged in, redirect to home
-    //       this.$state.go('leo-events', { leo_id: id });
-    //   });
-    // }
-  }
-
   forgotPassword() {
-    this.$http.get('/api/users/' + this.forgotEmail + '/forgot_password')
-      .then(() => this.showForgotCodeInput = true)
+    this.$http.get(`/api/users/${this.forgotEmail}/forgot_password`)
+      .then(u => {
+        this.showForgotCodeInput = true;
+      })
       .catch(err => console.log(err));
   }
 
@@ -69,7 +55,9 @@ export default class LoginController {
       code: this.forgotPasswordCode,
       password: this.forgotNewPassword
     })
-      .then(() => this.showForgotCodeInput = false)
+      .then(u => {
+        this.showForgotCodeInput = false;
+      })
       .catch(err => console.log(err));
   }
 }

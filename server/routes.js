@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars,camelcase,handle-callback-err */
 'use strict';
 import errors from './components/errors';
 import { CostCalculator } from './api/event/event.controller';
@@ -24,7 +25,6 @@ export default function(app, btSignatureParam, btPayloadParam = null) {
   app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
   app.use('/api/bt_webhook', require('./api/bt_webhook'));
-
   app.use('/api/def_dept_preferences', require('./api/def_dept_preferences'));
   app.use('/api/dept_preferences', require('./api/dept_preferences'));
   app.use('/api/departments', require('./api/department'));
@@ -45,7 +45,8 @@ export default function(app, btSignatureParam, btPayloadParam = null) {
 
     for(let i in errors) { // eslint-disable-line no-inner-declarations, lets-on-top
       if(errors.hasOwnProperty(i)) {
-        formattedErrors += 'Error: ' + errors[i].code + ': ' + errors[i].message + '\n';
+        formattedErrors += `Error: ${errors[i].code}: ${errors[i].message}
+`;
       }
     }
     return formattedErrors;
@@ -55,7 +56,7 @@ export default function(app, btSignatureParam, btPayloadParam = null) {
     let result;
     let status = transaction.status;
 
-    if (TRANSACTION_SUCCESS_STATUSES.indexOf(status) !== -1) {
+    if(TRANSACTION_SUCCESS_STATUSES.indexOf(status) !== -1) {
       result = {
         header: 'Sweet Success!',
         icon: 'success',
@@ -65,7 +66,7 @@ export default function(app, btSignatureParam, btPayloadParam = null) {
       result = {
         header: 'Transaction Failed',
         icon: 'fail',
-        message: 'Your test transaction has a status of ' + status + '. See the Braintree API response and try again.'
+        message: `Your test transaction has a status of ${status}. See the Braintree API response and try again.`
       };
     }
 
@@ -80,8 +81,8 @@ export default function(app, btSignatureParam, btPayloadParam = null) {
   // });
 
   app.post('/checkout/transaction/token', function(request, response) {
-    gateway.clientToken.generate({}, function (err, res) {
-      if (err) throw err;
+    gateway.clientToken.generate({}, function(err, res) {
+      if(err) throw err;
       response.json(res.clientToken);
       console.log(res.clientToken);
     });
@@ -101,13 +102,12 @@ export default function(app, btSignatureParam, btPayloadParam = null) {
         include: [User, JobType]
       }]
     }).then(function(tran) {
-
-      gateway.transaction.find(transactionId, function (err, BTtransaction) {
+      gateway.transaction.find(transactionId, function(err, BTtransaction) {
         result = createResultObject(BTtransaction);
 
         res.json({
-          BTtransaction: BTtransaction,
-          result: result,
+          BTtransaction,
+          result,
           transaction: tran
         });
       });
@@ -117,10 +117,12 @@ export default function(app, btSignatureParam, btPayloadParam = null) {
   app.post('/checkout', function(req, res) {
     let transactionErrors;
     // let amount = req.body.amount; // In production you should not take amounts directly from clients, I second this
-    let nonce = req.body.payment_method_nonce;
-    console.log('nonce = ' + nonce);
+    let nonce;
+    nonce = req.body.payment_method_nonce;
+    console.log(`nonce = ${nonce}`);
     //let amount = req.body.event_id; //////////////********
 
+    /** @namespace req.body.event_id */
     Event.find({
       where: {
         _id: req.body.event_id
@@ -133,8 +135,8 @@ export default function(app, btSignatureParam, btPayloadParam = null) {
         options: {
           submitForSettlement: true
         }
-      }, function (err, result) {
-        if (result.success || result.transaction) {
+      }, function(err, result) {
+        if(result.success || result.transaction) {
           let resultOb = createResultObject(result.transaction);
           console.log('result: ');
           console.log(resultOb);
@@ -146,7 +148,7 @@ export default function(app, btSignatureParam, btPayloadParam = null) {
             transaction_status: result.transaction.status
           });
 
-          res.redirect('/checkout/transaction?tranid=' + result.transaction.id);
+          res.redirect(`/checkout/transaction?tranid=${result.transaction.id}`);
         } else {
           transactionErrors = result.errors.deepErrors();
           req.flash('error', {msg: formatErrors(transactionErrors)});

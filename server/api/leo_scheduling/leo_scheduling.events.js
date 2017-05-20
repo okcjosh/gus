@@ -26,7 +26,7 @@ for(let e in events) {
 
 function emitEvent(event) {
   return function(doc, options, done) {
-    LeoSchedulingEvents.emit(event + ':' + doc._id, doc);
+    LeoSchedulingEvents.emit(`${event}:${doc._id}`, doc);
     LeoSchedulingEvents.emit(event, doc);
     done(null);
   };

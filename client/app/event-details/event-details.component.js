@@ -1,3 +1,4 @@
+/* eslint-disable camelcase,no-return-assign,no-undef,no-alert,no-unused-vars,no-shadow,brace-style */
 'use strict';
 const angular = require('angular');
 const uiRouter = require('angular-ui-router');
@@ -5,7 +6,6 @@ const moment = require('moment');
 
 import routing from './event-details.routes';
 export class EventDetailsComponent {
-  awesomeEvents = [];
   leoInvites = [];
   adjustedAmount = 0;
   eventCost = {};
@@ -20,11 +20,9 @@ export class EventDetailsComponent {
     this.$scope = $scope;
     this.orderBy = orderByFilter;
     this.init($scope);
-    $scope.approve = this.approve.bind(this, $scope, $http);
+    $scope.approve = EventDetailsComponent.approve.bind(this, $scope, $http);
     $scope.saveDrags = this.saveDrags.bind(this, $scope, $http);
     $scope.expressInterest = this.expressInterest.bind(this);
-    // $scope.orderByChange = this.orderByChange.bind(this);
-
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('event');
     });
@@ -59,7 +57,7 @@ export class EventDetailsComponent {
     this.event_id = event_id;
 
     this.$http.get(`/api/events/${event_id}`)
-      .then((res) => {
+      .then(res => {
         if(res.status === 200) {
           let event = res.data;
           event.startDate = moment(event.date).format('llll');
@@ -69,7 +67,6 @@ export class EventDetailsComponent {
           $scope.event = res.data;
           this.initMap(event.address);
         }
-
       });
 
     this.$http.get('/api/users/me')
@@ -81,7 +78,9 @@ export class EventDetailsComponent {
           }
         }
       })
-      .catch(() => $scope.isLeo = true);
+      .catch(function() {
+        return $scope.isLeo = true;
+      });
 
     this.$http.get('/api/job_types')
       .then(function(res) {
@@ -96,9 +95,6 @@ export class EventDetailsComponent {
       .then(res => {
         this.eventStatusId = res.data;
       });
-    // this.$http.get(`/api/events/${event_id}/leos_invite?status=Accepted`)
-    //   .then(res => this.receivingLeos = res.data);
-
     this.$http.get(`/api/events/${event_id}/leos_invite`)
       .then(res => {
         this.leoInvites = res.data;
@@ -110,7 +106,8 @@ export class EventDetailsComponent {
 
 
   initMap(address) {
-    let geocoder = new google.maps.Geocoder();
+    let geocoder;
+    geocoder = new google.maps.Geocoder();
     // Create a map object and specify the DOM element for display.
     const map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: -34.397, lng: 150.644},
@@ -126,9 +123,15 @@ export class EventDetailsComponent {
           position: results[0].geometry.location
         });
       } else {
-        alert('Geocode was not successful for the following reason: ' + status);
+        alert(`Geocode was not successful for the following reason: ${status}`);
       }
     });
+  }
+
+  geocode(param, f) {
+  }
+
+  Geocoder() {
   }
 
   initializeDragDrop($scope, invitations) {
@@ -139,7 +142,10 @@ export class EventDetailsComponent {
      */
     $scope.getSelectedItemsIncluding = function(list, item) {
       item.selected = true;
-      return list.items.filter(function(item) { return item.selected; });
+      return list.items.filter(function(parameters) {
+        let item = parameters.item;
+        return item.selected;
+      });
     };
 
     /**
@@ -150,7 +156,7 @@ export class EventDetailsComponent {
      */
     $scope.onDragstart = function(list, event) {
       list.dragging = true;
-      if (event.dataTransfer.setDragImage) {
+      if(event.dataTransfer.setDragImage) {
         let img = new Image();
         img.src = 'framework/vendor/ic_content_copy_black_24dp_2x.png';
         event.dataTransfer.setDragImage(img, 0, 0);
@@ -275,8 +281,8 @@ export class EventDetailsComponent {
     roundInputThree.val(0);
   }
 
-  approve($scope, $http) {
-    $http.get('/api/events/approve/' + $scope.event_id);
+  static approve($scope, $http) {
+    $http.get(`/api/events/approve/${$scope.event_id}`);
   }
 
   saveDrags($scope, $http) {
@@ -321,7 +327,7 @@ export class EventDetailsComponent {
     let event_id = this.$state.params.event_id;
     let leo_id = window.localStorage.getItem('temp_leo_id');
 
-    this.$http.put('/api/events/' + event_id + '/interest/' + leo_id)
+    this.$http.put(`/api/events/${event_id}/interest/${leo_id}`)
       .then(res => this.$scope.event = res.data);
   }
 }

@@ -1,10 +1,8 @@
+/* eslint-disable no-undef,no-unused-vars,no-duplicate-imports */
 'use strict';
 
 import main from './main.component';
-import {
-  MainController
-} from './main.component';
-
+/** @namespace angular.mock */
 describe('Component: MainComponent', function() {
   beforeEach(angular.mock.module(main));
   beforeEach(angular.mock.module('stateMock'));

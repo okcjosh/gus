@@ -1,3 +1,4 @@
+/* eslint-disable */
 /*
  * International Telephone Input v10.0.4
  * https://github.com/jackocnr/intl-tel-input.git

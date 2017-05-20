@@ -26,7 +26,7 @@ for(let e in events) {
 
 function emitEvent(event) {
   return function(doc, options, done) {
-    LeoEvents.emit(event + ':' + doc._id, doc);
+    LeoEvents.emit(`${event}:${doc._id}`, doc);
     LeoEvents.emit(event, doc);
     done(null);
   };

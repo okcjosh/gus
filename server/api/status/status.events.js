@@ -26,7 +26,7 @@ for(let e in events) {
 
 function emitEvent(event) {
   return function(doc, options, done) {
-    StatusEvents.emit(event + ':' + doc._id, doc);
+    StatusEvents.emit(`${event}:${doc._id}`, doc);
     StatusEvents.emit(event, doc);
     done(null);
   };

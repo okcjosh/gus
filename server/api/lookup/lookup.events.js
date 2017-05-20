@@ -26,7 +26,7 @@ for(let e in events) {
 
 function emitEvent(event) {
   return function(doc, options, done) {
-    LookupEvents.emit(event + ':' + doc._id, doc);
+    LookupEvents.emit(`${event}:${doc._id}`, doc);
     LookupEvents.emit(event, doc);
     done(null);
   };

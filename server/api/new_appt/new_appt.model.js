@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 'use strict';
 
 export default function(sequelize, DataTypes) {

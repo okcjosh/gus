@@ -1,27 +1,27 @@
+/* eslint-disable camelcase,no-unused-vars */
 'use strict';
 const angular = require('angular');
-
 const uiRouter = require('angular-ui-router');
-const jquery = require('jquery');
-import routes from './rates.routes';
+import routing from './rates.routes';
 
 let $ = require('jquery');
-require( 'datatables.net' );
-require( 'datatables.net-buttons');
-require( 'datatables.net-buttons-bs');
-require( 'datatables.net-bs');
-require( 'datatables.net-buttons-bs');
-require( 'datatables.net-fixedheader');
-require( 'datatables.net-keytable');
-require( 'datatables.net-responsive');
-require( 'datatables.net-responsive-bs');
-require( 'datatables.net-select');
-require( 'datatables.net-scroller');
+require('datatables.net');
+require('datatables.net-buttons');
+require('datatables.net-buttons-bs');
+require('datatables.net-bs');
+require('datatables.net-buttons-bs');
+require('datatables.net-fixedheader');
+require('datatables.net-keytable');
+require('datatables.net-responsive');
+require('datatables.net-responsive-bs');
+require('datatables.net-select');
+require('datatables.net-scroller');
+
 
 export class RatesComponent {
   /*@ngInject*/
 
-  constructor($http, $scope, socket, $state, $uibModal, $uibModalStack) {
+  constructor($http, $scope, $state, $uibModal, $uibModalStack) {
     this.$http = $http;
     this.$scope = $scope;
     this.$scope.$state = $state;
@@ -40,7 +40,7 @@ export class RatesComponent {
           police_vehicle: first.police_vehicle,
           barricade: first.barricade,
           amplified_sound: first.amplified_sound
-        }
+        };
       });
 
     this.$http.get('/api/lookups')
@@ -60,14 +60,14 @@ export class RatesComponent {
   }
 
   saveRates($scope) {
-    $scope.jobTypes.forEach((jobType) => {
+    $scope.jobTypes.forEach(jobType => {
       let rate = {
         base_price: jobType.base_price,
         crowd_rate: jobType.crowd_rate,
         hour_rate: jobType.hour_rate,
         officer_rate: jobType.officer_rate
       };
-      this.$http.put('/api/job_types/' + jobType._id, rate)
+      this.$http.put(`/api/job_types/${jobType._id}`, rate)
         .then(function(res) {
           //console.log(res);
         });
@@ -77,30 +77,28 @@ export class RatesComponent {
   saveGenerals($scope) {
     this.$http.put('/api/job_types/general_costs', $scope.all)
       .then(function(res) {
-
       });
   }
 
   addLookup(lookup) {
     this.$http.post('/api/lookups', lookup)
-      .then((res) => {
+      .then(res => {
         this.$scope.newLookup = {};
         this.$scope.lookups.push(res.data);
       });
   }
 
   editModal(lookup) {
-
-    const modInstance = this.$uibModal.open({                       
+    const modInstance = this.$uibModal.open({
       templateUrl: 'editModal.html',
       controller: ($scope, $uibModalStack) => {
         $scope.editingLookup = lookup;
         $scope.jobTypes = this.$scope.jobTypes;
 
         $scope.editLookup = () => {
-          this.$http.put('/api/lookups/' + lookup._id, lookup)
-            .then((res) => {
-              const index = this.$scope.jobTypes.findIndex((item) => item._id === lookup.JobTypeId);
+          this.$http.put(`/api/lookups/${lookup._id}`, lookup)
+            .then(res => {
+              const index = this.$scope.jobTypes.findIndex(item => item._id === lookup.JobTypeId);
               lookup.JobType = this.$scope.jobTypes[index];
               $uibModalStack.dismissAll({});
               $scope.editingLookup = null;
@@ -109,22 +107,21 @@ export class RatesComponent {
 
         $scope.close = function() {
           $uibModalStack.dismissAll({});
-        }
+        };
       }
     });
   }
 
   deleteModal(lookup) {
-
     const modInstance = this.$uibModal.open({
       templateUrl: 'deleteModal.html',
       controller: ($scope, $uibModalStack) => {
         $scope.deletingLookup = lookup;
 
         $scope.deleteLookup = () => {
-          this.$http.delete('/api/lookups/' + lookup._id)
-            .then((res) => {
-              const index = this.$scope.lookups.findIndex((item) => item._id === lookup._id);
+          this.$http.delete(`/api/lookups/${lookup._id}`)
+            .then(res => {
+              const index = this.$scope.lookups.findIndex(item => item._id === lookup._id);
               this.$scope.lookups.splice(index, 1);
               $uibModalStack.dismissAll({});
               $scope.deletingLookup = null;
@@ -133,16 +130,16 @@ export class RatesComponent {
 
         $scope.close = function() {
           $uibModalStack.dismissAll({});
-        }
+        };
       }
     });
   }
 
-  
+
 }
 
 export default angular.module('gusApp.rates', [uiRouter])
-  .config(routes)
+  .config(routing)
   .component('rates', {
     template: require('./rates.html'),
     controller: RatesComponent,

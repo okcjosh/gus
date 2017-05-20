@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars,camelcase,prefer-reflect */
 /**
  * Using Rails-like standard naming convention for endpoints.
  * GET     /api/job_invitations              ->  index

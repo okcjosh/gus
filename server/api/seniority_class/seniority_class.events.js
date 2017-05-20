@@ -26,7 +26,7 @@ for(let e in events) {
 
 function emitEvent(event) {
   return function(doc, options, done) {
-    SeniorityClassEvents.emit(event + ':' + doc._id, doc);
+    SeniorityClassEvents.emit(`${event}:${doc._id}`, doc);
     SeniorityClassEvents.emit(event, doc);
     done(null);
   };

@@ -1,5 +1,6 @@
+/* eslint-disable handle-callback-err */
 let braintree = require('braintree');
-let environment, gateway;
+let gateway;
 
 gateway = braintree.connect({
   environment: braintree.Environment.Sandbox,
@@ -11,17 +12,32 @@ gateway = braintree.connect({
 module.exports = gateway;
 
 
+function btSignature() {
+}
+function btPayload() {
+}
 
 
-gateway.webhookNotification.parse(btSignature, btPayload, function (err, webhookNotification) {
-  webhookNotification.kind === braintree.WebhookNotification.Kind.SubMerchantAccountApproved
-   true
-  webhookNotification.merchantAccount.status
-   "active"
-  webhookNotification.merchantAccount.id
-   "blueLaddersStore"
-  webhookNotification.merchantAccount.masterMerchantAccount.id
-   "14laddersMarketplace"
-  notification.merchantAccount.masterMerchantAccount.status
-   "active"
+gateway.webhookNotification.parse(btSignature, btPayload, (err, webhookNotification) => {
+  //noinspection JSUnusedAssignment,BadExpressionStatementJS
+  webhookNotification.kind === braintree.WebhookNotification.Kind.SubMerchantAccountApproved;
+  //noinspection BadExpressionStatementJS
+  true;
+  //noinspection JSUnusedAssignment,BadExpressionStatementJS
+  webhookNotification.merchantAccount.status;
+  //noinspection BadExpressionStatementJS
+  'active';
+  //noinspection JSUnusedAssignment,BadExpressionStatementJS
+  webhookNotification.merchantAccount.id;
+  //noinspection BadExpressionStatementJS
+  'blueLaddersStore';
+  //noinspection JSUnusedAssignment,BadExpressionStatementJS
+  webhookNotification.merchantAccount.masterMerchantAccount.id;
+  //noinspection BadExpressionStatementJS
+  '14laddersMarketplace';
+  let notification;
+  //noinspection JSUnusedAssignment,BadExpressionStatementJS
+  notification.merchantAccount.masterMerchantAccount.status;
+  //noinspection BadExpressionStatementJS
+  'active';
 });

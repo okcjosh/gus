@@ -1,3 +1,4 @@
+/* eslint-disable prefer-reflect */
 /**
  * Using Rails-like standard naming convention for endpoints.
  * GET     /api/lookups              ->  index
@@ -100,7 +101,6 @@ export function create(req, res) {
 
 // Upserts the given Lookup in the DB at the specified ID
 export function upsert(req, res) {
-
   return Lookup.update(req.body, {
     where: {
       _id: req.params.id

@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style,camelcase,prefer-reflect */
 /**
  * Using Rails-like standard naming convention for endpoints.
  * GET     /api/leos              ->  index
@@ -79,7 +80,6 @@ function createSubMerchantAccount(leo) {
         firstName: leo.firstName,
         lastName: leo.lastName,
         email: leo.email,
-        // TODO: verify validity of phone number
         phone: leo.phone,
         dateOfBirth: '1981-11-19',
         // ssn: "456-45-4567",
@@ -105,7 +105,6 @@ function createSubMerchantAccount(leo) {
         descriptor: leo.name,
         destination: braintree.MerchantAccount.FundingDestination.Bank,
         email: leo.email,
-        // TODO: verify validity of phone number
         mobilePhone: leo.phone,
         routingNumber: leo.routingNumber,
         accountNumber: leo.accountNumber

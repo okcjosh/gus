@@ -1,3 +1,5 @@
+/* eslint-disable no-undef,no-unused-vars */
+import {it} from 'moment';
 'use strict';
 
 describe('Component: CheckoutComponent', function() {

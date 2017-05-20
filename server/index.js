@@ -1,3 +1,4 @@
+/* eslint-disable no-process-env */
 'use strict';
 
 // Set default node environment to development

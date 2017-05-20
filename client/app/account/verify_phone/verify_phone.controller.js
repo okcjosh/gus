@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use strict';
 
 export default class VerifyPhoneController {
@@ -21,13 +22,13 @@ export default class VerifyPhoneController {
 
     if(form.$valid) {
       this.$http.post('/api/users/me/verify_phone', {code: this.verificationCode})
-        .then((res) => {
+        .then(res => {
           this.message = 'Phone number successfully verified.';
           setTimeout(() => {
             this.$state.go('event');
           }, 1000);
         })
-        .catch((res) => {
+        .catch(res => {
           this.submitted = false;
           console.log('ERROR');
          // form.code.$setValidity('mongoose', false);
@@ -39,8 +40,8 @@ export default class VerifyPhoneController {
 
   requestCode() {
     this.$http.get('/api/users/me/generate_phone_code')
-      .then((res) => {
-        this.message = 'Check your mobile phone, code has been sent through SMS'
+      .then(res => {
+        this.message = 'Check your mobile phone, code has been sent through SMS';
       });
   }
 }

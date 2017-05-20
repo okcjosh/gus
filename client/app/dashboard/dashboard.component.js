@@ -1,9 +1,8 @@
+/* eslint-disable consistent-this,camelcase,no-unused-vars,array-callback-return,no-invalid-this,prefer-template */
 'use strict';
 const angular = require('angular');
-
 const uiRouter = require('angular-ui-router');
 const $ = require('jquery');
-// const jquery = require('jquery');
 import routes from './dashboard.routes';
 
 require('datatables.net');
@@ -12,25 +11,22 @@ require('datatables.net-buttons-bs');
 require('datatables.net-bs');
 require('datatables.net-buttons-bs');
 require('datatables.net-fixedheader');
-//require('datatables.net-fixedheader-bs');
 require('datatables.net-keytable');
 require('datatables.net-responsive');
 require('datatables.net-responsive-bs');
 require('datatables.net-select');
 require('datatables.net-scroller');
-//require( 'datatables.net-scroller-bs');
+
 
 export class DashboardComponent {
   /*@ngInject*/
 
-  constructor($http, $scope, socket, $state, $interpolate) {
+  constructor($http, $scope, $state, $interpolate) {
     this.$http = $http;
     this.$scope = $scope;
     this.$scope.$state = $state;
     this.$interpolate = $interpolate;
     this.init($scope);
-    // $scope.saveDrags = this.saveDrags.bind(this, $scope, $http);
-    // $scope.approve = this.approve.bind(this, $scope, $http);
   }
 
   init($scope) {
@@ -65,7 +61,7 @@ export class DashboardComponent {
             </a>`;
           event.venueLink = _self.$interpolate(link)(_self.$scope);
 
-          if (event.Status) {
+          if(event.Status) {
             let colorClass = `label label-${statusLabels[event.Status.name]}`;
             event.statusLabel = `<span class="${colorClass}">${event.Status.name}</span>`;
           } else {
@@ -79,16 +75,14 @@ export class DashboardComponent {
 
         const table = $('#events').DataTable({
           select: true,
-          initComplete: function() {
+          initComplete() {
             this.api().columns()
             .every(function() {
-              //alert('col: ' + this.header().innerHTML );
               let column = this;
-              if(this.header().innerHTML == 'Status') {
-
+              if(this.header().innerHTML === 'Status') {
                 let select = $('<select><option value=""></option></select>')
                   .appendTo($(column.header()).empty())
-                  .on('change', function () {
+                  .on('change', function() {
                     let val = $.fn.dataTable.util.escapeRegex(
                       $(this).val()
                     );
@@ -98,60 +92,38 @@ export class DashboardComponent {
                       .draw();
                   });
 
-                column.data().unique().sort().each(function (d, j) {
-                  // select.append('<option value="' + d + '">' + d + '</option>')
-                  let val = $('<div/>').html(d).text();
-                  select.append('<option value="' + val + '">' + val + '</option>');});
+                column.data().unique()
+                  .sort()
+                  .each(function(parameters) {
+                    let d;
+                    let j;
+                    ({d, j} = parameters);
+                    let val = $('<div/>').html(d)
+                      .text();
+                    select.append('<option value="' + val + '">' + val + '</option>');
+                  });
               }
             });
           },
 
           data: this.dataSet,
           columns: [
-            {data: "_id", title: "ID", visible: false},
-            {data: "venue", title: "Venue Data", visible: false},
-            {data: "venueLink", title: "Venue"},
-            {data: "address", title: "Location"},
-            {data: "phone_number", title: "Phone Number"},
-            {data: "leo_count", title: "Officers Needed"},
-            {data: "invite_count", title: "Invites Accepted"},
-            {data: "point_of_contact", title: "POC"},
-            {data: "statusLabel", title: "Status", className: 'text-center'},
-            {data: "JobType", title: "Job Type", visible: false},
-            {data: "job_type_specs", title: "Job Specs", visible: false},
-            {data: "prefered_officer_name", title: "Prefered Officer", visible: false},
-            {data: "is_recuring", title: "Is Recuring", visible: false},
-            //{data: "recuring_data", title: "Recuring", visible: false},
-            {data: "date", title: "Date", visible: false},
-            // { data: "status", title: "Status" },
-            // { data: "event_type", title: "Event Type" }
+            {data: '_id', title: 'ID', visible: false},
+            {data: 'venue', title: 'Venue Data', visible: false},
+            {data: 'venueLink', title: 'Venue'},
+            {data: 'address', title: 'Location'},
+            {data: 'phone_number', title: 'Phone Number'},
+            {data: 'leo_count', title: 'Officers Needed'},
+            {data: 'invite_count', title: 'Invites Accepted'},
+            {data: 'point_of_contact', title: 'POC'},
+            {data: 'statusLabel', title: 'Status', className: 'text-center'},
+            {data: 'JobType', title: 'Job Type', visible: false},
+            {data: 'job_type_specs', title: 'Job Specs', visible: false},
+            {data: 'preferred_officer_name', title: 'Preferred Officer', visible: false},
+            {data: 'is_recuring', title: 'Is Recuring', visible: false},
+            {data: 'date', title: 'Date', visible: false},
           ]
         });
-
-
-        // table.on('select', function (e, dt, type, indexes) {
-        //   if (type === 'row') {
-        //     // table.rows(indexes).data() ==> This returns an array of selected rows
-        //     //  because you can select multiple items at the same time, so I just get
-        //     //  the first item on the next line
-        //     let data = table.rows(indexes).data()[0];
-        //     $scope.selectedRow = data;
-        //
-        //     $http.get('/api/invitations', {
-        //       params: {
-        //         party_id: $scope.selectedRow._id
-        //       }
-        //     }).then(res => {
-        //       _self.initializeDragDrop($scope, res.data);
-        //     });
-        //
-        //     if (!$scope.$$phase) {
-        //       // Update the angular $scope so changes are reflected
-        //       $scope.$digest();
-        //     }
-        //   }
-        // });
-
       });
   }
 }

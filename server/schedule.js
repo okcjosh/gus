@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars,brace-style */
 // Require schedule
 let schedule = require('schedulejs');
 
 // To make schedules easier to read, we'll be using the text parser from later,
 // if you manually specify the later schedules, you don't need to require it here
-let later = require('later'),
-  p = later.parse.text;
+let later = require('later');
+let p = later.parse.text;
 
 // Step 1: Define the work items (tasks), property names don't matter at this
 // point, we'll fix them up later using schedule.task

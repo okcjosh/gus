@@ -1,3 +1,4 @@
+/* eslint-disable prefer-reflect */
 /**
  * Using Rails-like standard naming convention for endpoints.
  * GET     /dept_preferences              ->  index
@@ -63,7 +64,7 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of DeptPreferencess
+// Gets a list of DeptPreferences
 export function index(req, res) {
   return DeptPreferences.findAll()
     .then(respondWithResult(res))

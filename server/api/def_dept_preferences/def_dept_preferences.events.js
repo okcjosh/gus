@@ -26,7 +26,7 @@ for(let e in events) {
 
 function emitEvent(event) {
   return function(doc, options, done) {
-    DefDeptPreferencesEvents.emit(event + ':' + doc._id, doc);
+    DefDeptPreferencesEvents.emit(`${event}:${doc._id}`, doc);
     DefDeptPreferencesEvents.emit(event, doc);
     done(null);
   };

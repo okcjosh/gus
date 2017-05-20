@@ -1,11 +1,16 @@
+/* eslint-disable no-undef,no-unused-vars,no-duplicate-imports */
 'use strict';
 
+//noinspection JSFileReferences
 import main from './main.component';
+//noinspection JSFileReferences
 import {
   MainController
 } from './main.component';
 
+
 describe('Component: MainComponent', function() {
+  /** @namespace angular.mock */
   beforeEach(angular.mock.module(main));
   beforeEach(angular.mock.module('stateMock'));
   beforeEach(angular.mock.module('socketMock'));
@@ -34,6 +39,7 @@ describe('Component: MainComponent', function() {
   it('should attach a list of things to the controller', function() {
     mainComponent.$onInit();
     $httpBackend.flush();
+    /** @namespace mainComponent.awesomeThings */
     expect(mainComponent.awesomeThings.length)
       .to.equal(4);
   });

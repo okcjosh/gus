@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {

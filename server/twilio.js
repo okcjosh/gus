@@ -16,9 +16,9 @@ function sendText(to, body) {
     body
   }, (err, sms) => {
     if(err) {
-        console.log(err);
+      console.log(err);
     } else {
-        console.log(`Text sent: ${sms.sid}`);
+      console.log(`Text sent: ${sms.sid}`);
     }
   });
   // cookie.parse

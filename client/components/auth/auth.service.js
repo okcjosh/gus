@@ -1,3 +1,4 @@
+/* eslint-disable no-undef,no-sync,prefer-reflect,prefer-rest-params */
 'use strict';
 
 class _User {
@@ -10,6 +11,7 @@ class _User {
 }
 
 export function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
+  //noinspection BadExpressionStatementJS
   'ngInject';
 
   let safeCb = Util.safeCb;
@@ -28,18 +30,16 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
     currentUser = User.get();
   }
 
+  //noinspection JSValidateJSDoc
   let Auth = {
     /**
      * Authenticate user and save token
      *
-     * @param  {Object}   user     - form-profile info
-     * @param  {Function} callback - function(error, user)
      * @return {Promise}
      */
     login({
-      email,
-      password
-    }, callback) {
+            email,
+          }) {
       return $http.post('/auth/local', {
         email,
         password
@@ -63,7 +63,8 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
     /**
      * Authenticate leo and save token
      *
-     * @param  {Object}   leo     - form-profile info
+     * @param email
+     * @param password
      * @param  {Function} callback - function(error, leo)
      * @return {Promise}
      */
@@ -76,7 +77,8 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
         password
       }).then(res => {
         callback(null, res.data.leo_id);
-      }).catch(err => callback(err));
+      })
+        .catch(err => callback(err));
     },
 
     /**
@@ -175,7 +177,7 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
     /**
      * Check if a user is logged in
      *
-     * @return {Bool}
+     * @return {boolean}
      */
     isLoggedInSync() {
       return !!_.get(currentUser, 'role');
@@ -212,7 +214,6 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
      * Check if a user is an admin
      *   (synchronous|asynchronous)
      *
-     * @param  {Function|*} callback - optional, function(is)
      * @return {Bool|Promise}
      */
     isAdmin() {

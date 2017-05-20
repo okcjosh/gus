@@ -1,3 +1,4 @@
+/* eslint-disable no-alert,handle-callback-err,no-unused-vars,no-return-assign */
 'use strict';
 require('angular');
 require('moment');
@@ -8,13 +9,11 @@ require('datatables.net-buttons-bs');
 require('datatables.net-bs');
 require('datatables.net-buttons-bs');
 require('datatables.net-fixedheader');
-//require('datatables.net-fixedheader-bs');
 require('datatables.net-keytable');
 require('datatables.net-responsive');
 require('datatables.net-responsive-bs');
 require('datatables.net-select');
 require('datatables.net-scroller');
-//require('datatables.net-scroller-bs');
 require('./../../assets/lib/date-time-sort');
 
 export default class AdminController {
@@ -28,7 +27,7 @@ export default class AdminController {
     this.newLeo = { dislikes: [] };
   }
 
-  transformLeoForTable(leo) {
+  static transformLeoForTable(leo) {
     let statusLabels = {
       Pending: 'warning',
       Declined: 'danger',
@@ -47,7 +46,7 @@ export default class AdminController {
       .then(response => {
         $.fn.dataTable.ext.errMode = 'none';
         // Map through leos to display labels  properly
-        this.awesomeLeos = response.data.map(this.transformLeoForTable);
+        this.awesomeLeos = response.data.map(AdminController.transformLeoForTable);
 
         setTimeout(function() {
           $.fn.dataTable.moment('MMM D, YYYY');
@@ -67,13 +66,13 @@ export default class AdminController {
 
       this.$http.post('/api/leos', this.newLeo)
         .then(res => {
-          this.awesomeLeos.push(this.transformLeoForTable(res.data));
+          this.awesomeLeos.push(AdminController.transformLeoForTable(res.data));
           this.newLeo = { dislikes: [] };
         }, err => {
           alert('Could not create LEO, due to incorrect info');
         });
     } else {
-      alert('Fill all feilds');
+      alert('Fill all fields');
     }
   }
 
@@ -101,5 +100,8 @@ export default class AdminController {
     // console.log(this.users, user);
     // let table = $('#leo-table').DataTable();
     // let usersTable = $('#users-table').DataTable();
+  }
+
+  $remove() {
   }
 }

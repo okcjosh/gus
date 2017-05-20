@@ -33,7 +33,8 @@ export default function routes($stateProvider) {
       controller: 'SettingsController',
       controllerAs: 'vm',
       authenticate: true
-    }).state('verify_phone', {
+    })
+    .state('verify_phone', {
       url: '/verify_phone',
       template: require('./verify_phone/verify_phone.html'),
       controller: 'VerifyPhoneController',

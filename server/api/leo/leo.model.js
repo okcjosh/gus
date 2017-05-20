@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 'use strict';
 
 import shortid from 'shortid';

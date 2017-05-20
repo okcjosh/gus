@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars,arrow-body-style,camelcase,prefer-reflect */
 /**
  * Using Rails-like standard naming convention for endpoints.
  * GET     /api/events              ->  index
@@ -17,7 +18,7 @@ import gateway from './../../gateway';
 import shortid from 'shortid';
 import moment from 'moment';
 
-import {Event, Status, JobType, User, Leo, JobInvitation, Lookup} from '../../sqldb';
+import {Event, Status, JobType, User, Leo, JobInvitation} from '../../sqldb';
 
 import { sendEventCompletionEmail } from './../../email';
 import { sendEventCompletionText } from './../../twilio';
@@ -128,7 +129,7 @@ function chargeForService(amount) {
 // Pass the event with the JobType included for which the cost is to be calculted
 export function CostCalculator(event) {
   function yesNo(v) {
-    return v == 'yes' ? 1 : 0;
+    return v === 'yes' ? 1 : 0;
   }
 
   event.JobType = event.JobType || {};
@@ -141,37 +142,37 @@ export function CostCalculator(event) {
     officers: {
       cost: event.JobType.officer_rate,
       count: Math.ceil(event.crowd_size / 20), //event.prefered_officer_name.split(',').length,
-      total: (event.JobType.officer_rate * Math.ceil(event.crowd_size / 20)) || 0//(event.prefered_officer_name.split(',').length)) || 0
+      total: event.JobType.officer_rate * Math.ceil(event.crowd_size / 20) || 0//(event.prefered_officer_name.split(',').length)) || 0
     },
     time: {
       cost: event.JobType.hour_rate,
       count: event.hours_expected,
-      total: (event.JobType.hour_rate * event.hours_expected) || 0
+      total: event.JobType.hour_rate * event.hours_expected || 0
     },
     crowd: {
       cost: event.JobType.crowd_rate,
       count: event.crowd_size,
-      total: (event.JobType.crowd_rate * (event.crowd_size / 10)) || 0
+      total: event.JobType.crowd_rate * (event.crowd_size / 10) || 0
     },
     alcohol: {
       cost: event.JobType.alcohol,
       count: event.alcohol,
-      total: (event.JobType.alcohol * yesNo(event.alcohol)) || 0
+      total: event.JobType.alcohol * yesNo(event.alcohol) || 0
     },
     police_vehicle: {
       cost: event.JobType.police_vehicle,
       count: event.police_vehicle,
-      total: (event.JobType.police_vehicle * yesNo(event.police_vehicle)) || 0
+      total: event.JobType.police_vehicle * yesNo(event.police_vehicle) || 0
     },
     barricade: {
       cost: event.JobType.barricade,
       count: event.barricade,
-      total: (event.JobType.barricade * yesNo(event.barricade)) || 0
+      total: event.JobType.barricade * yesNo(event.barricade) || 0
     },
     amplified_sound: {
       cost: event.JobType.amplified_sound,
       count: event.amplified_sound,
-      total: (event.JobType.amplified_sound * yesNo(event.amplified_sound)) || 0
+      total: event.JobType.amplified_sound * yesNo(event.amplified_sound) || 0
     },
   };
 
@@ -232,10 +233,13 @@ export function completeEventPayment(req, res) {
   return getLeosForEvent(req.params.id, 'Accepted')
     .then(handleEntityNotFound(res))
     .then(leos => {
+      Event.findOne = function(param) {
+      };
       return Event.findOne({ where: { _id: req.params.id }, include: [User, JobType]})
         .then(event => {
-          let amount = req.body.amount || CostCalculator(event);
-          let leoShare = amount - (amount * .07);
+          let amount;
+          amount = CostCalculator(event) || req.body.amount;
+          let leoShare = amount - amount * .07;
 
           chargeForService(amount * .07)
             .then(result => {
@@ -318,7 +322,7 @@ export function showByStatus(req, res) {
 
 export function approve(req, res) {
   let id = req.params._id;
-  Event.seq.query('update Events set StatusId = 2 where _id =' + id);
+  Event.seq.query(`update Events set StatusId = 2 where _id =${id}`);
   res.status(200).end();
 }
 
@@ -373,7 +377,7 @@ export function create(req, res) {
                 res.status(201).json({
                   event: reloadedEvent,
                   cost: CostCalculator(reloadedEvent),
-                  totalCost: totalCost
+                  totalCost
                 });
               }
             });
@@ -385,13 +389,15 @@ export function create(req, res) {
   // This will run if the event is a Single event
   return Event.create(req.body)
     .then(function(event) {
+      event.setUser = function(_id) {
+      };
       event.setUser(req.user._id)
         .then(function(user) {
           event.reload({
             include: [User, JobType]
           }).then(function() {
             res.status(201).json({
-              event: event,
+              event,
               cost: CostCalculator(event)
             });
           });
@@ -403,7 +409,7 @@ export function create(req, res) {
 // Upserts the given Event in the DB at the specified ID
 export function upsert(req, res) {
   if(req.body._id) {
-    delete req.body._id;
+    Reflect.deleteProperty(req.body._id);
   }
 
   return Event.upsert(req.body, {
@@ -418,7 +424,7 @@ export function upsert(req, res) {
 // Updates an existing Event in the DB
 export function patch(req, res) {
   if(req.body._id) {
-    delete req.body._id;
+    Reflect.deleteProperty(req.body._id);
   }
   return Event.find({
     where: {
@@ -433,7 +439,7 @@ export function patch(req, res) {
 
 export function expressInterest(req, res) {
   Leo.findOne({ where: { _id: req.params.leo_id }})
-    .then(leo => leo.firstName + ' ' + leo.lastName)
+    .then(leo => `${leo.firstName} ${leo.lastName}`)
     .then(name => {
       Event.find({ where: { _id: req.params.event_id }})
         .then(handleEntityNotFound(res))
@@ -441,7 +447,7 @@ export function expressInterest(req, res) {
           let interestedOfficers = [];
           if(event.interested_officers) {
             // Using set to make array unique
-            interestedOfficers = [... new Set(event.interested_officers.split(','))];
+            interestedOfficers = [...new Set(event.interested_officers.split(','))];
           }
 
           interestedOfficers.push(name);

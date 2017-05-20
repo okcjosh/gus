@@ -1,12 +1,14 @@
+/* eslint-disable no-shadow,brace-style,camelcase,arrow-body-style */
 'use strict';
 const angular = require('angular');
 const uiRouter = require('angular-ui-router');
 import routing from './drag.routes';
 export class DragComponent {
+  /** @namespace event.dataTransfer */
 
 
   /*@ngInject*/
-  constructor($http, $scope, socket, $state) {
+  constructor($http, $scope) {
     this.$http = $http;
     this.$scope = $scope;
     this.init($scope);
@@ -47,7 +49,7 @@ export class DragComponent {
      */
     $scope.onDragstart = function(list, event) {
       list.dragging = true;
-      if (event.dataTransfer.setDragImage) {
+      if(event.dataTransfer.setDragImage) {
         let img = new Image();
         img.src = 'framework/vendor/ic_content_copy_black_24dp_2x.png';
         event.dataTransfer.setDragImage(img, 0, 0);
@@ -85,20 +87,14 @@ export class DragComponent {
 
   saveDrags($scope, $http) {
     $scope.jobsList.forEach(function(job) {
-
       let draggedLeos = job.items;
       draggedLeos.forEach(function(leo) {
-
         let inviteData = {
-          job_id: job.job_data.job_id,
-        	leo_id: leo.leo_id,
-        	job_invitation_status_id: 1,
-        	expires: 0
-        };
+          job_id: job.job_data.job_id, leo_id: leo.leo_id, job_invitation_status_id: 1, expires: 0};
 
         $http.post('/api/invitations', inviteData)
           .then(function(res) {
-            if (res.status === 201) {
+            if(res.status === 201) {
               // Invitation successfully created!!!
               // Decide what you want to do after creating invitation.
             }

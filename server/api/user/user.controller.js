@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars,camelcase,brace-style */
 'use strict';
 
 import jwt from 'jsonwebtoken';
@@ -221,7 +222,7 @@ export function requestForgotPassword(req, res) {
 
   return User.find({
     where: {
-      email: email
+      email
     }
   }).then(user => {
     if(user) {

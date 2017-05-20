@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /**
  * BtWebhook model events
  */
@@ -28,7 +29,7 @@ function registerEvents(BtWebhook) {
 
 function emitEvent(event) {
   return function(doc, options, done) {
-    BtWebhookEvents.emit(event + ':' + doc._id, doc);
+    BtWebhookEvents.emit(`${event}:${doc._id}`, doc);
     BtWebhookEvents.emit(event, doc);
     done(null);
   };

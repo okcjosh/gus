@@ -1,3 +1,4 @@
+/* eslint-disable no-undef,no-unused-vars,no-duplicate-imports */
 'use strict';
 
 describe('Component: DashboardComponent', function() {
