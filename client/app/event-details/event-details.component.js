@@ -91,10 +91,10 @@ export class EventDetailsComponent {
         this.eventCost = res.data;
         this.adjustedAmount = res.data.grand_total;
       });
-    this.$http.get(`/api/events/${event_id}/status`)
-      .then(res => {
-        this.eventStatusId = res.data;
-      });
+    // this.$http.get(`/api/events/${event_id}/status`)
+    //   .then(res => {
+    //     this.eventStatusId = res.data;
+    //   });
     this.$http.get(`/api/events/${event_id}/leos_invite`)
       .then(res => {
         this.leoInvites = res.data;

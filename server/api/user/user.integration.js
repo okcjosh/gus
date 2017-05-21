@@ -1,3 +1,4 @@
+/* eslint-disable no-undef,handle-callback-err */
 'use strict';
 
 import app from '../..';
