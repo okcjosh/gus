@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 'use strict';
 
 import angular from "angular";
