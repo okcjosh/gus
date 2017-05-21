@@ -4,9 +4,7 @@
  */
 
 'use strict';
-import {
-  User,
-} from '../sqldb';
+import {User} from "../sqldb";
 
 
 User.sync()
@@ -24,6 +22,12 @@ User.sync()
       role: 'admin',
       name: 'Admin',
       email: 'admin@example.com',
+      password: 'admin'
+    }, {
+      provider: 'local',
+      role: 'admin',
+      name: 'Admin',
+      email: 'josh@myofficers.com',
       password: 'admin'
     }])
       .then(() => {
