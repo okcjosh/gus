@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-import * as console from 'nodemon/lib/utils/index';
 'use strict';
 
 export default class LoginController {

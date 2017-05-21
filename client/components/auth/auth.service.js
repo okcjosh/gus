@@ -39,7 +39,8 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
      */
     login({
             email,
-          }) {
+            password
+          }, callback) {
       return $http.post('/auth/local', {
         email,
         password

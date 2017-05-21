@@ -120,14 +120,13 @@ export default function(sequelize, DataTypes) {
       // Hide password from JSON of user
       toJSON() {
         let values = Object.assign({}, this.get());
-        Reflect.deleteProperty(
-          values.provider,
-          values.salt,
-          values.facebook,
-          values.twitter,
-          values.google,
-          values.github
-        );
+
+        Reflect.deleteProperty(values, 'provider');
+        Reflect.deleteProperty(values, 'salt');
+        Reflect.deleteProperty(values, 'facebook');
+        Reflect.deleteProperty(values, 'twitter');
+        Reflect.deleteProperty(values, 'google');
+        Reflect.deleteProperty(values, 'github');
         return values;
       },
       /**
