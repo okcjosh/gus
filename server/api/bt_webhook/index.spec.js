@@ -1,3 +1,4 @@
+let sinon = require('sinon');
 'use strict';
 
 /* globals sinon, describe, expect, it */

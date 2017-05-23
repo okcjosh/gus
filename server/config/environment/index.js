@@ -1,8 +1,8 @@
 'use strict';
 /*eslint no-process-env:0*/
 
-import path from "path";
-import _ from "lodash";
+const path = require('path');
+const _ = require('lodash');
 
 /*function requiredProcessEnv(name) {
   if(!process.env[name]) {
@@ -64,7 +64,7 @@ let all = {
 
 // Export the config object based on the NODE_ENV
 // ==============================================
-var processRequire = process.env.NODE_ENV != undefined ? require('./' + process.env.NODE_ENV + '.js') : {};
+var processRequire = process.env.NODE_ENV != undefined ? require(`./${process.env.NODE_ENV}.js`) : {};
 module.exports = _.merge(
   all,
   require('./shared'),

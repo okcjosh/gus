@@ -276,8 +276,8 @@ gulp.task('lint:scripts:clientTest', () => {
 });
 
 gulp.task('lint:scripts:serverTest', () => {
-  return gulp.src(paths.server.test)
-        .pipe(lintServerTestScripts());
+  return gulp.src(paths.server.test.integration, paths.server.test.unit)
+    .pipe(lintServerTestScripts());
 });
 
 gulp.task('jscs', () => {
