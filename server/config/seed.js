@@ -4,7 +4,7 @@
  */
 
 'use strict';
-import {User} from "../sqldb";
+import {User} from '../sqldb';
 
 
 User.sync()

@@ -2,10 +2,45 @@
   <div class="col-lg-12">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <b>All Jobs</b>
+        <b>All One-Time Jobs</b>
       </div>
       <div class="panel-body">
         <table id="events" class="table dataTable table-striped table-bordered table-responsive"></table>
+      </div>
+    </div>
+    <div class="row">
+
+    </div>
+  </div>
+
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <b>All Recurring Jobs</b>
+      </div>
+      <div class="panel-body">
+        <table id="events-recurring" class="table dataTable table-striped table-bordered table-responsive">
+          <thead>
+            <th>Collection ID</th>
+            <th>Venue</th>
+            <th>Location</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="event in recurringEvents">
+              <td>
+                <a ui-sref="dashboard-recurring({ recurring_id: event.recuring_id})">
+                  {{event.recuring_id}}
+                </a>
+              </td>
+              <td>{{event.venue}}</td>
+              <td>{{event.address}}</td>
+              <td>{{event.email}}</td>
+              <td>{{event.phone_number}}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <div class="row">

@@ -139,19 +139,19 @@
                 <div class="row">
                   <div class="col-md-3">
                     <label class="radio-inline">
-                    <input type="radio" name="jobRecuring" id="inlineRadio1" ng-model="eventData.is_recuring" value="0" class="recuringJob" checked> One-off Job
+                    <input type="radio" name="jobRecuring" id="inlineRadio1" ng-model="eventData.is_recuring" ng-value="false" class="recuringJob" checked> One-off Job
                   </label>
                   </div>
                   <div class="col-md-3">
                     <label class="radio-inline">
-                    <input type="radio" name="jobRecuring" ng-click="showRecurringModal()" id="inlineRadio2" ng-model="eventData.is_recuring" value="1" class="recuringJob"> Recurring Job
+                    <input type="radio" name="jobRecuring" ng-click="showRecurringModal()" id="inlineRadio2" ng-model="eventData.is_recuring" ng-value="true" class="recuringJob"> Recurring Job
                   </label>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div class="form-group">
+            
+            <div ng-show="!eventData.is_recuring" class="form-group">
               <label for="creationEventDate" id="creationEventDateLabel" class="control-label col-md-3">Event Date &amp; Time</label>
               <div class="col-md-4">
                 <div class="input-group date" id="creationEventDateGroup">
@@ -172,7 +172,7 @@
 
             </div>
 
-            <div class="form-group">
+            <div ng-show="!eventData.is_recuring" class="form-group">
               <label for="OfficerArriveTime" id="OfficerArriveTimeLabel" class="control-label col-md-3">Officer(s) to arrive at</label>
               <div class="col-md-4">
                 <div class="input-group date" id="OfficerArriveTimeGroup">
@@ -267,6 +267,21 @@
           </div>
           <div class="tab-pane" ng-class="{active: progress == 3}" role="tabpanel" id="step3">
             <h3 class="margin-bottom-10">Cost</h3>
+
+            <div class="row">
+              <div ng-if="event.is_recuring" class="row">
+                <div class="col-xs-12">
+                  <h3>Shifts</h3>
+                </div>
+              </div>
+              <div ng-repeat="shift in shifts" style="padding: 10px; display: inline-block">
+                <button class="btn btn-success" ng-click="setShiftCost($index)">
+                  Date: {{ shift.formattedDate }} <br>
+                  Hours Expected: {{ shift.hours_expected }} hours
+                </button>
+              </div>
+            </div>
+
             <table class="table table-bordered table-responsive table-hover">
               <thead>
                 <th>Element</th>
@@ -329,6 +344,7 @@
                 </tr>
               </tbody>
             </table>
+
           </div>
           <div class="clearfix"></div>
         </div>

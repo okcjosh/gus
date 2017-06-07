@@ -1,0 +1,46 @@
+<div class="container-fluid main-content" style="width: 98%">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <b>All Shifts</b>
+      </div>
+      <div class="panel-body">
+        <table id="events" class="table dataTable table-striped table-bordered table-responsive">
+          <thead>
+            <th>Venue</th>
+            <th>Date</th>
+            <th>Hours Exp.</th>
+            <th>Location</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Event Status</th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="event in recurringEvents">
+              <td>
+                <a ui-sref="event-details({ event_id: event._id})">
+                  {{event.venue}}
+                </a>
+              </td>
+              <td>{{event.formattedDate}}</td>
+              <td>{{event.hours_expected}}</td>
+              <td>{{event.address}}</td>
+              <td>{{event.email}}</td>
+              <td>{{event.phone_number}}</td>
+              <td>
+                <span ng-if="event.Status.name === 'Created'" class="label label-warning">Created</span>
+                <span ng-if="event.Status.name === 'Rejected'" class="label label-primary">Danger</span>
+                <span ng-if="event.Status.name === 'Scheduled'" class="label label-info">Scheduled</span>
+                <span ng-if="event.Status.name === 'Approved'" class="label label-success">Approved</span>
+                <span ng-if="event.Status.name === 'Completed'" class="label label-primary">Completed</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+
+    </div>
+  </div>
+</div>

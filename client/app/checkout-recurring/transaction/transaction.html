@@ -1,0 +1,166 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="wrapper col-lg-8 hidden-print text-center animated fadeInRight">
+      <div class="response bt-response col-lg-6 center-block">
+        <div class="content">
+          <section>
+            <img src='assets/images/success.svg'>
+          </section>
+          <section>
+            <p class="pay-success-message">Thank You! We have received your event reservation request and pre-authorized your card. You will be contacted when your event is approved.</p>
+          </section>
+          <section><a href="javascript:window.print()" class="btn btn-success btn-icon btn-lg"> <span class="fa fa-print"></span> Print Reservation Estimate </a></section>
+        </div>
+      </div>
+    </div>
+    <aside class="drawer dark col-lg-4">
+      <header>
+        <div class="content text-center">
+          <h3> <img src="assets/images/ps4Logo.png" class="visible-print receipt-logo"> MYOFFICERS.COM Event Reservation Estimate</h3>
+        </div>
+      </header>
+      <article class="content compact">
+        <section>
+          <h5>Event Details</h5>
+          <table cellpadding="0" cellspacing="0" class="table">
+            <tbody>
+              <tr>
+                <th>Venue</th>
+                <td>{{event.venue}}</td>
+              </tr>
+              <tr>
+                <th>Event ID</th>
+                <td>{{event._id}}</td>
+              </tr>
+              <tr>
+                <th>Address</th>
+                <td>{{event.address}}</td>
+              </tr>
+              <tr>
+                <th>Phone Number</th>
+                <td>{{event.phone_number}}</td>
+              </tr>
+              <!--<tr>-->
+                <!--<th>Job Type</th>-->
+                <!--<td>{{event.job_type.name}}</td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<th>Job Specifications</th>-->
+                <!--<td>{{event.job_type_specs}}</td>-->
+              <!--</tr>-->
+              <tr>
+                <th>Date</th>
+                <td>{{ event.date | date: 'MM/dd/yyyy' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section>
+          <h5>Transaction</h5>
+          <table cellpadding="0" cellspacing="0" class="table">
+            <tbody>
+            <tr>
+              <th>Transaction ID</th>
+              <td>{{transaction.id}}</td>
+            </tr>
+            <tr>
+              <th>Type</th>
+              <td>{{transaction.type}}</td>
+            </tr>
+            <tr>
+              <th>Amount</th>
+              <td>{{transaction.amount}}</td>
+            </tr>
+            <tr>
+              <th>Status</th>
+              <td>{{transaction.status}}</td>
+            </tr>
+            <tr>
+              <th>Date</th>
+              <td>{{transaction.createdAt | date: 'MM/dd/yyyy'}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </section>
+        <section>
+          <h5>Pre-Authorization</h5>
+          <table cellpadding="0" cellspacing="0" class="table">
+            <tbody>
+              <!--<tr>-->
+                <!--<th>Token</th>-->
+                <!--<td>{{transaction.creditCard.token}}</td>-->
+              <!--</tr>-->
+              <tr>
+                <th>Bin</th>
+                <td>{{transaction.creditCard.bin}}</td>
+              </tr>
+              <tr>
+                <th>Last 4 digits</th>
+                <td>{{transaction.creditCard.last4}}</td>
+              </tr>
+              <tr>
+                <th>Card Type</th>
+                <td>{{transaction.creditCard.cardType}}</td>
+              </tr>
+              <tr>
+                <th>Expiration Date</th>
+                <td>{{transaction.creditCard.expirationMonth + '/' + transaction.creditCard.expirationYear}}</td>
+              </tr>
+              <tr>
+                <th>Cardholder Name</th>
+                <td>{{transaction.creditCard.cardholderName}}</td>
+              </tr>
+              <tr>
+                <th>Customer Location</th>
+                <td>{{transaction.creditCard.customerLocation}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section>
+          <h5>Customer</h5>
+          <table cellpadding="0" cellspacing="0" class="table">
+            <tbody>
+              <tr>
+                <th>ID</th>
+                <td>{{transaction.customer.id}}</td>
+              </tr>
+              <tr>
+                <th>First Name</th>
+                <td>{{transaction.customer.firstName}}</td>
+              </tr>
+              <tr>
+                <th>Last Name</th>
+                <td>{{transaction.customer.lastName}}</td>
+              </tr>
+              <tr>
+                <th>Email</th>
+                <td>{{transaction.customer.email}}</td>
+              </tr>
+              <tr>
+                <th>Company</th>
+                <td>{{transaction.customer.company}}</td>
+              </tr>
+              <tr>
+                <th>Website</th>
+                <td>{{transaction.customer.website}}</td>
+              </tr>
+              <tr>
+                <th>Phone</th>
+                <td>{{transaction.customer.phone}}</td>
+              </tr>
+              <tr>
+                <th>Fax</th>
+                <td>{{transaction.customer.fax}}</td>
+              </tr>
+            </tbody>
+            <div class="notice-wrapper"><span class="notice-message">{{msg.msg}}</span></div>
+          </table>
+        </section>
+      </article>
+    </aside>
+
+  </div>
+
+</div>

@@ -21,9 +21,11 @@ import footer from "../components/footer/footer.component";
 import main from "./main/main.component";
 import LeoDashboardController from "./leo-dashboard/leo-dashboard.component";
 import CheckoutComponent from "./checkout/checkout.component";
+import CheckoutRecurringComponent from "./checkout-recurring/checkout-recurring.component";
 import TransactionComponent from "./checkout/transaction/transaction.component";
 import InvitationComponent from "./invitation/invitation.component";
 import DashboardComponent from "./dashboard/dashboard.component";
+import DashboardRecurringComponent from "./dashboard-recurring/dashboard-recurring.component";
 import RatesComponent from "./rates/rates.component";
 import event from "./event/event.component";
 import eventDetails from "./event-details/event-details.component";
@@ -62,7 +64,9 @@ angular.module('myofficersApp',
     footer,
     main,
     CheckoutComponent,
+    CheckoutRecurringComponent,
     DashboardComponent,
+    DashboardRecurringComponent,
     RatesComponent,
     TransactionComponent,
     InvitationComponent,

@@ -110,9 +110,9 @@ export class EventDetailsComponent {
     geocoder = new google.maps.Geocoder();
     // Create a map object and specify the DOM element for display.
     const map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: -34.397, lng: 150.644},
+      center: { lat: 0, lng: 0 },
       scrollwheel: false,
-      zoom: 10
+      zoom: 13
     });
 
     geocoder.geocode({ address }, function(results, status) {
@@ -126,12 +126,6 @@ export class EventDetailsComponent {
         alert(`Geocode was not successful for the following reason: ${status}`);
       }
     });
-  }
-
-  geocode(param, f) {
-  }
-
-  Geocoder() {
   }
 
   initializeDragDrop($scope, invitations) {

@@ -11,6 +11,8 @@
 
 'use strict';
 
+import sequelize from 'sequelize';
+
 import jsonpatch from 'fast-json-patch';
 
 import gateway from './../../gateway';
@@ -193,21 +195,96 @@ export function CostCalculator(event) {
   return c;
 }
 
+// This will accumulate the cost JSON for all shifts into one
+export function CostCalculatorRecurring(events) {
+  let recurringCost = {
+    shiftsCosts: [],
+    totalCost: {}
+  };
+
+  events.forEach(ev => {
+    let c = CostCalculator(ev);
+    recurringCost.shiftsCosts.push(c);
+  });
+
+  let firstCost = JSON.parse(JSON.stringify(recurringCost.shiftsCosts[0]));
+
+  recurringCost.totalCost = recurringCost.shiftsCosts.reduce((acc, cost) => {
+    let newCost = Object.assign({}, cost);
+
+    [
+      'officers',
+      'time',
+      'crowd',
+      'alcohol',
+      'police_vehicle',
+      'barricade',
+      'amplified_sound'
+    ].forEach(i => {
+      acc[i].cost = acc[i].cost + newCost[i].cost;
+      acc[i].count = acc[i].count + newCost[i].count;
+      acc[i].total = acc[i].total + newCost[i].total;
+    });
+
+    acc.base.cost = acc.base.cost + newCost.base.cost;
+    acc.base.total = acc.base.total + newCost.base.total;
+    acc.grand_total = acc.grand_total + newCost.grand_total;
+
+    return acc;
+  });
+
+  recurringCost.shiftsCosts[0] = firstCost;
+
+  return recurringCost;
+}
+
 // Gets a list of Events
 export function index(req, res) {
   return Event.findAll({
     include: [JobType, Status],
-    // where: {
-    //   date: {
-    //     $gt: Date.now()
-    //   }
-    // },
+    where: {
+      is_recuring: false
+    }
     // order: [
     //   ['date', 'ASC']
     // ]
   })
     .then(respondWithResult(res))
-    .catch(() => handleError(res));
+    .catch(handleError(res));
+}
+
+// Gets a list of Events
+export function listRecurringCollection(req, res) {
+  return Event.findAll({
+    include: [JobType, Status],
+    where: {
+      recuring_collection_id: req.params.id
+    }
+    // order: [
+    //   ['date', 'ASC']
+    // ]
+  })
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+// Gets a list of Events
+export function indexRecurring(req, res) {
+  return Event.findAll({
+    // include: [JobType, Status],
+    where: {
+      is_recuring: true
+    },
+    attributes: [
+      [sequelize.fn('DISTINCT', sequelize.col('recuring_collection_id')), 'recuring_id'],
+      'venue',
+      'email',
+      'address',
+      'phone_number'
+    ]
+  })
+    .then(respondWithResult(res))
+    .catch(handleError(res));
 }
 
 // Gets a single Event from the DB
@@ -321,7 +398,7 @@ export function showByStatus(req, res) {
 // }
 
 export function approve(req, res) {
-  let id = req.params._id;
+  let id = req.params.id;
   Event.seq.query(`update Events set StatusId = 2 where _id =${id}`);
   res.status(200).end();
 }
@@ -341,11 +418,14 @@ export function getEventCost(req, res) {
 // Creates a new Event or series of events in the DB
 export function create(req, res) {
   req.body.UserId = req.user._id;
-  req.body.is_recuring = parseInt(req.body.is_recuring, 10);
   let eventData = req.body;
 
   // This will run if the event is a recurring event
   if(eventData.is_recuring) {
+    eventData.recuring_data = eventData.recuring_data || [];
+    if(!eventData.recuring_data.length) {
+      return handleError(res, 400)('Recurring Data must be at least 1');
+    }
     eventData.recuring_collection_id = shortid.generate();
     let recuringEvents = eventData.recuring_data.map(data => {
       let newEvent = Object.assign({}, eventData);
@@ -353,16 +433,12 @@ export function create(req, res) {
       newEvent.date = data.start;
       newEvent.hours_expected = moment(data.end).diff(moment(data.start), 'h');
       delete newEvent.recuring_data;
-      // Reflect.deleteProperty(newEvent, 'recuring_data');
 
       return newEvent;
     });
-    // console.log(recuringEvents.length, recuringEvents, '======');
 
     return Event.bulkCreate(recuringEvents)
       .then(() => {
-        let totalCost = 0;
-
         return Event.findAll({
           where: {
             recuring_collection_id: eventData.recuring_collection_id
@@ -370,16 +446,13 @@ export function create(req, res) {
           include: [JobType, User]
         })
           .then(reloadedEvents => {
-            reloadedEvents.forEach((reloadedEvent, ind) => {
-              totalCost += CostCalculator(reloadedEvent).base.total;
-
-              if(ind === reloadedEvents.length - 1) {
-                res.status(201).json({
-                  event: reloadedEvent,
-                  cost: CostCalculator(reloadedEvent),
-                  totalCost
-                });
-              }
+            let recurringCost = CostCalculatorRecurring(reloadedEvents);
+            res.status(201).json({
+              event: reloadedEvents[0],
+              events: reloadedEvents,
+              cost: recurringCost.shiftsCosts[0],
+              recurringCost,
+              totalCost: recurringCost.totalCost
             });
           });
       })
@@ -389,8 +462,6 @@ export function create(req, res) {
   // This will run if the event is a Single event
   return Event.create(req.body)
     .then(function(event) {
-      event.setUser = function(_id) {
-      };
       event.setUser(req.user._id)
         .then(function(user) {
           event.reload({

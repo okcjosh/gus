@@ -22,13 +22,16 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 // Component styles are injected through gulp
 
 /* inject:scss */
+@import 'aCustom';
 @import 'account/login/login';
 @import 'account/signup/signup';
 @import 'accounts/accounts';
-@import 'aCustom';
 @import 'admin/admin';
+@import 'checkout-recurring/checkout-recurring';
+@import 'checkout-recurring/transaction/transaction';
 @import 'checkout/checkout';
 @import 'checkout/transaction/transaction';
+@import 'dashboard-recurring/dashboard-recurring';
 @import 'dashboard/dashboard';
 @import 'drag/drag';
 @import 'event-details/event-details';

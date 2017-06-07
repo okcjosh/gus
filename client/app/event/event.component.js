@@ -20,7 +20,6 @@ export class EventComponent {
     this.$q = $q;
     this.toastr = toastr;
 
-
     $scope.loadRecuringModal = this.loadRecuringModal;
   }
 
@@ -43,19 +42,30 @@ export class EventComponent {
       }
     } else if(step === 2) {
       this.jQueryShowErrorStep('#step2');
-      $s.eventData.creationEventDate = document.getElementById('creationEventDate').value;
-      $s.eventData.officer_arrival_time = document.getElementById('OfficerArriveTime').value;
-      return !!($s.newEventForm.jobType.$valid
-      && $s.newEventForm.jobSpecs.$valid
-      // && $s.newEventForm.officerName.$valid
-      && $s.newEventForm.jobRecuring.$valid
-      && $s.newEventForm.officer_stay_hours.$modelValue > 0
-      && $s.newEventForm.officerUniform.$valid
-      && $s.newEventForm.attendeesNum.$modelValue > 0
-      && $s.newEventForm.alcoholServed.$valid
-      && $s.newEventForm.policeVehicle.$valid
-      && $s.newEventForm.barricadeRequested.$valid
-      && $s.newEventForm.amplifiedSound.$valid);
+      let one_time_event_checks = true;
+
+      if(!$s.eventData.is_recuring) {
+        // Run these checks if it's a recurring Event
+        $s.eventData.creationEventDate = document.getElementById('creationEventDate').value;
+        $s.eventData.officer_arrival_time = document.getElementById('OfficerArriveTime').value;
+
+        one_time_event_checks
+          = $s.newEventForm.officer_stay_hours.$modelValue > 0
+            && $s.newEventForm.attendeesNum.$modelValue > 0;
+      }
+
+      return !!(
+        $s.newEventForm.jobType.$valid
+        && $s.newEventForm.jobSpecs.$valid
+        // && $s.newEventForm.officerName.$valid
+        && $s.newEventForm.jobRecuring.$valid
+        && $s.newEventForm.officerUniform.$valid
+        && $s.newEventForm.alcoholServed.$valid
+        && $s.newEventForm.policeVehicle.$valid
+        && $s.newEventForm.barricadeRequested.$valid
+        && $s.newEventForm.amplifiedSound.$valid
+        && one_time_event_checks
+      );
     } else if(step === 3) {
       this.jQueryShowErrorStep('#step3');
       return true;
@@ -77,16 +87,30 @@ export class EventComponent {
               // Store created event on scope
               $scope.event = data.event;
               $scope.eventCost = data.cost;
+              if($scope.event.is_recuring) {
+                $scope.shifts = data.events.map(s => {
+                  s.formattedDate = moment(s.date).format('llll');
+                  return s;
+                });
+
+                $scope.recurringCost = data.recurringCost;
+              }
+
               $scope.progress++;
             });
         } else if($scope.progress === 3) {
-          // To go to checkout page
-          $state.go('checkout', { event_id: $scope.event._id });
+          // To go to checkout page for Recurring Event
+          if($scope.event.is_recuring) {
+            $state.go('checkout-recurring', { event_id: $scope.event.recuring_collection_id });
+          } else {
+            // To go to checkout page
+            $state.go('checkout', { event_id: $scope.event._id });
+          }
         } else {
           $scope.progress++;
         }
       } else {
-        console.log('Not Valid ===>>>', $scope.newEventForm);
+        console.error('Not Valid ===>>>', $scope.newEventForm);
         alert('Not Valid');
       }
     };
@@ -119,11 +143,9 @@ export class EventComponent {
         // moment objects
         // if no end is specified, automatically fullcalendar means 2 hours
         let twoHoursFromStart = e.start.clone().add(2, 'h');
-                                  //.toDate();
 
-        e.end = e.end ? e.end : twoHoursFromStart;
-        //noinspection SillyAssignmentJS
-        e.start = e.start;//.toDate();
+        e.end = e.end || twoHoursFromStart;
+
         return e;
       });
 
@@ -139,6 +161,11 @@ export class EventComponent {
       operational_details: [],
       jobSpecs: [],
       officerName: []
+    };
+
+    this.$scope.setShiftCost = index => {
+      this.$scope.eventCost = this.$scope.recurringCost.shiftsCosts[index];
+      this.$scope.eventCost.grand_total = this.$scope.recurringCost.totalCost.grand_total;
     };
 
     this.$q.all([
@@ -219,14 +246,14 @@ export class EventComponent {
     });
 
     //noinspection JSJQueryEfficiency
-    $('#external-events ').find('.fc-event'.each(function() {
+    $('#external-events .fc-event').each(function() {
       // make the event draggable using jQuery UI
       $(this).draggable({
         zIndex: 999,
         revert: true,      // will cause the event to go back to its
         revertDuration: 0  //  original position after the drag
       });
-    }),
+    });
 
     /** ******************************
      * Required Fields
@@ -238,13 +265,13 @@ export class EventComponent {
       } else if($(this).hasClass('hasError')) {
         $(this).removeClass('hasError');
       }
-    }),
+    });
     //noinspection JSJQueryEfficiency
     $('form :input[required=\'required\']').change(function() {
       if($(this).hasClass('hasError')) {
         $(this).removeClass('hasError');
       }
-    }));
+    });
   }
 
   jQueryShowErrorStep(step) {
@@ -291,7 +318,7 @@ export class EventComponent {
 
     this.$http.post('/api/events', eventPayload)
       .then(function(res) {
-        console.log(res.data);
+        // console.log(res.data);
         if(res.status === 201) {
           d.resolve(res.data);
           //$state.go('checkout', { event_id: res.data._id });

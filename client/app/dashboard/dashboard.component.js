@@ -119,11 +119,17 @@ export class DashboardComponent {
             {data: 'statusLabel', title: 'Status', className: 'text-center'},
             {data: 'JobType', title: 'Job Type', visible: false},
             {data: 'job_type_specs', title: 'Job Specs', visible: false},
-            {data: 'preferred_officer_name', title: 'Preferred Officer', visible: false},
             {data: 'is_recuring', title: 'Is Recuring', visible: false},
             {data: 'date', title: 'Date', visible: false},
           ]
         });
+      });
+
+    this.$http.get('/api/events/recurring')
+      .then(response => {
+        this.$scope.recurringEvents = response.data;
+
+        setTimeout(() => $('#events-recurring').DataTable(), 1000);
       });
   }
 }
